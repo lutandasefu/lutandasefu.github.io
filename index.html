@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | UI/UX Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@ body{
   background:#ddd;
   color:#333;
   overflow:hidden;
-  scroll-behavior: smooth;
+  scroll-behavior:smooth;
 }
 
 /* HERO */
@@ -27,8 +27,14 @@ body{
   flex-direction:column;
   position: relative;
   background: #ddd;
+  transition: opacity 1.2s ease;
 }
 
+.hero.fade-out{
+  opacity:0;
+}
+
+/* Typed intro */
 h1{
   font-size:5rem;
   font-weight:300;
@@ -37,36 +43,33 @@ h1{
   transition:opacity 1s ease, transform 1s ease;
 }
 
-.fade-up{
-  opacity:0;
-  transform:translateY(-60px);
-}
+.typing{animation:blink .7s step-end infinite;}
+.cursor-end{animation:blink .7s step-end 3;}
 
 @keyframes blink{
   0%,50%,100%{border-color:#333;}
   25%,75%{border-color:transparent;}
 }
-.typing{animation:blink .7s step-end infinite;}
-.cursor-end{animation:blink .7s step-end 3;}
 
-/* NEXT SECTION */
+/* NEXT SECTION (centered content) */
 .next{
-  min-height:100vh;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
   display:flex;
-  flex-direction: column;
-  justify-content:flex-start;
+  flex-direction:column;
+  justify-content:center;
   align-items:center;
   font-size:2.5rem;
-  background:#ddd; /* same as hero */
+  background:#ddd;
   opacity:0;
-  transform:translateY(80px);
-  transition:opacity 1.2s cubic-bezier(.22,1,.36,1),
-             transform 1.2s cubic-bezier(.22,1,.36,1);
-  padding-top:80px;
+  transition:opacity 1.2s ease;
 }
+
 .next.show{
   opacity:1;
-  transform:translateY(0);
 }
 
 /* NAVBAR in next section */
@@ -162,8 +165,8 @@ function type(){
     setTimeout(()=>{
       intro.classList.add("fade-up");
       setTimeout(()=>{
-        buildNext(); // scroll to next section
-      },2100); // wait after cursor flick
+        fadeHero(); // Fade hero completely and show next
+      },2100); // after cursor flick
     },2100);
   }
  }
@@ -179,28 +182,29 @@ function erase(){
  }
 }
 
-function buildNext(){
- document.body.style.overflow="auto";
+function fadeHero(){
+  hero.classList.add("fade-out");
 
- // NEXT SECTION
- const next = document.createElement("section");
- next.className="next";
- next.innerHTML = `
-   <h2>Welcome to my portfolio</h2>
-   <div class="navbar">
-     <ul class="nav-list">
-       <li class="list-item">About</li>
-       <li class="list-item">Case Studies</li>
-       <li class="list-item">Contact Details</li>
-     </ul>
-   </div>
- `;
- document.body.appendChild(next);
+  // NEXT SECTION
+  const next = document.createElement("section");
+  next.className="next";
+  next.innerHTML = `
+    <h2>Welcome to my portfolio</h2>
+    <div class="navbar">
+      <ul class="nav-list">
+        <li class="list-item">About</li>
+        <li class="list-item">Case Studies</li>
+        <li class="list-item">Contact Details</li>
+      </ul>
+    </div>
+  `;
+  document.body.appendChild(next);
 
- setTimeout(()=>{
-   window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
-   setTimeout(()=>next.classList.add("show"),400);
- },200);
+  // show next section after fade
+  setTimeout(()=>next.classList.add("show"),800);
+
+  // allow scrolling
+  document.body.style.overflow="auto";
 }
 
 window.onload=type;
