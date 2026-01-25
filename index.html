@@ -6,6 +6,7 @@
 <title>Lutanda | UI/UX Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -54,7 +55,7 @@ h1{
 .typing{animation:blink .7s step-end infinite;}
 .cursor-end{animation:blink .7s step-end 3;}
 
-/* NAVBAR - spread evenly, Sulphur Point, shadows like CodePen */
+/* NAVBAR */
 .navbar{
   display:flex;
   justify-content:space-evenly;
@@ -96,14 +97,14 @@ h1{
   text-shadow: 0px 2px 6px rgba(87,86,230,0.3);
 }
 
-/* NEXT SECTION matches hero background */
+/* NEXT SECTION */
 .next{
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   font-size:2.5rem;
-  background:#ddd; /* same as hero */
+  background:#ddd;
   opacity:0;
   transform:translateY(80px);
   transition:opacity 1.2s cubic-bezier(.22,1,.36,1),
@@ -148,7 +149,7 @@ function type(){
     setTimeout(()=>{
       intro.classList.add("fade-up");
       setTimeout(()=>{
-        hero.classList.add("shrink"); // Shrink hero to 50vh
+        hero.classList.add("shrink"); // Hero shrinks to 50vh
         buildNext();
       },1000);
     },2100);
@@ -169,7 +170,6 @@ function erase(){
 function buildNext(){
  document.body.style.overflow="auto";
 
- // NAVBAR (three options, evenly spread)
  const nav = document.createElement("div");
  nav.className="navbar";
  nav.innerHTML=`
@@ -179,10 +179,9 @@ function buildNext(){
  `;
  hero.appendChild(nav);
 
- // NEXT SECTION
  const next = document.createElement("section");
- next.className = "next";
- next.innerText = "Welcome to my portfolio";
+ next.className="next";
+ next.innerText="Welcome to my portfolio";
  document.body.appendChild(next);
 
  setTimeout(()=>{
@@ -190,7 +189,6 @@ function buildNext(){
    setTimeout(()=>next.classList.add("show"),400);
  },200);
 
- // Show navbar only when hero is in view
  window.addEventListener("scroll",()=>{
    if(window.scrollY < window.innerHeight - 80){
      nav.classList.add("visible");
@@ -200,7 +198,7 @@ function buildNext(){
  });
 }
 
-window.onload = type;
+window.onload=type;
 </script>
 
 </body>
