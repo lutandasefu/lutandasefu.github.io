@@ -34,9 +34,8 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
   opacity:0;transition:opacity .8s ease;
 }
 
-/* ---------- TOGGLE BASE ---------- */
+/* ---------- TOGGLE BASE (Welcome page) ---------- */
 .toggle{
-  position:fixed;
   width:420px;height:60px;
   border-radius:60px;
   border:2px solid #111;
@@ -48,7 +47,7 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
   font-weight:100;
   cursor:pointer;overflow:hidden;
   transition:all .7s cubic-bezier(.77,0,.18,1);
-  z-index:2001; /* above pages */
+  z-index:2;
 }
 
 .toggle span{
@@ -70,8 +69,9 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
 .toggle span:last-child{color:#111;}
 .toggle.active span:last-child{color:#fff;}
 
-/* ---------- ICON MODE (DARK PAGES) ---------- */
+/* ---------- ICON MODE (Dark pages) ---------- */
 .iconMode{
+  position:fixed;
   right:40px;
   top:50%;
   transform:translateY(-50%);
@@ -201,6 +201,8 @@ function createPage(title){
 
 /* ---------- MORPH TO ICON MODE ---------- */
 function toIconMode(){
+ // move toggle to body so it's independent of welcome section
+ document.body.appendChild(toggle);
  toggle.classList.add("iconMode");
  leftLabel.innerHTML='<i class="fa-solid fa-chart-line"></i>';
  rightLabel.innerHTML='<i class="fa-solid fa-user"></i>';
@@ -210,13 +212,13 @@ function toIconMode(){
 toggle.addEventListener("click",()=>{
   toggle.classList.toggle("active");
 
-  // morph toggle first so it's above page
+  // morph toggle FIRST before creating new page
   toIconMode();
 
-  // curtain animation
+  // show curtain
   curtain.style.transform="translateY(0%)";
 
-  // after curtain animation, show new page
+  // after curtain animation, create new page
   setTimeout(()=>{
     if(toggle.classList.contains("active")){
       createPage("About");
