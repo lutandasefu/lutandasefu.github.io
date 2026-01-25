@@ -56,3 +56,60 @@
     }
 
     .list-item {
+      list-style: none;
+      flex-basis: 100%;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: #555;
+      transform: translateY(0);
+      transition: transform 0.5s ease, color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .list-item-name {
+      font-size: 13px;
+      font-weight: 500;
+      position: absolute;
+      transform: translateY(50px);
+      transition: transform 0.5s ease, opacity 0.2s ease;
+      opacity: 0;
+    }
+
+    .list-item:hover {
+      color: #5756e6;
+      transform: translateY(-6px);
+    }
+
+    .list-item:hover .list-item-name {
+      transform: translateY(20px);
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated Background -->
+  <div class="background"></div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <li class="list-item"><i class="fa-solid fa-house"></i>
+      <span class="list-item-name">Home</span>
+    </li>
+    <li class="list-item"><i class="fa-solid fa-user"></i>
+      <span class="list-item-name">Profile</span>
+    </li>
+    <li class="list-item"><i class="fa-solid fa-gear"></i>
+      <span class="list-item-name">Settings</span>
+    </li>
+    <li class="list-item"><i class="fa-solid fa-bag-shopping"></i>
+      <span class="list-item-name">Bag</span>
+    </li>
+  </div>
+
+</body>
+</html>
