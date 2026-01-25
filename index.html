@@ -25,8 +25,7 @@ body{
   justify-content:center;
   align-items:center;
   flex-direction:column;
-  transition:height 1.2s cubic-bezier(.22,1,.36,1);
-  overflow:hidden;
+  position:relative;
 }
 
 h1{
@@ -42,10 +41,6 @@ h1{
   transform:translateY(-60px);
 }
 
-.collapse{
-  height:0 !important;
-}
-
 @keyframes blink{
   0%,50%,100%{border-color:#333;}
   25%,75%{border-color:transparent;}
@@ -53,7 +48,7 @@ h1{
 .typing{animation:blink .7s step-end infinite;}
 .cursor-end{animation:blink .7s step-end 3;}
 
-/* NAVBAR — EXACT CodePen style */
+/* NAVBAR — exact CodePen style */
 .navbar{
   border-radius:32px;
   background:white;
@@ -63,7 +58,7 @@ h1{
   max-width:400px;
   box-shadow:0 14px 28px #8f9cd4,0 10px 10px #8f9cd4;
   font-family:"Inter",sans-serif;
-  margin:40px auto;
+  margin-top:40px;
   opacity:0;
   transition:opacity .6s ease;
 }
@@ -154,12 +149,7 @@ function type(){
 
     setTimeout(()=>{
       intro.classList.add("fade-up");
-
-      setTimeout(()=>{
-        hero.classList.add("collapse");
-        buildNext();
-      },1000);
-
+      setTimeout(buildNext,1000);
     },2100);
   }
  }
@@ -177,7 +167,7 @@ function erase(){
 function buildNext(){
  document.body.style.overflow="auto";
 
- // NAVBAR (hidden)
+ // NAVBAR (inside hero, hidden)
  const nav=document.createElement("div");
  nav.className="navbar";
  nav.innerHTML=`
@@ -194,12 +184,18 @@ function buildNext(){
  next.innerHTML="Welcome to my portfolio";
  document.body.appendChild(next);
 
- next.scrollIntoView({behavior:"smooth"});
- setTimeout(()=>next.classList.add("show"),400);
+ // scroll exactly one screen down
+ setTimeout(()=>{
+   window.scrollTo({
+     top: window.innerHeight,
+     behavior: "smooth"
+   });
+   setTimeout(()=>next.classList.add("show"),400);
+ },200);
 
- // show navbar only when user scrolls up
+ // show navbar only when hero is in view
  window.addEventListener("scroll",()=>{
-   if(window.scrollY<40){
+   if(window.scrollY < window.innerHeight - 100){
      nav.classList.add("visible");
    }else{
      nav.classList.remove("visible");
