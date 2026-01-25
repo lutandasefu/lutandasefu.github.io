@@ -26,12 +26,7 @@ body{
   align-items:center;
   flex-direction:column;
   position: relative;
-  transition: height 1s cubic-bezier(.22,1,.36,1);
   background: #ddd;
-}
-
-.hero.shrink{
-  height:50vh;
 }
 
 h1{
@@ -54,10 +49,30 @@ h1{
 .typing{animation:blink .7s step-end infinite;}
 .cursor-end{animation:blink .7s step-end 3;}
 
-/* NAVBAR */
+/* NEXT SECTION */
+.next{
+  min-height:100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items:center;
+  font-size:2.5rem;
+  background:#ddd; /* same as hero */
+  opacity:0;
+  transform:translateY(80px);
+  transition:opacity 1.2s cubic-bezier(.22,1,.36,1),
+             transform 1.2s cubic-bezier(.22,1,.36,1);
+  padding-top:80px;
+}
+.next.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* NAVBAR in next section */
 .navbar{
   display:flex;
-  justify-content:center; /* center ul inside navbar */
+  justify-content:space-evenly;
   align-items:center;
   width:80%;
   max-width:420px;
@@ -68,12 +83,7 @@ h1{
   padding: 0.5rem 0;
   font-family:'Sulphur Point',sans-serif;
   font-weight:300;
-  opacity:0;
-  transition:opacity .6s ease;
-}
-
-.navbar.visible {
-  opacity:1;
+  margin-top:30px;
 }
 
 .nav-list {
@@ -96,7 +106,7 @@ h1{
   transition: transform 0.4s ease, color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-/* subtle hover glow like CodePen */
+/* subtle hover glow */
 .list-item::before{
   content:"";
   position:absolute;
@@ -116,24 +126,6 @@ h1{
   color:#5756e6;
   transform:translateY(-4px);
   box-shadow: 0px 4px 12px rgba(87,86,230,0.25);
-}
-
-/* NEXT SECTION */
-.next{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:2.5rem;
-  background:#ddd; /* same as hero */
-  opacity:0;
-  transform:translateY(80px);
-  transition:opacity 1.2s cubic-bezier(.22,1,.36,1),
-             transform 1.2s cubic-bezier(.22,1,.36,1);
-}
-.next.show{
-  opacity:1;
-  transform:translateY(0);
 }
 </style>
 </head>
@@ -170,9 +162,8 @@ function type(){
     setTimeout(()=>{
       intro.classList.add("fade-up");
       setTimeout(()=>{
-        hero.classList.add("shrink"); // Hero shrinks to 50vh
-        buildNext();
-      },1000);
+        buildNext(); // scroll to next section
+      },2100); // wait after cursor flick
     },2100);
   }
  }
@@ -191,37 +182,25 @@ function erase(){
 function buildNext(){
  document.body.style.overflow="auto";
 
- // NAVBAR with ul/li
- const nav = document.createElement("div");
- nav.className="navbar";
- nav.innerHTML=`
-  <ul class="nav-list">
-    <li class="list-item">About</li>
-    <li class="list-item">Case Studies</li>
-    <li class="list-item">Contact Details</li>
-  </ul>
- `;
- hero.appendChild(nav);
-
  // NEXT SECTION
  const next = document.createElement("section");
  next.className="next";
- next.innerText="Welcome to my portfolio";
+ next.innerHTML = `
+   <h2>Welcome to my portfolio</h2>
+   <div class="navbar">
+     <ul class="nav-list">
+       <li class="list-item">About</li>
+       <li class="list-item">Case Studies</li>
+       <li class="list-item">Contact Details</li>
+     </ul>
+   </div>
+ `;
  document.body.appendChild(next);
 
  setTimeout(()=>{
    window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
    setTimeout(()=>next.classList.add("show"),400);
  },200);
-
- // Show navbar only when hero is in view
- window.addEventListener("scroll",()=>{
-   if(window.scrollY < window.innerHeight - 80){
-     nav.classList.add("visible");
-   } else {
-     nav.classList.remove("visible");
-   }
- });
 }
 
 window.onload=type;
