@@ -7,6 +7,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 <style>
 * {
@@ -15,76 +16,75 @@
   padding: 0;
 }
 
-body{
-  font-family:'Sulphur Point',sans-serif;
-  background:#ddd;
-  color:#333;
-  overflow:hidden;
-  scroll-behavior:smooth;
+body {
+  font-family: 'Sulphur Point', sans-serif;
+  background: #ddd;
+  color: #333;
+  overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 /* HERO */
-.hero{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: relative;
   background: #ddd;
   transition: opacity 1.2s ease;
 }
 
-.hero.fade-out{
-  opacity:0;
+.hero.fade-out {
+  opacity: 0;
 }
 
 /* Typed intro */
-h1{
-  font-size:5rem;
-  font-weight:300;
-  border-right:2px solid #333;
-  white-space:nowrap;
-  transition:opacity 1s ease, transform 1s ease;
+h1 {
+  font-size: 5rem;
+  font-weight: 300;
+  border-right: 2px solid #333;
+  white-space: nowrap;
 }
 
-.typing{animation:blink .7s step-end infinite;}
-.cursor-end{animation:blink .7s step-end 3;}
+.typing { animation: blink 0.7s step-end infinite; }
+.cursor-end { animation: blink 0.7s step-end 3; }
 
-@keyframes blink{
-  0%,50%,100%{border-color:#333;}
-  25%,75%{border-color:transparent;}
+@keyframes blink {
+  0%,50%,100% { border-color: #333; }
+  25%,75% { border-color: transparent; }
 }
 
 /* NEXT SECTION */
-.next{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  background:#ddd;
-  opacity:0;
-  transition:opacity 1.2s ease;
+.next {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ddd;
+  opacity: 0;
+  transition: opacity 1.2s ease;
 }
 
-.next.show{
-  opacity:1;
+.next.show {
+  opacity: 1;
 }
 
 /* Welcome heading */
-.next h2{
-  font-size:4rem;
-  font-weight:300;
-  margin-bottom:50px;
-  text-align:center;
+.next h2 {
+  font-size: 4rem;
+  font-weight: 300;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
-/* CODEPEN MENU STYLES */
+/* CODEPEN MENU */
 #app {
   width: 300px;
   height: 70px;
@@ -101,7 +101,7 @@ h1{
   border-radius: 45px;
   background: rgba(255, 255, 255, 0.65);
   transform-origin: center center;
-  transform: perspective(1000px);
+  transform: perspective(1000px) rotateY(0deg);
   overflow: hidden;
 }
 
@@ -126,10 +126,9 @@ h1{
   height: 100%;
   border-radius: 45px;
   background: #fff;
-  transition: left 0.75s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.support{
+.support {
   position: absolute;
   right: 10px;
   bottom: 10px;
@@ -137,7 +136,7 @@ h1{
   display: flex;
 }
 
-.support a{
+.support a {
   margin: 0 10px;
   color: #fffdf9;
   font-size: 1.8rem;
@@ -145,7 +144,7 @@ h1{
   transition: all 150ms ease;
 }
 
-.support a:hover{
+.support a:hover {
   transform: scale(1.1);
 }
 </style>
@@ -203,7 +202,6 @@ function erase(){
 function fadeHero(){
   hero.classList.add("fade-out");
 
-  // NEXT SECTION
   const next = document.createElement("section");
   next.className="next";
   next.innerHTML = `
@@ -222,18 +220,14 @@ function fadeHero(){
   `;
   document.body.appendChild(next);
 
-  // show next section after fade
   setTimeout(()=>next.classList.add("show"),800);
-
-  // allow scrolling
   document.body.style.overflow="auto";
 
-  // Menu toggle functionality
+  // CodePen menu tilt and slide effect
   const liContainer = next.querySelector("ul");
   const liEls = [...next.querySelectorAll("ul li")];
   const slideEl = next.querySelector(".focus-el");
-
-  let liContainerRect = liContainer.getBoundingClientRect();
+  const liContainerRect = liContainer.getBoundingClientRect();
   let activeIndex = 0;
 
   liEls.forEach((li,index)=>{
@@ -242,16 +236,15 @@ function fadeHero(){
       const x = index === 0 ? -1 : 1;
       activeIndex = index;
       const liRect = li.getBoundingClientRect();
-      slideEl.style.left = `${liRect.left - liContainerRect.left}px`;
+      gsap.to(liContainer, { duration: 0.5, rotateY: `${x*25}deg` });
+      gsap.to(slideEl, { duration: 0.75, left: `${liRect.left - liContainerRect.left}px`, ease:"bounce.out" });
+      gsap.to(liContainer, { duration: 0.5, rotateY: `0deg`, delay: 0.5 });
     });
   });
 }
 
-window.onload=type;
+window.onload = type;
 </script>
-
-<!-- FontAwesome for social icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
