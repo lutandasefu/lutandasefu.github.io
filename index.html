@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navbar with Custom Gingham Background</title>
+  <title>Navbar with Textured Gingham Background</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* === Animated Background with custom colors === */
+    /* === Animated Gingham Background with Texture === */
     body, html {
       margin: 0;
       padding: 0;
@@ -25,20 +25,27 @@
       left: 0;
       right: 0;
       bottom: 0;
+      
+      /* Base gingham colors */
       background-color: #c9b696; /* Light */
       background-image:
         linear-gradient(45deg, #798175 25%, transparent 25%, transparent 75%, #798175 75%, #798175), /* Medium */
         linear-gradient(45deg, #798175 25%, transparent 25%, transparent 75%, #798175 75%, #798175), /* Medium offset */
-        linear-gradient(45deg, transparent, transparent 50%, #64230c 50%, #64230c); /* Dark */
-      background-size: 100px 100px;
-      background-position: 0 0, 50px 50px, 50px 0px;
+        linear-gradient(45deg, transparent, transparent 50%, #64230c 50%, #64230c), /* Dark */
+        
+        /* Linen texture overlay */
+        url('https://www.transparenttextures.com/patterns/linen.png');
+        
+      /* Background sizing & positioning */
+      background-size: 100px 100px, 100px 100px, 100px 100px, auto;
+      background-position: 0 0, 50px 50px, 50px 0px, 0 0;
       animation: scroll 5s linear infinite;
       z-index: -1;
     }
 
     @keyframes scroll {
-      from { background-position: 0 0, 50px 50px, 50px 0; }
-      to   { background-position: -100px -100px, -50px -50px, -50px -100px; }
+      from { background-position: 0 0, 50px 50px, 50px 0, 0 0; }
+      to   { background-position: -100px -100px, -50px -50px, -50px -100px, 0 0; }
     }
 
     /* === Navbar Styles === */
