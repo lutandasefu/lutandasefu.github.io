@@ -85,13 +85,13 @@ h1 {
 
 /* MENU */
 #app {
-  width: 600px;
+  width: 400px; /* reduced width for 2 options */
   height: 70px;
   display: grid;
   place-items: center;
   border-radius: 50px;
-  background: black;
-  border: 3px solid black;
+  background: white; /* menu background */
+  border: 3px solid black; /* border */
   transform-origin: center;
   perspective: 1000px;
 }
@@ -101,7 +101,7 @@ h1 {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 2 menu items */
   border-radius: 50px;
   overflow: hidden;
 }
@@ -114,7 +114,7 @@ h1 {
   font-family: 'Sulphur Point', sans-serif;
   font-weight: 600;
   text-transform: capitalize;
-  color: white; /* white text */
+  color: black; /* text color */
   cursor: pointer;
   z-index: 10;
 }
@@ -125,7 +125,7 @@ h1 {
   top: 0;
   height: 100%;
   border-radius: 50px;
-  background: #333; /* visible toggle on black */
+  background: #ddd; /* focus toggle visible */
   transition: left 0.75s ease;
 }
 </style>
@@ -186,7 +186,6 @@ function fadeHero(){
       <ul>
         <li>Case Studies</li>
         <li>About</li>
-        <li>Contact</li>
         <span class="focus-el"></span>
       </ul>
     </div>
