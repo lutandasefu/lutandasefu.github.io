@@ -10,9 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
-/* Reset */
 * { box-sizing: border-box; margin:0; padding:0; }
-
 body {
   font-family: 'Sulphur Point', sans-serif;
   background: #ddd;
@@ -28,7 +26,7 @@ body {
   justify-content: center;
   align-items: center;
   background: #ddd;
-  transition: opacity 1.2s ease;
+  transition: opacity 1s ease;
   padding: 0 20px;
   text-align: center;
 }
@@ -40,18 +38,11 @@ h1 {
   border-right: 2px solid #333;
   white-space: nowrap;
 }
-
 .typing { animation: blink 0.7s step-end infinite; }
 .cursor-end { animation: blink-3 0.7s step-end 3 forwards; }
 
-@keyframes blink {
-  0%,50%,100% { border-color:#333; }
-  25%,75% { border-color:transparent; }
-}
-@keyframes blink-3 {
-  0%,50%,100% { border-color:#333; }
-  25%,75% { border-color:transparent; }
-}
+@keyframes blink {0%,50%,100%{border-color:#333;}25%,75%{border-color:transparent;}}
+@keyframes blink-3 {0%,50%,100%{border-color:#333;}25%,75%{border-color:transparent;}}
 
 /* NEXT SECTION */
 .next, .page {
@@ -72,11 +63,7 @@ h1 {
 }
 .next.show { opacity:1; }
 
-.next h2 {
-  font-size:4rem;
-  margin-bottom:40px;
-  color:#333;
-}
+.next h2, .page h2 { font-size:4rem; margin-bottom:40px; color:#333; }
 
 /* MENU */
 #app {
@@ -122,7 +109,7 @@ h1 {
   height:100%;
   border-radius:50px;
   background:#ddd;
-  transition:left 0.4s ease;
+  transition:left 0.3s ease;
 }
 
 /* Collapsed menu button */
@@ -144,26 +131,26 @@ h1 {
 }
 
 /* Pages offscreen start */
-.page.case-studies { transform: translateX(-100vw); } /* Start left */
+.page.case-studies { transform: translateX(-100vw); }
 
 /* Responsive */
 @media(max-width:1024px){
   h1{ font-size:3.5rem; }
-  .next h2{ font-size:3rem; }
+  .next h2,.page h2{ font-size:3rem; }
   #app{ height:60px; }
   #app li{ font-size:1rem; }
 }
 
 @media(max-width:768px){
   h1{ font-size:3rem; }
-  .next h2{ font-size:2.5rem; }
+  .next h2,.page h2{ font-size:2.5rem; }
   #app{ height:55px; }
   #app li{ font-size:0.95rem; }
 }
 
 @media(max-width:480px){
   h1{ font-size:2.2rem; }
-  .next h2{ font-size:2rem; }
+  .next h2,.page h2{ font-size:2rem; }
   #app{ height:50px; }
   #app li{ font-size:0.9rem; }
 }
@@ -199,7 +186,7 @@ function type(){
   } else {
     intro.classList.remove("typing");
     intro.classList.add("cursor-end");
-    setTimeout(fadeHero,800);
+    setTimeout(fadeHero,500); // Reduced wait before transition
   }
  }
 }
@@ -213,10 +200,9 @@ function erase(){
 function fadeHero(){
  hero.classList.add("fade-out");
 
- // Next section
- const next = document.createElement("section");
- next.className="next";
- next.innerHTML = `
+const next = document.createElement("section");
+next.className="next";
+next.innerHTML = `
   <h2>Welcome to my portfolio</h2>
   <div id="app">
     <ul>
@@ -225,61 +211,57 @@ function fadeHero(){
       <span class="focus-el"></span>
     </ul>
   </div>
- `;
- document.body.appendChild(next);
- setTimeout(()=>next.classList.add("show"),800);
- document.body.style.overflow="auto";
+`;
+document.body.appendChild(next);
+setTimeout(()=>next.classList.add("show"),50);
+document.body.style.overflow="auto";
 
- const app = next.querySelector("#app");
- const ul = next.querySelector("ul");
- const lis = [...ul.querySelectorAll("li")];
- const focus = ul.querySelector(".focus-el");
- const width = ul.clientWidth / lis.length;
- focus.style.width = width+"px";
+const app = next.querySelector("#app");
+const ul = next.querySelector("ul");
+const lis = [...ul.querySelectorAll("li")];
+const focus = ul.querySelector(".focus-el");
+const width = ul.clientWidth / lis.length;
+focus.style.width = width+"px";
 
- // Create collapsed menu button
- const menuBtn = document.createElement("div");
- menuBtn.id="menu-btn";
- menuBtn.textContent="☰";
- document.body.appendChild(menuBtn);
+// Collapsed menu button
+const menuBtn = document.createElement("div");
+menuBtn.id="menu-btn";
+menuBtn.textContent="☰";
+document.body.appendChild(menuBtn);
 
- // Tilt and toggle
- let activeIndex = 0;
- lis.forEach((li,index)=>{
-   li.addEventListener("click",()=>{
-     if(index===activeIndex) return;
+// Tilt effect and focus
+let activeIndex = 0;
+lis.forEach((li,index)=>{
+  li.addEventListener("click",()=>{
+    if(index===activeIndex) return;
+    activeIndex=index;
+    const ulRect=ul.getBoundingClientRect();
+    gsap.to(focus,{duration:0.3,left:`${(ulRect.width/lis.length)*index}px`,ease:"bounce.out"});
 
-     const direction = index < activeIndex ? -1 :1;
-     activeIndex=index;
+    // Case Studies page transition
+    if(li.id==="menu-case"){
+      const caseSection = document.createElement("section");
+      caseSection.className="page case-studies";
+      caseSection.innerHTML="<h2>Case Studies</h2>";
+      document.body.appendChild(caseSection);
 
-     const ulRect=ul.getBoundingClientRect();
+      // Slide current next page to right, bring new page from left
+      gsap.to(next,{duration:1,x:"100vw",ease:"power2.inOut"});
+      gsap.to(caseSection,{duration:1,x:"0vw",ease:"power2.inOut"});
 
-     gsap.to(app,{duration:0.25,rotateY:`${direction*25}deg`});
-     gsap.to(focus,{duration:0.4,left:`${(ulRect.width/lis.length)*index}px`,ease:"bounce.out"});
-     gsap.to(app,{duration:0.25,rotateY:`0deg`,delay:0.25});
+      // Hide menu and show collapsed button
+      app.style.display="none";
+      menuBtn.style.display="flex";
+    }
+  });
+});
 
-     // Case Studies page transition
-     if(li.id==="menu-case"){
-       const caseSection = document.createElement("section");
-       caseSection.className="page case-studies";
-       caseSection.innerHTML="<h2>Case Studies</h2>";
-       document.body.appendChild(caseSection);
+// Toggle button to restore menu
+menuBtn.addEventListener("click",()=>{
+  app.style.display="grid";
+  menuBtn.style.display="none";
+});
 
-       // Slide current page right and bring in new page
-       gsap.to(next,{duration:1,x:"100vw",ease:"power2.inOut"});
-       gsap.to(caseSection,{duration:1,x:"0vw",ease:"power2.inOut"});
-
-       app.style.display="none";
-       menuBtn.style.display="flex";
-     }
-   });
- });
-
- // Toggle button
- menuBtn.addEventListener("click",()=>{
-   app.style.display="grid";
-   menuBtn.style.display="none";
- });
 }
 
 window.onload = type;
