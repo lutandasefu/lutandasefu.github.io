@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
 
   <style>
     /* Reset and body */
@@ -19,7 +19,7 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Roboto', sans-serif; /* default for static text */
       background-color: #ffffff;
       color: #111;
     }
@@ -35,25 +35,28 @@
       padding: 0 20px;
     }
 
+    /* Typed text */
     .hero h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Sulphur Point', sans-serif; /* typed text font */
+      font-weight: 300;
       font-size: 4rem;
-      font-weight: 700;
       display: inline-block;
       border-right: 2px solid #111; /* cursor */
       white-space: nowrap;
       overflow: hidden;
     }
 
+    /* Static subtitle */
     .hero p {
-      font-size: 1.75rem;
+      font-family: 'Roboto', sans-serif;
       font-weight: 400;
+      font-size: 1.75rem;
       color: #555;
       margin-top: 1rem;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInUp 1s ease forwards;
-      animation-delay: 2.5s; /* optional if you want subtitle to fade in after first sentence */
+      animation-delay: 2.5s; /* subtitle fades after first sentence */
     }
 
     /* Fade-in animation */
@@ -95,6 +98,7 @@
   </section>
 
   <script>
+    // Sentences for typing animation
     const sentences = [
       "Hello, I’m Your Name",
       "I design beautiful UI/UX experiences",
@@ -104,9 +108,9 @@
     const introEl = document.getElementById("intro");
     let sentenceIndex = 0;
     let charIndex = 0;
-    let typingSpeed = 100; // ms per character
-    let erasingSpeed = 50;
-    let delayBetween = 1500; // pause before erase
+    const typingSpeed = 100; // ms per character
+    const erasingSpeed = 50;
+    const delayBetween = 1500; // pause before erase
 
     function typeSentence() {
       if (charIndex < sentences[sentenceIndex].length) {
