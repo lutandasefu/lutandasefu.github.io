@@ -1,217 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | UI/UX Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Sulphur Point',sans-serif;
-  background:#ddd;
-  color:#333;
   overflow:hidden;
+  background:#e6e6e6;
+  color:#111;
 }
 
-/* HERO */
+/* HERO TYPING */
 .hero{
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  text-align:center;
 }
-h1{
+#intro{
   font-size:4.5rem;
-  font-weight:300;
-  border-right:2px solid #333;
+  border-right:2px solid #111;
   white-space:nowrap;
+  animation:blink .7s step-end infinite;
 }
-.typing{animation:blink .7s step-end infinite;}
-@keyframes blink{0%,50%,100%{border-color:#333;}25%,75%{border-color:transparent;}}
+@keyframes blink{0%,50%,100%{border-color:#111;}25%,75%{border-color:transparent;}}
 
-/* PAGES */
+/* PAGE AREA */
 .page{
   position:absolute;
-  top:0;left:0;
-  width:100%;
-  height:100vh;
+  inset:0;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:#ddd;
   text-align:center;
+  padding:40px;
+  background:#e6e6e6;
 }
 
-/* MENU */
-#app{
-  width:600px;
-  height:70px;
-  display:grid;
-  place-items:center;
-  border-radius:50px;
-  background:#fff;
-  border:3px solid #fff;
-  perspective:1000px;
-}
-#app ul{
-  width:100%;
-  height:100%;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  position:relative;
-  border-radius:50px;
-  overflow:hidden;
-}
-#app li{
-  display:grid;
-  place-items:center;
-  font-family:'Urbanist',sans-serif;
-  font-weight:100;
-  font-size:1.2rem;
-  color:#000;
-  cursor:pointer;
-  z-index:2;
-}
-.focus-el{
-  position:absolute;
-  top:0;left:0;
-  height:100%;
-  width:50%;
-  background:#ddd;
-  border-radius:50px;
-  z-index:1;
-}
-
-/* Buttons */
-.btn{
+/* CURTAIN */
+.curtain{
   position:fixed;
-  top:20px;
-  width:50px;height:50px;
-  border-radius:50%;
-  background:#fff;
-  border:3px solid #fff;
+  inset:0;
+  background:#111;
+  transform:translateY(-100%);
+  z-index:100;
+}
+
+/* TOGGLE MENU */
+.menu{
+  position:absolute;
+  top:40px;
   display:flex;
-  justify-content:center;
   align-items:center;
-  cursor:pointer;
-  z-index:200;
+  gap:20px;
   font-size:1.4rem;
 }
-#menu-btn{left:20px;display:none;}
-#back-btn{right:20px;display:none;}
+.switch{
+  position:relative;
+  width:80px;
+  height:40px;
+}
+.switch input{display:none;}
+.slider{
+  position:absolute;
+  inset:0;
+  background:#111;
+  border-radius:50px;
+  cursor:pointer;
+}
+.slider:before{
+  content:"";
+  position:absolute;
+  width:34px;
+  height:34px;
+  left:3px;
+  top:3px;
+  background:#e6e6e6;
+  border-radius:50%;
+  transition:.4s;
+}
+input:checked + .slider:before{
+  transform:translateX(40px);
+}
 
-h2{font-size:4rem;margin-bottom:40px;}
+/* HEADINGS */
+h2{
+  font-size:4rem;
+  margin-top:120px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  #intro{font-size:2.5rem;}
+  h2{font-size:2.5rem;}
+  .menu{font-size:1rem;}
+}
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <section class="hero" id="hero">
-  <h1 id="intro" class="typing"></h1>
+  <div id="intro"></div>
 </section>
 
-<div id="menu-btn" class="btn">☰</div>
-<div id="back-btn" class="btn">←</div>
+<!-- CURTAIN -->
+<div class="curtain" id="curtain"></div>
 
 <script>
+/* ---------------- TYPING INTRO ---------------- */
 const sentences=[
  "Hey, I'm Lutanda",
  "A UI/UX designer",
  "I design for clarity",
  "And purpose."
 ];
-
-const intro=document.getElementById("intro");
 let s=0,c=0;
+const intro=document.getElementById("intro");
 
 function type(){
  if(c<sentences[s].length){
-  intro.textContent+=sentences[s][c++];
-  setTimeout(type,100);
+   intro.textContent+=sentences[s][c++];
+   setTimeout(type,90);
  }else{
-  if(s<sentences.length-1){
-    setTimeout(erase,600);
-  }else{
-    setTimeout(initWelcome,600);
-  }
+   if(s<sentences.length-1){
+     setTimeout(erase,600);
+   }else{
+     setTimeout(showWelcome,800);
+   }
  }
 }
 function erase(){
  if(c>0){
-  intro.textContent=sentences[s].substring(0,--c);
-  setTimeout(erase,50);
+   intro.textContent=sentences[s].substring(0,--c);
+   setTimeout(erase,40);
  }else{s++;type();}
 }
 
-function initWelcome(){
+/* ---------------- WELCOME PAGE ---------------- */
+function showWelcome(){
  document.getElementById("hero").remove();
-
- const welcome=document.createElement("section");
- welcome.className="page";
- welcome.id="welcome";
- welcome.innerHTML=`
-  <h2>Welcome to my portfolio</h2>
-  <div id="app">
-    <ul>
-      <li id="case">Case Studies</li>
-      <li id="about">About</li>
-      <span class="focus-el"></span>
-    </ul>
-  </div>`;
- document.body.appendChild(welcome);
-
- const focus=welcome.querySelector(".focus-el");
- const lis=[...welcome.querySelectorAll("li")];
-
- lis.forEach((li,i)=>{
-   li.addEventListener("click",()=>{
-     gsap.to(focus,{left:`${i*50}%`,duration:0.3,ease:"bounce.out"});
-     if(li.id==="case") openPage("Case Studies","left");
-     if(li.id==="about") openPage("About","right");
-   });
- });
+ createPage("Welcome to my portfolio");
 }
 
-function openPage(title,direction){
- const welcome=document.getElementById("welcome");
-
+/* ---------------- PAGE CREATOR ---------------- */
+function createPage(title){
  const page=document.createElement("section");
  page.className="page";
- page.innerHTML=`<h2>${title}</h2>`;
+ page.innerHTML=`
+   <div class="menu">
+     <span>Case Studies</span>
+     <label class="switch">
+       <input type="checkbox" id="navToggle">
+       <span class="slider"></span>
+     </label>
+     <span>About</span>
+   </div>
+   <h2>${title}</h2>
+ `;
  document.body.appendChild(page);
 
- const fromX = direction==="left" ? "-100vw" : "100vw";
- const toX = direction==="left" ? "100vw" : "-100vw";
+ const toggle=page.querySelector("#navToggle");
+ toggle.addEventListener("change",handleToggle);
+}
 
- gsap.to(welcome,{
-   x:toX,
-   duration:1,
-   ease:"power2.inOut",
-   onComplete:()=>welcome.remove()
- });
+/* ---------------- CURTAIN TRANSITION ---------------- */
+function handleToggle(e){
+ const curtain=document.getElementById("curtain");
+ curtain.style.transition="transform 0.8s ease";
+ curtain.style.transform="translateY(0%)";
 
- gsap.fromTo(page,
-   {x:fromX},
-   {x:"0vw",duration:1,ease:"power2.inOut"}
- );
+ setTimeout(()=>{
+   document.querySelector(".page").remove();
 
- document.getElementById("menu-btn").style.display="flex";
- document.getElementById("back-btn").style.display="flex";
+   if(e.target.checked){
+     createPage("About");
+   }else{
+     createPage("Case Studies");
+   }
 
- document.getElementById("back-btn").onclick=()=>{
-   page.remove();
-   initWelcome();
-   document.getElementById("menu-btn").style.display="none";
-   document.getElementById("back-btn").style.display="none";
- };
+   curtain.style.transform="translateY(-100%)";
+ },800);
 }
 
 window.onload=type;
 </script>
+
 </body>
 </html>
