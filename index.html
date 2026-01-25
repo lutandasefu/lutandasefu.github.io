@@ -17,8 +17,8 @@
 
 body {
   font-family: 'Sulphur Point', sans-serif;
-  background: #ddd;
-  color: #333;
+  background: black;   /* page background black */
+  color: white;        /* default text white */
   overflow: hidden;
   scroll-behavior: smooth;
 }
@@ -29,7 +29,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ddd;
+  background: black;    /* hero background black */
   transition: opacity 1.2s ease;
 }
 
@@ -40,7 +40,7 @@ body {
 h1 {
   font-size: 5rem;
   font-weight: 300;
-  border-right: 2px solid #333;
+  border-right: 2px solid white; /* cursor white */
   white-space: nowrap;
 }
 
@@ -48,11 +48,11 @@ h1 {
 .cursor-end { animation: blink-3 0.7s step-end 3 forwards; }
 
 @keyframes blink {
-  0%,50%,100% { border-color: #333; }
+  0%,50%,100% { border-color: white; }
   25%,75% { border-color: transparent; }
 }
 @keyframes blink-3 {
-  0%,50%,100% { border-color: #333; }
+  0%,50%,100% { border-color: white; }
   25%,75% { border-color: transparent; }
 }
 
@@ -67,7 +67,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #ddd;
+  background: black;   /* section background black */
   opacity: 0;
   transition: opacity 1.2s ease;
 }
@@ -80,18 +80,18 @@ h1 {
   font-size: 5rem;
   margin-bottom: 50px;
   text-align: center;
-  color: #333;
+  color: white;   /* welcome text white */
 }
 
 /* MENU */
 #app {
-  width: 400px; /* reduced width for 2 options */
+  width: 400px; 
   height: 70px;
   display: grid;
   place-items: center;
   border-radius: 50px;
-  background: white; /* menu background */
-  border: 3px solid black; /* border */
+  background: black;  /* menu background black */
+  border: 3px solid black; /* border black */
   transform-origin: center;
   perspective: 1000px;
 }
@@ -101,7 +101,7 @@ h1 {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 menu items */
+  grid-template-columns: repeat(2, 1fr); 
   border-radius: 50px;
   overflow: hidden;
 }
@@ -114,7 +114,7 @@ h1 {
   font-family: 'Sulphur Point', sans-serif;
   font-weight: 600;
   text-transform: capitalize;
-  color: black; /* text color */
+  color: white;  /* menu text white */
   cursor: pointer;
   z-index: 10;
 }
@@ -125,7 +125,7 @@ h1 {
   top: 0;
   height: 100%;
   border-radius: 50px;
-  background: #ddd; /* focus toggle visible */
+  background: #222; /* slightly lighter toggle so visible on black */
   transition: left 0.75s ease;
 }
 </style>
