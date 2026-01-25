@@ -1,17 +1,85 @@
-<div class="navbar">
-  <li class="list-item"><i class="fa-solid fa-house"></i>
-    <span class="list-item-name">Home</span>
-  </li>
-  <li class="list-item">
-    <i class="fa-solid fa-user"></i>
-    <span class="list-item-name">Profile</span>
-  </li>
-  <li class="list-item">
-    <i class="fa-solid fa-gear"></i>
-    <span class="list-item-name">Settings</span>
-  </li>
-  <li class="list-item">
-    <i class="fa-solid fa-bag-shopping"></i>
-    <span class="list-item-name">Bag</span>
-  </li>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Micro Interaction</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --highlight: #5756e6;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #a4b1e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: "Inter", sans-serif;
+      margin: 0;
+    }
+    .navbar {
+      border-radius: 32px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 14px 28px #8f9cd4, 0 10px 10px #8f9cd4;
+    }
+    .list-item {
+      list-style: none;
+      flex-basis: 100%;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: #555;
+      transform: translateY(0);
+      transition: transform 0.5s ease, color 0.2s ease;
+      cursor: pointer;
+    }
+    .list-item-name {
+      font-size: 13px;
+      font-weight: 500;
+      position: absolute;
+      transform: translateY(50px);
+      transition: transform 0.5s ease, opacity 0.2s ease;
+      opacity: 0;
+    }
+    .list-item:hover {
+      color: var(--highlight);
+      transform: translateY(-6px);
+    }
+    .list-item:hover .list-item-name {
+      transform: translateY(20px);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <li class="list-item"><i class="fa-solid fa-house"></i>
+      <span class="list-item-name">Home</span>
+    </li>
+    <li class="list-item">
+      <i class="fa-solid fa-user"></i>
+      <span class="list-item-name">Profile</span>
+    </li>
+    <li class="list-item">
+      <i class="fa-solid fa-gear"></i>
+      <span class="list-item-name">Settings</span>
+    </li>
+    <li class="list-item">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span class="list-item-name">Bag</span>
+    </li>
+  </div>
+</body>
+</html>
+
