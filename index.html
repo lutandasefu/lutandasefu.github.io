@@ -5,29 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | UI/UX Portfolio</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
 
 <style>
-:root { --highlight: #5756e6; }
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Sulphur Point',sans-serif;
   background:#ddd;
   color:#333;
-  scroll-behavior:smooth;
+  overflow:hidden; /* prevent scroll at start */
 }
 
-/* ---------------- HERO ---------------- */
+/* HERO */
 .hero{
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
   text-align:center;
+  position:relative;
 }
 
 h1{
@@ -42,12 +40,11 @@ h1{
   0%,50%,100%{border-color:#333;}
   25%,75%{border-color:transparent;}
 }
-
 .typing{ animation:blink .7s step-end infinite; }
 .cursor-end{ animation:blink .7s step-end 3; }
 .fade-up-out{ opacity:0; transform:translateY(-80px); }
 
-/* ---------------- NAVBAR (from CodePen) ---------------- */
+/* NAVBAR (same style) */
 .navbar{
   border-radius:32px;
   background:white;
@@ -56,19 +53,8 @@ h1{
   width:100%;
   max-width:400px;
   box-shadow:0 14px 28px #8f9cd4, 0 10px 10px #8f9cd4;
-
-  position:fixed;
-  top:30px;
-  left:50%;
-  transform:translate(-50%,-40px);
-  opacity:0;
-  transition:all .8s cubic-bezier(.22,1,.36,1);
-  z-index:1000;
-}
-
-.navbar.show{
-  opacity:1;
-  transform:translate(-50%,0);
+  margin-top:40px;
+  font-family:"Inter",sans-serif;
 }
 
 .list-item{
@@ -80,9 +66,8 @@ h1{
   justify-content:center;
   position:relative;
   color:#555;
-  transition:transform .5s ease, color .2s ease;
+  transition:transform .5s ease,color .2s ease;
   cursor:pointer;
-  font-family:"Inter",sans-serif;
 }
 
 .list-item-name{
@@ -95,7 +80,7 @@ h1{
 }
 
 .list-item:hover{
-  color:var(--highlight);
+  color:#5756e6;
   transform:translateY(-6px);
 }
 .list-item:hover .list-item-name{
@@ -103,7 +88,7 @@ h1{
   opacity:1;
 }
 
-/* ---------------- NEXT SECTION ---------------- */
+/* NEXT SECTION */
 .next-section{
   height:100vh;
   display:flex;
@@ -116,7 +101,6 @@ h1{
   transition:opacity 1.4s cubic-bezier(.22,1,.36,1),
              transform 1.4s cubic-bezier(.22,1,.36,1);
 }
-
 .next-section.reveal{
   opacity:1;
   transform:translateY(0);
@@ -125,31 +109,8 @@ h1{
 </head>
 <body>
 
-<section class="hero">
+<section class="hero" id="hero">
   <h1 id="intro" class="typing"></h1>
-</section>
-
-<!-- NAVBAR (hidden at first) -->
-<div class="navbar" id="navbar">
-  <li class="list-item"><i class="fa-solid fa-house"></i>
-    <span class="list-item-name">Home</span>
-  </li>
-  <li class="list-item">
-    <i class="fa-solid fa-user"></i>
-    <span class="list-item-name">Profile</span>
-  </li>
-  <li class="list-item">
-    <i class="fa-solid fa-gear"></i>
-    <span class="list-item-name">Settings</span>
-  </li>
-  <li class="list-item">
-    <i class="fa-solid fa-bag-shopping"></i>
-    <span class="list-item-name">Bag</span>
-  </li>
-</div>
-
-<section class="next-section" id="next">
-  Welcome to my portfolio
 </section>
 
 <script>
@@ -161,8 +122,7 @@ const sentences=[
 ];
 
 const intro=document.getElementById("intro");
-const next=document.getElementById("next");
-const navbar=document.getElementById("navbar");
+const hero=document.getElementById("hero");
 
 let s=0,c=0;
 
@@ -179,13 +139,12 @@ function type(){
     intro.classList.remove("typing");
     intro.classList.add("cursor-end");
 
+    // wait for 3 blinks
     setTimeout(()=>{
       intro.classList.add("fade-up-out");
 
       setTimeout(()=>{
-        navbar.classList.add("show");
-        next.scrollIntoView({behavior:"smooth"});
-        setTimeout(()=>next.classList.add("reveal"),600);
+        buildNextSection();  // create content ONLY now
       },1200);
 
     },2100);
@@ -200,6 +159,32 @@ function erase(){
  }else{
   s++; setTimeout(type,rand());
  }
+}
+
+function buildNextSection(){
+  // allow scrolling now
+  document.body.style.overflow="auto";
+
+  // CREATE NAVBAR inside hero (hidden until user scrolls up)
+  const nav=document.createElement("div");
+  nav.className="navbar";
+  nav.innerHTML=`
+    <li class="list-item"><i class="fa-solid fa-house"></i><span class="list-item-name">Home</span></li>
+    <li class="list-item"><i class="fa-solid fa-user"></i><span class="list-item-name">Profile</span></li>
+    <li class="list-item"><i class="fa-solid fa-gear"></i><span class="list-item-name">Settings</span></li>
+    <li class="list-item"><i class="fa-solid fa-bag-shopping"></i><span class="list-item-name">Bag</span></li>
+  `;
+  hero.appendChild(nav);
+
+  // CREATE NEXT SECTION
+  const next=document.createElement("section");
+  next.className="next-section";
+  next.innerHTML="Welcome to my portfolio";
+  document.body.appendChild(next);
+
+  // scroll and reveal
+  next.scrollIntoView({behavior:"smooth"});
+  setTimeout(()=>next.classList.add("reveal"),600);
 }
 
 window.onload=type;
