@@ -27,6 +27,7 @@ body{
   flex-direction:column;
   position: relative;
   transition: height 1s cubic-bezier(.22,1,.36,1);
+  background: #ddd;
 }
 
 .hero.shrink{
@@ -53,12 +54,12 @@ h1{
 .typing{animation:blink .7s step-end infinite;}
 .cursor-end{animation:blink .7s step-end 3;}
 
-/* NAVBAR - three options, Sulphur Point, CodePen shadows */
+/* NAVBAR - spread evenly, Sulphur Point, shadows like CodePen */
 .navbar{
   display:flex;
-  justify-content:space-around;
+  justify-content:space-evenly;
   align-items:center;
-  width:70%;
+  width:80%;
   max-width:420px;
   background: #ffffff;
   border-radius: 32px;
@@ -95,14 +96,14 @@ h1{
   text-shadow: 0px 2px 6px rgba(87,86,230,0.3);
 }
 
-/* NEXT SECTION */
+/* NEXT SECTION matches hero background */
 .next{
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   font-size:2.5rem;
-  background:#bbb;
+  background:#ddd; /* same as hero */
   opacity:0;
   transform:translateY(80px);
   transition:opacity 1.2s cubic-bezier(.22,1,.36,1),
@@ -168,7 +169,7 @@ function erase(){
 function buildNext(){
  document.body.style.overflow="auto";
 
- // NAVBAR (three options)
+ // NAVBAR (three options, evenly spread)
  const nav = document.createElement("div");
  nav.className="navbar";
  nav.innerHTML=`
