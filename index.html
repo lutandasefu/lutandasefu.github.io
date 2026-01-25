@@ -1,188 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lutanda | UI/UX Portfolio Animation</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lutanda | UI/UX Portfolio</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-    body{
-      font-family:'Sulphur Point',sans-serif;
-      background:#ddd;
-      color:#333;
-      overflow:hidden; /* disable scroll until animation done */
-    }
+body{
+  font-family:'Sulphur Point',sans-serif;
+  background:#ddd;
+  color:#333;
+  overflow:hidden;
+}
 
-    .hero{
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  transition:height 1.2s cubic-bezier(.22,1,.36,1);
+  overflow:hidden;
+}
 
-    h1{
-      font-size:5rem;
-      font-weight:300;
-      border-right:2px solid #333;
-      white-space:nowrap;
-      transition:opacity 1s ease, transform 1s ease;
-    }
+h1{
+  font-size:5rem;
+  font-weight:300;
+  border-right:2px solid #333;
+  white-space:nowrap;
+  transition:opacity 1s ease, transform 1s ease;
+}
 
-    @keyframes blink {
-      0%,50%,100% { border-color:#333; }
-      25%,75% { border-color:transparent; }
-    }
+.fade-up{
+  opacity:0;
+  transform:translateY(-60px);
+}
 
-    .typing { animation:blink .7s step-end infinite; }
-    .cursor-end { animation:blink .7s step-end 3; }
-    .fade-out {
-      opacity:0;
-      transform:translateY(-60px);
-    }
+.collapse{
+  height:0 !important;
+}
 
-    /* NAV hidden until scroll back to top */
-    .navbar {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      width:90%;
-      max-width:420px;
-      margin:1rem auto;
-      font-family:'Inter',sans-serif;
-      opacity:0;
-      transform:translateY(-30px);
-      transition:opacity .8s ease, transform .8s ease;
-    }
-    .navbar.visible {
-      opacity:1;
-      transform:translateY(0);
-    }
-    .navbar li {
-      list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:.5rem;
-      cursor:pointer;
-      font-size:1rem;
-      color:#555;
-      transition:color .2s ease;
-    }
-    .navbar li:hover { color:#5756e6; }
+@keyframes blink{
+  0%,50%,100%{border-color:#333;}
+  25%,75%{border-color:transparent;}
+}
+.typing{animation:blink .7s step-end infinite;}
+.cursor-end{animation:blink .7s step-end 3;}
 
-    /* NEXT SECTION */
-    .next {
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-size:2.5rem;
-      background:#bbb;
-      opacity:0;
-      transform:translateY(80px);
-      transition:opacity 1.4s ease, transform 1.4s ease;
-    }
-    .next.show {
-      opacity:1;
-      transform:translateY(0);
-    }
-  </style>
+/* NAVBAR — EXACT CodePen style */
+.navbar{
+  border-radius:32px;
+  background:white;
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+  max-width:400px;
+  box-shadow:0 14px 28px #8f9cd4,0 10px 10px #8f9cd4;
+  font-family:"Inter",sans-serif;
+  margin:40px auto;
+  opacity:0;
+  transition:opacity .6s ease;
+}
+
+.navbar.visible{ opacity:1; }
+
+.list-item{
+  list-style:none;
+  flex-basis:100%;
+  min-height:80px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  color:#555;
+  cursor:pointer;
+  transition:transform .5s ease,color .2s ease;
+}
+
+.list-item-name{
+  font-size:13px;
+  font-weight:500;
+  position:absolute;
+  transform:translateY(50px);
+  transition:.5s ease;
+  opacity:0;
+}
+
+.list-item:hover{
+  color:#5756e6;
+  transform:translateY(-6px);
+}
+.list-item:hover .list-item-name{
+  transform:translateY(20px);
+  opacity:1;
+}
+
+/* NEXT SECTION */
+.next{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:2.5rem;
+  background:#bbb;
+  opacity:0;
+  transform:translateY(80px);
+  transition:opacity 1.2s cubic-bezier(.22,1,.36,1),
+             transform 1.2s cubic-bezier(.22,1,.36,1);
+}
+.next.show{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
 </head>
-
 <body>
 
-  <section class="hero" id="hero">
-    <h1 id="intro" class="typing"></h1>
-  </section>
+<section class="hero" id="hero">
+  <h1 id="intro" class="typing"></h1>
+</section>
 
-  <script>
-    const sentences = [
-      "Hey, I'm Lutanda",
-      "A UI/UX designer",
-      "I design for clarity",
-      "And purpose."
-    ];
+<script>
+const sentences=[
+ "Hey, I'm Lutanda",
+ "A UI/UX designer",
+ "I design for clarity",
+ "And purpose."
+];
 
-    const intro = document.getElementById("intro");
-    const hero = document.getElementById("hero");
+const intro=document.getElementById("intro");
+const hero=document.getElementById("hero");
 
-    let s=0, c=0;
+let s=0,c=0;
 
-    function randSpeed() { return 100 + Math.random() * 40; }
+function rand(){return 110+Math.random()*40;}
 
-    function type() {
-      if (c < sentences[s].length) {
-        intro.textContent += sentences[s][c++];
-        setTimeout(type, randSpeed());
-      } else {
-        if (s < sentences.length - 1) {
-          setTimeout(erase, 1400);
-        } else {
-          intro.classList.remove("typing");
-          intro.classList.add("cursor-end");
+function type(){
+ if(c<sentences[s].length){
+  intro.textContent+=sentences[s][c++];
+  setTimeout(type,rand());
+ }else{
+  if(s<sentences.length-1){
+    setTimeout(erase,1400);
+  }else{
+    intro.classList.remove("typing");
+    intro.classList.add("cursor-end");
 
-          // 3 cursor blinks complete
-          setTimeout(() => {
-            intro.classList.add("fade-out");
+    setTimeout(()=>{
+      intro.classList.add("fade-up");
 
-            setTimeout(createNext, 1200);
-          }, 2100);
-        }
-      }
-    }
+      setTimeout(()=>{
+        hero.classList.add("collapse");
+        buildNext();
+      },1000);
 
-    function erase() {
-      if (c > 0) {
-        intro.textContent = sentences[s].substring(0, --c);
-        setTimeout(erase, 70);
-      } else {
-        s++;
-        setTimeout(type, randSpeed());
-      }
-    }
+    },2100);
+  }
+ }
+}
 
-    function createNext() {
-      // allow scrolling now
-      document.body.style.overflow="auto";
+function erase(){
+ if(c>0){
+  intro.textContent=sentences[s].substring(0,--c);
+  setTimeout(erase,60);
+ }else{
+  s++;setTimeout(type,rand());
+ }
+}
 
-      // build navbar
-      const nav = document.createElement("ul");
-      nav.className="navbar";
-      nav.innerHTML = `
-        <li><i class="fa-solid fa-house"></i>Home</li>
-        <li><i class="fa-solid fa-user"></i>Profile</li>
-        <li><i class="fa-solid fa-gear"></i>Settings</li>
-        <li><i class="fa-solid fa-bag-shopping"></i>Bag</li>
-      `;
-      hero.appendChild(nav);
+function buildNext(){
+ document.body.style.overflow="auto";
 
-      // build next section
-      const next = document.createElement("section");
-      next.className="next";
-      next.innerText="Welcome to my portfolio";
-      document.body.appendChild(next);
+ // NAVBAR (hidden)
+ const nav=document.createElement("div");
+ nav.className="navbar";
+ nav.innerHTML=`
+  <li class="list-item"><i class="fa-solid fa-house"></i><span class="list-item-name">Home</span></li>
+  <li class="list-item"><i class="fa-solid fa-user"></i><span class="list-item-name">Profile</span></li>
+  <li class="list-item"><i class="fa-solid fa-gear"></i><span class="list-item-name">Settings</span></li>
+  <li class="list-item"><i class="fa-solid fa-bag-shopping"></i><span class="list-item-name">Bag</span></li>
+ `;
+ hero.appendChild(nav);
 
-      // scroll and reveal
-      next.scrollIntoView({ behavior:"smooth" });
-      setTimeout(()=> next.classList.add("show"), 500);
+ // NEXT SECTION
+ const next=document.createElement("section");
+ next.className="next";
+ next.innerHTML="Welcome to my portfolio";
+ document.body.appendChild(next);
 
-      // show navbar only when back at top
-      window.addEventListener("scroll", function() {
-        if (window.scrollY < 40) {
-          nav.classList.add("visible");
-        } else {
-          nav.classList.remove("visible");
-        }
-      });
-    }
+ next.scrollIntoView({behavior:"smooth"});
+ setTimeout(()=>next.classList.add("show"),400);
 
-    window.onload = type;
-  </script>
+ // show navbar only when user scrolls up
+ window.addEventListener("scroll",()=>{
+   if(window.scrollY<40){
+     nav.classList.add("visible");
+   }else{
+     nav.classList.remove("visible");
+   }
+ });
+}
+
+window.onload=type;
+</script>
 
 </body>
 </html>
