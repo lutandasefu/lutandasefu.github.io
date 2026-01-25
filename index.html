@@ -16,8 +16,7 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
 .hero{
   position:fixed;inset:0;
   display:flex;justify-content:center;align-items:center;
-  background:#e6e6e6;
-  z-index:1000;
+  background:#e6e6e6; z-index:1000;
 }
 #intro{
   font-size:4.5rem;
@@ -35,9 +34,9 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
   opacity:0;transition:opacity .8s ease;
 }
 
-/* ---------- TOGGLE (BASE) ---------- */
+/* ---------- TOGGLE BASE ---------- */
 .toggle{
-  position:relative;
+  position:fixed;
   width:420px;height:60px;
   border-radius:60px;
   border:2px solid #111;
@@ -49,7 +48,7 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
   font-weight:100;
   cursor:pointer;overflow:hidden;
   transition:all .7s cubic-bezier(.77,0,.18,1);
-  z-index:2000; /* always above pages */
+  z-index:2001; /* above pages */
 }
 
 .toggle span{
@@ -68,11 +67,11 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
 .toggle.active .slider{transform:translateX(100%);}
 .toggle span:first-child{color:#fff;}
 .toggle.active span:first-child{color:#111;}
+.toggle span:last-child{color:#111;}
 .toggle.active span:last-child{color:#fff;}
 
 /* ---------- ICON MODE (DARK PAGES) ---------- */
 .iconMode{
-  position:fixed;
   right:40px;
   top:50%;
   transform:translateY(-50%);
@@ -82,7 +81,10 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
   padding:20px 0;
   background:#111;
   border:2px solid #fff;
-  z-index:2000;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:2001; /* always above pages */
 }
 
 .iconMode .slider{
@@ -99,6 +101,9 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
 .iconMode span{
   font-size:1.6rem;
   color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 /* ---------- PAGE ---------- */
@@ -133,7 +138,6 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
 <!-- Welcome screen -->
 <section class="welcome" id="welcome">
   <div>Welcome to my portfolio</div>
-
   <div class="toggle" id="toggle">
     <div class="slider"></div>
     <span id="leftLabel">Case Studies</span>
@@ -206,11 +210,13 @@ function toIconMode(){
 toggle.addEventListener("click",()=>{
   toggle.classList.toggle("active");
 
-  // morph FIRST so it's visible above page
+  // morph toggle first so it's above page
   toIconMode();
 
+  // curtain animation
   curtain.style.transform="translateY(0%)";
 
+  // after curtain animation, show new page
   setTimeout(()=>{
     if(toggle.classList.contains("active")){
       createPage("About");
