@@ -20,8 +20,8 @@
 
     body {
       font-family: 'Sulphur Point', sans-serif;
-      background-color: #ddd; /* background from CodePen */
-      color: #333; /* text color from button */
+      background-color: #ddd; /* background */
+      color: #333; /* text color */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -31,9 +31,9 @@
 
     /* Typed text */
     h1 {
-      font-size: 4rem;
+      font-size: 5rem;
       font-weight: 300;
-      border-right: 2px solid #333; /* cursor same as text */
+      border-right: 2px solid #333; /* cursor */
       white-space: nowrap;
       overflow: hidden;
     }
@@ -48,13 +48,23 @@
       animation: blink 0.7s step-end infinite;
     }
 
+    /* Fade out cursor at end */
+    .cursor-fade {
+      animation: blink-fade 1s forwards;
+    }
+
+    @keyframes blink-fade {
+      from { border-color: #333; }
+      to { border-color: transparent; }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
-      h1 { font-size: 3rem; }
+      h1 { font-size: 4rem; }
     }
 
     @media (max-width: 480px) {
-      h1 { font-size: 2.5rem; }
+      h1 { font-size: 3rem; }
     }
   </style>
 </head>
@@ -67,15 +77,15 @@
       "Hey, I'm Lutanda",
       "A UI/UX designer",
       "I design for clarity",
-      "And purpose"
+      "And purpose." // added period at the end
     ];
 
     const introEl = document.getElementById("intro");
     let sentenceIndex = 0;
     let charIndex = 0;
 
-    const baseTypingSpeed = 120; // smoother, slower typing
-    const erasingSpeed = 70;     // smoother erase
+    const baseTypingSpeed = 120; // smoother typing
+    const erasingSpeed = 70;     
     const delayBetween = 1500;
 
     function randomTypingSpeed() {
@@ -88,7 +98,14 @@
         charIndex++;
         setTimeout(typeSentence, randomTypingSpeed());
       } else {
-        setTimeout(eraseSentence, delayBetween);
+        // last sentence check
+        if (sentenceIndex < sentences.length - 1) {
+          setTimeout(eraseSentence, delayBetween);
+        } else {
+          // last sentence finished: keep text with full stop, fade cursor
+          introEl.classList.remove("typing");
+          introEl.classList.add("cursor-fade");
+        }
       }
     }
 
@@ -98,7 +115,7 @@
         charIndex--;
         setTimeout(eraseSentence, erasingSpeed);
       } else {
-        sentenceIndex = (sentenceIndex + 1) % sentences.length;
+        sentenceIndex++;
         setTimeout(typeSentence, randomTypingSpeed());
       }
     }
