@@ -95,7 +95,7 @@ h1 {
 
 /* CODEPEN MENU */
 #app {
-  width: 300px;
+  width: 450px; /* wider to accommodate longer text */
   height: 70px;
   display: grid;
   place-items: center;
@@ -106,7 +106,7 @@ h1 {
   width: 100%;
   height: 70px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* 3 items now */
   border-radius: 45px;
   background: rgba(255, 255, 255, 0.65);
   transform-origin: center center;
@@ -131,7 +131,7 @@ h1 {
   position: absolute;
   left: 0;
   top: 0;
-  width: 50%;
+  width: 33.33%; /* evenly divide among 3 items */
   height: 100%;
   border-radius: 45px;
   background: #fff;
@@ -184,14 +184,13 @@ function type(){
   setTimeout(type, rand());
  } else {
   if(s<sentences.length-1){
-    setTimeout(erase, 700); // shorter pause
+    setTimeout(erase, 700);
   } else {
-    // Last sentence: cursor flickers 3 times
     intro.classList.remove("typing");
     intro.classList.add("cursor-end");
     setTimeout(()=>{
       fadeHero();
-    }, 1000); // shorter delay before transition
+    }, 1000);
   }
  }
 }
@@ -215,8 +214,9 @@ function fadeHero(){
     <h2>Welcome to my portfolio</h2>
     <div id="app">
       <ul>
-        <li>Photo</li>
-        <li>Video</li>
+        <li>Case Studies</li>
+        <li>About</li>
+        <li>Contact</li>
         <span class="focus-el"></span>
       </ul>
     </div>
