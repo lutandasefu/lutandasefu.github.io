@@ -10,6 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,6 +33,8 @@ body {
   align-items: center;
   background: #ddd;
   transition: opacity 1.2s ease;
+  padding: 0 20px;
+  text-align: center;
 }
 
 .hero.fade-out {
@@ -39,7 +42,7 @@ body {
 }
 
 h1 {
-  font-size: 5rem;
+  font-size: 4.5rem;
   font-weight: 300;
   border-right: 2px solid #333;
   white-space: nowrap;
@@ -63,7 +66,7 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,6 +74,8 @@ h1 {
   background: #ddd;
   opacity: 0;
   transition: opacity 1.2s ease;
+  padding: 20px;
+  text-align: center;
 }
 
 .next.show {
@@ -78,21 +83,21 @@ h1 {
 }
 
 .next h2 {
-  font-size: 5rem;
-  margin-bottom: 50px;
-  text-align: center;
+  font-size: 4rem;
+  margin-bottom: 40px;
   color: #333;
 }
 
 /* MENU */
 #app {
-  width: 400px; 
+  width: 90%;
+  max-width: 400px; 
   height: 70px;
   display: grid;
   place-items: center;
   border-radius: 50px;
   background: white; 
-  border: 3px solid white;
+  border: 3px solid white; 
   transform-origin: center;
   perspective: 1000px;
 }
@@ -111,8 +116,8 @@ h1 {
   list-style: none;
   display: grid;
   place-items: center;
-  font-size: 1.25rem;
-  font-family: 'Urbanist', sans-serif; 
+  font-size: 1.1rem;
+  font-family: 'Urbanist', sans-serif;
   font-weight: 100; 
   text-transform: capitalize;
   color: black; 
@@ -127,7 +132,29 @@ h1 {
   height: 100%;
   border-radius: 50px;
   background: #ddd; 
-  transition: left 0.4s ease; /* faster movement */
+  transition: left 0.4s ease;
+}
+
+/* Responsive */
+@media (max-width: 1024px) { /* Tablet */
+  h1 { font-size: 3.5rem; }
+  .next h2 { font-size: 3rem; }
+  #app { height: 60px; }
+  #app li { font-size: 1rem; }
+}
+
+@media (max-width: 768px) { /* Small tablet / large mobile */
+  h1 { font-size: 3rem; }
+  .next h2 { font-size: 2.5rem; }
+  #app { height: 55px; }
+  #app li { font-size: 0.95rem; }
+}
+
+@media (max-width: 480px) { /* Mobile */
+  h1 { font-size: 2.2rem; }
+  .next h2 { font-size: 2rem; }
+  #app { height: 50px; }
+  #app li { font-size: 0.9rem; }
 }
 </style>
 </head>
@@ -139,6 +166,7 @@ h1 {
 </section>
 
 <script>
+// Typed intro
 const sentences = [
  "Hey, I'm Lutanda",
  "A UI/UX designer",
@@ -162,7 +190,7 @@ function type(){
   } else {
     intro.classList.remove("typing");
     intro.classList.add("cursor-end");
-    setTimeout(fadeHero, 1000);
+    setTimeout(fadeHero, 800);
   }
  }
 }
@@ -196,6 +224,7 @@ function fadeHero(){
   setTimeout(()=>next.classList.add("show"), 800);
   document.body.style.overflow="auto";
 
+  // Menu toggle logic
   const app = next.querySelector("#app");
   const ul = next.querySelector("ul");
   const lis = [...ul.querySelectorAll("li")];
@@ -213,14 +242,12 @@ function fadeHero(){
 
       const ulRect = ul.getBoundingClientRect();
 
-      gsap.to(app, { duration: 0.25, rotateY: `${direction * 25}deg` }); // faster tilt
-
+      gsap.to(app, { duration: 0.25, rotateY: `${direction * 25}deg` });
       gsap.to(focus, {
-        duration: 0.4, // faster movement like CodePen
+        duration: 0.4,
         left: `${(ulRect.width / lis.length) * index}px`,
         ease: "bounce.out"
       });
-
       gsap.to(app, { duration: 0.25, rotateY: `0deg`, delay: 0.25 });
     });
   });
