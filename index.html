@@ -21,7 +21,7 @@
     body {
       font-family: 'Sulphur Point', sans-serif;
       background-color: #ddd; /* background from CodePen */
-      color: #fff; /* typed text color */
+      color: #333; /* text color from button */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -33,15 +33,14 @@
     h1 {
       font-size: 4rem;
       font-weight: 300;
-      color: #fff; /* text white */
-      border-right: 2px solid #fff; /* cursor matches text */
+      border-right: 2px solid #333; /* cursor same as text */
       white-space: nowrap;
       overflow: hidden;
     }
 
     /* Blinking cursor */
     @keyframes blink {
-      0%, 50%, 100% { border-color: #fff; }
+      0%, 50%, 100% { border-color: #333; }
       25%, 75% { border-color: transparent; }
     }
 
@@ -75,7 +74,7 @@
     let sentenceIndex = 0;
     let charIndex = 0;
 
-    const baseTypingSpeed = 120; // smoother typing
+    const baseTypingSpeed = 120; // smoother, slower typing
     const erasingSpeed = 70;     // smoother erase
     const delayBetween = 1500;
 
