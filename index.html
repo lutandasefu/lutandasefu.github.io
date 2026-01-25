@@ -3,24 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lutanda | UI/UX Portfolio</title>
+<title>Lutanda | Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:'Sulphur Point',sans-serif;
-  overflow:hidden;
-  background:#e6e6e6;
-}
+body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
 
-/* HERO */
+/* TYPING SCREEN */
 .hero{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  position:fixed;inset:0;
+  display:flex;justify-content:center;align-items:center;
+  background:#e6e6e6;
+  z-index:1000;
 }
 #intro{
   font-size:4.5rem;
@@ -28,181 +24,164 @@ body{
   white-space:nowrap;
   animation:blink .7s step-end infinite;
 }
-@keyframes blink{0%,50%,100%{border-color:#111;}25%,75%{border-color:transparent;}}
+@keyframes blink{50%{border-color:transparent;}}
 
-/* PERSISTENT NAV */
-.nav{
-  position:fixed;
-  top:40px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:2000;
+/* WELCOME SCREEN */
+.welcome{
+  position:fixed;inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:40px;
+  font-size:4rem;
+  opacity:0;
+  transition:opacity .8s ease;
 }
 
+/* TOGGLE (starts hidden) */
 .toggle{
   position:relative;
-  width:420px;
-  height:60px;
-  background:#fff;
+  width:420px;height:60px;
   border-radius:60px;
   border:2px solid #111;
-  font-family:'Urbanist',sans-serif;
-  font-weight:100;
+  background:#fff;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 30px;
+  font-family:'Urbanist',sans-serif;
+  font-weight:100;
   cursor:pointer;
   overflow:hidden;
+  opacity:0;
+  transition:all .6s cubic-bezier(.77,0,.18,1);
 }
 
-.toggle span{
-  z-index:2;
-  font-size:1.1rem;
-}
-
+.toggle span{z-index:2;font-size:1.1rem;color:#111;}
 .slider{
-  position:absolute;
-  height:100%;
-  width:50%;
-  background:#111;
-  border-radius:60px;
-  left:0;
+  position:absolute;height:100%;width:50%;
+  background:#111;border-radius:60px;
+  left:0;z-index:1;
   transition:transform .6s cubic-bezier(.77,0,.18,1);
-  z-index:1;
 }
 
-.toggle.active .slider{
-  transform:translateX(100%);
-}
+.toggle.active .slider{transform:translateX(100%);}
+.toggle.active span:first-child{color:#111;}
+.toggle.active span:last-child{color:#fff;}
+.toggle span:first-child{color:#fff;}
+.toggle span:last-child{color:#111;}
 
-.toggle span{
-  color:#111;
-  transition:color .4s ease;
-}
-
-.toggle.active span:first-child{
-  color:#111;
-}
-.toggle.active span:last-child{
-  color:#fff;
-}
-.toggle span:first-child{
-  color:#fff;
-}
-.toggle span:last-child{
-  color:#111;
+/* NAV MODE (after click) */
+.navMode{
+  position:fixed;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  opacity:1 !important;
 }
 
 /* PAGE */
 .page{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+  position:fixed;inset:0;
+  display:flex;justify-content:center;align-items:center;
   font-size:4rem;
-  transition:background .6s ease,color .6s ease;
+  background:#111;color:#fff;
 }
-
-.light{background:#e6e6e6;color:#111;}
-.dark{background:#111;color:#fff;}
 
 /* CURTAIN */
 .curtain{
-  position:fixed;
-  inset:0;
-  background:#111;
+  position:fixed;inset:0;background:#111;
   transform:translateY(-100%);
-  z-index:1500;
   transition:transform .8s ease;
-}
-
-@media(max-width:768px){
-  #intro{font-size:2.5rem;}
-  .toggle{width:300px;height:50px;font-size:.9rem;}
+  z-index:900;
 }
 </style>
 </head>
 <body>
 
-<div class="nav">
+<!-- Typing screen -->
+<section class="hero" id="hero">
+  <div id="intro"></div>
+</section>
+
+<!-- Welcome screen -->
+<section class="welcome" id="welcome">
+  <div>Welcome to my portfolio</div>
   <div class="toggle" id="toggle">
     <div class="slider"></div>
     <span>Case Studies</span>
     <span>About</span>
   </div>
-</div>
-
-<section class="hero" id="hero">
-  <div id="intro"></div>
 </section>
 
 <div class="curtain" id="curtain"></div>
 
 <script>
-/* TYPE INTRO */
-const sentences=[
+/* TYPE EFFECT */
+const lines=[
  "Hey, I'm Lutanda",
  "A UI/UX designer",
  "I design for clarity",
  "And purpose."
 ];
-let s=0,c=0;
+let l=0,c=0;
 const intro=document.getElementById("intro");
 
 function type(){
- if(c<sentences[s].length){
-   intro.textContent+=sentences[s][c++];
+ if(c<lines[l].length){
+   intro.textContent+=lines[l][c++];
    setTimeout(type,90);
  }else{
-   if(s<sentences.length-1){
+   if(l<lines.length-1){
      setTimeout(erase,600);
    }else{
-     setTimeout(showWelcome,800);
+     setTimeout(showWelcome,700);
    }
  }
 }
 function erase(){
  if(c>0){
-   intro.textContent=sentences[s].substring(0,--c);
+   intro.textContent=lines[l].substring(0,--c);
    setTimeout(erase,40);
- }else{s++;type();}
+ }else{l++;type();}
+}
+
+/* TRANSITION TO WELCOME */
+function showWelcome(){
+ document.getElementById("hero").remove();
+ const w=document.getElementById("welcome");
+ const t=document.getElementById("toggle");
+ w.style.opacity=1;
+ t.style.opacity=1;
 }
 
 /* PAGE SYSTEM */
 let currentPage=null;
-
-function createPage(title,mode){
- if(currentPage) currentPage.remove();
- const page=document.createElement("section");
- page.className=`page ${mode}`;
- page.innerHTML=`${title}`;
- document.body.appendChild(page);
- currentPage=page;
-}
-
-/* SHOW FIRST PAGE */
-function showWelcome(){
- document.getElementById("hero").remove();
- createPage("Welcome to my portfolio","light");
-}
-
-/* TOGGLE NAVIGATION */
 const toggle=document.getElementById("toggle");
 const curtain=document.getElementById("curtain");
 
+function createPage(title){
+ if(currentPage) currentPage.remove();
+ const p=document.createElement("section");
+ p.className="page";
+ p.textContent=title;
+ document.body.appendChild(p);
+ currentPage=p;
+}
+
+/* TOGGLE CLICK */
 toggle.addEventListener("click",()=>{
+  toggle.classList.add("navMode");
   toggle.classList.toggle("active");
 
   curtain.style.transform="translateY(0%)";
 
   setTimeout(()=>{
     if(toggle.classList.contains("active")){
-      createPage("About","dark");
+      createPage("About");
     }else{
-      createPage("Case Studies","dark");
+      createPage("Case Studies");
     }
   },800);
 });
