@@ -53,7 +53,7 @@
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInUp 1s ease forwards;
-      animation-delay: 2.5s; /* after typing */
+      animation-delay: 2.5s; /* optional if you want subtitle to fade in after first sentence */
     }
 
     /* Fade-in animation */
@@ -64,13 +64,13 @@
       }
     }
 
-    /* Blinking cursor animation */
+    /* Blinking cursor */
     @keyframes blink {
       0%, 50%, 100% { border-color: #111; }
       25%, 75% { border-color: transparent; }
     }
 
-    .hero h1.typing {
+    .typing {
       border-right: 2px solid #111;
       animation: blink 0.7s step-end infinite;
     }
@@ -91,26 +91,45 @@
 
   <section class="hero">
     <h1 id="intro" class="typing"></h1>
-    <p>UI/UX Designer</p>
+    <p>UI/UX Designer & Web Developer</p>
   </section>
 
   <script>
-    // Typing animation
-    const text = "Hey, I’m Lutanda";
-    const introEl = document.getElementById("intro");
-    let index = 0;
+    const sentences = [
+      "Hello, I’m Your Name",
+      "I design beautiful UI/UX experiences",
+      "I create websites that engage users"
+    ];
 
-    function type() {
-      if (index < text.length) {
-        introEl.innerHTML += text.charAt(index);
-        index++;
-        setTimeout(type, 120); // typing speed
+    const introEl = document.getElementById("intro");
+    let sentenceIndex = 0;
+    let charIndex = 0;
+    let typingSpeed = 100; // ms per character
+    let erasingSpeed = 50;
+    let delayBetween = 1500; // pause before erase
+
+    function typeSentence() {
+      if (charIndex < sentences[sentenceIndex].length) {
+        introEl.textContent += sentences[sentenceIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeSentence, typingSpeed);
       } else {
-        introEl.classList.remove("typing"); // stop cursor blink
+        setTimeout(eraseSentence, delayBetween);
       }
     }
 
-    window.onload = type;
+    function eraseSentence() {
+      if (charIndex > 0) {
+        introEl.textContent = sentences[sentenceIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(eraseSentence, erasingSpeed);
+      } else {
+        sentenceIndex = (sentenceIndex + 1) % sentences.length;
+        setTimeout(typeSentence, typingSpeed);
+      }
+    }
+
+    window.onload = () => typeSentence();
   </script>
 
 </body>
