@@ -60,6 +60,7 @@ h1 {
   padding: 20px;
   text-align:center;
   overflow:hidden;
+  z-index:1;
 }
 .next.show { opacity:1; }
 
@@ -130,8 +131,26 @@ h1 {
   font-size:1.5rem;
 }
 
+/* Back button */
+#back-btn {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:white;
+  border:3px solid white;
+  position: fixed;
+  top:20px;
+  right:20px;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  z-index:100;
+  font-size:1.5rem;
+}
+
 /* Pages offscreen start */
-.page.case-studies { transform: translateX(-100vw); }
+.page.case-studies { transform: translateX(100vw); }
 
 /* Responsive */
 @media(max-width:1024px){
@@ -186,7 +205,7 @@ function type(){
   } else {
     intro.classList.remove("typing");
     intro.classList.add("cursor-end");
-    setTimeout(fadeHero,500); // Reduced wait before transition
+    setTimeout(fadeHero,500);
   }
  }
 }
@@ -197,6 +216,7 @@ function erase(){
  } else { s++; setTimeout(type, rand()); }
 }
 
+// FADE HERO & CREATE NEXT SECTION
 function fadeHero(){
  hero.classList.add("fade-out");
 
@@ -229,7 +249,13 @@ menuBtn.id="menu-btn";
 menuBtn.textContent="☰";
 document.body.appendChild(menuBtn);
 
-// Tilt effect and focus
+// Back button (hidden until Case Studies clicked)
+const backBtn = document.createElement("div");
+backBtn.id="back-btn";
+backBtn.textContent="←";
+document.body.appendChild(backBtn);
+
+// Menu tilt and focus
 let activeIndex = 0;
 lis.forEach((li,index)=>{
   li.addEventListener("click",()=>{
@@ -238,20 +264,38 @@ lis.forEach((li,index)=>{
     const ulRect=ul.getBoundingClientRect();
     gsap.to(focus,{duration:0.3,left:`${(ulRect.width/lis.length)*index}px`,ease:"bounce.out"});
 
-    // Case Studies page transition
+    // Case Studies transition
     if(li.id==="menu-case"){
       const caseSection = document.createElement("section");
       caseSection.className="page case-studies";
       caseSection.innerHTML="<h2>Case Studies</h2>";
       document.body.appendChild(caseSection);
 
-      // Slide current next page to right, bring new page from left
-      gsap.to(next,{duration:1,x:"100vw",ease:"power2.inOut"});
-      gsap.to(caseSection,{duration:1,x:"0vw",ease:"power2.inOut"});
+      caseSection.style.position="absolute";
+      caseSection.style.top="0";
+      caseSection.style.left="0";
+      caseSection.style.width="100%";
+      caseSection.style.height="100vh";
+      caseSection.style.zIndex="100";
 
-      // Hide menu and show collapsed button
+      // Slide Welcome page right and fade out completely
+      gsap.to(next,{
+        duration:1,
+        x:"100vw",
+        opacity:0,
+        ease:"power2.inOut",
+        onComplete:()=> next.remove() // fully remove Welcome page
+      });
+
+      // Slide Case Studies page in from left
+      gsap.fromTo(caseSection,
+        {x:"-100vw", opacity:0},
+        {duration:1, x:"0vw", opacity:1, ease:"power2.inOut"}
+      );
+
       app.style.display="none";
       menuBtn.style.display="flex";
+      backBtn.style.display="flex";
     }
   });
 });
@@ -260,6 +304,20 @@ lis.forEach((li,index)=>{
 menuBtn.addEventListener("click",()=>{
   app.style.display="grid";
   menuBtn.style.display="none";
+});
+
+// Back button to return to Welcome page
+backBtn.addEventListener("click",()=>{
+  const caseSection = document.querySelector(".case-studies");
+  if(!caseSection) return;
+
+  caseSection.remove(); // remove Case Studies
+  next.style.display="flex";
+  gsap.fromTo(next,{x:"100vw", opacity:0},{duration:1,x:"0vw", opacity:1,ease:"power2.inOut"});
+
+  app.style.display="grid";
+  menuBtn.style.display="none";
+  backBtn.style.display="none";
 });
 
 }
