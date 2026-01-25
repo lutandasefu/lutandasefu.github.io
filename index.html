@@ -6,9 +6,14 @@
 <title>Lutanda | UI/UX Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body{
   font-family:'Sulphur Point',sans-serif;
@@ -51,7 +56,7 @@ h1{
   25%,75%{border-color:transparent;}
 }
 
-/* NEXT SECTION (centered content) */
+/* NEXT SECTION */
 .next{
   position:absolute;
   top:0;
@@ -62,7 +67,7 @@ h1{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:#ddd; 
+  background:#ddd;
   opacity:0;
   transition:opacity 1.2s ease;
 }
@@ -73,81 +78,75 @@ h1{
 
 /* Welcome heading */
 .next h2{
-  font-family:'Sulphur Point',sans-serif;
+  font-size:4rem;
   font-weight:300;
-  font-size:5rem; /* slightly reduced */
-  text-align:center;
   margin-bottom:50px;
+  text-align:center;
 }
 
-/* MENU from CodePen */
-.navbar{
-  display:flex;
-  justify-content:center;
-  align-items:center;
+/* CODEPEN MENU STYLES */
+#app {
+  width: 300px;
+  height: 70px;
+  display: grid;
+  place-items: center;
 }
 
-.nav-list{
-  display:flex;
-  gap:50px;
-  list-style:none;
-  position:relative;
+#app ul {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-radius: 45px;
+  background: rgba(255, 255, 255, 0.65);
+  transform-origin: center center;
+  transform: perspective(1000px);
+  overflow: hidden;
 }
 
-.list-item{
-  position:relative;
-  font-size:2rem;
-  font-weight:300;
-  cursor:pointer;
-  transition: color 0.3s ease;
-  padding-bottom:5px;
-  color:#333;
+#app li {
+  list-style: none;
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  font-family: 'Sulphur Point', sans-serif;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: #1355f6;
+  z-index: 10;
+  cursor: pointer;
 }
 
-.list-item::after{
-  content:'';
-  position:absolute;
-  left:0;
-  bottom:0;
-  width:0;
-  height:3px;
-  background:#5756e6;
-  border-radius:2px;
-  transition: width 0.3s ease;
+.focus-el {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 45px;
+  background: #fff;
+  transition: left 0.75s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.list-item:hover::after,
-.list-item.active::after{
-  width:100%;
+.support{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 10px;
+  display: flex;
 }
 
-.list-item:hover{
-  color:#5756e6;
+.support a{
+  margin: 0 10px;
+  color: #fffdf9;
+  font-size: 1.8rem;
+  backface-visibility: hidden;
+  transition: all 150ms ease;
 }
 
-/* Responsive */
-@media (max-width:768px){
-  .next h2{
-    font-size:3.5rem;
-  }
-  .nav-list{
-    gap:30px;
-  }
-  .list-item{
-    font-size:1.5rem;
-  }
-}
-
-@media (max-width:480px){
-  .next h2{
-    font-size:2.5rem;
-  }
-  .nav-list{
-    gap:20px;
-  }
-  .list-item{
-    font-size:1.2rem;
-  }
+.support a:hover{
+  transform: scale(1.1);
 }
 </style>
 </head>
@@ -209,12 +208,16 @@ function fadeHero(){
   next.className="next";
   next.innerHTML = `
     <h2>Welcome to my portfolio</h2>
-    <div class="navbar">
-      <ul class="nav-list">
-        <li class="list-item">About</li>
-        <li class="list-item">Case Studies</li>
-        <li class="list-item">Contact Details</li>
+    <div id="app">
+      <ul>
+        <li>Photo</li>
+        <li>Video</li>
+        <span class="focus-el"></span>
       </ul>
+    </div>
+    <div class="support">
+      <a href="https://twitter.com/DevLoop01" target="_blank"><i class="fab fa-twitter-square"></i></a>
+      <a href="https://dribbble.com/devloop01" target="_blank"><i class="fab fa-dribbble"></i></a>
     </div>
   `;
   document.body.appendChild(next);
@@ -225,18 +228,30 @@ function fadeHero(){
   // allow scrolling
   document.body.style.overflow="auto";
 
-  // Toggle active state on click
-  const items = next.querySelectorAll(".list-item");
-  items.forEach(item=>{
-    item.addEventListener("click",()=>{
-      items.forEach(i=>i.classList.remove("active"));
-      item.classList.add("active");
+  // Menu toggle functionality
+  const liContainer = next.querySelector("ul");
+  const liEls = [...next.querySelectorAll("ul li")];
+  const slideEl = next.querySelector(".focus-el");
+
+  let liContainerRect = liContainer.getBoundingClientRect();
+  let activeIndex = 0;
+
+  liEls.forEach((li,index)=>{
+    li.addEventListener("click",()=>{
+      if(index === activeIndex) return;
+      const x = index === 0 ? -1 : 1;
+      activeIndex = index;
+      const liRect = li.getBoundingClientRect();
+      slideEl.style.left = `${liRect.left - liContainerRect.left}px`;
     });
   });
 }
 
 window.onload=type;
 </script>
+
+<!-- FontAwesome for social icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
