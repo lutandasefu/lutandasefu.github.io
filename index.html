@@ -16,7 +16,7 @@ body{
   color:#111;
 }
 
-/* HERO TYPING */
+/* HERO */
 .hero{
   height:100vh;
   display:flex;
@@ -31,9 +31,9 @@ body{
 }
 @keyframes blink{0%,50%,100%{border-color:#111;}25%,75%{border-color:transparent;}}
 
-/* PAGE AREA */
+/* PAGE */
 .page{
-  position:absolute;
+  position:fixed;
   inset:0;
   display:flex;
   flex-direction:column;
@@ -42,32 +42,33 @@ body{
   text-align:center;
   padding:40px;
   background:#e6e6e6;
+  transition:background .6s ease,color .6s ease;
 }
 
-/* CURTAIN */
-.curtain{
-  position:fixed;
-  inset:0;
+/* DARK PAGE STATE */
+.page.dark{
   background:#111;
-  transform:translateY(-100%);
-  z-index:100;
+  color:#fff;
 }
 
-/* TOGGLE MENU */
+/* MENU TOGGLE */
 .menu{
   position:absolute;
   top:40px;
   display:flex;
   align-items:center;
-  gap:20px;
-  font-size:1.4rem;
+  gap:24px;
+  font-size:1.3rem;
+  letter-spacing:1px;
 }
+
 .switch{
   position:relative;
-  width:80px;
-  height:40px;
+  width:90px;
+  height:44px;
 }
 .switch input{display:none;}
+
 .slider{
   position:absolute;
   inset:0;
@@ -78,44 +79,50 @@ body{
 .slider:before{
   content:"";
   position:absolute;
-  width:34px;
-  height:34px;
-  left:3px;
-  top:3px;
+  width:36px;
+  height:36px;
+  left:4px;
+  top:4px;
   background:#e6e6e6;
   border-radius:50%;
-  transition:.4s;
+  transition:.45s cubic-bezier(.77,0,.18,1);
 }
 input:checked + .slider:before{
-  transform:translateX(40px);
+  transform:translateX(46px);
 }
 
-/* HEADINGS */
+/* CURTAIN */
+.curtain{
+  position:fixed;
+  inset:0;
+  background:#111;
+  transform:translateY(-100%);
+  z-index:1000;
+}
+
 h2{
   font-size:4rem;
   margin-top:120px;
+  transition:opacity .6s ease;
 }
 
-/* RESPONSIVE */
 @media(max-width:768px){
   #intro{font-size:2.5rem;}
-  h2{font-size:2.5rem;}
+  h2{font-size:2.2rem;}
   .menu{font-size:1rem;}
 }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div id="intro"></div>
 </section>
 
-<!-- CURTAIN -->
 <div class="curtain" id="curtain"></div>
 
 <script>
-/* ---------------- TYPING INTRO ---------------- */
+/* TYPING INTRO */
 const sentences=[
  "Hey, I'm Lutanda",
  "A UI/UX designer",
@@ -144,21 +151,15 @@ function erase(){
  }else{s++;type();}
 }
 
-/* ---------------- WELCOME PAGE ---------------- */
-function showWelcome(){
- document.getElementById("hero").remove();
- createPage("Welcome to my portfolio");
-}
-
-/* ---------------- PAGE CREATOR ---------------- */
-function createPage(title){
+/* CREATE PAGE */
+function createPage(title,dark=false){
  const page=document.createElement("section");
- page.className="page";
+ page.className="page"+(dark?" dark":"");
  page.innerHTML=`
    <div class="menu">
      <span>Case Studies</span>
      <label class="switch">
-       <input type="checkbox" id="navToggle">
+       <input type="checkbox" id="navToggle" ${dark?"checked":""}>
        <span class="slider"></span>
      </label>
      <span>About</span>
@@ -166,27 +167,30 @@ function createPage(title){
    <h2>${title}</h2>
  `;
  document.body.appendChild(page);
-
- const toggle=page.querySelector("#navToggle");
- toggle.addEventListener("change",handleToggle);
+ page.querySelector("#navToggle").addEventListener("change",togglePage);
 }
 
-/* ---------------- CURTAIN TRANSITION ---------------- */
-function handleToggle(e){
+/* WELCOME */
+function showWelcome(){
+ document.getElementById("hero").remove();
+ createPage("Welcome to my portfolio");
+}
+
+/* TOGGLE LOGIC */
+function togglePage(e){
  const curtain=document.getElementById("curtain");
- curtain.style.transition="transform 0.8s ease";
+ curtain.style.transition="transform .8s ease";
  curtain.style.transform="translateY(0%)";
 
  setTimeout(()=>{
    document.querySelector(".page").remove();
 
    if(e.target.checked){
-     createPage("About");
+     createPage("About",true);
    }else{
-     createPage("Case Studies");
+     createPage("Case Studies",true);
    }
 
-   curtain.style.transform="translateY(-100%)";
  },800);
 }
 
