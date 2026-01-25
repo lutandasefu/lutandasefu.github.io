@@ -3,89 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navbar with Black Background</title>
+  <title>Your Name | UI/UX Portfolio</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <style>
-    /* === Black Background === */
-    body, html {
+    /* Reset and body */
+    * {
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #000000; /* Black background */
-      font-family: "Inter", sans-serif;
+      box-sizing: border-box;
     }
 
-    /* === Navbar Styles === */
-    .navbar {
-      border-radius: 32px;
-      background-color: rgba(255, 255, 255, 0.85);
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      max-width: 500px;
-      margin: 20px auto;
-      padding: 10px 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      position: relative;
-      z-index: 10;
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #111;
     }
 
-    .list-item {
-      list-style: none;
-      flex-basis: 100%;
-      min-height: 80px;
+    /* Hero Section */
+    .hero {
+      height: 100vh;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      position: relative;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      display: inline-block;
+      border-right: 2px solid #111; /* cursor */
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .hero p {
+      font-size: 1.75rem;
+      font-weight: 400;
       color: #555;
-      transform: translateY(0);
-      transition: transform 0.5s ease, color 0.2s ease;
-      cursor: pointer;
-    }
-
-    .list-item-name {
-      font-size: 13px;
-      font-weight: 500;
-      position: absolute;
-      transform: translateY(50px);
-      transition: transform 0.5s ease, opacity 0.2s ease;
+      margin-top: 1rem;
       opacity: 0;
-    }
-
-    .list-item:hover {
-      color: #5756e6;
-      transform: translateY(-6px);
-    }
-
-    .list-item:hover .list-item-name {
       transform: translateY(20px);
-      opacity: 1;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 2.5s; /* after typing */
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Blinking cursor animation */
+    @keyframes blink {
+      0%, 50%, 100% { border-color: #111; }
+      25%, 75% { border-color: transparent; }
+    }
+
+    .hero h1.typing {
+      border-right: 2px solid #111;
+      animation: blink 0.7s step-end infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      .hero p { font-size: 1.25rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1rem; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Navbar -->
-  <div class="navbar">
-    <li class="list-item"><i class="fa-solid fa-house"></i>
-      <span class="list-item-name">Home</span>
-    </li>
-    <li class="list-item"><i class="fa-solid fa-user"></i>
-      <span class="list-item-name">Profile</span>
-    </li>
-    <li class="list-item"><i class="fa-solid fa-gear"></i>
-      <span class="list-item-name">Settings</span>
-    </li>
-    <li class="list-item"><i class="fa-solid fa-bag-shopping"></i>
-      <span class="list-item-name">Bag</span>
-    </li>
-  </div>
+  <section class="hero">
+    <h1 id="intro" class="typing"></h1>
+    <p>UI/UX Designer & Web Developer</p>
+  </section>
+
+  <script>
+    // Typing animation
+    const text = "Hello, I’m Your Name";
+    const introEl = document.getElementById("intro");
+    let index = 0;
+
+    function type() {
+      if (index < text.length) {
+        introEl.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(type, 120); // typing speed
+      } else {
+        introEl.classList.remove("typing"); // stop cursor blink
+      }
+    }
+
+    window.onload = type;
+  </script>
 
 </body>
 </html>
