@@ -65,10 +65,10 @@ h1 {
   justify-content:center;
   align-items:center;
   background:#ddd;
-  opacity:0;
-  transition: opacity 1.2s ease, transform 1s ease;
+  transition: transform 1s ease, opacity 1s ease;
   padding: 20px;
   text-align:center;
+  overflow:hidden;
 }
 .next.show { opacity:1; }
 
@@ -143,10 +143,8 @@ h1 {
   font-size:1.5rem;
 }
 
-/* Case Studies page offscreen start */
-.page.case-studies {
-  transform: translateX(100vw);
-}
+/* Pages offscreen start */
+.page.case-studies { transform: translateX(-100vw); } /* Start left */
 
 /* Responsive */
 @media(max-width:1024px){
@@ -267,7 +265,8 @@ function fadeHero(){
        caseSection.innerHTML="<h2>Case Studies</h2>";
        document.body.appendChild(caseSection);
 
-       gsap.to(next,{duration:1,x:"-100vw",ease:"power2.inOut"});
+       // Slide current page right and bring in new page
+       gsap.to(next,{duration:1,x:"100vw",ease:"power2.inOut"});
        gsap.to(caseSection,{duration:1,x:"0vw",ease:"power2.inOut"});
 
        app.style.display="none";
