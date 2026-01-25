@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name | UI/UX Portfolio</title>
+  <title>Lutanda | UI/UX Portfolio</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
 
   <style>
     /* Reset and body */
@@ -19,7 +19,7 @@
     }
 
     body {
-      font-family: 'Roboto', sans-serif; /* default for static text */
+      font-family: 'Sulphur Point', sans-serif;
       background-color: #ffffff;
       color: #111;
     }
@@ -28,7 +28,6 @@
     .hero {
       height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
@@ -37,34 +36,12 @@
 
     /* Typed text */
     .hero h1 {
-      font-family: 'Sulphur Point', sans-serif; /* typed text font */
-      font-weight: 300;
       font-size: 4rem;
+      font-weight: 300;
       display: inline-block;
       border-right: 2px solid #111; /* cursor */
       white-space: nowrap;
       overflow: hidden;
-    }
-
-    /* Static subtitle */
-    .hero p {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 1.75rem;
-      color: #555;
-      margin-top: 1rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease forwards;
-      animation-delay: 2.5s; /* subtitle fades after first sentence */
-    }
-
-    /* Fade-in animation */
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* Blinking cursor */
@@ -81,12 +58,10 @@
     /* Responsive */
     @media (max-width: 768px) {
       .hero h1 { font-size: 3rem; }
-      .hero p { font-size: 1.25rem; }
     }
 
     @media (max-width: 480px) {
       .hero h1 { font-size: 2.5rem; }
-      .hero p { font-size: 1rem; }
     }
   </style>
 </head>
@@ -94,11 +69,9 @@
 
   <section class="hero">
     <h1 id="intro" class="typing"></h1>
-    <p>UI/UX Designer</p>
   </section>
 
   <script>
-    // Sentences for typing animation
     const sentences = [
       "Hey, I'm Lutanda",
       "A UI/UX designer",
@@ -109,15 +82,21 @@
     const introEl = document.getElementById("intro");
     let sentenceIndex = 0;
     let charIndex = 0;
-    const typingSpeed = 100; // ms per character
+
+    const baseTypingSpeed = 100; // average typing speed
     const erasingSpeed = 50;
-    const delayBetween = 1500; // pause before erase
+    const delayBetween = 1500;
+
+    function randomTypingSpeed() {
+      // small variation for more fluid, natural typing
+      return baseTypingSpeed + Math.random() * 50;
+    }
 
     function typeSentence() {
       if (charIndex < sentences[sentenceIndex].length) {
         introEl.textContent += sentences[sentenceIndex].charAt(charIndex);
         charIndex++;
-        setTimeout(typeSentence, typingSpeed);
+        setTimeout(typeSentence, randomTypingSpeed());
       } else {
         setTimeout(eraseSentence, delayBetween);
       }
@@ -130,7 +109,7 @@
         setTimeout(eraseSentence, erasingSpeed);
       } else {
         sentenceIndex = (sentenceIndex + 1) % sentences.length;
-        setTimeout(typeSentence, typingSpeed);
+        setTimeout(typeSentence, randomTypingSpeed());
       }
     }
 
