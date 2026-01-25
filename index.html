@@ -16,6 +16,7 @@ body{
   background:#ddd;
   color:#333;
   overflow:hidden;
+  scroll-behavior: smooth;
 }
 
 /* HERO */
@@ -25,6 +26,12 @@ body{
   justify-content:center;
   align-items:center;
   flex-direction:column;
+  transition: height 1s cubic-bezier(.22,1,.36,1);
+  position: relative;
+}
+
+.hero.shrink{
+  height:50vh;
 }
 
 h1{
@@ -47,24 +54,19 @@ h1{
 .typing{animation:blink .7s step-end infinite;}
 .cursor-end{animation:blink .7s step-end 3;}
 
-
-/* UPDATED NAVBAR STYLE (inspired by CodePen colors/shadows) */
+/* UPDATED NAVBAR STYLE */
 .navbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
   width:90%;
-  max-width:420px;
+  max-width:400px;
   background: #ffffff;
   border-radius: 32px;
-  
-  /* stronger shadow like CodePen panel cards */
   box-shadow: 0px 15px 25px rgba(0,0,0,0.15),
               0px 10px 10px rgba(0,0,0,0.12);
-  
   padding: 0.5rem 1rem;
   gap: 0.5rem;
-
   font-family:"Inter",sans-serif;
   opacity:0;
   transition:opacity .6s ease;
@@ -141,8 +143,8 @@ const sentences = [
  "And purpose."
 ];
 
-const intro=document.getElementById("intro");
-const hero=document.getElementById("hero");
+const intro = document.getElementById("intro");
+const hero = document.getElementById("hero");
 let s=0,c=0;
 
 function rand(){return 110+Math.random()*40;}
@@ -159,7 +161,12 @@ function type(){
     intro.classList.add("cursor-end");
     setTimeout(()=>{
       intro.classList.add("fade-up");
-      setTimeout(buildNext,1000);
+
+      setTimeout(()=>{
+        hero.classList.add("shrink"); // Shrink hero to 50vh
+        buildNext();
+      },1000);
+
     },2100);
   }
  }
@@ -178,8 +185,8 @@ function erase(){
 function buildNext(){
  document.body.style.overflow="auto";
 
- // CREATE NAVBAR (hidden by default)
- const nav=document.createElement("div");
+ // NAVBAR (inside hero)
+ const nav = document.createElement("div");
  nav.className="navbar";
  nav.innerHTML=`
   <li class="list-item"><i class="fa-solid fa-house"></i><span class="list-item-name">Home</span></li>
@@ -190,9 +197,9 @@ function buildNext(){
  hero.appendChild(nav);
 
  // NEXT SECTION
- const next=document.createElement("section");
- next.className="next";
- next.innerText="Welcome to my portfolio";
+ const next = document.createElement("section");
+ next.className = "next";
+ next.innerText = "Welcome to my portfolio";
  document.body.appendChild(next);
 
  setTimeout(()=>{
@@ -210,7 +217,7 @@ function buildNext(){
  });
 }
 
-window.onload=type;
+window.onload = type;
 </script>
 
 </body>
