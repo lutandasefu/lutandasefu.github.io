@@ -53,13 +53,13 @@ h1{
 .typing{animation:blink .7s step-end infinite;}
 .cursor-end{animation:blink .7s step-end 3;}
 
-/* NAVBAR - two options, Sulphur Point, shadows like CodePen */
+/* NAVBAR - three options, Sulphur Point, CodePen shadows */
 .navbar{
   display:flex;
   justify-content:space-around;
   align-items:center;
-  width:60%;
-  max-width:350px;
+  width:70%;
+  max-width:420px;
   background: #ffffff;
   border-radius: 32px;
   box-shadow: 0px 15px 25px rgba(0,0,0,0.15),
@@ -168,10 +168,11 @@ function erase(){
 function buildNext(){
  document.body.style.overflow="auto";
 
- // NAVBAR (two options, Sulphur Point)
+ // NAVBAR (three options)
  const nav = document.createElement("div");
  nav.className="navbar";
  nav.innerHTML=`
+  <li class="list-item">About</li>
   <li class="list-item">Case Studies</li>
   <li class="list-item">Contact Details</li>
  `;
