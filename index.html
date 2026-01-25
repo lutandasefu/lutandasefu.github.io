@@ -63,7 +63,7 @@ h1{
   justify-content:center;
   align-items:center;
   font-size:2.5rem;
-  background:#ddd;
+  background:#ddd; /* same as hero */
   opacity:0;
   transition:opacity 1.2s ease;
 }
@@ -77,8 +77,8 @@ h1{
   display:flex;
   justify-content:space-evenly;
   align-items:center;
-  width:80%;
-  max-width:420px;
+  width:90%; /* increased width for more side space */
+  max-width:600px; /* wider max */
   background: #ffffff;
   border-radius: 32px;
   box-shadow: 0px 15px 25px rgba(0,0,0,0.15),
@@ -103,7 +103,7 @@ h1{
   cursor:pointer;
   font-size:1.2rem;
   color:#333;
-  padding:0.6rem 1.2rem;
+  padding:0.8rem 2rem; /* added horizontal padding for extra space */
   border-radius:16px;
   position: relative;
   transition: transform 0.4s ease, color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
@@ -129,6 +129,15 @@ h1{
   color:#5756e6;
   transform:translateY(-4px);
   box-shadow: 0px 4px 12px rgba(87,86,230,0.25);
+}
+
+/* Welcome heading uses Sulphur Point */
+.next h2{
+  font-family:'Sulphur Point',sans-serif;
+  font-weight:300;
+  font-size:3rem;
+  text-align:center;
+  margin-bottom:20px;
 }
 </style>
 </head>
