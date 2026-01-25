@@ -49,11 +49,19 @@ h1 {
 }
 
 .typing { animation: blink 0.7s step-end infinite; }
-.cursor-end { animation: blink 0.7s step-end 3; }
+
+.cursor-end {
+  animation: blink-3 0.7s step-end 3 forwards;
+}
 
 @keyframes blink {
   0%,50%,100% { border-color: #333; }
   25%,75% { border-color: transparent; }
+}
+
+@keyframes blink-3 {
+  0%, 50%, 100% { border-color: #333; }
+  25%, 75% { border-color: transparent; }
 }
 
 /* NEXT SECTION */
@@ -78,11 +86,11 @@ h1 {
 
 /* Welcome heading */
 .next h2 {
-  font-size: 5rem; /* increased from 4rem */
+  font-size: 5rem; /* slightly larger */
   font-weight: 300;
   margin-bottom: 50px;
   text-align: center;
-  color: #333; /* ensure same as typed text */
+  color: #333; /* match typed text */
 }
 
 /* CODEPEN MENU */
@@ -114,7 +122,7 @@ h1 {
   font-family: 'Sulphur Point', sans-serif;
   font-weight: 500;
   text-transform: capitalize;
-  color: #333; /* changed from #1355f6 to match typed text */
+  color: #333; /* match typed text */
   z-index: 10;
   cursor: pointer;
 }
@@ -168,35 +176,33 @@ const intro = document.getElementById("intro");
 const hero = document.getElementById("hero");
 let s=0,c=0;
 
-function rand(){return 110+Math.random()*40;}
+function rand(){ return 110 + Math.random()*40; }
 
 function type(){
  if(c<sentences[s].length){
-  intro.textContent+=sentences[s][c++];
-  setTimeout(type,rand());
+  intro.textContent += sentences[s][c++];
+  setTimeout(type, rand());
  } else {
   if(s<sentences.length-1){
-    setTimeout(erase,1400);
+    setTimeout(erase, 700); // shorter pause
   } else {
+    // Last sentence: cursor flickers 3 times
     intro.classList.remove("typing");
     intro.classList.add("cursor-end");
     setTimeout(()=>{
-      intro.classList.add("fade-up");
-      setTimeout(()=>{
-        fadeHero();
-      },2100);
-    },2100);
+      fadeHero();
+    }, 1000); // shorter delay before transition
   }
  }
 }
 
 function erase(){
  if(c>0){
-  intro.textContent=sentences[s].substring(0,--c);
-  setTimeout(erase,60);
+  intro.textContent = sentences[s].substring(0,--c);
+  setTimeout(erase, 60);
  } else {
   s++;
-  setTimeout(type,rand());
+  setTimeout(type, rand());
  }
 }
 
@@ -204,7 +210,7 @@ function fadeHero(){
   hero.classList.add("fade-out");
 
   const next = document.createElement("section");
-  next.className="next";
+  next.className = "next";
   next.innerHTML = `
     <h2>Welcome to my portfolio</h2>
     <div id="app">
@@ -221,10 +227,10 @@ function fadeHero(){
   `;
   document.body.appendChild(next);
 
-  setTimeout(()=>next.classList.add("show"),800);
-  document.body.style.overflow="auto";
+  setTimeout(()=>next.classList.add("show"), 800);
+  document.body.style.overflow = "auto";
 
-  // CodePen menu tilt and slide effect
+  // CodePen menu tilt & slide effect
   const liContainer = next.querySelector("ul");
   const liEls = [...next.querySelectorAll("ul li")];
   const slideEl = next.querySelector(".focus-el");
