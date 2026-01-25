@@ -59,14 +59,13 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 
 /* ---------- CURTAIN ---------- */
 .curtain{
+  display: none; /* hidden by default */
   position:fixed;
-  top:-100vh;
-  left:0;
-  width:100%;
-  height:100vh;
+  inset:0;
   background:#111;
-  transition:top .8s ease;
   z-index:900;
+  opacity:0;
+  transition:opacity .6s ease;
 }
 
 /* ---------- RESPONSIVE ---------- */
@@ -153,18 +152,22 @@ toggle.addEventListener("click",()=>{
   // morph toggle first
   toIconMode();
 
-  // curtain down
-  curtain.style.top = '0';
+  // show curtain for transition
+  curtain.style.display = 'block';
+  curtain.style.opacity = '0';
+  setTimeout(() => { curtain.style.opacity = '1'; }, 10);
 
-  // after curtain animation, create new page and slide
+  // after curtain fade-in
   setTimeout(()=>{
     if(toggle.classList.contains("active")){
       createPage("About");
     }else{
       createPage("Case Studies");
     }
-    // hide curtain after page slides in
-    setTimeout(()=>{curtain.style.top='-100vh';},800);
+    // fade curtain out
+    curtain.style.opacity='0';
+    setTimeout(()=>{curtain.style.display='none';},600);
+
   },600);
 });
 
