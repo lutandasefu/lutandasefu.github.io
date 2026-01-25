@@ -1,169 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lutanda | UI/UX Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lutanda | UI/UX Portfolio</title>
 
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+:root { --highlight: #5756e6; }
 
-    body {
-      font-family: 'Sulphur Point', sans-serif;
-      background: #ddd;
-      color: #333;
-      scroll-behavior: smooth;
-    }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    /* HERO */
-    .hero {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-    }
+body{
+  font-family:'Sulphur Point',sans-serif;
+  background:#ddd;
+  color:#333;
+  scroll-behavior:smooth;
+}
 
-    h1 {
-      font-size: 5rem;
-      font-weight: 300;
-      border-right: 2px solid #333;
-      white-space: nowrap;
-      transition: opacity 1.2s ease, transform 1.2s ease;
-    }
+/* ---------------- HERO ---------------- */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-    @keyframes blink {
-      0%, 50%, 100% { border-color: #333; }
-      25%, 75% { border-color: transparent; }
-    }
+h1{
+  font-size:5rem;
+  font-weight:300;
+  border-right:2px solid #333;
+  white-space:nowrap;
+  transition:opacity 1.2s ease, transform 1.2s ease;
+}
 
-    .typing {
-      animation: blink 0.7s step-end infinite;
-    }
+@keyframes blink{
+  0%,50%,100%{border-color:#333;}
+  25%,75%{border-color:transparent;}
+}
 
-    .cursor-end {
-      animation: blink 0.7s step-end 3;
-    }
+.typing{ animation:blink .7s step-end infinite; }
+.cursor-end{ animation:blink .7s step-end 3; }
+.fade-up-out{ opacity:0; transform:translateY(-80px); }
 
-    .fade-up-out {
-      opacity: 0;
-      transform: translateY(-80px);
-    }
+/* ---------------- NAVBAR (from CodePen) ---------------- */
+.navbar{
+  border-radius:32px;
+  background:white;
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+  max-width:400px;
+  box-shadow:0 14px 28px #8f9cd4, 0 10px 10px #8f9cd4;
 
-    /* NEXT SECTION */
-    .next-section {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2.5rem;
-      background: #bbb;
+  position:fixed;
+  top:30px;
+  left:50%;
+  transform:translate(-50%,-40px);
+  opacity:0;
+  transition:all .8s cubic-bezier(.22,1,.36,1);
+  z-index:1000;
+}
 
-      opacity: 0;
-      transform: translateY(80px);
-      transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+.navbar.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
 
-    .next-section.reveal {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.list-item{
+  list-style:none;
+  flex-basis:100%;
+  min-height:80px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  color:#555;
+  transition:transform .5s ease, color .2s ease;
+  cursor:pointer;
+  font-family:"Inter",sans-serif;
+}
 
-    @media (max-width: 768px) {
-      h1 { font-size: 4rem; }
-    }
+.list-item-name{
+  font-size:13px;
+  font-weight:500;
+  position:absolute;
+  transform:translateY(50px);
+  transition:.5s ease;
+  opacity:0;
+}
 
-    @media (max-width: 480px) {
-      h1 { font-size: 3rem; }
-    }
-  </style>
+.list-item:hover{
+  color:var(--highlight);
+  transform:translateY(-6px);
+}
+.list-item:hover .list-item-name{
+  transform:translateY(20px);
+  opacity:1;
+}
+
+/* ---------------- NEXT SECTION ---------------- */
+.next-section{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:2.5rem;
+  background:#bbb;
+  opacity:0;
+  transform:translateY(80px);
+  transition:opacity 1.4s cubic-bezier(.22,1,.36,1),
+             transform 1.4s cubic-bezier(.22,1,.36,1);
+}
+
+.next-section.reveal{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
 </head>
 <body>
 
-  <section class="hero">
-    <h1 id="intro" class="typing"></h1>
-  </section>
+<section class="hero">
+  <h1 id="intro" class="typing"></h1>
+</section>
 
-  <section class="next-section" id="next">
-    Welcome to my portfolio
-  </section>
+<!-- NAVBAR (hidden at first) -->
+<div class="navbar" id="navbar">
+  <li class="list-item"><i class="fa-solid fa-house"></i>
+    <span class="list-item-name">Home</span>
+  </li>
+  <li class="list-item">
+    <i class="fa-solid fa-user"></i>
+    <span class="list-item-name">Profile</span>
+  </li>
+  <li class="list-item">
+    <i class="fa-solid fa-gear"></i>
+    <span class="list-item-name">Settings</span>
+  </li>
+  <li class="list-item">
+    <i class="fa-solid fa-bag-shopping"></i>
+    <span class="list-item-name">Bag</span>
+  </li>
+</div>
 
-  <script>
-    const sentences = [
-      "Hey, I'm Lutanda",
-      "A UI/UX designer",
-      "I design for clarity",
-      "And purpose."
-    ];
+<section class="next-section" id="next">
+  Welcome to my portfolio
+</section>
 
-    const introEl = document.getElementById("intro");
-    const nextSection = document.getElementById("next");
+<script>
+const sentences=[
+ "Hey, I'm Lutanda",
+ "A UI/UX designer",
+ "I design for clarity",
+ "And purpose."
+];
 
-    let sentenceIndex = 0;
-    let charIndex = 0;
+const intro=document.getElementById("intro");
+const next=document.getElementById("next");
+const navbar=document.getElementById("navbar");
 
-    const baseTypingSpeed = 120;
-    const erasingSpeed = 70;
-    const delayBetween = 1500;
+let s=0,c=0;
 
-    function randomSpeed() {
-      return baseTypingSpeed + Math.random() * 40;
-    }
+function rand(){ return 110+Math.random()*40; }
 
-    function typeSentence() {
-      if (charIndex < sentences[sentenceIndex].length) {
-        introEl.textContent += sentences[sentenceIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeSentence, randomSpeed());
-      } else {
-        if (sentenceIndex < sentences.length - 1) {
-          setTimeout(eraseSentence, delayBetween);
-        } else {
-          // Final sequence
-          introEl.classList.remove("typing");
-          introEl.classList.add("cursor-end");
+function type(){
+ if(c<sentences[s].length){
+  intro.textContent+=sentences[s][c++];
+  setTimeout(type,rand());
+ }else{
+  if(s<sentences.length-1){
+    setTimeout(erase,1400);
+  }else{
+    intro.classList.remove("typing");
+    intro.classList.add("cursor-end");
 
-          setTimeout(() => {
-            introEl.classList.add("fade-up-out");
+    setTimeout(()=>{
+      intro.classList.add("fade-up-out");
 
-            setTimeout(() => {
-              nextSection.scrollIntoView({ behavior: "smooth" });
+      setTimeout(()=>{
+        navbar.classList.add("show");
+        next.scrollIntoView({behavior:"smooth"});
+        setTimeout(()=>next.classList.add("reveal"),600);
+      },1200);
 
-              setTimeout(() => {
-                nextSection.classList.add("reveal");
-              }, 600);
+    },2100);
+  }
+ }
+}
 
-            }, 1200);
+function erase(){
+ if(c>0){
+  intro.textContent=sentences[s].substring(0,--c);
+  setTimeout(erase,60);
+ }else{
+  s++; setTimeout(type,rand());
+ }
+}
 
-          }, 2100); // 3 cursor blinks
-        }
-      }
-    }
-
-    function eraseSentence() {
-      if (charIndex > 0) {
-        introEl.textContent = sentences[sentenceIndex].substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(eraseSentence, erasingSpeed);
-      } else {
-        sentenceIndex++;
-        setTimeout(typeSentence, randomSpeed());
-      }
-    }
-
-    window.onload = () => typeSentence();
-  </script>
+window.onload=type;
+</script>
 
 </body>
 </html>
