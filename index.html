@@ -62,7 +62,7 @@ h1{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:#ddd; /* same as hero */
+  background:#ddd; 
   opacity:0;
   transition:opacity 1.2s ease;
 }
@@ -71,37 +71,37 @@ h1{
   opacity:1;
 }
 
-/* Welcome heading uses Sulphur Point, doubled size */
+/* Welcome heading */
 .next h2{
   font-family:'Sulphur Point',sans-serif;
   font-weight:300;
-  font-size:8rem; /* doubled size */
+  font-size:5rem; /* slightly reduced */
   text-align:center;
-  margin-bottom:40px;
+  margin-bottom:50px;
 }
 
-/* NEW CODEPEN STYLE NAVBAR */
+/* MENU from CodePen */
 .navbar{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:transparent;
-  font-family:'Sulphur Point',sans-serif;
 }
 
 .nav-list{
   display:flex;
-  gap:60px;
+  gap:50px;
   list-style:none;
+  position:relative;
 }
 
 .list-item{
-  cursor:pointer;
+  position:relative;
   font-size:2rem;
   font-weight:300;
-  position:relative;
-  padding-bottom:5px;
+  cursor:pointer;
   transition: color 0.3s ease;
+  padding-bottom:5px;
+  color:#333;
 }
 
 .list-item::after{
@@ -109,7 +109,7 @@ h1{
   position:absolute;
   left:0;
   bottom:0;
-  width:0%;
+  width:0;
   height:3px;
   background:#5756e6;
   border-radius:2px;
@@ -125,10 +125,10 @@ h1{
   color:#5756e6;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width:768px){
   .next h2{
-    font-size:5rem;
+    font-size:3.5rem;
   }
   .nav-list{
     gap:30px;
@@ -140,7 +140,7 @@ h1{
 
 @media (max-width:480px){
   .next h2{
-    font-size:3rem;
+    font-size:2.5rem;
   }
   .nav-list{
     gap:20px;
@@ -225,7 +225,7 @@ function fadeHero(){
   // allow scrolling
   document.body.style.overflow="auto";
 
-  // Toggle behavior for navbar items
+  // Toggle active state on click
   const items = next.querySelectorAll(".list-item");
   items.forEach(item=>{
     item.addEventListener("click",()=>{
