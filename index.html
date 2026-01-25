@@ -5,324 +5,213 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | UI/UX Portfolio</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
-* { box-sizing: border-box; margin:0; padding:0; }
-body {
-  font-family: 'Sulphur Point', sans-serif;
-  background: #ddd;
-  color: #333;
-  overflow: hidden;
-  scroll-behavior: smooth;
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Sulphur Point',sans-serif;
+  background:#ddd;
+  color:#333;
+  overflow:hidden;
 }
 
 /* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ddd;
-  transition: opacity 1s ease;
-  padding: 0 20px;
-  text-align: center;
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
-.hero.fade-out { opacity:0; }
-
-h1 {
-  font-size: 4.5rem;
-  font-weight: 300;
-  border-right: 2px solid #333;
-  white-space: nowrap;
+h1{
+  font-size:4.5rem;
+  font-weight:300;
+  border-right:2px solid #333;
+  white-space:nowrap;
 }
-.typing { animation: blink 0.7s step-end infinite; }
-.cursor-end { animation: blink-3 0.7s step-end 3 forwards; }
+.typing{animation:blink .7s step-end infinite;}
+@keyframes blink{0%,50%,100%{border-color:#333;}25%,75%{border-color:transparent;}}
 
-@keyframes blink {0%,50%,100%{border-color:#333;}25%,75%{border-color:transparent;}}
-@keyframes blink-3 {0%,50%,100%{border-color:#333;}25%,75%{border-color:transparent;}}
-
-/* NEXT SECTION */
-.next, .page {
-  position: absolute;
-  top:0;
-  left:0;
+/* PAGES */
+.page{
+  position:absolute;
+  top:0;left:0;
   width:100%;
-  min-height:100vh;
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   background:#ddd;
-  transition: transform 1s ease, opacity 1s ease;
-  padding: 20px;
   text-align:center;
-  overflow:hidden;
-  z-index:1;
 }
-.next.show { opacity:1; }
-
-.next h2, .page h2 { font-size:4rem; margin-bottom:40px; color:#333; }
 
 /* MENU */
-#app {
-  width: 90%;
-  max-width: 400px; 
-  height: 70px;
-  display: grid;
-  place-items: center;
+#app{
+  width:600px;
+  height:70px;
+  display:grid;
+  place-items:center;
   border-radius:50px;
-  background:white; 
-  border:3px solid white;
-  transform-origin:center;
+  background:#fff;
+  border:3px solid #fff;
   perspective:1000px;
 }
-
-#app ul {
-  position: relative;
-  width: 100%;
-  height: 100%;
+#app ul{
+  width:100%;
+  height:100%;
   display:grid;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns:repeat(2,1fr);
+  position:relative;
   border-radius:50px;
   overflow:hidden;
 }
-
-#app li {
-  list-style:none;
+#app li{
   display:grid;
   place-items:center;
-  font-size:1.1rem;
-  font-family:'Urbanist', sans-serif;
+  font-family:'Urbanist',sans-serif;
   font-weight:100;
-  text-transform:capitalize;
-  color:black;
+  font-size:1.2rem;
+  color:#000;
   cursor:pointer;
-  z-index:10;
+  z-index:2;
 }
-
-.focus-el {
+.focus-el{
   position:absolute;
-  left:0;
-  top:0;
+  top:0;left:0;
   height:100%;
-  border-radius:50px;
+  width:50%;
   background:#ddd;
-  transition:left 0.3s ease;
+  border-radius:50px;
+  z-index:1;
 }
 
-/* Collapsed menu button */
-#menu-btn {
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  background:white;
-  border:3px solid white;
-  position: fixed;
+/* Buttons */
+.btn{
+  position:fixed;
   top:20px;
-  left:20px;
-  display:none;
+  width:50px;height:50px;
+  border-radius:50%;
+  background:#fff;
+  border:3px solid #fff;
+  display:flex;
   justify-content:center;
   align-items:center;
   cursor:pointer;
-  z-index:100;
-  font-size:1.5rem;
+  z-index:200;
+  font-size:1.4rem;
 }
+#menu-btn{left:20px;display:none;}
+#back-btn{right:20px;display:none;}
 
-/* Back button */
-#back-btn {
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  background:white;
-  border:3px solid white;
-  position: fixed;
-  top:20px;
-  right:20px;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  cursor:pointer;
-  z-index:100;
-  font-size:1.5rem;
-}
-
-/* Pages offscreen start */
-.page.case-studies { transform: translateX(100vw); }
-
-/* Responsive */
-@media(max-width:1024px){
-  h1{ font-size:3.5rem; }
-  .next h2,.page h2{ font-size:3rem; }
-  #app{ height:60px; }
-  #app li{ font-size:1rem; }
-}
-
-@media(max-width:768px){
-  h1{ font-size:3rem; }
-  .next h2,.page h2{ font-size:2.5rem; }
-  #app{ height:55px; }
-  #app li{ font-size:0.95rem; }
-}
-
-@media(max-width:480px){
-  h1{ font-size:2.2rem; }
-  .next h2,.page h2{ font-size:2rem; }
-  #app{ height:50px; }
-  #app li{ font-size:0.9rem; }
-}
+h2{font-size:4rem;margin-bottom:40px;}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <h1 id="intro" class="typing"></h1>
 </section>
 
+<div id="menu-btn" class="btn">☰</div>
+<div id="back-btn" class="btn">←</div>
+
 <script>
-// Typing intro
-const sentences = [
+const sentences=[
  "Hey, I'm Lutanda",
  "A UI/UX designer",
  "I design for clarity",
  "And purpose."
 ];
-const intro = document.getElementById("intro");
-const hero = document.getElementById("hero");
-let s=0, c=0;
 
-function rand(){ return 110+Math.random()*40; }
+const intro=document.getElementById("intro");
+let s=0,c=0;
+
 function type(){
  if(c<sentences[s].length){
-  intro.textContent += sentences[s][c++];
-  setTimeout(type, rand());
- } else {
+  intro.textContent+=sentences[s][c++];
+  setTimeout(type,100);
+ }else{
   if(s<sentences.length-1){
-    setTimeout(erase,700);
-  } else {
-    intro.classList.remove("typing");
-    intro.classList.add("cursor-end");
-    setTimeout(fadeHero,500);
+    setTimeout(erase,600);
+  }else{
+    setTimeout(initWelcome,600);
   }
  }
 }
 function erase(){
  if(c>0){
-  intro.textContent = sentences[s].substring(0,--c);
-  setTimeout(erase,60);
- } else { s++; setTimeout(type, rand()); }
+  intro.textContent=sentences[s].substring(0,--c);
+  setTimeout(erase,50);
+ }else{s++;type();}
 }
 
-// FADE HERO & CREATE NEXT SECTION
-function fadeHero(){
- hero.classList.add("fade-out");
+function initWelcome(){
+ document.getElementById("hero").remove();
 
-const next = document.createElement("section");
-next.className="next";
-next.innerHTML = `
+ const welcome=document.createElement("section");
+ welcome.className="page";
+ welcome.id="welcome";
+ welcome.innerHTML=`
   <h2>Welcome to my portfolio</h2>
   <div id="app">
     <ul>
-      <li id="menu-case">Case Studies</li>
-      <li id="menu-about">About</li>
+      <li id="case">Case Studies</li>
+      <li id="about">About</li>
       <span class="focus-el"></span>
     </ul>
-  </div>
-`;
-document.body.appendChild(next);
-setTimeout(()=>next.classList.add("show"),50);
-document.body.style.overflow="auto";
+  </div>`;
+ document.body.appendChild(welcome);
 
-const app = next.querySelector("#app");
-const ul = next.querySelector("ul");
-const lis = [...ul.querySelectorAll("li")];
-const focus = ul.querySelector(".focus-el");
-const width = ul.clientWidth / lis.length;
-focus.style.width = width+"px";
+ const focus=welcome.querySelector(".focus-el");
+ const lis=[...welcome.querySelectorAll("li")];
 
-// Collapsed menu button
-const menuBtn = document.createElement("div");
-menuBtn.id="menu-btn";
-menuBtn.textContent="☰";
-document.body.appendChild(menuBtn);
-
-// Back button (hidden until Case Studies clicked)
-const backBtn = document.createElement("div");
-backBtn.id="back-btn";
-backBtn.textContent="←";
-document.body.appendChild(backBtn);
-
-// Menu tilt and focus
-let activeIndex = 0;
-lis.forEach((li,index)=>{
-  li.addEventListener("click",()=>{
-    if(index===activeIndex) return;
-    activeIndex=index;
-    const ulRect=ul.getBoundingClientRect();
-    gsap.to(focus,{duration:0.3,left:`${(ulRect.width/lis.length)*index}px`,ease:"bounce.out"});
-
-    // Case Studies transition
-    if(li.id==="menu-case"){
-      const caseSection = document.createElement("section");
-      caseSection.className="page case-studies";
-      caseSection.innerHTML="<h2>Case Studies</h2>";
-      document.body.appendChild(caseSection);
-
-      caseSection.style.position="absolute";
-      caseSection.style.top="0";
-      caseSection.style.left="0";
-      caseSection.style.width="100%";
-      caseSection.style.height="100vh";
-      caseSection.style.zIndex="100";
-
-      // Slide Welcome page right and fade out completely
-      gsap.to(next,{
-        duration:1,
-        x:"100vw",
-        opacity:0,
-        ease:"power2.inOut",
-        onComplete:()=> next.remove() // fully remove Welcome page
-      });
-
-      // Slide Case Studies page in from left
-      gsap.fromTo(caseSection,
-        {x:"-100vw", opacity:0},
-        {duration:1, x:"0vw", opacity:1, ease:"power2.inOut"}
-      );
-
-      app.style.display="none";
-      menuBtn.style.display="flex";
-      backBtn.style.display="flex";
-    }
-  });
-});
-
-// Toggle button to restore menu
-menuBtn.addEventListener("click",()=>{
-  app.style.display="grid";
-  menuBtn.style.display="none";
-});
-
-// Back button to return to Welcome page
-backBtn.addEventListener("click",()=>{
-  const caseSection = document.querySelector(".case-studies");
-  if(!caseSection) return;
-
-  caseSection.remove(); // remove Case Studies
-  next.style.display="flex";
-  gsap.fromTo(next,{x:"100vw", opacity:0},{duration:1,x:"0vw", opacity:1,ease:"power2.inOut"});
-
-  app.style.display="grid";
-  menuBtn.style.display="none";
-  backBtn.style.display="none";
-});
-
+ lis.forEach((li,i)=>{
+   li.addEventListener("click",()=>{
+     gsap.to(focus,{left:`${i*50}%`,duration:0.3,ease:"bounce.out"});
+     if(li.id==="case") openPage("Case Studies","left");
+     if(li.id==="about") openPage("About","right");
+   });
+ });
 }
 
-window.onload = type;
+function openPage(title,direction){
+ const welcome=document.getElementById("welcome");
+
+ const page=document.createElement("section");
+ page.className="page";
+ page.innerHTML=`<h2>${title}</h2>`;
+ document.body.appendChild(page);
+
+ const fromX = direction==="left" ? "-100vw" : "100vw";
+ const toX = direction==="left" ? "100vw" : "-100vw";
+
+ gsap.to(welcome,{
+   x:toX,
+   duration:1,
+   ease:"power2.inOut",
+   onComplete:()=>welcome.remove()
+ });
+
+ gsap.fromTo(page,
+   {x:fromX},
+   {x:"0vw",duration:1,ease:"power2.inOut"}
+ );
+
+ document.getElementById("menu-btn").style.display="flex";
+ document.getElementById("back-btn").style.display="flex";
+
+ document.getElementById("back-btn").onclick=()=>{
+   page.remove();
+   initWelcome();
+   document.getElementById("menu-btn").style.display="none";
+   document.getElementById("back-btn").style.display="none";
+ };
+}
+
+window.onload=type;
 </script>
 </body>
 </html>
