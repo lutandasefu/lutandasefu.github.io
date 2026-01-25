@@ -3,42 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navbar with Custom Gingham Background</title>
+  <title>Navbar with Black Background</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* === Animated Background with custom colors === */
+    /* === Black Background === */
     body, html {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      background-color: #000000; /* Black background */
       font-family: "Inter", sans-serif;
-    }
-
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #c9b696; /* Light */
-      background-image:
-        linear-gradient(45deg, #798175 25%, transparent 25%, transparent 75%, #798175 75%, #798175), /* Medium */
-        linear-gradient(45deg, #798175 25%, transparent 25%, transparent 75%, #798175 75%, #798175), /* Medium offset */
-        linear-gradient(45deg, transparent, transparent 50%, #64230c 50%, #64230c); /* Dark */
-      background-size: 100px 100px;
-      background-position: 0 0, 50px 50px, 50px 0px;
-      animation: scroll 5s linear infinite;
-      z-index: -1;
-    }
-
-    @keyframes scroll {
-      from { background-position: 0 0, 50px 50px, 50px 0; }
-      to   { background-position: -100px -100px, -50px -50px, -50px -100px; }
     }
 
     /* === Navbar Styles === */
@@ -53,6 +31,7 @@
       padding: 10px 20px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       position: relative;
+      z-index: 10;
     }
 
     .list-item {
@@ -91,9 +70,6 @@
 </head>
 
 <body>
-
-  <!-- Animated Background -->
-  <div class="background"></div>
 
   <!-- Navbar -->
   <div class="navbar">
