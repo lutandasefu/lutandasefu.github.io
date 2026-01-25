@@ -7,157 +7,106 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-body {
-  font-family: 'Sulphur Point', sans-serif;
-  background: #ddd;
-  color: #333;
-  overflow: hidden;
-  scroll-behavior: smooth;
+body{
+  font-family:'Sulphur Point',sans-serif;
+  background:#ddd;
+  color:#333;
+  overflow:hidden;
 }
 
 /* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-  background: #ddd;
-  transition: opacity 1.2s ease;
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#ddd;
+  transition:opacity 1.2s ease;
 }
+.hero.fade-out{opacity:0}
 
-.hero.fade-out {
-  opacity: 0;
+h1{
+  font-size:5rem;
+  font-weight:300;
+  border-right:2px solid #333;
+  white-space:nowrap;
 }
-
-/* Typed intro */
-h1 {
-  font-size: 5rem;
-  font-weight: 300;
-  border-right: 2px solid #333;
-  white-space: nowrap;
-}
-
-.typing { animation: blink 0.7s step-end infinite; }
-
-.cursor-end {
-  animation: blink-3 0.7s step-end 3 forwards;
-}
-
-@keyframes blink {
-  0%,50%,100% { border-color: #333; }
-  25%,75% { border-color: transparent; }
-}
-
-@keyframes blink-3 {
-  0%, 50%, 100% { border-color: #333; }
-  25%, 75% { border-color: transparent; }
+.typing{animation:blink .7s step-end infinite}
+.cursor-end{animation:blink .7s step-end 3 forwards}
+@keyframes blink{
+  0%,50%,100%{border-color:#333}
+  25%,75%{border-color:transparent}
 }
 
 /* NEXT SECTION */
-.next {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #ddd;
-  opacity: 0;
-  transition: opacity 1.2s ease;
+.next{
+  position:absolute;
+  inset:0;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:#ddd;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+.next.show{opacity:1}
+
+.next h2{
+  font-size:5rem;
+  margin-bottom:60px;
 }
 
-.next.show {
-  opacity: 1;
+/* MENU */
+#app{
+  width:560px;
+  height:70px;
+  display:grid;
+  place-items:center;
 }
 
-/* Welcome heading */
-.next h2 {
-  font-size: 5rem; /* slightly larger */
-  font-weight: 300;
-  margin-bottom: 50px;
-  text-align: center;
-  color: #333; /* match typed text */
+#app ul{
+  position:relative;
+  width:100%;
+  height:70px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-radius:45px;
+  background:rgba(255,255,255,.65);
+  transform-origin:center;
+  transform:perspective(1000px) rotateY(0deg);
+  overflow:hidden;
+  padding:0 25px; /* breathing space */
 }
 
-/* CODEPEN MENU */
-#app {
-  width: 450px; /* wider to accommodate longer text */
-  height: 70px;
-  display: grid;
-  place-items: center;
+#app li{
+  list-style:none;
+  display:grid;
+  place-items:center;
+  font-size:1.25rem;
+  font-weight:500;
+  color:#333;
+  cursor:pointer;
+  z-index:10;
 }
 
-#app ul {
-  position: relative;
-  width: 100%;
-  height: 70px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 items now */
-  border-radius: 45px;
-  background: rgba(255, 255, 255, 0.65);
-  transform-origin: center center;
-  transform: perspective(1000px) rotateY(0deg);
-  overflow: hidden;
-}
-
-#app li {
-  list-style: none;
-  display: grid;
-  place-items: center;
-  font-size: 1.25rem;
-  font-family: 'Sulphur Point', sans-serif;
-  font-weight: 500;
-  text-transform: capitalize;
-  color: #333; /* match typed text */
-  z-index: 10;
-  cursor: pointer;
-}
-
-.focus-el {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 33.33%; /* evenly divide among 3 items */
-  height: 100%;
-  border-radius: 45px;
-  background: #fff;
-}
-
-.support {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  padding: 10px;
-  display: flex;
-}
-
-.support a {
-  margin: 0 10px;
-  color: #fffdf9;
-  font-size: 1.8rem;
-  backface-visibility: hidden;
-  transition: all 150ms ease;
-}
-
-.support a:hover {
-  transform: scale(1.1);
+.focus-el{
+  position:absolute;
+  left:25px;
+  top:0;
+  width:calc((100% - 50px)/3);
+  height:100%;
+  border-radius:45px;
+  background:#fff;
 }
 </style>
 </head>
+
 <body>
 
 <section class="hero" id="hero">
@@ -165,92 +114,88 @@ h1 {
 </section>
 
 <script>
-const sentences = [
+const sentences=[
  "Hey, I'm Lutanda",
  "A UI/UX designer",
  "I design for clarity",
  "And purpose."
 ];
 
-const intro = document.getElementById("intro");
-const hero = document.getElementById("hero");
+const intro=document.getElementById("intro");
+const hero=document.getElementById("hero");
 let s=0,c=0;
 
-function rand(){ return 110 + Math.random()*40; }
+function rand(){return 110+Math.random()*40}
 
 function type(){
  if(c<sentences[s].length){
-  intro.textContent += sentences[s][c++];
-  setTimeout(type, rand());
- } else {
+  intro.textContent+=sentences[s][c++];
+  setTimeout(type,rand());
+ }else{
   if(s<sentences.length-1){
-    setTimeout(erase, 700);
-  } else {
+    setTimeout(erase,700);
+  }else{
     intro.classList.remove("typing");
     intro.classList.add("cursor-end");
-    setTimeout(()=>{
-      fadeHero();
-    }, 1000);
+    setTimeout(fadeHero,1000);
   }
  }
 }
 
 function erase(){
  if(c>0){
-  intro.textContent = sentences[s].substring(0,--c);
-  setTimeout(erase, 60);
- } else {
-  s++;
-  setTimeout(type, rand());
+  intro.textContent=sentences[s].substring(0,--c);
+  setTimeout(erase,60);
+ }else{
+  s++; setTimeout(type,rand());
  }
 }
 
 function fadeHero(){
-  hero.classList.add("fade-out");
+ hero.classList.add("fade-out");
 
-  const next = document.createElement("section");
-  next.className = "next";
-  next.innerHTML = `
-    <h2>Welcome to my portfolio</h2>
-    <div id="app">
-      <ul>
-        <li>Case Studies</li>
-        <li>About</li>
-        <li>Contact</li>
-        <span class="focus-el"></span>
-      </ul>
-    </div>
-    <div class="support">
-      <a href="https://twitter.com/DevLoop01" target="_blank"><i class="fab fa-twitter-square"></i></a>
-      <a href="https://dribbble.com/devloop01" target="_blank"><i class="fab fa-dribbble"></i></a>
-    </div>
-  `;
-  document.body.appendChild(next);
+ const next=document.createElement("section");
+ next.className="next";
+ next.innerHTML=`
+  <h2>Welcome to my portfolio</h2>
+  <div id="app">
+    <ul>
+      <li>Case Studies</li>
+      <li>About</li>
+      <li>Contact</li>
+      <span class="focus-el"></span>
+    </ul>
+  </div>
+ `;
+ document.body.appendChild(next);
+ setTimeout(()=>next.classList.add("show"),800);
+ document.body.style.overflow="auto";
 
-  setTimeout(()=>next.classList.add("show"), 800);
-  document.body.style.overflow = "auto";
+ // menu animation
+ const ul=next.querySelector("ul");
+ const lis=[...ul.querySelectorAll("li")];
+ const focus=ul.querySelector(".focus-el");
+ const rect=ul.getBoundingClientRect();
+ let active=0;
 
-  // CodePen menu tilt & slide effect
-  const liContainer = next.querySelector("ul");
-  const liEls = [...next.querySelectorAll("ul li")];
-  const slideEl = next.querySelector(".focus-el");
-  const liContainerRect = liContainer.getBoundingClientRect();
-  let activeIndex = 0;
-
-  liEls.forEach((li,index)=>{
-    li.addEventListener("click",()=>{
-      if(index === activeIndex) return;
-      const x = index === 0 ? -1 : 1;
-      activeIndex = index;
-      const liRect = li.getBoundingClientRect();
-      gsap.to(liContainer, { duration: 0.5, rotateY: `${x*25}deg` });
-      gsap.to(slideEl, { duration: 0.75, left: `${liRect.left - liContainerRect.left}px`, ease:"bounce.out" });
-      gsap.to(liContainer, { duration: 0.5, rotateY: `0deg`, delay: 0.5 });
-    });
+ lis.forEach((li,i)=>{
+  li.addEventListener("click",()=>{
+   if(i===active) return;
+   const x=i===0?-1:1;
+   active=i;
+   const liRect=li.getBoundingClientRect();
+   gsap.to(ul,{duration:.5,rotateY:`${x*25}deg`});
+   gsap.to(focus,{
+     duration:.75,
+     left:`${liRect.left-rect.left}px`,
+     ease:"bounce.out"
+   });
+   gsap.to(ul,{duration:.5,rotateY:`0deg`,delay:.5});
   });
+ });
 }
 
-window.onload = type;
+window.onload=type;
 </script>
 
 </body>
