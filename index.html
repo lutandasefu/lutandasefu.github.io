@@ -83,17 +83,16 @@ h1 {
   color: #333;
 }
 
-/* MENU WITH BORDER */
+/* MENU */
 #app {
-  width: 600px;                /* wide enough for text */
+  width: 600px;
   height: 70px;
   display: grid;
   place-items: center;
-  border: 3px solid #333;      /* border around menu */
   border-radius: 50px;
   background: #fff;
-  transform-origin: center;    /* needed for tilt */
-  perspective: 1000px;         /* preserve 3D space */
+  transform-origin: center;
+  perspective: 1000px;
 }
 
 #app ul {
@@ -112,7 +111,7 @@ h1 {
   place-items: center;
   font-size: 1.25rem;
   font-family: 'Sulphur Point', sans-serif;
-  font-weight: 500;
+  font-weight: 600; /* slightly bolder */
   text-transform: capitalize;
   color: #333;
   cursor: pointer;
@@ -211,20 +210,16 @@ function fadeHero(){
       const direction = index < activeIndex ? -1 : 1;
       activeIndex = index;
 
-      const liRect = li.getBoundingClientRect();
       const ulRect = ul.getBoundingClientRect();
 
-      // Tilt the whole bordered menu
       gsap.to(app, { duration: 0.5, rotateY: `${direction * 25}deg` });
 
-      // Slide focus
       gsap.to(focus, {
         duration: 0.75,
         left: `${(ulRect.width / lis.length) * index}px`,
         ease: "bounce.out"
       });
 
-      // Reset tilt
       gsap.to(app, { duration: 0.5, rotateY: `0deg`, delay: 0.5 });
     });
   });
