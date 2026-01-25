@@ -144,6 +144,7 @@ const rightLabel=document.getElementById("rightLabel");
 const iconMode=document.getElementById("iconMode");
 const darkCase=document.getElementById("darkCase");
 const darkAbout=document.getElementById("darkAbout");
+const welcomeSection=document.getElementById("welcome");
 
 /* ---------- MORPH TO DARK ICON MODE ---------- */
 function toIconMode(){
@@ -175,6 +176,8 @@ toggle.addEventListener("click",()=>{
     }else{
       createPage("Case Studies");
     }
+    // remove welcome section entirely after first dark page
+    welcomeSection.remove();
     // show icon mode toggle for dark pages
     toIconMode();
     curtain.style.opacity='0';
