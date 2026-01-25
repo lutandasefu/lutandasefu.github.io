@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
 
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
+
+<!-- Font Awesome Free CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
 /* ---------- GLOBAL ---------- */
@@ -23,43 +26,51 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
   display:flex;align-items:center;justify-content:space-between;padding:0 40px;
   font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;transition:all .7s cubic-bezier(.77,0,.18,1);z-index:2;position:relative;}
 .toggle span{z-index:2;font-size:1.1rem;color:#111;}
-.slider{
-  position:absolute;height:100%;width:50%;background:#111;border-radius:60px;left:0;
-  z-index:1;transition:transform .6s cubic-bezier(.77,0,.18,1);opacity:0;
-} /* hidden initially */
-.toggle.active .slider{opacity:1; transform:translateX(100%);} /* show slider on toggle active */
+.slider{position:absolute;height:100%;width:50%;background:#111;border-radius:60px;left:0;z-index:1;transition:transform .6s cubic-bezier(.77,0,.18,1);opacity:0;}
+.toggle.active .slider{opacity:1; transform:translateX(100%);}
 .toggle span:first-child{color:#fff;}
 .toggle.active span:first-child{color:#111;}
 .toggle span:last-child{color:#111;}
 .toggle.active span:last-child{color:#fff;}
 
-/* ---------- ICON MODE FOR DARK PAGES ---------- */
+/* ---------- DARK PAGE CIRCULAR ICON TOGGLE ---------- */
 .iconMode{
   position:fixed;
   right:40px;
   top:50%;
   transform:translateY(-50%);
-  width:70px;height:200px;
-  flex-direction:column;
-  padding:20px 0;
-  background:#111;
-  border:2px solid #fff;
   display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:2001;
-  transition:all .7s ease;
+  flex-direction:column;
+  gap:30px;
+  z-index:2000;
+  display:none; /* hidden until welcome page shows */
 }
-.iconMode .slider{width:100%;height:50%;transform:translateY(0%);background:#fff;}
-.iconMode.active .slider{transform:translateY(100%);}
-.iconMode span{font-size:1.6rem;color:#fff;display:flex;justify-content:center;align-items:center;}
+.iconMode button{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  border:2px solid #fff;
+  background:#111;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:1.8rem;
+  cursor:pointer;
+  transition:all .3s ease;
+}
+.iconMode button:hover{
+  transform: scale(1.1);
+  background:#fff;
+  color:#111;
+}
 
 /* ---------- PAGE ---------- */
 .page{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;font-size:4rem;background:#111;color:#fff;z-index:1000;transform:translateX(100%);transition:transform .8s ease;}
 
 /* ---------- CURTAIN ---------- */
 .curtain{
-  display: none; /* hidden by default */
+  display: none;
   position:fixed;
   inset:0;
   background:#111;
@@ -92,6 +103,12 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 
 <div class="curtain" id="curtain"></div>
 
+<!-- Dark page circular icon toggle -->
+<div class="iconMode" id="iconMode">
+  <button id="darkCase"><i class="far fa-file-lines"></i></button>
+  <button id="darkAbout"><i class="fas fa-user"></i></button>
+</div>
+
 <script>
 /* ---------- TYPE EFFECT ---------- */
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
@@ -114,7 +131,8 @@ function erase(){
 /* ---------- SHOW WELCOME ---------- */
 function showWelcome(){
  document.getElementById("hero").remove();
- document.getElementById("welcome").style.opacity=1;
+ const welcome=document.getElementById("welcome");
+ welcome.style.opacity=1;
 }
 
 /* ---------- PAGE SYSTEM ---------- */
@@ -123,14 +141,14 @@ const toggle=document.getElementById("toggle");
 const curtain=document.getElementById("curtain");
 const leftLabel=document.getElementById("leftLabel");
 const rightLabel=document.getElementById("rightLabel");
+const iconMode=document.getElementById("iconMode");
+const darkCase=document.getElementById("darkCase");
+const darkAbout=document.getElementById("darkAbout");
 
-/* ---------- MORPH TO ICON MODE ---------- */
+/* ---------- MORPH TO DARK ICON MODE ---------- */
 function toIconMode(){
- // move toggle to body so it's above pages
- document.body.appendChild(toggle);
- toggle.classList.add("iconMode");
- leftLabel.innerHTML='<i class="fa-solid fa-chart-line"></i>';
- rightLabel.innerHTML='<i class="fa-solid fa-user"></i>';
+  toggle.style.display='none';
+  iconMode.style.display='flex';
 }
 
 /* ---------- CREATE PAGE ---------- */
@@ -140,34 +158,47 @@ function createPage(title){
  p.className="page";
  p.textContent=title;
  document.body.appendChild(p);
- // slide in from right
  setTimeout(()=>{p.style.transform="translateX(0%)";},50);
  currentPage=p;
 }
 
 /* ---------- TOGGLE CLICK ---------- */
 toggle.addEventListener("click",()=>{
-  toggle.classList.toggle("active");
-
-  // morph toggle first
-  toIconMode();
-
-  // show curtain for transition
+  // fade curtain
   curtain.style.display = 'block';
   curtain.style.opacity = '0';
   setTimeout(() => { curtain.style.opacity = '1'; }, 10);
 
-  // after curtain fade-in
   setTimeout(()=>{
     if(toggle.classList.contains("active")){
       createPage("About");
     }else{
       createPage("Case Studies");
     }
-    // fade curtain out
+    // show icon mode toggle for dark pages
+    toIconMode();
     curtain.style.opacity='0';
     setTimeout(()=>{curtain.style.display='none';},600);
+  },600);
+});
 
+/* ---------- DARK PAGE BUTTON CLICK ---------- */
+darkCase.addEventListener("click",()=>{
+  curtain.style.display='block'; curtain.style.opacity='0';
+  setTimeout(()=>{curtain.style.opacity='1';},10);
+  setTimeout(()=>{
+    createPage("Case Studies");
+    curtain.style.opacity='0';
+    setTimeout(()=>{curtain.style.display='none';},600);
+  },600);
+});
+darkAbout.addEventListener("click",()=>{
+  curtain.style.display='block'; curtain.style.opacity='0';
+  setTimeout(()=>{curtain.style.opacity='1';},10);
+  setTimeout(()=>{
+    createPage("About");
+    curtain.style.opacity='0';
+    setTimeout(()=>{curtain.style.display='none';},600);
   },600);
 });
 
