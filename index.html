@@ -51,7 +51,6 @@ h1 {
   0%,50%,100% { border-color: #333; }
   25%,75% { border-color: transparent; }
 }
-
 @keyframes blink-3 {
   0%,50%,100% { border-color: #333; }
   25%,75% { border-color: transparent; }
@@ -84,15 +83,17 @@ h1 {
   color: #333;
 }
 
-/* UPDATED MENU WITH BORDER */
+/* MENU WITH BORDER */
 #app {
-  width: 600px;                /* slightly bigger to fit words comfortably */
+  width: 600px;                /* wide enough for text */
   height: 70px;
   display: grid;
   place-items: center;
-  border: 3px solid #333;      /* menu border */
+  border: 3px solid #333;      /* border around menu */
   border-radius: 50px;
   background: #fff;
+  transform-origin: center;    /* needed for tilt */
+  perspective: 1000px;         /* preserve 3D space */
 }
 
 #app ul {
@@ -103,8 +104,6 @@ h1 {
   grid-template-columns: repeat(3, 1fr);
   border-radius: 50px;
   overflow: hidden;
-  transform-origin: center;
-  transform: perspective(1000px) rotateY(0deg);
 }
 
 #app li {
@@ -126,11 +125,12 @@ h1 {
   top: 0;
   height: 100%;
   border-radius: 50px;
-  background: #ddd; /* match background so it feels inset */
+  background: #ddd;
   transition: left 0.75s ease;
 }
 </style>
 </head>
+
 <body>
 
 <section class="hero" id="hero">
@@ -147,41 +147,40 @@ const sentences = [
 
 const intro = document.getElementById("intro");
 const hero = document.getElementById("hero");
-let s=0,c=0;
+let s=0, c=0;
 
 function rand(){ return 110 + Math.random()*40; }
 
 function type(){
- if(c<sentences[s].length){
-  intro.textContent+=sentences[s][c++];
-  setTimeout(type,rand());
+ if(c < sentences[s].length){
+  intro.textContent += sentences[s][c++];
+  setTimeout(type, rand());
  } else {
-  if(s<sentences.length-1){
-    setTimeout(erase,700);
+  if(s < sentences.length - 1){
+    setTimeout(erase, 700);
   } else {
     intro.classList.remove("typing");
     intro.classList.add("cursor-end");
-    setTimeout(fadeHero,1000);
+    setTimeout(fadeHero, 1000);
   }
  }
 }
 
 function erase(){
  if(c>0){
-  intro.textContent=sentences[s].substring(0,--c);
-  setTimeout(erase,60);
+  intro.textContent = sentences[s].substring(0,--c);
+  setTimeout(erase, 60);
  } else {
-  s++;
-  setTimeout(type,rand());
+  s++; setTimeout(type, rand());
  }
 }
 
 function fadeHero(){
   hero.classList.add("fade-out");
 
-  const next=document.createElement("section");
-  next.className="next";
-  next.innerHTML=`
+  const next = document.createElement("section");
+  next.className = "next";
+  next.innerHTML = `
     <h2>Welcome to my portfolio</h2>
     <div id="app">
       <ul>
@@ -194,33 +193,44 @@ function fadeHero(){
   `;
   document.body.appendChild(next);
 
-  setTimeout(()=>next.classList.add("show"),800);
+  setTimeout(()=>next.classList.add("show"), 800);
   document.body.style.overflow="auto";
 
-  // Recalculate focus element for 3 items evenly
+  const app = next.querySelector("#app");
   const ul = next.querySelector("ul");
   const lis = [...ul.querySelectorAll("li")];
   const focus = ul.querySelector(".focus-el");
   const width = ul.clientWidth / lis.length;
-
   focus.style.width = width + "px";
 
   let activeIndex = 0;
-  lis.forEach((li,index)=>{
-    li.addEventListener("click",()=>{
-      if(index===activeIndex) return;
-      const x = index===0 ? -1 : 1;
-      activeIndex=index;
+  lis.forEach((li, index) => {
+    li.addEventListener("click", () => {
+      if(index === activeIndex) return;
+
+      const direction = index < activeIndex ? -1 : 1;
+      activeIndex = index;
+
       const liRect = li.getBoundingClientRect();
       const ulRect = ul.getBoundingClientRect();
-      gsap.to(ul,{duration:0.5,rotateY:`${x*25}deg`});
-      gsap.to(focus,{duration:0.75,left:`${(ulRect.width/3)*index}px`,ease:"bounce.out"});
-      gsap.to(ul,{duration:0.5,rotateY:"0deg",delay:0.5});
+
+      // Tilt the whole bordered menu
+      gsap.to(app, { duration: 0.5, rotateY: `${direction * 25}deg` });
+
+      // Slide focus
+      gsap.to(focus, {
+        duration: 0.75,
+        left: `${(ulRect.width / lis.length) * index}px`,
+        ease: "bounce.out"
+      });
+
+      // Reset tilt
+      gsap.to(app, { duration: 0.5, rotateY: `0deg`, delay: 0.5 });
     });
   });
 }
 
-window.onload=type;
+window.onload = type;
 </script>
 
 </body>
