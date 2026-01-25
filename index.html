@@ -5,17 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Navbar with Liquid Gradient Background</title>
 
+  <!-- Font Awesome & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
       font-family: "Inter", sans-serif;
+    }
+
+    /* Canvas fills the full screen */
+    #liquid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     /* Navbar Styles */
@@ -65,16 +76,6 @@
       transform: translateY(20px);
       opacity: 1;
     }
-
-    /* Canvas takes full screen */
-    #liquid-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
   </style>
 </head>
 <body>
@@ -84,37 +85,33 @@
 
   <!-- Navbar -->
   <div class="navbar">
-    <li class="list-item"><i class="fa-solid fa-house"></i>
-      <span class="list-item-name">Home</span>
-    </li>
-    <li class="list-item"><i class="fa-solid fa-user"></i>
-      <span class="list-item-name">Profile</span>
-    </li>
-    <li class="list-item"><i class="fa-solid fa-gear"></i>
-      <span class="list-item-name">Settings</span>
-    </li>
-    <li class="list-item"><i class="fa-solid fa-bag-shopping"></i>
-      <span class="list-item-name">Bag</span>
-    </li>
+    <li class="list-item"><i class="fa-solid fa-house"></i><span class="list-item-name">Home</span></li>
+    <li class="list-item"><i class="fa-solid fa-user"></i><span class="list-item-name">Profile</span></li>
+    <li class="list-item"><i class="fa-solid fa-gear"></i><span class="list-item-name">Settings</span></li>
+    <li class="list-item"><i class="fa-solid fa-bag-shopping"></i><span class="list-item-name">Bag</span></li>
   </div>
 
-  <!-- Three.js and Liquid Gradient JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+  <!-- Three.js and Liquid Gradient Script -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script>
-    // Basic liquid gradient from first color scheme
+    // Get canvas
     const canvas = document.getElementById('liquid-bg');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+    // Renderer
     const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    camera.position.z = 2;
+    // Scene & Camera
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
 
-    const geometry = new THREE.PlaneGeometry(2, 2);
+    // Geometry & Material
+    const geometry = new THREE.PlaneGeometry(2,2);
+
     const material = new THREE.ShaderMaterial({
       uniforms: {
-        u_time: {value: 0},
-        u_resolution: {value: new THREE.Vector2(window.innerWidth, window.innerHeight)}
+        u_time: { value: 0 },
+        u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
       },
       vertexShader: `
         void main() {
@@ -126,10 +123,12 @@
         uniform vec2 u_resolution;
 
         void main() {
-          vec2 st = gl_FragCoord.xy/u_resolution;
-          vec3 color = vec3(0.2, 0.5, 0.9); // first color scheme only
-          float wave = sin(st.x*10.0 + u_time) * 0.1 + cos(st.y*10.0 + u_time) * 0.1;
-          color += wave;
+          vec2 st = gl_FragCoord.xy / u_resolution;
+
+          // Simple animated gradient (first color scheme)
+          float y = st.y + 0.2*sin(st.x*10.0 + u_time*0.5);
+          vec3 color = mix(vec3(0.2,0.5,0.9), vec3(0.1,0.2,0.7), y);
+
           gl_FragColor = vec4(color, 1.0);
         }
       `
@@ -138,16 +137,16 @@
     const plane = new THREE.Mesh(geometry, material);
     scene.add(plane);
 
-    function animate(time){
+    // Animate
+    function animate(time) {
       material.uniforms.u_time.value = time * 0.001;
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     }
     animate();
 
+    // Handle resize
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth/window.innerHeight;
-      camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
       material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
     });
