@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
 
   <style>
-    /* Reset and body */
+    /* Reset */
     * {
       margin: 0;
       padding: 0;
@@ -20,56 +20,47 @@
 
     body {
       font-family: 'Sulphur Point', sans-serif;
-      background-color: #ffffff;
-      color: #111;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
+      background-color: #ddd; /* background from CodePen */
+      color: #333; /* text color from button */
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
       text-align: center;
-      padding: 0 20px;
     }
 
     /* Typed text */
-    .hero h1 {
+    h1 {
       font-size: 4rem;
       font-weight: 300;
-      display: inline-block;
-      border-right: 2px solid #111; /* cursor */
+      border-right: 2px solid #333; /* cursor same as text */
       white-space: nowrap;
       overflow: hidden;
     }
 
     /* Blinking cursor */
     @keyframes blink {
-      0%, 50%, 100% { border-color: #111; }
+      0%, 50%, 100% { border-color: #333; }
       25%, 75% { border-color: transparent; }
     }
 
     .typing {
-      border-right: 2px solid #111;
       animation: blink 0.7s step-end infinite;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 3rem; }
+      h1 { font-size: 3rem; }
     }
 
     @media (max-width: 480px) {
-      .hero h1 { font-size: 2.5rem; }
+      h1 { font-size: 2.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <section class="hero">
-    <h1 id="intro" class="typing"></h1>
-  </section>
+  <h1 id="intro" class="typing"></h1>
 
   <script>
     const sentences = [
@@ -83,12 +74,11 @@
     let sentenceIndex = 0;
     let charIndex = 0;
 
-    const baseTypingSpeed = 100; // average typing speed
-    const erasingSpeed = 50;
+    const baseTypingSpeed = 120; // smoother, slower typing
+    const erasingSpeed = 70;     // smoother erase
     const delayBetween = 1500;
 
     function randomTypingSpeed() {
-      // small variation for more fluid, natural typing
       return baseTypingSpeed + Math.random() * 50;
     }
 
