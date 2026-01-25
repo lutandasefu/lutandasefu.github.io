@@ -9,74 +9,33 @@
 <script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
 
 <style>
+/* ---------- GLOBAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
-
-/* ---------- TYPING SCREEN ---------- */
-.hero{
-  position:fixed;inset:0;
-  display:flex;justify-content:center;align-items:center;
-  background:#e6e6e6; z-index:1000;
-}
-#intro{
-  font-size:4.5rem;
-  border-right:2px solid #111;
-  animation:blink .7s step-end infinite;
-}
+body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;width:100%;height:100vh;}
+section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;}
+#intro{font-size:4.2rem;border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
 
-/* ---------- WELCOME SCREEN ---------- */
-.welcome{
-  position:fixed;inset:0;
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  gap:40px;font-size:4rem;
-  opacity:0;transition:opacity .8s ease;
-}
-
-/* ---------- TOGGLE BASE (Welcome page) ---------- */
-.toggle{
-  width:420px;height:60px;
-  border-radius:60px;
-  border:2px solid #111;
-  background:#fff;
-  display:flex;align-items:center;
-  justify-content:space-between;
-  padding:0 30px;
-  font-family:'Urbanist',sans-serif;
-  font-weight:100;
-  cursor:pointer;overflow:hidden;
-  transition:all .7s cubic-bezier(.77,0,.18,1);
-  z-index:2;
-}
-
-.toggle span{
-  z-index:2;
-  font-size:1.1rem;
-  color:#111;
-}
-
-.slider{
-  position:absolute;height:100%;width:50%;
-  background:#111;border-radius:60px;
-  left:0;z-index:1;
-  transition:transform .6s cubic-bezier(.77,0,.18,1);
-}
-
+/* ---------- WELCOME ---------- */
+.welcome{flex-direction:column;gap:50px;font-size:3.8rem;opacity:0;transition:opacity .8s ease;}
+.toggle{width:350px;height:60px;border-radius:60px;border:2px solid #111;background:#fff;
+  display:flex;align-items:center;justify-content:space-between;padding:0 40px;
+  font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;transition:all .7s cubic-bezier(.77,0,.18,1);z-index:2;}
+.toggle span{z-index:2;font-size:1.1rem;color:#111;}
+.slider{position:absolute;height:100%;width:50%;background:#111;border-radius:60px;left:0;z-index:1;transition:transform .6s cubic-bezier(.77,0,.18,1);}
 .toggle.active .slider{transform:translateX(100%);}
 .toggle span:first-child{color:#fff;}
 .toggle.active span:first-child{color:#111;}
 .toggle span:last-child{color:#111;}
 .toggle.active span:last-child{color:#fff;}
 
-/* ---------- ICON MODE (Dark pages) ---------- */
+/* ---------- ICON MODE FOR DARK PAGES ---------- */
 .iconMode{
   position:fixed;
   right:40px;
   top:50%;
   transform:translateY(-50%);
-  width:70px;
-  height:200px;
+  width:70px;height:200px;
   flex-direction:column;
   padding:20px 0;
   background:#111;
@@ -84,58 +43,32 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
   display:flex;
   justify-content:space-around;
   align-items:center;
-  z-index:2001; /* always above pages */
+  z-index:2001;
+  transition:all .7s ease;
 }
-
-.iconMode .slider{
-  width:100%;
-  height:50%;
-  transform:translateY(0%);
-  background:#fff;
-}
-
-.iconMode.active .slider{
-  transform:translateY(100%);
-}
-
-.iconMode span{
-  font-size:1.6rem;
-  color:#fff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+.iconMode .slider{width:100%;height:50%;transform:translateY(0%);background:#fff;}
+.iconMode.active .slider{transform:translateY(100%);}
+.iconMode span{font-size:1.6rem;color:#fff;display:flex;justify-content:center;align-items:center;}
 
 /* ---------- PAGE ---------- */
-.page{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:4rem;
-  background:#111;
-  color:#fff;
-  z-index:1000;
-}
+.page{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;font-size:4rem;background:#111;color:#fff;z-index:1000;transform:translateX(100%);transition:transform .8s ease;}
 
 /* ---------- CURTAIN ---------- */
-.curtain{
-  position:fixed;inset:0;background:#111;
-  transform:translateY(-100%);
-  transition:transform .8s ease;
-  z-index:900;
-}
+.curtain{position:fixed;inset:0;background:#111;transform:translateY(-100%);transition:transform .8s ease;z-index:900;}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:768px){#intro{font-size:3rem;}.welcome{font-size:2.8rem;}.toggle{width:300px;}}
+@media(max-width:480px){#intro{font-size:2.2rem;}.welcome{font-size:2rem;}.toggle{width:250px;padding:0 25px;}}
 </style>
 </head>
 <body>
 
-<!-- Typing screen -->
+<!-- Typing page -->
 <section class="hero" id="hero">
   <div id="intro"></div>
 </section>
 
-<!-- Welcome screen -->
+<!-- Welcome page -->
 <section class="welcome" id="welcome">
   <div>Welcome to my portfolio</div>
   <div class="toggle" id="toggle">
@@ -149,12 +82,7 @@ body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;}
 
 <script>
 /* ---------- TYPE EFFECT ---------- */
-const lines=[
- "Hey, I'm Lutanda",
- "A UI/UX designer",
- "I design for clarity",
- "And purpose."
-];
+const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 const intro=document.getElementById("intro");
 
@@ -163,18 +91,12 @@ function type(){
    intro.textContent+=lines[l][c++];
    setTimeout(type,90);
  }else{
-   if(l<lines.length-1){
-     setTimeout(erase,600);
-   }else{
-     setTimeout(showWelcome,700);
-   }
+   if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,500);}
  }
 }
 function erase(){
- if(c>0){
-   intro.textContent=lines[l].substring(0,--c);
-   setTimeout(erase,40);
- }else{l++;type();}
+ if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
+ else{l++;type();}
 }
 
 /* ---------- SHOW WELCOME ---------- */
@@ -190,42 +112,47 @@ const curtain=document.getElementById("curtain");
 const leftLabel=document.getElementById("leftLabel");
 const rightLabel=document.getElementById("rightLabel");
 
-function createPage(title){
- if(currentPage) currentPage.remove();
- const p=document.createElement("section");
- p.className="page";
- p.textContent=title;
- document.body.appendChild(p);
- currentPage=p;
-}
-
 /* ---------- MORPH TO ICON MODE ---------- */
 function toIconMode(){
- // move toggle to body so it's independent of welcome section
+ // move toggle to body so it's above pages
  document.body.appendChild(toggle);
  toggle.classList.add("iconMode");
  leftLabel.innerHTML='<i class="fa-solid fa-chart-line"></i>';
  rightLabel.innerHTML='<i class="fa-solid fa-user"></i>';
 }
 
+/* ---------- CREATE PAGE ---------- */
+function createPage(title){
+ if(currentPage) currentPage.remove();
+ const p=document.createElement("section");
+ p.className="page";
+ p.textContent=title;
+ document.body.appendChild(p);
+ // slide in from right
+ setTimeout(()=>{p.style.transform="translateX(0%)";},50);
+ currentPage=p;
+}
+
 /* ---------- TOGGLE CLICK ---------- */
 toggle.addEventListener("click",()=>{
   toggle.classList.toggle("active");
 
-  // morph toggle FIRST before creating new page
+  // morph toggle first
   toIconMode();
 
-  // show curtain
+  // curtain down
   curtain.style.transform="translateY(0%)";
 
-  // after curtain animation, create new page
+  // after curtain animation, create new page and slide
   setTimeout(()=>{
     if(toggle.classList.contains("active")){
       createPage("About");
     }else{
       createPage("Case Studies");
     }
-  },800);
+    // hide curtain after page slides in
+    setTimeout(()=>{curtain.style.transform="translateY(-100%)";},800);
+  },600);
 });
 
 window.onload=type;
