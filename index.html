@@ -8,36 +8,39 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:'Sulphur Point',sans-serif;
-  overflow:hidden;
-  background:#e6e6e6;
-}
+body{font-family:'Sulphur Point',sans-serif;background:#e6e6e6;overflow:hidden}
 
-/* ---------- MASTER WRAPPER ---------- */
+/* ---------- INTRO (separate layer) ---------- */
+#introScreen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:clamp(2rem,6vw,4rem);
+  border-right:2px solid #111;
+  animation:blink .7s step-end infinite;
+  background:#e6e6e6;
+  z-index:5000;
+  transition:opacity .8s ease;
+}
+@keyframes blink{50%{border-color:transparent;}}
+
+/* ---------- WRAPPER ---------- */
 .wrapper{
-  height:400vh;
-  width:100%;
+  height:300vh;
   transition:transform 1s cubic-bezier(.77,0,.18,1);
 }
 
 /* ---------- SECTIONS ---------- */
 section{
   height:100vh;
-  width:100%;
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
   font-size:clamp(2rem,6vw,4rem);
 }
-
-/* ---------- INTRO ---------- */
-#intro{
-  border-right:2px solid #111;
-  animation:blink .7s step-end infinite;
-}
-@keyframes blink{50%{border-color:transparent;}}
 
 /* ---------- WELCOME TOGGLE ---------- */
 .welcome-switch{
@@ -61,28 +64,16 @@ section{
   transition:transform .3s;
 }
 .welcome-switch button{
-  flex:1;
-  border:none;
-  background:none;
-  cursor:pointer;
-  z-index:1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  flex:1;border:none;background:none;cursor:pointer;
+  display:flex;justify-content:center;align-items:center;z-index:1;
 }
-.welcome-switch svg{
-  width:26px;
-  height:26px;
-  stroke:black;
-  transition:.3s;
-}
-.welcome-switch button.active svg{
-  stroke:white;
-}
+.welcome-switch svg{width:26px;height:26px;stroke:black;transition:.3s;}
+.welcome-switch button.active svg{stroke:white;}
 
-/* ---------- CASE / ABOUT ---------- */
+/* ---------- DARK PAGES ---------- */
 .page{background:#111;color:#fff;}
 
+/* ---------- RIGHT TOGGLE ---------- */
 .right-toggle{
   position:fixed;
   right:30px;
@@ -96,6 +87,7 @@ section{
   flex-direction:column;
   overflow:hidden;
   border:2px solid #fff;
+  display:none;
 }
 .right-focus{
   position:absolute;
@@ -105,37 +97,21 @@ section{
   transition:transform .3s;
 }
 .right-toggle button{
-  flex:1;
-  border:none;
-  background:none;
-  cursor:pointer;
-  z-index:1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  flex:1;border:none;background:none;cursor:pointer;
+  display:flex;justify-content:center;align-items:center;z-index:1;
 }
-.right-toggle svg{
-  width:26px;
-  height:26px;
-  stroke:black;
-  transition:.3s;
-}
-.right-toggle button.active svg{
-  stroke:white;
-}
+.right-toggle svg{width:26px;height:26px;stroke:black;transition:.3s;}
+.right-toggle button.active svg{stroke:white;}
 </style>
 </head>
 <body>
 
+<!-- INTRO SCREEN -->
+<div id="introScreen"></div>
+
 <div class="wrapper" id="wrap">
-
-  <section id="introSection">
-    <div id="intro"></div>
-  </section>
-
   <section id="welcome">
     <div>Welcome to my portfolio</div>
-
     <div class="welcome-switch">
       <div class="focus" id="wFocus"></div>
 
@@ -152,7 +128,6 @@ section{
           <path d="M4 20c2-4 14-4 16 0"/>
         </svg>
       </button>
-
     </div>
   </section>
 
@@ -160,8 +135,8 @@ section{
   <section id="about" class="page">About</section>
 </div>
 
-<!-- Right Toggle -->
-<div class="right-toggle" id="rightToggle" style="display:none;">
+<!-- RIGHT TOGGLE -->
+<div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
 
   <button id="caseBtn">
@@ -180,8 +155,8 @@ section{
 </div>
 
 <script>
-const wrap=document.getElementById('wrap');
-const intro=document.getElementById("intro");
+/* ---------- TYPE INTRO ---------- */
+const intro=document.getElementById("introScreen");
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 
@@ -191,16 +166,21 @@ function type(){
    setTimeout(type,80);
  }else{
    if(l<lines.length-1){setTimeout(erase,600);}
-   else{setTimeout(()=>wrap.style.transform="translateY(-100vh)",700);}
+   else{setTimeout(finishIntro,800);}
  }
 }
 function erase(){
  if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
  else{l++;type();}
 }
+function finishIntro(){
+ intro.style.opacity=0;
+ setTimeout(()=>intro.remove(),800);
+}
 type();
 
-/* Welcome toggle FIXED */
+/* ---------- WELCOME TOGGLE ---------- */
+const wrap=document.getElementById('wrap');
 const wFocus=document.getElementById('wFocus');
 const toCase=document.getElementById('toCase');
 const toAbout=document.getElementById('toAbout');
@@ -212,18 +192,18 @@ toCase.onclick=()=>{
   wFocus.style.transform="translateX(0)";
   toCase.classList.add('active');
   toAbout.classList.remove('active');
-  wrap.style.transform="translateY(-200vh)";
+  wrap.style.transform="translateY(-100vh)";
   showRight("case");
 }
 toAbout.onclick=()=>{
   wFocus.style.transform="translateX(100%)";
   toAbout.classList.add('active');
   toCase.classList.remove('active');
-  wrap.style.transform="translateY(-300vh)";
+  wrap.style.transform="translateY(-200vh)";
   showRight("about");
 }
 
-/* Right toggle */
+/* ---------- RIGHT TOGGLE ---------- */
 const right=document.getElementById("rightToggle");
 const rFocus=document.getElementById("rFocus");
 const caseBtn=document.getElementById("caseBtn");
@@ -243,11 +223,11 @@ function showRight(page){
 }
 
 caseBtn.onclick=()=>{
-  wrap.style.transform="translateY(-200vh)";
+  wrap.style.transform="translateY(-100vh)";
   showRight("case");
 }
 aboutBtn.onclick=()=>{
-  wrap.style.transform="translateY(-300vh)";
+  wrap.style.transform="translateY(-200vh)";
   showRight("about");
 }
 </script>
