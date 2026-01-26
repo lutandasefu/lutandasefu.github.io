@@ -17,9 +17,17 @@ body{
 
 /* ---------- INTRO ---------- */
 #intro{
-  border-right:2px solid #111; /* black */
+  border-right:2px solid #111; /* black cursor line */
   animation:blink .7s step-end infinite;
   z-index:5;
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:clamp(2.2rem,6vw,4.4rem);
+  background:#cfe9e0; /* new intro background */
+  color:#ed6339;       /* typing text color */
 }
 @keyframes blink{50%{border-color:transparent;}}
 
@@ -137,7 +145,7 @@ section{
 
 /* ---------- PAGES ---------- */
 .page{
-  background:#111; /* black */
+  background:#111; /* black pages */
   color:white;
   transform:translateX(100%);
   transition:transform .8s cubic-bezier(.77,0,.18,1);
