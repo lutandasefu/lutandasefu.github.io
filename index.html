@@ -76,18 +76,16 @@ section{
   transition:transform .6s cubic-bezier(.77,0,.18,1);
 }
 
-/* ---------- TOGGLE ---------- */
+/* ---------- FIXED TOGGLE ---------- */
 .iconToggle{
   position:fixed;
   right:30px;
   top:50%;
   transform:translateY(-50%);
-  display:flex; /* exists from start */
+  display:flex;
   flex-direction:column;
   gap:25px;
   z-index:2000;
-  opacity:0; /* hidden initially */
-  transition:opacity .6s ease, top .6s ease, transform .6s ease;
 }
 .iconToggle button{
   width:65px;
@@ -187,10 +185,10 @@ section{
   </div>
 </section>
 
-<!-- Toggle -->
+<!-- Fixed Toggle (Right Centered) -->
 <div class="iconToggle" id="iconToggle">
-  <button id="caseIcon"><i class="fa-solid fa-layer-group"></i></button>
-  <button id="aboutIcon"><i class="fa-solid fa-user"></i></button>
+  <button id="caseIcon" title="Case Studies"><i class="fa-solid fa-layer-group"></i></button>
+  <button id="aboutIcon" title="About"><i class="fa-solid fa-user"></i></button>
 </div>
 
 <script>
@@ -217,11 +215,6 @@ function showWelcome(){
  document.getElementById("hero").remove();
  const welcome=document.getElementById("welcome");
  welcome.style.opacity=1;
- // Show toggle under welcome text
- const iconToggle=document.getElementById("iconToggle");
- iconToggle.style.opacity=1;
- iconToggle.style.top="calc(50% + 100px)";
- iconToggle.style.transform="translateY(-50%)";
 }
 window.onload=type;
 
@@ -240,15 +233,13 @@ function createPage(title){
  setTimeout(()=>p.style.transform="translateX(0)",50);
  currentPage=p;
 
- // Phase 3: move toggle to top
- iconToggle.style.top="30px";
- iconToggle.style.transform="translateY(0)";
+ // Show toggle always on the right
  iconToggle.style.opacity=1;
 
  // Add carousel if Case Studies
-if(title==="Case Studies"){
+ if(title==="Case Studies"){
   addCarousel(p);
-}
+ }
 }
 
 /* ---------- FIRST TRANSITION ---------- */
@@ -270,13 +261,12 @@ document.getElementById("aboutBtn").onclick=()=>{
  createPage("About");
 }
 
-/* ---------- ICON TOGGLE ---------- */
+/* ---------- ICON TOGGLE NAV ---------- */
 document.getElementById("caseIcon").onclick=()=>{ createPage("Case Studies"); }
 document.getElementById("aboutIcon").onclick=()=>{ createPage("About"); }
 
 /* ---------- CAROUSEL ---------- */
 function addCarousel(page){
-  // Create carousel container
   const carousel=document.createElement("div");
   carousel.className="carousel";
   carousel.innerHTML=`
