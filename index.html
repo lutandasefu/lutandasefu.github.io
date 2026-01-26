@@ -14,7 +14,14 @@
 <style>
 /* ---------- GLOBAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;width:100%;height:100vh;}
+body{
+  overflow:hidden;
+  background:#e6e6e6;
+  font-family:'Sulphur Point',sans-serif;
+  width:100%;
+  height:100vh;
+  transition: background 0.8s ease;
+}
 section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;}
 #intro{font-size:4.2rem;border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
@@ -66,7 +73,19 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 }
 
 /* ---------- PAGE ---------- */
-.page{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;font-size:4rem;background:#111;color:#fff;z-index:1000;transform:translateX(100%);transition:transform .8s ease;}
+.page{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:4rem;
+  background:#111;
+  color:#fff;
+  z-index:1000;
+  transform:translateX(100%);
+  transition:transform .8s ease;
+}
 
 /* ---------- CURTAIN ---------- */
 .curtain{
@@ -165,6 +184,9 @@ function createPage(title){
 
 /* ---------- TOGGLE CLICK ---------- */
 toggle.addEventListener("click",()=>{
+  // switch body to dark immediately
+  document.body.style.background="#111";
+
   // fade curtain
   curtain.style.display = 'block';
   curtain.style.opacity = '0';
@@ -187,22 +209,10 @@ toggle.addEventListener("click",()=>{
 
 /* ---------- DARK PAGE BUTTON CLICK ---------- */
 darkCase.addEventListener("click",()=>{
-  curtain.style.display='block'; curtain.style.opacity='0';
-  setTimeout(()=>{curtain.style.opacity='1';},10);
-  setTimeout(()=>{
-    createPage("Case Studies");
-    curtain.style.opacity='0';
-    setTimeout(()=>{curtain.style.display='none';},600);
-  },600);
+  createPage("Case Studies");
 });
 darkAbout.addEventListener("click",()=>{
-  curtain.style.display='block'; curtain.style.opacity='0';
-  setTimeout(()=>{curtain.style.opacity='1';},10);
-  setTimeout(()=>{
-    createPage("About");
-    curtain.style.opacity='0';
-    setTimeout(()=>{curtain.style.display='none';},600);
-  },600);
+  createPage("About");
 });
 
 window.onload=type;
