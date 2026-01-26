@@ -9,93 +9,37 @@
 <script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
 
 <style>
+/* ---------- GLOBAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:'Sulphur Point',sans-serif;
-  background:#111;
-  color:#fff;
-  overflow:hidden;
-}
+body{font-family:'Sulphur Point',sans-serif;background:#e6e6e6;color:#111;overflow:hidden;width:100%;height:100vh;}
+section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;transition:opacity .6s ease;}
+#intro{font-size:4rem;border-right:2px solid #111;animation:blink .7s step-end infinite;}
+@keyframes blink{50%{border-color:transparent;}}
 
-/* ===== CASE STUDIES PAGE ===== */
-.casePage{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#111;
-}
+/* ---------- HERO TYPING ---------- */
+.hero{background:#e6e6e6;flex-direction:column;}
+/* ---------- WELCOME ---------- */
+.welcome{flex-direction:column;gap:20px;font-size:3rem;opacity:0;transition:opacity .8s ease;}
+.toggle{width:350px;height:60px;border-radius:60px;border:2px solid #111;background:#fff;
+  display:flex;align-items:center;justify-content:space-between;padding:0 40px;
+  font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;transition:all .7s cubic-bezier(.77,0,.18,1);z-index:2;}
+.toggle span{z-index:2;font-size:1.1rem;color:#111;}
+.slider{position:absolute;height:100%;width:50%;background:#111;border-radius:60px;left:0;z-index:1;transition:transform .6s cubic-bezier(.77,0,.18,1);}
+.toggle.active .slider{transform:translateX(100%);}
+.toggle span:first-child{color:#fff;}
+.toggle.active span:first-child{color:#111;}
+.toggle span:last-child{color:#111;}
+.toggle.active span:last-child{color:#fff;}
 
-/* container from CodePen logic */
-.cases{
-  width:90%;
-  height:85vh;
-  display:flex;
-  gap:12px;
-}
-
-/* each row */
-.case{
-  flex:1;
-  border-radius:20px;
-  background:#1b1b1b;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:1.8rem;
-  font-family:'Urbanist',sans-serif;
-  font-weight:300;
-  cursor:pointer;
-  transition:flex 0.6s cubic-bezier(.77,0,.18,1), background 0.5s;
-  position:relative;
-  overflow:hidden;
-}
-
-/* label text */
-.case span{
-  z-index:2;
-  pointer-events:none;
-}
-
-/* expansion like CodePen */
-.case:hover{
-  flex:6;
-  background:#fff;
-  color:#111;
-}
-
-/* inner expanding panel */
-.caseContent{
-  position:absolute;
-  inset:0;
-  opacity:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:2rem;
-  transition:opacity .4s ease .3s;
-}
-
-/* show content when expanded */
-.case:hover .caseContent{
-  opacity:1;
-}
-
-/* collapse siblings */
-.cases:hover .case:not(:hover){
-  flex:0.8;
-}
-
-/* ===== ICON TOGGLE (right side) ===== */
+/* ---------- DARK PAGE ICON TOGGLE ---------- */
 .iconToggle{
   position:fixed;
   right:30px;
   top:50%;
   transform:translateY(-50%);
   width:70px;
-  height:180px;
-  background:#000;
+  height:140px;
+  background:#111;
   border-radius:50px;
   border:2px solid #fff;
   display:flex;
@@ -104,26 +48,46 @@ body{
   align-items:center;
   z-index:1000;
 }
-
 .iconToggle i{
   font-size:1.6rem;
   color:#fff;
   cursor:pointer;
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:900px){
-  .cases{flex-direction:column;}
-  .case:hover{flex:4;}
-  .cases:hover .case:not(:hover){flex:1;}
-}
+/* ---------- CASE STUDIES CAROUSEL ---------- */
+.casePage{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#111;opacity:0;transition:opacity .6s ease;}
+.cases{width:90%;height:60vh;display:flex;gap:12px;}
+.case{flex:1;border-radius:20px;background:#1b1b1b;display:flex;justify-content:center;align-items:center;font-size:1.5rem;font-family:'Urbanist',sans-serif;font-weight:300;cursor:pointer;transition:flex 0.6s cubic-bezier(.77,0,.18,1), background 0.5s;color:#fff;position:relative;overflow:hidden;}
+.case span{z-index:2;pointer-events:none;}
+.case:hover{flex:5;background:#fff;color:#111;}
+.caseContent{position:absolute;inset:0;opacity:0;display:flex;justify-content:center;align-items:center;font-size:1.2rem;transition:opacity .4s ease .3s;}
+.case:hover .caseContent{opacity:1;}
+.cases:hover .case:not(:hover){flex:0.8;}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){.cases{flex-direction:column;height:75vh;}.case:hover{flex:3;}.cases:hover .case:not(:hover){flex:1;}}
+@media(max-width:480px){#intro{font-size:2.5rem;}.welcome{font-size:2rem;}.toggle{width:250px;padding:0 25px;}}
 </style>
 </head>
 <body>
 
-<!-- CASE STUDIES PAGE -->
-<section class="casePage">
+<!-- HERO TYPING PAGE -->
+<section class="hero" id="hero">
+  <div id="intro"></div>
+</section>
 
+<!-- WELCOME PAGE -->
+<section class="welcome" id="welcome">
+  <div style="font-family:'Sulphur Point',sans-serif;font-size:4rem;">Welcome to my portfolio</div>
+  <div class="toggle" id="toggle">
+    <div class="slider"></div>
+    <span id="leftLabel">Case Studies</span>
+    <span id="rightLabel">About</span>
+  </div>
+</section>
+
+<!-- CASE STUDIES PAGE -->
+<section class="casePage" id="casePage">
   <div class="cases">
     <div class="case"><span>Case Study 1</span><div class="caseContent"></div></div>
     <div class="case"><span>Case Study 2</span><div class="caseContent"></div></div>
@@ -132,14 +96,56 @@ body{
     <div class="case"><span>Case Study 5</span><div class="caseContent"></div></div>
     <div class="case"><span>Case Study 6</span><div class="caseContent"></div></div>
   </div>
-
 </section>
 
 <!-- ICON TOGGLE -->
-<div class="iconToggle">
+<div class="iconToggle" id="iconToggle">
   <i class="fa-solid fa-layer-group" title="Case Studies"></i>
   <i class="fa-solid fa-user" title="About"></i>
 </div>
+
+<script>
+/* ---------- TYPING ---------- */
+const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
+let l=0,c=0;
+const intro=document.getElementById("intro");
+function type(){
+ if(c<lines[l].length){
+   intro.textContent+=lines[l][c++];
+   setTimeout(type,90);
+ }else{
+   if(l<lines.length-1){setTimeout(erase,400);}else{setTimeout(showWelcome,300);}
+ }
+}
+function erase(){
+ if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
+ else{l++;type();}
+}
+function showWelcome(){
+ document.getElementById("hero").remove();
+ document.getElementById("welcome").style.opacity=1;
+ document.getElementById("casePage").style.opacity=0; // hide case studies until clicked
+}
+
+/* ---------- WELCOME TO CASE/ABOUT TOGGLE ---------- */
+const toggle=document.getElementById("toggle");
+const leftLabel=document.getElementById("leftLabel");
+const rightLabel=document.getElementById("rightLabel");
+const casePage=document.getElementById("casePage");
+toggle.addEventListener("click",()=>{
+  toggle.classList.toggle("active");
+  if(toggle.classList.contains("active")){
+    // Show About page (dark page)
+    casePage.style.opacity=0;
+    alert("About page placeholder");
+  }else{
+    // Show Case Studies
+    casePage.style.opacity=1;
+  }
+});
+
+window.onload=type;
+</script>
 
 </body>
 </html>
