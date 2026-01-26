@@ -79,7 +79,7 @@ section{
   width:28px;
   height:28px;
   stroke:black;
-  fill:none;              /* IMPORTANT */
+  fill:none;
   transition:.3s;
 }
 
@@ -130,7 +130,7 @@ section{
 /* ---------- ACTIVE STATES ---------- */
 #welcome-toggle button.active svg{
   stroke:white;
-  fill:white;   /* THE FIX */
+  fill:white;
 }
 .right-toggle button.active svg{
   stroke:white;
@@ -224,7 +224,6 @@ section{
 </div>
 
 <script>
-/* --- YOUR JS UNCHANGED --- */
 const intro=document.getElementById("intro");
 const welcome=document.getElementById("welcome");
 const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
@@ -285,6 +284,9 @@ aboutBtn.onclick = showAbout;
 const wFocus = document.getElementById('wFocus');
 const toCase = document.getElementById('toCase');
 const toAbout = document.getElementById('toAbout');
+
+/* DEFAULT ACTIVE ON LOAD */
+toCase.classList.add("active");
 
 function setWelcomeActive(activeBtn, inactiveBtn){
   wFocus.style.transform =
