@@ -17,7 +17,7 @@ body{
 
 /* ---------- INTRO ---------- */
 #intro{
-  border-right:2px solid #111;
+  border-right:2px solid #961b2b; /* changed from black */
   animation:blink .7s step-end infinite;
   z-index:5;
 }
@@ -61,7 +61,7 @@ section{
   width:75px;
   height:50px;
   border-radius:50px;
-  background:#111;
+  background:#961b2b; /* changed from black */
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 #welcome-toggle button{
@@ -84,8 +84,8 @@ section{
 }
 /* ---------- ACTIVE STATES WELCOME TOGGLE ---------- */
 #welcome-toggle button.active svg{
-  stroke:white;   /* only stroke changes */
-  fill:none;      /* ensure fill never changes */
+  stroke:white;   /* active icons remain white */
+  fill:none;
 }
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -110,7 +110,7 @@ section{
   left:0;
   width:100%;
   height:50%;
-  background:#000;
+  background:#961b2b; /* changed from black */
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
@@ -137,8 +137,8 @@ section{
 
 /* ---------- PAGES ---------- */
 .page{
-  background:#111;
-  color:#fff;
+  background:#961b2b; /* changed from #111 */
+  color:white;
   transform:translateX(100%);
   transition:transform .8s cubic-bezier(.77,0,.18,1);
   z-index:3;
@@ -179,7 +179,7 @@ section{
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
 
-    <!-- Case Studies Button (single consistent icon) -->
+    <!-- Case Studies Button -->
     <button id="toCase">
       <svg fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="1.5">
         <rect x="3" y="4" width="14" height="14" rx="2"/>
@@ -248,10 +248,7 @@ function erase(){
 }
 function showWelcome(){
  intro.style.opacity=0;
- setTimeout(()=>{
-   intro.remove();
-   welcome.style.opacity=1;
- },600);
+ setTimeout(()=>{intro.remove();welcome.style.opacity=1;},600);
 }
 type();
 
