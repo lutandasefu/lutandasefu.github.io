@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | Portfolio</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100;300&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
 
 <style>
-/* ---------- GLOBAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Sulphur Point',sans-serif;background:#e6e6e6;color:#111;overflow:hidden;width:100%;height:100vh;}
 section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;transition:opacity .6s ease;}
 #intro{font-size:4rem;border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
 
-/* ---------- HERO TYPING ---------- */
-.hero{background:#e6e6e6;flex-direction:column;}
+/* ---------- HERO ---------- */
+.hero{flex-direction:column;}
+
 /* ---------- WELCOME ---------- */
-.welcome{flex-direction:column;gap:20px;font-size:3rem;opacity:0;transition:opacity .8s ease;}
+.welcome{flex-direction:column;gap:20px;font-size:3rem;opacity:0;transition:opacity .8s ease;z-index:10;}
 .toggle{width:350px;height:60px;border-radius:60px;border:2px solid #111;background:#fff;
   display:flex;align-items:center;justify-content:space-between;padding:0 40px;
-  font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;transition:all .7s cubic-bezier(.77,0,.18,1);z-index:2;}
+  font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;transition:all .7s cubic-bezier(.77,0,.18,1);}
 .toggle span{z-index:2;font-size:1.1rem;color:#111;}
 .slider{position:absolute;height:100%;width:50%;background:#111;border-radius:60px;left:0;z-index:1;transition:transform .6s cubic-bezier(.77,0,.18,1);}
 .toggle.active .slider{transform:translateX(100%);}
@@ -31,31 +30,10 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 .toggle span:last-child{color:#111;}
 .toggle.active span:last-child{color:#fff;}
 
-/* ---------- DARK PAGE ICON TOGGLE ---------- */
-.iconToggle{
-  position:fixed;
-  right:30px;
-  top:50%;
-  transform:translateY(-50%);
-  width:70px;
-  height:140px;
-  background:#111;
-  border-radius:50px;
-  border:2px solid #fff;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-around;
-  align-items:center;
-  z-index:1000;
-}
-.iconToggle i{
-  font-size:1.6rem;
-  color:#fff;
-  cursor:pointer;
-}
+/* ---------- DARK PAGES ---------- */
+.darkPage{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#111;color:#fff;transform:translateX(100%);transition:transform .8s ease;z-index:1000;}
 
-/* ---------- CASE STUDIES CAROUSEL ---------- */
-.casePage{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#111;opacity:0;transition:opacity .6s ease;}
+/* CASE STUDIES CARDS */
 .cases{width:90%;height:60vh;display:flex;gap:12px;}
 .case{flex:1;border-radius:20px;background:#1b1b1b;display:flex;justify-content:center;align-items:center;font-size:1.5rem;font-family:'Urbanist',sans-serif;font-weight:300;cursor:pointer;transition:flex 0.6s cubic-bezier(.77,0,.18,1), background 0.5s;color:#fff;position:relative;overflow:hidden;}
 .case span{z-index:2;pointer-events:none;}
@@ -64,7 +42,11 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 .case:hover .caseContent{opacity:1;}
 .cases:hover .case:not(:hover){flex:0.8;}
 
-/* ---------- RESPONSIVE ---------- */
+/* ICON TOGGLE ON DARK PAGES */
+.iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);width:70px;height:140px;background:#111;border-radius:50px;border:2px solid #fff;display:flex;flex-direction:column;justify-content:space-around;align-items:center;z-index:2000;}
+.iconToggle i{font-size:1.6rem;color:#fff;cursor:pointer;}
+
+/* RESPONSIVE */
 @media(max-width:900px){.cases{flex-direction:column;height:75vh;}.case:hover{flex:3;}.cases:hover .case:not(:hover){flex:1;}}
 @media(max-width:480px){#intro{font-size:2.5rem;}.welcome{font-size:2rem;}.toggle{width:250px;padding:0 25px;}}
 </style>
@@ -87,7 +69,7 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 </section>
 
 <!-- CASE STUDIES PAGE -->
-<section class="casePage" id="casePage">
+<section class="darkPage" id="casePage">
   <div class="cases">
     <div class="case"><span>Case Study 1</span><div class="caseContent"></div></div>
     <div class="case"><span>Case Study 2</span><div class="caseContent"></div></div>
@@ -96,6 +78,11 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
     <div class="case"><span>Case Study 5</span><div class="caseContent"></div></div>
     <div class="case"><span>Case Study 6</span><div class="caseContent"></div></div>
   </div>
+</section>
+
+<!-- ABOUT PAGE -->
+<section class="darkPage" id="aboutPage">
+  <div>About Page Placeholder</div>
 </section>
 
 <!-- ICON TOGGLE -->
@@ -124,28 +111,42 @@ function erase(){
 function showWelcome(){
  document.getElementById("hero").remove();
  document.getElementById("welcome").style.opacity=1;
- document.getElementById("casePage").style.opacity=0; // hide case studies until clicked
 }
 
-/* ---------- WELCOME TO CASE/ABOUT TOGGLE ---------- */
+/* ---------- TOGGLE ---------- */
 const toggle=document.getElementById("toggle");
 const leftLabel=document.getElementById("leftLabel");
 const rightLabel=document.getElementById("rightLabel");
 const casePage=document.getElementById("casePage");
+const aboutPage=document.getElementById("aboutPage");
+const iconToggle=document.getElementById("iconToggle");
+
 toggle.addEventListener("click",()=>{
   toggle.classList.toggle("active");
   if(toggle.classList.contains("active")){
-    // Show About page (dark page)
-    casePage.style.opacity=0;
-    alert("About page placeholder");
+    // Show About
+    casePage.style.transform="translateX(100%)";
+    aboutPage.style.transform="translateX(0%)";
   }else{
     // Show Case Studies
-    casePage.style.opacity=1;
+    aboutPage.style.transform="translateX(100%)";
+    casePage.style.transform="translateX(0%)";
+  }
+});
+
+/* ---------- ICON TOGGLE ON DARK PAGES ---------- */
+iconToggle.addEventListener("click",(e)=>{
+  const target=e.target;
+  if(target.title==="Case Studies"){
+    aboutPage.style.transform="translateX(100%)";
+    casePage.style.transform="translateX(0%)";
+  }else if(target.title==="About"){
+    casePage.style.transform="translateX(100%)";
+    aboutPage.style.transform="translateX(0%)";
   }
 });
 
 window.onload=type;
 </script>
-
 </body>
 </html>
