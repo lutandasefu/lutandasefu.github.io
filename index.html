@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
   font-family:'Sulphur Point',sans-serif;
   overflow:hidden;
   background:#e6e6e6;
@@ -43,51 +43,55 @@ section{
   z-index:4;
 }
 
+/* =========================
+   BALANCED TOGGLE STYLES
+   ========================= */
+
+/* -------- COMMON BUTTON BASE -------- */
+.toggle-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;         /* square buttons */
+  height: 64px;        /* matched width & height */
+  cursor: pointer;
+}
+
 /* ---------- WELCOME TOGGLE ---------- */
 #welcome-toggle{
   margin-top:40px;
   display:flex;
   position:relative;
-  width:160px;
-  height:60px;
+  width:164px;         /* accommodates two 64px buttons + spacing */
+  height:64px;
   background:#fff;
   border-radius:50px;
   border:2px solid #fff;
-  padding:5px; /* equal spacing inside toggle */
+  padding:4px;         /* equal padding around icons */
 }
 #welcome-toggle .focus{
   position:absolute;
-  top:8px;
-  left:8px;
-  width:60px;
-  height:44px; /* slightly shorter than button for balance */
+  top:4px;
+  left:4px;
+  width:64px;
+  height:56px;
   border-radius:50px;
   background:#111;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 #welcome-toggle button{
-  flex:1;
-  width:60px;      /* square buttons for balance */
-  height:60px;
   border:none;
   background:none;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center; /* perfect centering */
-  position:relative;
-  z-index:2;
 }
 #welcome-toggle button svg{
-  width:32px;
-  height:32px;
+  width:28px;
+  height:28px;
   stroke:black;
   fill:none;
   transition:.3s;
 }
-/* Active state for welcome toggle */
 #welcome-toggle button.active svg{
-  stroke:white; 
+  stroke:white;       /* active changes stroke only */
   fill:none;
 }
 
@@ -97,42 +101,37 @@ section{
   right:30px;
   top:50%;
   transform:translateY(-50%);
-  width:75px;
-  height:160px;
+  width:88px;          /* accommodates 1 column of 64px + padding */
+  height:168px;        /* accommodates two 64px + padding */
   background:#fff;
   border-radius:45px;
   display:none;
   flex-direction:column;
   overflow:hidden;
   border:2px solid #fff;
-  padding:5px; /* equal spacing inside toggle */
+  padding:4px;
   z-index:10;
 }
 .right-toggle .right-focus{
   position:absolute;
-  top:0;
-  left:0;
-  width:75px;
-  height:50px;
+  top:4px;
+  left:4px;
+  width:76px;
+  height:64px;
   background:#000;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
-  flex:1;
-  width:60px;   /* square buttons for balance */
-  height:60px;
   border:none;
   background:none;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center; /* center icons */
-  position:relative;
-  z-index:2;
+  margin-bottom:4px;
+}
+.right-toggle button:last-child {
+  margin-bottom:0;
 }
 .right-toggle button svg{
-  width:32px;
-  height:32px;
+  width:28px;
+  height:28px;
   stroke:black;
   fill:none;
   transition:.3s;
@@ -185,16 +184,16 @@ section{
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
 
-    <!-- Case Studies Button -->
-    <button id="toCase">
+    <!-- Case Studies -->
+    <button id="toCase" class="toggle-btn">
       <svg fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="1.5">
         <rect x="3" y="4" width="14" height="14" rx="2"/>
         <path d="M7 8h6M7 12h6M7 16h4"/>
       </svg>
     </button>
 
-    <!-- About Button -->
-    <button id="toAbout">
+    <!-- About -->
+    <button id="toAbout" class="toggle-btn">
       <svg fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="1.5">
         <circle cx="12" cy="8" r="4"/>
         <path d="M4 20c2-4 14-4 16 0"/>
@@ -218,14 +217,14 @@ section{
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
 
-  <button id="caseBtn">
+  <button id="caseBtn" class="toggle-btn">
     <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
       <rect x="3" y="4" width="14" height="14" rx="2"/>
       <path d="M7 8h6M7 12h6M7 16h4"/>
     </svg>
   </button>
 
-  <button id="aboutBtn">
+  <button id="aboutBtn" class="toggle-btn">
     <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
       <circle cx="12" cy="8" r="4"/>
       <path d="M4 20c2-4 14-4 16 0"/>
@@ -240,24 +239,24 @@ const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","
 let l=0,c=0;
 
 function type(){
- if(c<lines[l].length){
-   intro.textContent+=lines[l][c++];
-   setTimeout(type,80);
- }else{
-   if(l<lines.length-1){setTimeout(erase,600);}
-   else{setTimeout(showWelcome,800);}
- }
+  if(c<lines[l].length){
+    intro.textContent+=lines[l][c++];
+    setTimeout(type,80);
+  }else{
+    if(l<lines.length-1){setTimeout(erase,600);}
+    else{setTimeout(showWelcome,800);}
+  }
 }
 function erase(){
- if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
- else{l++;type();}
+  if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
+  else{l++;type();}
 }
 function showWelcome(){
- intro.style.opacity=0;
- setTimeout(()=>{
-   intro.remove();
-   welcome.style.opacity=1;
- },600);
+  intro.style.opacity=0;
+  setTimeout(()=>{
+    intro.remove();
+    welcome.style.opacity=1;
+  },600);
 }
 type();
 
@@ -291,31 +290,30 @@ function showAbout(){
 caseBtn.onclick = showCase;
 aboutBtn.onclick = showAbout;
 
-const wFocus = document.getElementById('wFocus');
-const toCase = document.getElementById('toCase');
-const toAbout = document.getElementById('toAbout');
+const wFocus=document.getElementById('wFocus');
+const toCase=document.getElementById('toCase');
+const toAbout=document.getElementById('toAbout');
 
-/* DEFAULT ACTIVE ON LOAD */
 toCase.classList.add("active");
 
 function setWelcomeActive(activeBtn, inactiveBtn){
   wFocus.style.transform =
-    activeBtn === toCase ? "translateX(0)" : "translateX(100%)";
+    activeBtn===toCase ? "translateX(0)" : "translateX(100%)";
   activeBtn.classList.add("active");
   inactiveBtn.classList.remove("active");
 }
 
 toCase.onclick = () => {
-  setWelcomeActive(toCase, toAbout);
-  welcome.style.transform = "translateY(-100%)";
-  right.style.display = "flex";
+  setWelcomeActive(toCase,toAbout);
+  welcome.style.transform="translateY(-100%)";
+  right.style.display="flex";
   showCase();
 }
 
 toAbout.onclick = () => {
-  setWelcomeActive(toAbout, toCase);
-  welcome.style.transform = "translateY(-100%)";
-  right.style.display = "flex";
+  setWelcomeActive(toAbout,toCase);
+  welcome.style.transform="translateY(-100%)";
+  right.style.display="flex";
   showAbout();
 }
 
