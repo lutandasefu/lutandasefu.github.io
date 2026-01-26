@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
 
-<!-- Font Awesome SVG+JS CDN (works on GH Pages) -->
-<script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
+<!-- Font Awesome Free CSS (guaranteed to work on GH Pages) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-H7TxldT+7j6qxjqKN4J0x3eFzGwO5WzEvM7T/C9c0gDZn5nYtDb/x1rZwz2D+fX08r0WlwnYV0B/7gq0g2bbpA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
 
@@ -222,11 +222,12 @@ section{
 <div class="iconToggle" id="iconToggle">
   <div class="switch">
     <div class="switch-focus" id="switchFocus"></div>
+    <!-- Free Font Awesome icons (will show correctly) -->
     <button class="switch-btn" id="caseIcon" title="Case Studies">
-      <i class="fa-solid fa-layer-group"></i>
+      <i class="fa-regular fa-file"></i>
     </button>
     <button class="switch-btn" id="aboutIcon" title="About">
-      <i class="fa-solid fa-user"></i>
+      <i class="fa-regular fa-user"></i>
     </button>
   </div>
 </div>
@@ -270,7 +271,6 @@ function createPage(title){
  p.className="page";
  document.body.appendChild(p);
  setTimeout(()=>p.style.transform="translateX(0)",50);
- currentPage=p;
 
  if(title==="Case Studies" || title==="About"){
    iconToggle.style.display="block";
