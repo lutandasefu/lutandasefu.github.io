@@ -86,6 +86,7 @@ section{
   flex-direction:column;
   gap:25px;
   z-index:2000;
+  opacity:0; /* hidden initially */
 }
 .iconToggle button{
   width:65px;
@@ -114,10 +115,19 @@ section{
   flex-direction:column;
 }
 
+/* ---------- CASE STUDIES TEXT ---------- */
+.page-text{
+  cursor:pointer;
+  color:#fff;
+  font-size:2rem;
+  margin-bottom:20px;
+  position:relative;
+}
+
 /* ---------- CAROUSEL ---------- */
 .carousel{
-  display:none; /* hidden initially */
-  margin-top:40px;
+  display:none;
+  margin-top:20px;
   width:90%;
   max-width:600px;
   overflow:hidden;
@@ -185,7 +195,7 @@ section{
   </div>
 </section>
 
-<!-- Fixed Toggle (Right Centered) -->
+<!-- Fixed Toggle -->
 <div class="iconToggle" id="iconToggle">
   <button id="caseIcon" title="Case Studies"><i class="fa-solid fa-layer-group"></i></button>
   <button id="aboutIcon" title="About"><i class="fa-solid fa-user"></i></button>
@@ -215,6 +225,8 @@ function showWelcome(){
  document.getElementById("hero").remove();
  const welcome=document.getElementById("welcome");
  welcome.style.opacity=1;
+ // Toggle hidden on welcome
+ document.getElementById("iconToggle").style.opacity=0;
 }
 window.onload=type;
 
@@ -228,17 +240,26 @@ function createPage(title){
  if(currentPage) currentPage.remove();
  const p=document.createElement("section");
  p.className="page";
- p.textContent=title;
  document.body.appendChild(p);
  setTimeout(()=>p.style.transform="translateX(0)",50);
  currentPage=p;
 
- // Show toggle always on the right
- iconToggle.style.opacity=1;
+ // Show toggle only on Case Studies or About
+ if(title==="Case Studies" || title==="About"){
+   iconToggle.style.opacity=1;
+ }else{
+   iconToggle.style.opacity=0;
+ }
 
- // Add carousel if Case Studies
+ // Add page text
+ const pageText=document.createElement("div");
+ pageText.className="page-text";
+ pageText.textContent=title;
+ p.appendChild(pageText);
+
+ // Carousel only for Case Studies
  if(title==="Case Studies"){
-  addCarousel(p);
+   addCarousel(pageText);
  }
 }
 
@@ -246,7 +267,6 @@ function createPage(title){
 function firstTransition(){
  document.getElementById("welcome").remove();
  body.style.background="#111";
- iconToggle.style.opacity=1;
 }
 
 /* ---------- MENU CLICK ---------- */
@@ -266,7 +286,7 @@ document.getElementById("caseIcon").onclick=()=>{ createPage("Case Studies"); }
 document.getElementById("aboutIcon").onclick=()=>{ createPage("About"); }
 
 /* ---------- CAROUSEL ---------- */
-function addCarousel(page){
+function addCarousel(textElement){
   const carousel=document.createElement("div");
   carousel.className="carousel";
   carousel.innerHTML=`
@@ -280,17 +300,16 @@ function addCarousel(page){
       <button class="next">&#10095;</button>
     </div>
   `;
-  page.appendChild(carousel);
+  textElement.appendChild(carousel);
 
   const track=carousel.querySelector(".carousel-track");
   const items=carousel.querySelectorAll(".carousel-item");
   let index=0;
 
-  // Show carousel on hover of page text
-  page.addEventListener("mouseenter",()=>{ carousel.style.display="block"; });
-  page.addEventListener("mouseleave",()=>{ carousel.style.display="none"; });
+  // Show carousel only when hovering over "Case Studies" text
+  textElement.addEventListener("mouseenter",()=>{ carousel.style.display="block"; });
+  textElement.addEventListener("mouseleave",()=>{ carousel.style.display="none"; });
 
-  // Carousel nav
   const prev=carousel.querySelector(".prev");
   const next=carousel.querySelector(".next");
   prev.onclick=()=>{ index=(index-1+items.length)%items.length; track.style.transform=`translateX(-${index*100}%)`; }
