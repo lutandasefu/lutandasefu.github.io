@@ -8,34 +8,17 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;transition:background .6s ease;}
+section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;padding:20px;text-align:center;}
 
 /* ---------- INTRO ---------- */
-section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;padding:20px;text-align:center;}
 #intro{font-size:clamp(2rem,6vw,4.2rem);border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
 
 /* ---------- WELCOME ---------- */
 .welcome{flex-direction:column;gap:50px;font-size:clamp(2.2rem,6vw,4.4rem);opacity:0;transition:opacity .8s ease;}
 
-/* ---------- WELCOME TOGGLE (CODEPEN-STYLE) ---------- */
-.welcomeToggleWrapper {position:relative;display:flex;justify-content:center;align-items:center;}
-.welcomeToggle {
-  width:260px;height:60px;background:#fff;border-radius:50px;border:2px solid #ccc;position:relative;cursor:pointer;transition:0.4s ease;
-}
-.welcomeToggle input{display:none;}
-.welcomeKnob {
-  position:absolute;top:5px;left:5px;width:120px;height:50px;background:#111;border-radius:45px;
-  transform:rotate(-5deg);transition:all 0.35s cubic-bezier(.68,-0.55,.265,1.55);
-}
-.welcomeToggle input:checked + .welcomeKnob{transform:translateX(130px) rotate(5deg);}
-.welcomeOption {position:absolute;width:50%;height:100%;display:flex;justify-content:center;align-items:center;font-family:'Urbanist',sans-serif;font-size:1.1rem;color:#444;user-select:none;}
-.welcomeOption.caseLabel{left:0;}
-.welcomeOption.aboutLabel{right:0;}
-.welcomeToggle input:checked ~ .aboutLabel{color:#fff;}
-.welcomeToggle input:not(:checked) ~ .caseLabel{color:#fff;}
-
-/* ---------- CASE/ABOUT ICON TOGGLE ---------- */
-.iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:2000;display:none;}
+/* ---------- ICON TOGGLE (vertical switch) ---------- */
+.iconToggle{position:fixed;right:30px;z-index:2000;display:none;}
 .switch{width:70px;height:150px;background:#fff;border-radius:45px;display:grid;grid-template-rows:1fr 1fr;position:relative;overflow:hidden;border:2px solid #fff;}
 .switch-focus{position:absolute;top:0;left:0;width:100%;height:50%;background:#000;border-radius:45px;transition:transform 0.3s ease;z-index:0;}
 .switch-btn{border:none;background:transparent;color:black;display:flex;align-items:center;justify-content:center;z-index:1;cursor:pointer;transition:color 0.3s;}
@@ -54,7 +37,7 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 .carousel-nav button{background:rgba(0,0,0,0.2);border:none;color:#fff;font-size:2rem;border-radius:50%;cursor:pointer;}
 
 @media(max-width:600px){
-  .iconToggle{right:15px;}.switch{width:55px;height:120px;}.switch-btn svg{width:24px;height:24px;}.carousel-item{height:150px;font-size:1.2rem;}.welcomeToggle{width:200px;height:50px;}.welcomeKnob{width:90px;height:40px;}
+  .iconToggle{right:15px;}.switch{width:55px;height:120px;}.switch-btn svg{width:24px;height:24px;}.carousel-item{height:150px;font-size:1.2rem;}
 }
 </style>
 </head>
@@ -66,17 +49,22 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 <!-- Phase 2: Welcome -->
 <section class="welcome" id="welcome">
   <div>Welcome to my portfolio</div>
-  <div class="welcomeToggleWrapper">
-    <label class="welcomeToggle">
-      <input type="checkbox" id="welcomeToggle">
-      <div class="welcomeKnob"></div>
-      <div class="welcomeOption caseLabel">Case Studies</div>
-      <div class="welcomeOption aboutLabel">About</div>
-    </label>
+
+  <!-- Centered vertical icon toggle -->
+  <div class="iconToggle" id="welcomeIconToggle" style="top:50%;transform:translateY(-50%);">
+    <div class="switch">
+      <div class="switch-focus" id="welcomeSwitchFocus"></div>
+      <button class="switch-btn" id="welcomeCaseIcon" title="Case Studies">
+        <svg viewBox="0 0 24 24"><path d="M3 4H21V20H3V4ZM5 6V18H19V6H5ZM7 8H17V10H7V8ZM7 12H17V14H7V12Z"/></svg>
+      </button>
+      <button class="switch-btn" id="welcomeAboutIcon" title="About">
+        <svg viewBox="0 0 24 24"><path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12ZM12 14C8.13 14 2 16.17 2 20V22H22V20C22 16.17 15.87 14 12 14Z"/></svg>
+      </button>
+    </div>
   </div>
 </section>
 
-<!-- Phase 3: Case/About Icon Toggle -->
+<!-- Case/About page icon toggle -->
 <div class="iconToggle" id="iconToggle">
   <div class="switch">
     <div class="switch-focus" id="switchFocus"></div>
@@ -96,17 +84,23 @@ let l=0,c=0;
 const intro=document.getElementById("intro");
 function type(){if(c<lines[l].length){intro.textContent+=lines[l][c++];setTimeout(type,90);}else{if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,500);}}}
 function erase(){if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}else{l++;type();}}
-function showWelcome(){document.getElementById("hero").remove();document.getElementById("welcome").style.opacity=1;}
+function showWelcome(){
+  document.getElementById("hero").remove();
+  document.getElementById("welcome").style.opacity=1;
+  document.getElementById("welcomeIconToggle").style.display="block";
+}
 window.onload=type;
 
-// ---------- Welcome Toggle ----------
-const welcomeToggle=document.getElementById("welcomeToggle");
-welcomeToggle.addEventListener("change",function(){
-  const mode=this.checked ? "About" : "Case Studies";
-  document.getElementById("welcome").remove();
-  document.body.style.background="#111";
-  createPage(mode);
-});
+// ---------- Welcome icon toggle ----------
+const wCase=document.getElementById("welcomeCaseIcon");
+const wAbout=document.getElementById("welcomeAboutIcon");
+const wFocus=document.getElementById("welcomeSwitchFocus");
+function setWelcomeActive(active){
+  if(active==="case"){wFocus.style.transform="translateY(0)"; wCase.classList.add("active"); wAbout.classList.remove("active");}
+  else{wFocus.style.transform="translateY(100%)"; wCase.classList.remove("active"); wAbout.classList.add("active");}
+}
+wCase.onclick=()=>{setWelcomeActive("case");document.getElementById("welcome").remove();document.body.style.background="#111";createPage("Case Studies");}
+wAbout.onclick=()=>{setWelcomeActive("about");document.getElementById("welcome").remove();document.body.style.background="#111";createPage("About");}
 
 // ---------- Page system ----------
 let currentPage=null;
@@ -114,19 +108,10 @@ const iconToggle=document.getElementById("iconToggle");
 const switchFocus=document.getElementById("switchFocus");
 const caseIcon=document.getElementById("caseIcon");
 const aboutIcon=document.getElementById("aboutIcon");
-
 function setActiveToggle(active){
-  if(active==="case"){
-    switchFocus.style.transform="translateY(0)";
-    caseIcon.classList.add("active");
-    aboutIcon.classList.remove("active");
-  } else {
-    switchFocus.style.transform="translateY(100%)";
-    caseIcon.classList.remove("active");
-    aboutIcon.classList.add("active");
-  }
+  if(active==="case"){switchFocus.style.transform="translateY(0)";caseIcon.classList.add("active");aboutIcon.classList.remove("active");}
+  else{switchFocus.style.transform="translateY(100%)";caseIcon.classList.remove("active");aboutIcon.classList.add("active");}
 }
-
 function createPage(title){
   if(currentPage) currentPage.remove();
   const p=document.createElement("section");
@@ -142,7 +127,7 @@ function createPage(title){
   if(title==="About"){setActiveToggle("about");iconToggle.style.display="block";}
 }
 
-// Icon toggle click
+// Page icon toggle click
 caseIcon.onclick=()=>{createPage("Case Studies");}
 aboutIcon.onclick=()=>{createPage("About");}
 
