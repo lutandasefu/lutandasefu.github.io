@@ -39,7 +39,7 @@ section{
 }
 @keyframes blink{50%{border-color:transparent;}}
 
-/* ---------- WELCOME ---------- */
+/* ---------- WELCOME TOGGLE ---------- */
 .welcome-switch{
   margin-top:40px;
   width:170px;
@@ -135,10 +135,10 @@ section{
 
   <section id="welcome">
     <div>Welcome to my portfolio</div>
+
     <div class="welcome-switch">
       <div class="focus" id="wFocus"></div>
 
-      <!-- Pages Icon -->
       <button id="toCase">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
           <rect x="3" y="4" width="14" height="14" rx="2"/>
@@ -146,7 +146,6 @@ section{
         </svg>
       </button>
 
-      <!-- Person Icon -->
       <button id="toAbout">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
           <circle cx="12" cy="8" r="4"/>
@@ -201,13 +200,16 @@ function erase(){
 }
 type();
 
-/* Welcome toggle */
+/* Welcome toggle FIXED */
 const wFocus=document.getElementById('wFocus');
 const toCase=document.getElementById('toCase');
 const toAbout=document.getElementById('toAbout');
 
+wFocus.style.transform="translateX(0)";
+toCase.classList.add('active');
+
 toCase.onclick=()=>{
-  wFocus.style.transform="translateX(100%)";
+  wFocus.style.transform="translateX(0)";
   toCase.classList.add('active');
   toAbout.classList.remove('active');
   wrap.style.transform="translateY(-200vh)";
