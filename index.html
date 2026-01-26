@@ -43,12 +43,12 @@ section{
   z-index:4;
 }
 
-/* ---------- WELCOME TOGGLE ---------- */
+/* ---------- WELCOME TOGGLE (SPACING FIX) ---------- */
 #welcome-toggle{
   margin-top:40px;
   display:flex;
   position:relative;
-  width:180px;
+  width:190px;         /* slightly wider */
   height:60px;
   background:#fff;
   border-radius:50px;
@@ -56,10 +56,10 @@ section{
 }
 #welcome-toggle .focus{
   position:absolute;
-  top:5px;
-  left:5px;
-  width:80px;   /* adjusted to fit icon + spacing */
-  height:50px;
+  top:6px;
+  left:6px;
+  width:78px;          /* switch matches icon area */
+  height:48px;
   border-radius:50px;
   background:#111;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
@@ -74,11 +74,11 @@ section{
   align-items:center;
   position:relative;
   z-index:2;
-  padding:0 6px; /* added horizontal padding for spacing */
+  padding:0 10px;      /* added horizontal breathing room */
 }
 #welcome-toggle button svg{
-  width:28px;
-  height:28px;
+  width:24px;          /* slightly smaller icon for balance */
+  height:24px;
   stroke:black;
   fill:none;
   transition:.3s;
@@ -123,11 +123,10 @@ section{
   align-items:center;
   position:relative;
   z-index:2;
-  padding:0;
 }
 .right-toggle button svg{
-  width:26px;
-  height:26px;
+  width:28px;
+  height:28px;
   stroke:black;
   fill:none;
   transition:.3s;
