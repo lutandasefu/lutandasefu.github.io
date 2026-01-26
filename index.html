@@ -63,7 +63,6 @@ section{
   border-radius:50px;
   background:#111;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
-  z-index:0; /* FIX */
 }
 #welcome-toggle button{
   flex:1;
@@ -73,13 +72,15 @@ section{
   display:flex;
   justify-content:center;
   align-items:center;
-  position:relative; /* FIX */
-  z-index:2;          /* FIX */
+  position:relative;
+  z-index:2;
 }
 #welcome-toggle button svg{
   width:28px;
   height:28px;
-  transition:stroke .3s;
+  stroke:black;
+  fill:none;              /* IMPORTANT */
+  transition:.3s;
 }
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -106,7 +107,6 @@ section{
   height:50%;
   background:#000;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
-  z-index:0; /* FIX */
 }
 .right-toggle button{
   flex:1;
@@ -116,21 +116,22 @@ section{
   display:flex;
   justify-content:center;
   align-items:center;
-  position:relative; /* FIX */
-  z-index:2;          /* FIX */
+  position:relative;
+  z-index:2;
 }
 .right-toggle button svg{
   width:28px;
   height:28px;
-  transition:stroke .3s;
+  stroke:black;
+  fill:none;
+  transition:.3s;
 }
 
-/* ---------- ACTIVE ICON STATES ---------- */
-#welcome-toggle button svg,
-.right-toggle button svg{
-  stroke:black;
+/* ---------- ACTIVE STATES ---------- */
+#welcome-toggle button.active svg{
+  stroke:white;
+  fill:white;   /* THE FIX */
 }
-#welcome-toggle button.active svg,
 .right-toggle button.active svg{
   stroke:white;
 }
@@ -179,7 +180,6 @@ section{
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
     <button id="toCase">
-      <!-- FIXED SVG -->
       <svg fill="none" viewBox="0 0 20 24" stroke-width="1.5">
         <rect x="3" y="4" width="14" height="14" rx="2"/>
         <path d="M7 8h6M7 12h6M7 16h4"/>
@@ -209,7 +209,6 @@ section{
   <div class="right-focus" id="rFocus"></div>
 
   <button id="caseBtn">
-    <!-- FIXED SVG -->
     <svg fill="none" viewBox="0 0 20 24" stroke-width="1.5">
       <rect x="3" y="4" width="14" height="14" rx="2"/>
       <path d="M7 8h6M7 12h6M7 16h4"/>
@@ -225,7 +224,7 @@ section{
 </div>
 
 <script>
-/* YOUR JS IS UNCHANGED */
+/* --- YOUR JS UNCHANGED --- */
 const intro=document.getElementById("intro");
 const welcome=document.getElementById("welcome");
 const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
@@ -290,7 +289,6 @@ const toAbout = document.getElementById('toAbout');
 function setWelcomeActive(activeBtn, inactiveBtn){
   wFocus.style.transform =
     activeBtn === toCase ? "translateX(0)" : "translateX(100%)";
-
   activeBtn.classList.add("active");
   inactiveBtn.classList.remove("active");
 }
