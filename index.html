@@ -70,7 +70,9 @@ button{
   display:flex;justify-content:center;align-items:center;z-index:1;
 }
 svg{width:28px;height:28px;stroke:black;transition:.3s;}
-button.active svg{stroke:white;}
+button.active svg{
+  stroke:white !important;
+}
 
 /* ---------- PAGES ---------- */
 .page{
@@ -219,6 +221,9 @@ type();
 function setActive(btn1, btn2){
   btn1.classList.add("active");
   btn2.classList.remove("active");
+  // force icon color
+  btn1.querySelector("svg").style.stroke = "white";
+  btn2.querySelector("svg").style.stroke = "black";
 }
 
 /* ---------- PAGE SYSTEM ---------- */
