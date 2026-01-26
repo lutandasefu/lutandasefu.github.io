@@ -27,13 +27,16 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
   left:0;
   width:100%;
   height:50%;
-  background:#fff;   /* White shadow highlight */
+  background:#000;   /* black highlight */
   border-radius:45px;
   transition:transform 0.3s ease;
   z-index:0;
 }
-.switch-btn{border:none;background:transparent;color:#000;display:flex;align-items:center;justify-content:center;z-index:1;cursor:pointer;}
-.switch-btn svg{width:32px;height:32px;fill:black;}
+.switch-btn{border:none;background:transparent;color:black;display:flex;align-items:center;justify-content:center;z-index:1;cursor:pointer;transition:color 0.3s;}
+.switch-btn svg{width:32px;height:32px;fill:black;transition:fill 0.3s;}
+
+/* Active icon style */
+.switch-btn.active svg{fill:white;}
 
 /* ---------- PAGE ---------- */
 .page{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#111;color:#fff;font-size:clamp(2rem,6vw,4rem);transform:translateX(100%);transition:transform .8s ease;z-index:1000;flex-direction:column;}
@@ -96,6 +99,20 @@ let currentPage=null;
 const focus=document.getElementById("focus");
 const iconToggle=document.getElementById("iconToggle");
 const switchFocus=document.getElementById("switchFocus");
+const caseIcon=document.getElementById("caseIcon");
+const aboutIcon=document.getElementById("aboutIcon");
+
+function setActiveToggle(active){
+  if(active==="case"){
+    switchFocus.style.transform="translateY(0)";
+    caseIcon.classList.add("active");
+    aboutIcon.classList.remove("active");
+  } else {
+    switchFocus.style.transform="translateY(100%)";
+    caseIcon.classList.remove("active");
+    aboutIcon.classList.add("active");
+  }
+}
 
 function createPage(title){
  if(currentPage) currentPage.remove();
@@ -105,15 +122,15 @@ function createPage(title){
 
  const pageText=document.createElement("div");pageText.className="page-text";pageText.textContent=title;p.appendChild(pageText);
 
- if(title==="Case Studies"){addCarousel(pageText);switchFocus.style.transform="translateY(0)";}
- if(title==="About"){switchFocus.style.transform="translateY(100%)";}
+ if(title==="Case Studies"){addCarousel(pageText);setActiveToggle("case");}
+ if(title==="About"){setActiveToggle("about");}
 }
 
 function firstTransition(){document.getElementById("welcome").remove();document.body.style.background="#111";}
 document.getElementById("caseBtn").onclick=()=>{focus.style.transform="translateX(0)";firstTransition();createPage("Case Studies");}
 document.getElementById("aboutBtn").onclick=()=>{focus.style.transform="translateX(100%)";firstTransition();createPage("About");}
-document.getElementById("caseIcon").onclick=()=>{createPage("Case Studies");}
-document.getElementById("aboutIcon").onclick=()=>{createPage("About");}
+caseIcon.onclick=()=>{createPage("Case Studies");}
+aboutIcon.onclick=()=>{createPage("About");}
 
 // ---------- Carousel ----------
 function addCarousel(textElement){
