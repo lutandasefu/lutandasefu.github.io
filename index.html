@@ -82,6 +82,11 @@ section{
   fill:none;
   transition:.3s;
 }
+/* ---------- ACTIVE STATES WELCOME TOGGLE ---------- */
+#welcome-toggle button.active svg{
+  stroke:white;   /* only stroke changes */
+  fill:none;      /* ensure fill never changes */
+}
 
 /* ---------- RIGHT TOGGLE ---------- */
 .right-toggle{
@@ -125,12 +130,6 @@ section{
   stroke:black;
   fill:none;
   transition:.3s;
-}
-
-/* ---------- ACTIVE STATES ---------- */
-#welcome-toggle button.active svg{
-  stroke:white;
-  fill:white;
 }
 .right-toggle button.active svg{
   stroke:white;
@@ -180,19 +179,17 @@ section{
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
 
-    <!-- Case Studies Button (Centered) -->
+    <!-- Case Studies Button (single consistent icon) -->
     <button id="toCase">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-        <g transform="translate(1 0)">
-          <rect x="3" y="4" width="14" height="14" rx="2"/>
-          <path d="M7 8h6M7 12h6M7 16h4"/>
-        </g>
+      <svg fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="1.5">
+        <rect x="3" y="4" width="14" height="14" rx="2"/>
+        <path d="M7 8h6M7 12h6M7 16h4"/>
       </svg>
     </button>
 
     <!-- About Button -->
     <button id="toAbout">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+      <svg fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="1.5">
         <circle cx="12" cy="8" r="4"/>
         <path d="M4 20c2-4 14-4 16 0"/>
       </svg>
