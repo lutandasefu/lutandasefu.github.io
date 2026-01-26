@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100;300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
@@ -17,37 +17,39 @@ body{
   font-family:'Sulphur Point',sans-serif;
 }
 
-/* ---------- INTRO TYPING ---------- */
+/* ---------- TRUE 3D PERSPECTIVE (THE MISSING PIECE) ---------- */
+#app{
+  perspective:1000px;
+}
+
+/* ---------- INTRO ---------- */
 section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;}
-#intro{font-size:4.2rem;border-right:2px solid #111;animation:blink .7s step-end infinite;}
+#intro{
+  font-size:4.2rem;
+  border-right:2px solid #111;
+  animation:blink .7s step-end infinite;
+}
 @keyframes blink{50%{border-color:transparent;}}
 
 /* ---------- WELCOME ---------- */
 .welcome{
   flex-direction:column;
-  gap:60px;
+  gap:70px;
   font-size:3.8rem;
   opacity:0;
   transition:opacity .8s ease;
 }
 
 /* ---------- DEV LOOP MENU ---------- */
-#app{
-  width:520px;
-  height:90px;
-  display:grid;
-  place-items:center;
-}
-
 #app ul{
   position:relative;
-  width:100%;
+  width:520px;
   height:70px;
   display:grid;
   grid-template-columns:repeat(2,1fr);
   border-radius:45px;
   background:#fff;
-  transform:perspective(1000px);
+  transform-style:preserve-3d;
   overflow:hidden;
 }
 
@@ -121,7 +123,7 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
   </div>
 </section>
 
-<!-- Dark toggle -->
+<!-- Dark icon toggle -->
 <div class="iconMode" id="iconMode">
   <button id="darkCase"><i class="far fa-file-lines"></i></button>
   <button id="darkAbout"><i class="fas fa-user"></i></button>
@@ -145,22 +147,20 @@ function erase(){
  if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
  else{l++;type();}
 }
-
 function showWelcome(){
  document.getElementById("hero").remove();
  document.getElementById("welcome").style.opacity=1;
 }
 
-/* ---------- DEV LOOP MENU ANIMATION ---------- */
+/* ---------- DEV LOOP MENU (FIXED) ---------- */
 const liEls=[...document.querySelectorAll("#app li")];
 const slideEl=document.querySelector(".focus-el");
 const liContainer=document.querySelector("#app ul");
-let activeIndex=0;
+
+let activeIndex=-1; // FIX
 
 liEls.forEach((li,index)=>{
  li.addEventListener("click",()=>{
-   if(index===activeIndex) return;
-
    const x=index===0?-1:1;
    const liRect=li.getBoundingClientRect();
    const parentRect=liContainer.getBoundingClientRect();
@@ -175,8 +175,8 @@ liEls.forEach((li,index)=>{
 
    activeIndex=index;
 
-   // trigger page
-   setTimeout(()=>goToDarkPage(li.dataset.page),600);
+   // INSTANT PAGE CHANGE (no lag)
+   goToDarkPage(li.dataset.page);
  });
 });
 
@@ -201,7 +201,6 @@ function createPage(title){
  currentPage=p;
 }
 
-/* ---------- DARK ICON BUTTONS ---------- */
 document.getElementById("darkCase").onclick=()=>createPage("Case Studies");
 document.getElementById("darkAbout").onclick=()=>createPage("About");
 
