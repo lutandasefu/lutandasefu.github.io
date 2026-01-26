@@ -8,41 +8,40 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Sulphur Point',sans-serif;background:#e6e6e6;overflow:hidden}
+body{
+  font-family:'Sulphur Point',sans-serif;
+  overflow:hidden;
+  background:#e6e6e6;
+}
 
-/* ---------- INTRO (separate layer) ---------- */
-#introScreen{
+/* ---------- SECTIONS ---------- */
+section{
   position:fixed;
   inset:0;
   display:flex;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:20px;
+}
+
+/* ---------- INTRO ---------- */
+#intro{
   font-size:clamp(2rem,6vw,4rem);
   border-right:2px solid #111;
   animation:blink .7s step-end infinite;
   background:#e6e6e6;
-  z-index:5000;
-  transition:opacity .8s ease;
+  z-index:5;
 }
 @keyframes blink{50%{border-color:transparent;}}
 
-/* ---------- WRAPPER ---------- */
-.wrapper{
-  height:300vh;
-  transition:transform 1s cubic-bezier(.77,0,.18,1);
+/* ---------- WELCOME ---------- */
+#welcome{
+  opacity:0;
+  transition:opacity .8s ease;
+  z-index:4;
 }
-
-/* ---------- SECTIONS ---------- */
-section{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  font-size:clamp(2rem,6vw,4rem);
-}
-
-/* ---------- WELCOME TOGGLE ---------- */
 .welcome-switch{
   margin-top:40px;
   width:170px;
@@ -70,8 +69,14 @@ section{
 .welcome-switch svg{width:26px;height:26px;stroke:black;transition:.3s;}
 .welcome-switch button.active svg{stroke:white;}
 
-/* ---------- DARK PAGES ---------- */
-.page{background:#111;color:#fff;}
+/* ---------- PAGES ---------- */
+.page{
+  background:#111;
+  color:#fff;
+  transform:translateX(100%);
+  transition:transform .8s ease;
+  z-index:3;
+}
 
 /* ---------- RIGHT TOGGLE ---------- */
 .right-toggle{
@@ -83,11 +88,11 @@ section{
   height:150px;
   background:#fff;
   border-radius:45px;
-  display:flex;
+  display:none;
   flex-direction:column;
   overflow:hidden;
   border:2px solid #fff;
-  display:none;
+  z-index:10;
 }
 .right-focus{
   position:absolute;
@@ -106,34 +111,35 @@ section{
 </head>
 <body>
 
-<!-- INTRO SCREEN -->
-<div id="introScreen"></div>
+<!-- INTRO -->
+<section id="intro"></section>
 
-<div class="wrapper" id="wrap">
-  <section id="welcome">
-    <div>Welcome to my portfolio</div>
-    <div class="welcome-switch">
-      <div class="focus" id="wFocus"></div>
+<!-- WELCOME -->
+<section id="welcome">
+  <div>Welcome to my portfolio</div>
 
-      <button id="toCase">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-          <rect x="3" y="4" width="14" height="14" rx="2"/>
-          <path d="M7 8h6M7 12h6M7 16h4"/>
-        </svg>
-      </button>
+  <div class="welcome-switch">
+    <div class="focus" id="wFocus"></div>
 
-      <button id="toAbout">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-          <circle cx="12" cy="8" r="4"/>
-          <path d="M4 20c2-4 14-4 16 0"/>
-        </svg>
-      </button>
-    </div>
-  </section>
+    <button id="toCase">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+        <rect x="3" y="4" width="14" height="14" rx="2"/>
+        <path d="M7 8h6M7 12h6M7 16h4"/>
+      </svg>
+    </button>
 
-  <section id="case" class="page">Case Studies</section>
-  <section id="about" class="page">About</section>
-</div>
+    <button id="toAbout">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c2-4 14-4 16 0"/>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<!-- PAGES -->
+<section id="case" class="page">Case Studies</section>
+<section id="about" class="page">About</section>
 
 <!-- RIGHT TOGGLE -->
 <div class="right-toggle" id="rightToggle">
@@ -156,7 +162,8 @@ section{
 
 <script>
 /* ---------- TYPE INTRO ---------- */
-const intro=document.getElementById("introScreen");
+const intro=document.getElementById("intro");
+const welcome=document.getElementById("welcome");
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 
@@ -166,21 +173,23 @@ function type(){
    setTimeout(type,80);
  }else{
    if(l<lines.length-1){setTimeout(erase,600);}
-   else{setTimeout(finishIntro,800);}
+   else{setTimeout(showWelcome,800);}
  }
 }
 function erase(){
  if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
  else{l++;type();}
 }
-function finishIntro(){
+function showWelcome(){
  intro.style.opacity=0;
- setTimeout(()=>intro.remove(),800);
+ setTimeout(()=>{
+   intro.remove();
+   welcome.style.opacity=1;
+ },600);
 }
 type();
 
 /* ---------- WELCOME TOGGLE ---------- */
-const wrap=document.getElementById('wrap');
 const wFocus=document.getElementById('wFocus');
 const toCase=document.getElementById('toCase');
 const toAbout=document.getElementById('toAbout');
@@ -192,44 +201,42 @@ toCase.onclick=()=>{
   wFocus.style.transform="translateX(0)";
   toCase.classList.add('active');
   toAbout.classList.remove('active');
-  wrap.style.transform="translateY(-100vh)";
-  showRight("case");
+  openPage("case");
 }
 toAbout.onclick=()=>{
   wFocus.style.transform="translateX(100%)";
   toAbout.classList.add('active');
   toCase.classList.remove('active');
-  wrap.style.transform="translateY(-200vh)";
-  showRight("about");
+  openPage("about");
 }
 
-/* ---------- RIGHT TOGGLE ---------- */
+/* ---------- PAGE SYSTEM ---------- */
+const casePage=document.getElementById("case");
+const aboutPage=document.getElementById("about");
 const right=document.getElementById("rightToggle");
 const rFocus=document.getElementById("rFocus");
 const caseBtn=document.getElementById("caseBtn");
 const aboutBtn=document.getElementById("aboutBtn");
 
-function showRight(page){
+function openPage(page){
+  welcome.style.transform="translateY(-100%)";
   right.style.display="flex";
+
   if(page==="case"){
+    casePage.style.transform="translateX(0)";
     rFocus.style.transform="translateY(0)";
     caseBtn.classList.add("active");
     aboutBtn.classList.remove("active");
   }else{
+    aboutPage.style.transform="translateX(0)";
     rFocus.style.transform="translateY(100%)";
     aboutBtn.classList.add("active");
     caseBtn.classList.remove("active");
   }
 }
 
-caseBtn.onclick=()=>{
-  wrap.style.transform="translateY(-100vh)";
-  showRight("case");
-}
-aboutBtn.onclick=()=>{
-  wrap.style.transform="translateY(-200vh)";
-  showRight("about");
-}
+caseBtn.onclick=()=>openPage("case");
+aboutBtn.onclick=()=>openPage("about");
 </script>
 
 </body>
