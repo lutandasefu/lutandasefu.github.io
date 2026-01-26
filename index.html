@@ -104,6 +104,30 @@ button.active svg{stroke:white;}
   background:#000;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
+
+/* ---------- CAROUSEL ---------- */
+.carousel{
+  position:absolute;
+  bottom:10%;
+  width:80%;
+  height:200px;
+  opacity:0;
+  transform:scale(.8);
+  transition:.5s ease;
+  display:flex;
+  gap:20px;
+  justify-content:center;
+}
+.carousel img{
+  width:200px;
+  height:120px;
+  object-fit:cover;
+  border-radius:12px;
+}
+.showCarousel{
+  opacity:1;
+  transform:scale(1);
+}
 </style>
 </head>
 <body>
@@ -132,7 +156,16 @@ button.active svg{stroke:white;}
   </div>
 </section>
 
-<section id="case" class="page">Case Studies</section>
+<section id="case" class="page">
+  <div id="caseTitle">Case Studies</div>
+
+  <div class="carousel" id="carousel">
+    <img src="https://picsum.photos/300/200?1">
+    <img src="https://picsum.photos/300/200?2">
+    <img src="https://picsum.photos/300/200?3">
+  </div>
+</section>
+
 <section id="about" class="page">About</section>
 
 <div class="right-toggle" id="rightToggle">
@@ -182,6 +215,12 @@ function showWelcome(){
 }
 type();
 
+/* ---------- ACTIVE STATE FUNCTION ---------- */
+function setActive(btn1, btn2){
+  btn1.classList.add("active");
+  btn2.classList.remove("active");
+}
+
 /* ---------- PAGE SYSTEM ---------- */
 const casePage=document.getElementById("case");
 const aboutPage=document.getElementById("about");
@@ -192,34 +231,47 @@ function showCase(){
   casePage.style.transform="translateX(0)";
   aboutPage.style.transform="translateX(100%)";
   rFocus.style.transform="translateY(0)";
+  setActive(caseBtn, aboutBtn);
 }
 function showAbout(){
   aboutPage.style.transform="translateX(0)";
   casePage.style.transform="translateX(-100%)";
   rFocus.style.transform="translateY(100%)";
+  setActive(aboutBtn, caseBtn);
 }
 
 /* ---------- WELCOME TOGGLE ---------- */
 const wFocus=document.getElementById('wFocus');
 const toCase=document.getElementById('toCase');
 const toAbout=document.getElementById('toAbout');
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
 
 toCase.onclick=()=>{
   wFocus.style.transform="translateX(0)";
   welcome.style.transform="translateY(-100%)";
   right.style.display="flex";
+  setActive(toCase, toAbout);
   showCase();
 }
 toAbout.onclick=()=>{
   wFocus.style.transform="translateX(100%)";
   welcome.style.transform="translateY(-100%)";
   right.style.display="flex";
+  setActive(toAbout, toCase);
   showAbout();
 }
 
 /* ---------- RIGHT TOGGLE ---------- */
-document.getElementById("caseBtn").onclick=showCase;
-document.getElementById("aboutBtn").onclick=showAbout;
+caseBtn.onclick=showCase;
+aboutBtn.onclick=showAbout;
+
+/* ---------- CAROUSEL HOVER ---------- */
+const title=document.getElementById("caseTitle");
+const carousel=document.getElementById("carousel");
+
+title.onmouseenter=()=>carousel.classList.add("showCarousel");
+title.onmouseleave=()=>carousel.classList.remove("showCarousel");
 </script>
 
 </body>
