@@ -77,11 +77,10 @@ section{
 #welcome-toggle button svg{
   width:28px;
   height:28px;
-  stroke:black;
-  transition:stroke .3s;
+  transition:stroke .3s, transform .3s;
 }
 
-/* ---------- RIGHT TOGGLE (kept exactly as before) ---------- */
+/* ---------- RIGHT TOGGLE ---------- */
 .right-toggle{
   position:fixed;
   right:30px;
@@ -99,6 +98,8 @@ section{
 }
 .right-toggle .right-focus{
   position:absolute;
+  top:0;
+  left:0;
   width:100%;
   height:50%;
   background:#000;
@@ -117,8 +118,23 @@ section{
 .right-toggle button svg{
   width:28px;
   height:28px;
+  transition:stroke .3s, transform .3s;
+}
+
+/* ---------- ACTIVE ICON STATES ---------- */
+#welcome-toggle button svg,
+.right-toggle button svg{
   stroke:black;
-  transition:stroke .3s;
+}
+#welcome-toggle button.active svg,
+.right-toggle button.active svg{
+  stroke:white;
+}
+
+/* ---------- Optical centering for paper icon ---------- */
+#welcome-toggle button:first-child svg,
+.right-toggle button:first-child svg{
+  transform:translateX(1px);
 }
 
 /* ---------- PAGES ---------- */
@@ -162,7 +178,6 @@ section{
 <section id="welcome">
   <div>Welcome to my portfolio</div>
 
-  <!-- Welcome Toggle -->
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
     <button id="toCase">
@@ -191,7 +206,6 @@ section{
 
 <section id="about" class="page">About</section>
 
-<!-- Right toggle (kept exactly as your previous polished version) -->
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
 
@@ -214,7 +228,7 @@ section{
 /* ---------- TYPE INTRO ---------- */
 const intro=document.getElementById("intro");
 const welcome=document.getElementById("welcome");
-const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
+const lines=["Hi There, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 
 function type(){
@@ -249,11 +263,9 @@ const rFocus=document.getElementById("rFocus");
 const caseBtn=document.getElementById("caseBtn");
 const aboutBtn=document.getElementById("aboutBtn");
 
-function setActive(btn1, btn2){
-  btn1.classList.add("active");
-  btn1.querySelector("svg").style.stroke = "white";
-  btn2.classList.remove("active");
-  btn2.querySelector("svg").style.stroke = "black";
+function setActive(active, inactive){
+  active.classList.add("active");
+  inactive.classList.remove("active");
 }
 
 function showCase(){
@@ -279,9 +291,11 @@ const toCase = document.getElementById('toCase');
 const toAbout = document.getElementById('toAbout');
 
 function setWelcomeActive(activeBtn, inactiveBtn){
-  wFocus.style.transform = activeBtn === toCase ? "translateX(0)" : "translateX(100%)";
-  activeBtn.querySelector("svg").style.stroke = "white";
-  inactiveBtn.querySelector("svg").style.stroke = "black";
+  wFocus.style.transform =
+    activeBtn === toCase ? "translateX(0)" : "translateX(100%)";
+
+  activeBtn.classList.add("active");
+  inactiveBtn.classList.remove("active");
 }
 
 toCase.onclick = () => {
