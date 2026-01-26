@@ -5,213 +5,252 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  overflow:hidden;
-  background:#e6e6e6;
-  font-family:'Sulphur Point',sans-serif;
-  transition:background .6s ease;
-}
+body{font-family:'Sulphur Point',sans-serif;overflow:hidden;background:#e6e6e6;}
 
-/* ---------- INTRO ---------- */
-section{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  text-align:center;
-}
+/* ---------- INTRO TYPE ---------- */
 #intro{
-  font-size:clamp(2rem,6vw,4.2rem);
+  font-size:4.2rem;
   border-right:2px solid #111;
   animation:blink .7s step-end infinite;
 }
 @keyframes blink{50%{border-color:transparent;}}
 
+section{
+  position:fixed;inset:0;
+  display:flex;justify-content:center;align-items:center;
+}
+
 /* ---------- WELCOME ---------- */
-.welcome{
+#welcome{
   flex-direction:column;
-  gap:35px;
-  font-size:clamp(2.2rem,6vw,4.4rem);
+  gap:30px;
+  font-size:4.2rem;
   opacity:0;
   transition:opacity .8s ease;
 }
 
-/* ---------- DEV LOOP MENU ---------- */
-.menu{
-  width:90%;
-  max-width:520px;
-  height:70px;
-  background:#fff;
-  border-radius:45px;
+.menuToggle{
   position:relative;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  overflow:hidden;
+  width:420px;
+  height:65px;
+  border-radius:60px;
+  background:#fff;
+  border:2px solid #ddd;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 50px;
   font-family:'Urbanist',sans-serif;
-}
-.menu div{
-  display:grid;
-  place-items:center;
-  font-size:clamp(1rem,2.5vw,1.2rem);
-  color:#666;
+  font-weight:100;
   cursor:pointer;
-  z-index:2;
+  overflow:hidden;
 }
-.focus{
+.menuToggle span{z-index:2;color:#777;font-size:1.2rem;}
+.slider{
   position:absolute;
-  left:0;
-  top:0;
-  width:50%;
-  height:100%;
-  background:#f2f2f2;
-  border-radius:45px;
+  left:0;top:0;height:100%;width:50%;
+  background:#111;border-radius:60px;
   transition:transform .6s cubic-bezier(.77,0,.18,1);
 }
+.menuToggle.active .slider{transform:translateX(100%);}
+.menuToggle.active span:first-child{color:#777;}
+.menuToggle.active span:last-child{color:#fff;}
+.menuToggle span:first-child{color:#fff;}
 
-/* ---------- DARK ICON TOGGLE ---------- */
-.iconToggle{
-  position:fixed;
-  right:30px;
-  top:50%;
-  transform:translateY(-50%);
-  display:none;
-  flex-direction:column;
-  gap:25px;
-  z-index:2000;
-}
-.iconToggle button{
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  border:2px solid #fff;
+/* ---------- CURTAIN FADE ---------- */
+#curtain{
+  position:fixed;inset:0;
   background:#111;
-  color:#fff;
-  font-size:1.5rem;
-  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .7s ease;
+  z-index:900;
 }
+#curtain.show{opacity:1;}
 
 /* ---------- DARK PAGE ---------- */
 .page{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#111;
-  color:#fff;
-  font-size:clamp(2rem,6vw,4rem);
+  position:fixed;inset:0;
+  background:#111;color:#fff;
+  display:flex;justify-content:center;align-items:center;
   transform:translateX(100%);
   transition:transform .8s ease;
-  z-index:1000;
+  z-index:800;
 }
 
-/* ---------- MOBILE ---------- */
-@media(max-width:600px){
-  .iconToggle{right:15px;}
-  .iconToggle button{width:55px;height:55px;font-size:1.2rem;}
-  .menu{height:60px;}
+/* ---------- ICON TOGGLE ---------- */
+.iconToggle{
+  position:fixed;
+  right:35px;
+  top:50%;
+  transform:translateY(-50%);
+  width:70px;height:170px;
+  border-radius:50px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  align-items:center;
+  z-index:1001;
+}
+.iconToggle i{
+  font-size:1.5rem;
+  color:#111;
+  cursor:pointer;
+}
+
+/* ---------- CASE STUDIES ---------- */
+.caseContainer{
+  width:90%;max-width:1100px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.caseRow{
+  position:relative;
+  background:#1a1a1a;
+  border:1px solid #333;
+  padding:22px 30px;
+  font-size:1.6rem;
+  cursor:pointer;
+  overflow:hidden;
+}
+.caseExpand{
+  position:absolute;inset:0;
+  background:#fff;
+  opacity:0;
+  transform:scaleY(.85);
+  transform-origin:top;
+  transition:.6s cubic-bezier(.77,0,.18,1);
+}
+.caseRow:hover .caseExpand{
+  opacity:1;
+  transform:scaleY(1);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:768px){
+  #intro{font-size:3rem;}
+  #welcome{font-size:3rem;}
+  .menuToggle{width:320px;padding:0 30px;}
+}
+@media(max-width:480px){
+  #intro{font-size:2.2rem;}
+  #welcome{font-size:2.2rem;}
+  .menuToggle{width:260px;}
 }
 </style>
 </head>
 <body>
 
-<!-- Intro -->
-<section id="hero">
-  <div id="intro"></div>
-</section>
+<section id="hero"><div id="intro"></div></section>
 
-<!-- Welcome -->
-<section class="welcome" id="welcome">
+<section id="welcome">
   <div>Welcome to my portfolio</div>
-
-  <div class="menu" id="menu">
-    <div class="focus" id="focus"></div>
-    <div id="caseBtn">Case Studies</div>
-    <div id="aboutBtn">About</div>
+  <div class="menuToggle" id="menuToggle">
+    <div class="slider"></div>
+    <span>Case Studies</span>
+    <span>About</span>
   </div>
 </section>
 
-<!-- Icon Toggle for dark pages -->
-<div class="iconToggle" id="iconToggle">
-  <button id="caseIcon"><i class="fa-solid fa-layer-group"></i></button>
-  <button id="aboutIcon"><i class="fa-solid fa-user"></i></button>
-</div>
+<div id="curtain"></div>
 
 <script>
-/* ---------- TYPE EFFECT ---------- */
+/* ---------- TYPE INTRO ---------- */
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 const intro=document.getElementById("intro");
 
 function type(){
  if(c<lines[l].length){
-   intro.textContent+=lines[l][c++];
-   setTimeout(type,90);
+  intro.textContent+=lines[l][c++];
+  setTimeout(type,90);
  }else{
-   if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,500);}
+  if(l<lines.length-1){setTimeout(erase,600);}
+  else{setTimeout(showWelcome,500);}
  }
 }
 function erase(){
  if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
  else{l++;type();}
 }
-window.onload=type;
-
-/* ---------- SHOW WELCOME ---------- */
 function showWelcome(){
  document.getElementById("hero").remove();
  document.getElementById("welcome").style.opacity=1;
 }
 
 /* ---------- PAGE SYSTEM ---------- */
+const curtain=document.getElementById("curtain");
+const toggle=document.getElementById("menuToggle");
 let currentPage=null;
-const focus=document.getElementById("focus");
-const iconToggle=document.getElementById("iconToggle");
-const body=document.body;
 
-function createPage(title){
- if(currentPage) currentPage.remove();
- const p=document.createElement("section");
- p.className="page";
- p.textContent=title;
- document.body.appendChild(p);
- setTimeout(()=>p.style.transform="translateX(0)",50);
- currentPage=p;
-}
-
-function firstTransition(){
- document.getElementById("welcome").remove();
- body.style.background="#111";
- iconToggle.style.display="flex";
+function iconToggle(){
+ const nav=document.createElement("div");
+ nav.className="iconToggle";
+ nav.innerHTML=`
+   <i class="fa-solid fa-layer-group" id="cs"></i>
+   <i class="fa-solid fa-user" id="ab"></i>
+ `;
+ document.body.appendChild(nav);
+ document.getElementById("cs").onclick=()=>loadPage("Case Studies");
+ document.getElementById("ab").onclick=()=>loadPage("About");
 }
 
-/* ---------- MENU CLICK ---------- */
-document.getElementById("caseBtn").onclick=()=>{
- focus.style.transform="translateX(0)";
- firstTransition();
- createPage("Case Studies");
-}
-document.getElementById("aboutBtn").onclick=()=>{
- focus.style.transform="translateX(100%)";
- firstTransition();
- createPage("About");
+function createCaseStudies(){
+ return `
+   <div class="caseContainer">
+   ${[1,2,3,4,5,6].map(n=>`
+     <div class="caseRow">
+       Case Study ${n}
+       <div class="caseExpand"></div>
+     </div>
+   `).join('')}
+   </div>
+ `;
 }
 
-/* ---------- ICON TOGGLE ---------- */
-document.getElementById("caseIcon").onclick=()=>{
- createPage("Case Studies");
+function loadPage(title){
+ curtain.classList.add("show");
+
+ setTimeout(()=>{
+  document.body.style.background="#111";
+  document.getElementById("welcome").style.display="none";
+
+  if(currentPage) currentPage.remove();
+
+  const p=document.createElement("section");
+  p.className="page";
+
+  if(title==="Case Studies"){
+    p.innerHTML=createCaseStudies();
+  }else{
+    p.innerHTML="<div style='font-size:4rem'>About</div>";
+  }
+
+  document.body.appendChild(p);
+  setTimeout(()=>p.style.transform="translateX(0)",50);
+  currentPage=p;
+
+  iconToggle();
+
+  setTimeout(()=>curtain.classList.remove("show"),600);
+ },700);
 }
-document.getElementById("aboutIcon").onclick=()=>{
- createPage("About");
-}
+
+toggle.onclick=()=>{
+ toggle.classList.toggle("active");
+ if(toggle.classList.contains("active")){
+   loadPage("About");
+ }else{
+   loadPage("Case Studies");
+ }
+};
+
+window.onload=type;
 </script>
-
 </body>
 </html>
