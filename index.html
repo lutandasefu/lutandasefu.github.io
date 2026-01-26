@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
 
-<!-- Font Awesome Free CSS (guaranteed to work on GH Pages) -->
+<!-- Font Awesome Free Solid Icons CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-H7TxldT+7j6qxjqKN4J0x3eFzGwO5WzEvM7T/C9c0gDZn5nYtDb/x1rZwz2D+fX08r0WlwnYV0B/7gq0g2bbpA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
@@ -13,204 +13,43 @@
 <style>
 /* ---------- GENERAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  overflow:hidden;
-  background:#e6e6e6;
-  font-family:'Sulphur Point',sans-serif;
-  transition:background .6s ease;
-}
-
-/* ---------- INTRO ---------- */
-section{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  text-align:center;
-}
-#intro{
-  font-size:clamp(2rem,6vw,4.2rem);
-  border-right:2px solid #111;
-  animation:blink .7s step-end infinite;
-}
+body{overflow:hidden;background:#e6e6e6;font-family:'Sulphur Point',sans-serif;transition:background .6s ease;}
+section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;padding:20px;text-align:center;}
+#intro{font-size:clamp(2rem,6vw,4.2rem);border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
-
-/* ---------- WELCOME ---------- */
-.welcome{
-  flex-direction:column;
-  gap:35px;
-  font-size:clamp(2.2rem,6vw,4.4rem);
-  opacity:0;
-  transition:opacity .8s ease;
-}
-
-/* ---------- MENU ---------- */
-.menu{
-  width:90%;
-  max-width:520px;
-  height:70px;
-  background:#fff;
-  border-radius:45px;
-  position:relative;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  overflow:hidden;
-  font-family:'Urbanist',sans-serif;
-}
-.menu div{
-  display:grid;
-  place-items:center;
-  font-size:clamp(1rem,2.5vw,1.2rem);
-  color:#666;
-  cursor:pointer;
-  z-index:2;
-}
-.focus{
-  position:absolute;
-  left:0;
-  top:0;
-  width:50%;
-  height:100%;
-  background:#f2f2f2;
-  border-radius:45px;
-  transition:transform .6s cubic-bezier(.77,0,.18,1);
-}
+.welcome{flex-direction:column;gap:35px;font-size:clamp(2.2rem,6vw,4.4rem);opacity:0;transition:opacity .8s ease;}
+.menu{width:90%;max-width:520px;height:70px;background:#fff;border-radius:45px;position:relative;display:grid;grid-template-columns:repeat(2,1fr);overflow:hidden;font-family:'Urbanist',sans-serif;}
+.menu div{display:grid;place-items:center;font-size:clamp(1rem,2.5vw,1.2rem);color:#666;cursor:pointer;z-index:2;}
+.focus{position:absolute;left:0;top:0;width:50%;height:100%;background:#f2f2f2;border-radius:45px;transition:transform .6s cubic-bezier(.77,0,.18,1);}
 
 /* ---------- SWITCH-STYLE TOGGLE ---------- */
-.iconToggle{
-  position:fixed;
-  right:30px;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:2000;
-  display:none;
-}
-.switch{
-  width:70px;
-  height:150px;
-  background:#fff;
-  border-radius:45px;
-  display:grid;
-  grid-template-rows:1fr 1fr;
-  position:relative;
-  overflow:hidden;
-  border:2px solid #fff;
-}
-.switch-focus{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:50%;
-  background:#ccc;
-  border-radius:45px;
-  transition:transform 0.3s ease;
-  z-index:0;
-}
-.switch-btn{
-  border:none;
-  background:transparent;
-  color:#000; /* black icons */
-  font-size:1.5rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:1;
-  cursor:pointer;
-}
+.iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:2000;display:none;}
+.switch{width:70px;height:150px;background:#fff;border-radius:45px;display:grid;grid-template-rows:1fr 1fr;position:relative;overflow:hidden;border:2px solid #fff;}
+.switch-focus{position:absolute;top:0;left:0;width:100%;height:50%;background:#ccc;border-radius:45px;transition:transform 0.3s ease;z-index:0;}
+.switch-btn{border:none;background:transparent;color:#000;font-size:1.5rem;display:flex;align-items:center;justify-content:center;z-index:1;cursor:pointer;}
 
 /* ---------- PAGE ---------- */
-.page{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#111;
-  color:#fff;
-  font-size:clamp(2rem,6vw,4rem);
-  transform:translateX(100%);
-  transition:transform .8s ease;
-  z-index:1000;
-  flex-direction:column;
-}
-
-/* ---------- CASE STUDIES TEXT ---------- */
-.page-text{
-  cursor:pointer;
-  color:#fff;
-  font-size:2rem;
-  margin-bottom:20px;
-  position:relative;
-}
+.page{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#111;color:#fff;font-size:clamp(2rem,6vw,4rem);transform:translateX(100%);transition:transform .8s ease;z-index:1000;flex-direction:column;}
+.page-text{cursor:pointer;color:#fff;font-size:2rem;margin-bottom:20px;position:relative;}
 
 /* ---------- CAROUSEL ---------- */
-.carousel{
-  display:none;
-  margin-top:20px;
-  width:90%;
-  max-width:600px;
-  overflow:hidden;
-  border-radius:15px;
-  position:relative;
-}
-.carousel-track{
-  display:flex;
-  transition:transform 0.5s ease-in-out;
-}
-.carousel-item{
-  min-width:100%;
-  flex-shrink:0;
-  background:#222;
-  color:#fff;
-  font-size:1.5rem;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:200px;
-  border-radius:10px;
-}
-.carousel-nav{
-  position:absolute;
-  top:50%;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  transform:translateY(-50%);
-  padding:0 15px;
-}
-.carousel-nav button{
-  background:rgba(0,0,0,0.2);
-  border:none;
-  color:#fff;
-  font-size:2rem;
-  border-radius:50%;
-  cursor:pointer;
-}
+.carousel{display:none;margin-top:20px;width:90%;max-width:600px;overflow:hidden;border-radius:15px;position:relative;}
+.carousel-track{display:flex;transition:transform 0.5s ease-in-out;}
+.carousel-item{min-width:100%;flex-shrink:0;background:#222;color:#fff;font-size:1.5rem;display:flex;justify-content:center;align-items:center;height:200px;border-radius:10px;}
+.carousel-nav{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);padding:0 15px;}
+.carousel-nav button{background:rgba(0,0,0,0.2);border:none;color:#fff;font-size:2rem;border-radius:50%;cursor:pointer;}
 
-/* ---------- MOBILE ---------- */
-@media(max-width:600px){
-  .iconToggle{right:15px;}
-  .switch{width:55px;height:120px;}
-  .switch-btn{font-size:1.2rem;}
-  .carousel-item{height:150px;font-size:1.2rem;}
-  .menu{height:60px;}
-}
+@media(max-width:600px){.iconToggle{right:15px;}.switch{width:55px;height:120px;}.switch-btn{font-size:1.2rem;}.carousel-item{height:150px;font-size:1.2rem;}.menu{height:60px;}}
 </style>
 </head>
 <body>
 
 <!-- Phase 1: Intro -->
-<section id="hero">
-  <div id="intro"></div>
-</section>
+<section id="hero"><div id="intro"></div></section>
 
 <!-- Phase 2: Welcome -->
 <section class="welcome" id="welcome">
   <div>Welcome to my portfolio</div>
-
   <div class="menu" id="menu">
     <div class="focus" id="focus"></div>
     <div id="caseBtn">Case Studies</div>
@@ -222,44 +61,24 @@ section{
 <div class="iconToggle" id="iconToggle">
   <div class="switch">
     <div class="switch-focus" id="switchFocus"></div>
-    <!-- Free Font Awesome icons (will show correctly) -->
     <button class="switch-btn" id="caseIcon" title="Case Studies">
-      <i class="fa-regular fa-file"></i>
+      <i class="fa-solid fa-file-lines"></i>
     </button>
     <button class="switch-btn" id="aboutIcon" title="About">
-      <i class="fa-regular fa-user"></i>
+      <i class="fa-solid fa-user"></i>
     </button>
   </div>
 </div>
 
 <script>
-/* ---------- TYPE EFFECT ---------- */
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 const intro=document.getElementById("intro");
-
-function type(){
- if(c<lines[l].length){
-   intro.textContent+=lines[l][c++];
-   setTimeout(type,90);
- }else{
-   if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,500);}
- }
-}
-function erase(){
- if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
- else{l++;type();}
-}
-
-function showWelcome(){
- document.getElementById("hero").remove();
- const welcome=document.getElementById("welcome");
- welcome.style.opacity=1;
- document.getElementById("iconToggle").style.display="none";
-}
+function type(){if(c<lines[l].length){intro.textContent+=lines[l][c++];setTimeout(type,90);}else{if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,500);}}}
+function erase(){if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}else{l++;type();}}
+function showWelcome(){document.getElementById("hero").remove();const welcome=document.getElementById("welcome");welcome.style.opacity=1;document.getElementById("iconToggle").style.display="none";}
 window.onload=type;
 
-/* ---------- PAGE SYSTEM ---------- */
 let currentPage=null;
 const focus=document.getElementById("focus");
 const iconToggle=document.getElementById("iconToggle");
@@ -267,58 +86,21 @@ const switchFocus=document.getElementById("switchFocus");
 
 function createPage(title){
  if(currentPage) currentPage.remove();
- const p=document.createElement("section");
- p.className="page";
- document.body.appendChild(p);
- setTimeout(()=>p.style.transform="translateX(0)",50);
-
- if(title==="Case Studies" || title==="About"){
-   iconToggle.style.display="block";
- }else{
-   iconToggle.style.display="none";
- }
-
- const pageText=document.createElement("div");
- pageText.className="page-text";
- pageText.textContent=title;
- p.appendChild(pageText);
-
- if(title==="Case Studies"){
-   addCarousel(pageText);
-   switchFocus.style.transform="translateY(0)";
- }
- if(title==="About"){
-   switchFocus.style.transform="translateY(100%)";
- }
+ const p=document.createElement("section");p.className="page";document.body.appendChild(p);setTimeout(()=>p.style.transform="translateX(0)",50);
+ if(title==="Case Studies"||title==="About"){iconToggle.style.display="block";}else{iconToggle.style.display="none";}
+ const pageText=document.createElement("div");pageText.className="page-text";pageText.textContent=title;p.appendChild(pageText);
+ if(title==="Case Studies"){addCarousel(pageText);switchFocus.style.transform="translateY(0)";}
+ if(title==="About"){switchFocus.style.transform="translateY(100%)";}
 }
 
-/* ---------- FIRST TRANSITION ---------- */
-function firstTransition(){
- document.getElementById("welcome").remove();
- document.body.style.background="#111";
-}
-
-/* ---------- MENU CLICK ---------- */
-document.getElementById("caseBtn").onclick=()=>{ 
- focus.style.transform="translateX(0)";
- firstTransition();
- createPage("Case Studies");
-}
-document.getElementById("aboutBtn").onclick=()=>{ 
- focus.style.transform="translateX(100%)";
- firstTransition();
- createPage("About");
-}
-
-/* ---------- SWITCH NAV ---------- */
+function firstTransition(){document.getElementById("welcome").remove();document.body.style.background="#111";}
+document.getElementById("caseBtn").onclick=()=>{ focus.style.transform="translateX(0)"; firstTransition(); createPage("Case Studies"); }
+document.getElementById("aboutBtn").onclick=()=>{ focus.style.transform="translateX(100%)"; firstTransition(); createPage("About"); }
 document.getElementById("caseIcon").onclick=()=>{ createPage("Case Studies"); }
 document.getElementById("aboutIcon").onclick=()=>{ createPage("About"); }
 
-/* ---------- CAROUSEL ---------- */
 function addCarousel(textElement){
-  const carousel=document.createElement("div");
-  carousel.className="carousel";
-  carousel.innerHTML=`
+  const carousel=document.createElement("div");carousel.className="carousel";carousel.innerHTML=`
     <div class="carousel-track">
       <div class="carousel-item">Project 1</div>
       <div class="carousel-item">Project 2</div>
@@ -327,21 +109,14 @@ function addCarousel(textElement){
     <div class="carousel-nav">
       <button class="prev">&#10094;</button>
       <button class="next">&#10095;</button>
-    </div>
-  `;
-  textElement.appendChild(carousel);
-
+    </div>`;textElement.appendChild(carousel);
   const track=carousel.querySelector(".carousel-track");
-  const items=carousel.querySelectorAll(".carousel-item");
-  let index=0;
-
-  textElement.addEventListener("mouseenter",()=>{ carousel.style.display="block"; });
-  textElement.addEventListener("mouseleave",()=>{ carousel.style.display="none"; });
-
-  const prev=carousel.querySelector(".prev");
-  const next=carousel.querySelector(".next");
-  prev.onclick=()=>{ index=(index-1+items.length)%items.length; track.style.transform=`translateX(-${index*100}%)`; }
-  next.onclick=()=>{ index=(index+1)%items.length; track.style.transform=`translateX(-${index*100}%)`; }
+  const items=carousel.querySelectorAll(".carousel-item");let index=0;
+  textElement.addEventListener("mouseenter",()=>{carousel.style.display="block";});
+  textElement.addEventListener("mouseleave",()=>{carousel.style.display="none";});
+  const prev=carousel.querySelector(".prev");const next=carousel.querySelector(".next");
+  prev.onclick=()=>{index=(index-1+items.length)%items.length;track.style.transform=`translateX(-${index*100}%)`;}
+  next.onclick=()=>{index=(index+1)%items.length;track.style.transform=`translateX(-${index*100}%)`;}
 }
 </script>
 
