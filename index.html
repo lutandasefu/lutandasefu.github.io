@@ -127,7 +127,7 @@ const switchFocus=document.getElementById("switchFocus");
 const caseIcon=document.getElementById("caseIcon");
 const aboutIcon=document.getElementById("aboutIcon");
 
-function slideWelcome(targetPage,btn){
+function slideWelcome(targetPage){
   const welcome=document.getElementById("welcome");
   welcome.style.transform="translateY(-100%)";
   setTimeout(()=>{
@@ -138,8 +138,13 @@ function slideWelcome(targetPage,btn){
 }
 
 function setActiveWelcome(btn){
-  if(btn===wCase){welcomeFocus.style.transform="translateX(0)";wCase.classList.add("active");wAbout.classList.remove("active");}
-  else{welcomeFocus.style.transform="translateX(100%)";wAbout.classList.add("active");wCase.classList.remove("active");}
+  if(btn===wCase){
+    welcomeFocus.style.transform="translateX(0)";
+    wCase.classList.add("active"); wAbout.classList.remove("active");
+  }else{
+    welcomeFocus.style.transform="translateX(100%)";
+    wAbout.classList.add("active"); wCase.classList.remove("active");
+  }
 }
 
 wCase.onclick=()=>{setActiveWelcome(wCase);slideWelcome(casePage);}
