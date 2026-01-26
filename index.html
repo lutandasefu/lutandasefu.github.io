@@ -15,7 +15,7 @@ body{overflow:hidden;font-family:'Sulphur Point',sans-serif;background:#e6e6e6;}
 @keyframes blink{50%{border-color:transparent;}}
 
 /* ---------- Welcome ---------- */
-.welcome{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:50px;transition:transform 0.8s ease;opacity:0;}
+.welcome{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:50px;opacity:0;transition:transform 0.8s ease;}
 .welcome-text{font-size:clamp(2.2rem,6vw,4.4rem);text-align:center;}
 
 /* ---------- Welcome toggle (centered vertical icons) ---------- */
@@ -32,9 +32,11 @@ body{overflow:hidden;font-family:'Sulphur Point',sans-serif;background:#e6e6e6;}
 .switch-btn.active svg{fill:white;}
 
 /* ---------- Pages ---------- */
-.page{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#111;color:#fff;font-size:clamp(2rem,6vw,4rem);transform:translateX(100%);transition:transform 0.8s ease;z-index:1000;}
-.page.show-horizontal{transform:translateX(0);}
-.page.show-vertical{transform:translateY(0);}
+.page{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#111;color:#fff;font-size:clamp(2rem,6vw,4rem);z-index:1000;transition:transform 0.8s ease;}
+.page-horizontal{transform:translateX(100%);}
+.page-horizontal.show{transform:translateX(0);}
+.page-vertical{transform:translateY(100%);}
+.page-vertical.show{transform:translateY(0);}
 .page-text{cursor:pointer;color:#fff;font-size:2rem;margin-bottom:20px;position:relative;}
 
 /* ---------- Carousel ---------- */
@@ -90,7 +92,7 @@ function showWelcome(){
   welcome.style.opacity=1;
 }
 
-// ---------- Welcome page toggle ----------
+// ---------- Welcome toggle ----------
 const wCase=document.getElementById("welcomeCaseIcon");
 const wAbout=document.getElementById("welcomeAboutIcon");
 wCase.onclick=()=>transitionFromWelcome("Case Studies");
@@ -98,7 +100,6 @@ wAbout.onclick=()=>transitionFromWelcome("About");
 
 function transitionFromWelcome(target){
   const welcome=document.getElementById("welcome");
-  welcome.style.transition="transform 0.8s ease";
   welcome.style.transform="translateY(-100%)";
   setTimeout(()=>{
     welcome.remove();
@@ -122,10 +123,10 @@ function setActiveToggle(active){
 function createPage(title,transitionType="horizontal"){
   if(currentPage) currentPage.remove();
   const p=document.createElement("section");
-  p.className="page";
+  p.className="page "+(transitionType==="horizontal"?"page-horizontal":"page-vertical");
   document.body.appendChild(p);
-  if(transitionType==="horizontal"){setTimeout(()=>p.classList.add("show-horizontal"),50);}
-  else{p.style.transform="translateY(100%)";setTimeout(()=>p.classList.add("show-vertical"),50);}
+  setTimeout(()=>p.classList.add("show"),50);
+
   const pageText=document.createElement("div");
   pageText.className="page-text";
   pageText.textContent=title;
