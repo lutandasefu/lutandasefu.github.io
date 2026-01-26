@@ -5,124 +5,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100&display=swap" rel="stylesheet">
-
-<!-- Font Awesome Free CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
-/* ---------- GLOBAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   overflow:hidden;
   background:#e6e6e6;
   font-family:'Sulphur Point',sans-serif;
-  width:100%;
-  height:100vh;
-  transition: background 0.8s ease;
 }
+
+/* ---------- INTRO TYPING ---------- */
 section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;}
 #intro{font-size:4.2rem;border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
 
 /* ---------- WELCOME ---------- */
-.welcome{flex-direction:column;gap:50px;font-size:3.8rem;opacity:0;transition:opacity .8s ease;}
-.toggle{
-  width:350px;height:60px;border-radius:60px;border:2px solid #111;background:#fff;
-  display:flex;align-items:center;justify-content:space-between;padding:0 40px;
-  font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;transition:all .7s cubic-bezier(.77,0,.18,1);z-index:2;position:relative;}
-.toggle span{z-index:2;font-size:1.1rem;color:#111;}
-.slider{position:absolute;height:100%;width:50%;background:#111;border-radius:60px;left:0;z-index:1;transition:transform .6s cubic-bezier(.77,0,.18,1);opacity:0;}
-.toggle.active .slider{opacity:1; transform:translateX(100%);}
-.toggle span:first-child{color:#fff;}
-.toggle.active span:first-child{color:#111;}
-.toggle span:last-child{color:#111;}
-.toggle.active span:last-child{color:#fff;}
+.welcome{
+  flex-direction:column;
+  gap:60px;
+  font-size:3.8rem;
+  opacity:0;
+  transition:opacity .8s ease;
+}
 
-/* ---------- DARK PAGE CIRCULAR ICON TOGGLE ---------- */
+/* ---------- DEV LOOP MENU ---------- */
+#app{
+  width:520px;
+  height:90px;
+  display:grid;
+  place-items:center;
+}
+
+#app ul{
+  position:relative;
+  width:100%;
+  height:70px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  border-radius:45px;
+  background:#fff;
+  transform:perspective(1000px);
+  overflow:hidden;
+}
+
+#app li{
+  list-style:none;
+  display:grid;
+  place-items:center;
+  font-family:'Urbanist',sans-serif;
+  font-weight:300;
+  font-size:1.2rem;
+  color:#666;
+  cursor:pointer;
+  z-index:10;
+}
+
+.focus-el{
+  position:absolute;
+  left:0;
+  top:0;
+  width:50%;
+  height:100%;
+  border-radius:45px;
+  background:#f2f2f2;
+}
+
+/* ---------- DARK ICON TOGGLE ---------- */
 .iconMode{
   position:fixed;
   right:40px;
   top:50%;
   transform:translateY(-50%);
-  display:flex;
+  display:none;
   flex-direction:column;
   gap:30px;
   z-index:2000;
-  display:none; /* hidden until welcome page shows */
 }
 .iconMode button{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  border:2px solid #fff;
-  background:#111;
-  color:#fff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:1.8rem;
-  cursor:pointer;
-  transition:all .3s ease;
-}
-.iconMode button:hover{
-  transform: scale(1.1);
-  background:#fff;
-  color:#111;
+  width:70px;height:70px;border-radius:50%;
+  border:2px solid #fff;background:#111;color:#fff;
+  font-size:1.6rem;cursor:pointer;
 }
 
-/* ---------- PAGE ---------- */
+/* ---------- DARK PAGE ---------- */
 .page{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  position:fixed;inset:0;
+  display:flex;justify-content:center;align-items:center;
+  background:#111;color:#fff;
   font-size:4rem;
-  background:#111;
-  color:#fff;
-  z-index:1000;
   transform:translateX(100%);
   transition:transform .8s ease;
 }
-
-/* ---------- CURTAIN ---------- */
-.curtain{
-  display: none;
-  position:fixed;
-  inset:0;
-  background:#111;
-  z-index:900;
-  opacity:0;
-  transition:opacity .6s ease;
-}
-
-/* ---------- RESPONSIVE ---------- */
-@media(max-width:768px){#intro{font-size:3rem;}.welcome{font-size:2.8rem;}.toggle{width:300px;}}
-@media(max-width:480px){#intro{font-size:2.2rem;}.welcome{font-size:2rem;}.toggle{width:250px;padding:0 25px;}}
 </style>
 </head>
 <body>
 
-<!-- Typing page -->
-<section class="hero" id="hero">
+<!-- Intro -->
+<section id="hero">
   <div id="intro"></div>
 </section>
 
-<!-- Welcome page -->
+<!-- Welcome -->
 <section class="welcome" id="welcome">
   <div>Welcome to my portfolio</div>
-  <div class="toggle" id="toggle">
-    <div class="slider"></div>
-    <span id="leftLabel">Case Studies</span>
-    <span id="rightLabel">About</span>
+
+  <div id="app">
+    <ul>
+      <li data-page="Case Studies">Case Studies</li>
+      <li data-page="About">About</li>
+      <span class="focus-el"></span>
+    </ul>
   </div>
 </section>
 
-<div class="curtain" id="curtain"></div>
-
-<!-- Dark page circular icon toggle -->
+<!-- Dark toggle -->
 <div class="iconMode" id="iconMode">
   <button id="darkCase"><i class="far fa-file-lines"></i></button>
   <button id="darkAbout"><i class="fas fa-user"></i></button>
@@ -147,31 +146,51 @@ function erase(){
  else{l++;type();}
 }
 
-/* ---------- SHOW WELCOME ---------- */
 function showWelcome(){
  document.getElementById("hero").remove();
- const welcome=document.getElementById("welcome");
- welcome.style.opacity=1;
+ document.getElementById("welcome").style.opacity=1;
 }
 
-/* ---------- PAGE SYSTEM ---------- */
+/* ---------- DEV LOOP MENU ANIMATION ---------- */
+const liEls=[...document.querySelectorAll("#app li")];
+const slideEl=document.querySelector(".focus-el");
+const liContainer=document.querySelector("#app ul");
+let activeIndex=0;
+
+liEls.forEach((li,index)=>{
+ li.addEventListener("click",()=>{
+   if(index===activeIndex) return;
+
+   const x=index===0?-1:1;
+   const liRect=li.getBoundingClientRect();
+   const parentRect=liContainer.getBoundingClientRect();
+
+   gsap.to(liContainer,{duration:0.4,rotateY:`${x*25}deg`});
+   gsap.to(slideEl,{
+     duration:0.7,
+     left:`${liRect.left-parentRect.left}px`,
+     ease:"bounce.out"
+   });
+   gsap.to(liContainer,{duration:0.4,rotateY:"0deg",delay:0.3});
+
+   activeIndex=index;
+
+   // trigger page
+   setTimeout(()=>goToDarkPage(li.dataset.page),600);
+ });
+});
+
+/* ---------- DARK PAGE SYSTEM ---------- */
 let currentPage=null;
-const toggle=document.getElementById("toggle");
-const curtain=document.getElementById("curtain");
-const leftLabel=document.getElementById("leftLabel");
-const rightLabel=document.getElementById("rightLabel");
 const iconMode=document.getElementById("iconMode");
-const darkCase=document.getElementById("darkCase");
-const darkAbout=document.getElementById("darkAbout");
-const welcomeSection=document.getElementById("welcome");
 
-/* ---------- MORPH TO DARK ICON MODE ---------- */
-function toIconMode(){
-  toggle.style.display='none';
-  iconMode.style.display='flex';
+function goToDarkPage(title){
+ document.body.style.background="#111";
+ document.getElementById("welcome").remove();
+ iconMode.style.display="flex";
+ createPage(title);
 }
 
-/* ---------- CREATE PAGE ---------- */
 function createPage(title){
  if(currentPage) currentPage.remove();
  const p=document.createElement("section");
@@ -182,38 +201,9 @@ function createPage(title){
  currentPage=p;
 }
 
-/* ---------- TOGGLE CLICK ---------- */
-toggle.addEventListener("click",()=>{
-  // switch body to dark immediately
-  document.body.style.background="#111";
-
-  // fade curtain
-  curtain.style.display = 'block';
-  curtain.style.opacity = '0';
-  setTimeout(() => { curtain.style.opacity = '1'; }, 10);
-
-  setTimeout(()=>{
-    if(toggle.classList.contains("active")){
-      createPage("About");
-    }else{
-      createPage("Case Studies");
-    }
-    // remove welcome section entirely after first dark page
-    welcomeSection.remove();
-    // show icon mode toggle for dark pages
-    toIconMode();
-    curtain.style.opacity='0';
-    setTimeout(()=>{curtain.style.display='none';},600);
-  },600);
-});
-
-/* ---------- DARK PAGE BUTTON CLICK ---------- */
-darkCase.addEventListener("click",()=>{
-  createPage("Case Studies");
-});
-darkAbout.addEventListener("click",()=>{
-  createPage("About");
-});
+/* ---------- DARK ICON BUTTONS ---------- */
+document.getElementById("darkCase").onclick=()=>createPage("Case Studies");
+document.getElementById("darkAbout").onclick=()=>createPage("About");
 
 window.onload=type;
 </script>
