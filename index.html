@@ -217,20 +217,22 @@ function showWelcome(){
 }
 type();
 
-/* ---------- ACTIVE STATE FUNCTION ---------- */
-function setActive(btn1, btn2){
-  btn1.classList.add("active");
-  btn2.classList.remove("active");
-  // force icon color
-  btn1.querySelector("svg").style.stroke = "white";
-  btn2.querySelector("svg").style.stroke = "black";
-}
-
 /* ---------- PAGE SYSTEM ---------- */
 const casePage=document.getElementById("case");
 const aboutPage=document.getElementById("about");
 const right=document.getElementById("rightToggle");
 const rFocus=document.getElementById("rFocus");
+
+/* ---------- RIGHT TOGGLE ---------- */
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
+
+function setActive(btn1, btn2){
+  btn1.classList.add("active");
+  btn1.querySelector("svg").style.stroke = "white";
+  btn2.classList.remove("active");
+  btn2.querySelector("svg").style.stroke = "black";
+}
 
 function showCase(){
   casePage.style.transform="translateX(0)";
@@ -238,6 +240,7 @@ function showCase(){
   rFocus.style.transform="translateY(0)";
   setActive(caseBtn, aboutBtn);
 }
+
 function showAbout(){
   aboutPage.style.transform="translateX(0)";
   casePage.style.transform="translateX(-100%)";
@@ -245,31 +248,36 @@ function showAbout(){
   setActive(aboutBtn, caseBtn);
 }
 
-/* ---------- WELCOME TOGGLE ---------- */
-const wFocus=document.getElementById('wFocus');
-const toCase=document.getElementById('toCase');
-const toAbout=document.getElementById('toAbout');
-const caseBtn=document.getElementById("caseBtn");
-const aboutBtn=document.getElementById("aboutBtn");
+caseBtn.onclick = showCase;
+aboutBtn.onclick = showAbout;
 
-toCase.onclick=()=>{
-  wFocus.style.transform="translateX(0)";
-  welcome.style.transform="translateY(-100%)";
-  right.style.display="flex";
-  setActive(toCase, toAbout);
+/* ---------- WELCOME TOGGLE ---------- */
+const wFocus = document.getElementById('wFocus');
+const toCase = document.getElementById('toCase');
+const toAbout = document.getElementById('toAbout');
+
+function setWelcomeActive(activeBtn, inactiveBtn){
+  wFocus.style.transform = activeBtn === toCase ? "translateX(0)" : "translateX(100%)";
+  // force icon color
+  activeBtn.classList.add("active");
+  activeBtn.querySelector("svg").style.stroke = "white";
+  inactiveBtn.classList.remove("active");
+  inactiveBtn.querySelector("svg").style.stroke = "black";
+}
+
+toCase.onclick = () => {
+  setWelcomeActive(toCase, toAbout);
+  welcome.style.transform = "translateY(-100%)";
+  right.style.display = "flex";
   showCase();
 }
-toAbout.onclick=()=>{
-  wFocus.style.transform="translateX(100%)";
-  welcome.style.transform="translateY(-100%)";
-  right.style.display="flex";
-  setActive(toAbout, toCase);
+
+toAbout.onclick = () => {
+  setWelcomeActive(toAbout, toCase);
+  welcome.style.transform = "translateY(-100%)";
+  right.style.display = "flex";
   showAbout();
 }
-
-/* ---------- RIGHT TOGGLE ---------- */
-caseBtn.onclick=showCase;
-aboutBtn.onclick=showAbout;
 
 /* ---------- CAROUSEL HOVER ---------- */
 const title=document.getElementById("caseTitle");
