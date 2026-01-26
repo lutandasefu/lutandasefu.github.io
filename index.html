@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100;300&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
 
 <style>
+/* ---------- GLOBAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Sulphur Point',sans-serif;background:#e6e6e6;color:#111;overflow:hidden;width:100%;height:100vh;}
-section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;transition:opacity .6s ease;}
+body{font-family:'Sulphur Point',sans-serif;background:#e6e6e6;color:#111;overflow:hidden;}
+
+/* ---------- INTRO TYPING ---------- */
+section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;}
 #intro{font-size:4rem;border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
 
-/* ---------- HERO ---------- */
-.hero{flex-direction:column;}
-
 /* ---------- WELCOME ---------- */
-.welcome{flex-direction:column;gap:20px;font-size:3rem;opacity:0;transition:opacity .8s ease;z-index:10;}
+#welcome{flex-direction:column;gap:20px;font-size:3.2rem;opacity:0;transition:opacity .8s ease;}
 .toggle{width:350px;height:60px;border-radius:60px;border:2px solid #111;background:#fff;
   display:flex;align-items:center;justify-content:space-between;padding:0 40px;
   font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;transition:all .7s cubic-bezier(.77,0,.18,1);}
@@ -31,44 +32,42 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 .toggle.active span:last-child{color:#fff;}
 
 /* ---------- DARK PAGES ---------- */
-.darkPage{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#111;color:#fff;transform:translateX(100%);transition:transform .8s ease;z-index:1000;}
+.darkPage{position:fixed;inset:0;display:flex;justify-content:center;align-items:flex-start;background:#111;color:#fff;transform:translateX(100%);transition:transform .8s ease;z-index:1000;padding-top:80px;}
 
-/* CASE STUDIES CARDS */
+/* ---------- CASE STUDIES CARDS ---------- */
 .cases{width:90%;height:60vh;display:flex;gap:12px;}
 .case{flex:1;border-radius:20px;background:#1b1b1b;display:flex;justify-content:center;align-items:center;font-size:1.5rem;font-family:'Urbanist',sans-serif;font-weight:300;cursor:pointer;transition:flex 0.6s cubic-bezier(.77,0,.18,1), background 0.5s;color:#fff;position:relative;overflow:hidden;}
-.case span{z-index:2;pointer-events:none;}
+.case span{z-index:2;}
 .case:hover{flex:5;background:#fff;color:#111;}
 .caseContent{position:absolute;inset:0;opacity:0;display:flex;justify-content:center;align-items:center;font-size:1.2rem;transition:opacity .4s ease .3s;}
 .case:hover .caseContent{opacity:1;}
 .cases:hover .case:not(:hover){flex:0.8;}
 
-/* ICON TOGGLE ON DARK PAGES */
-.iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);width:70px;height:140px;background:#111;border-radius:50px;border:2px solid #fff;display:flex;flex-direction:column;justify-content:space-around;align-items:center;z-index:2000;}
+/* ---------- ICON TOGGLE ON DARK PAGES ---------- */
+.iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);width:70px;height:140px;background:#111;border-radius:50px;border:2px solid #fff;display:flex;flex-direction:column;justify-content:space-around;align-items:center;z-index:1100;}
 .iconToggle i{font-size:1.6rem;color:#fff;cursor:pointer;}
 
-/* RESPONSIVE */
-@media(max-width:900px){.cases{flex-direction:column;height:75vh;}.case:hover{flex:3;}.cases:hover .case:not(:hover){flex:1;}}
-@media(max-width:480px){#intro{font-size:2.5rem;}.welcome{font-size:2rem;}.toggle{width:250px;padding:0 25px;}}
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){.cases{flex-direction:column;height:75vh;} .case:hover{flex:3;} .cases:hover .case:not(:hover){flex:1;}}
+@media(max-width:480px){#intro{font-size:2.5rem;} #welcome{font-size:2rem;} .toggle{width:250px;padding:0 25px;}}
 </style>
 </head>
 <body>
 
-<!-- HERO TYPING PAGE -->
-<section class="hero" id="hero">
-  <div id="intro"></div>
-</section>
+<!-- HERO TYPING -->
+<section class="hero" id="hero"><div id="intro"></div></section>
 
-<!-- WELCOME PAGE -->
-<section class="welcome" id="welcome">
-  <div style="font-family:'Sulphur Point',sans-serif;font-size:4rem;">Welcome to my portfolio</div>
+<!-- WELCOME -->
+<section class="darkPage" id="welcome">
+  <div>Welcome to my portfolio</div>
   <div class="toggle" id="toggle">
     <div class="slider"></div>
-    <span id="leftLabel">Case Studies</span>
-    <span id="rightLabel">About</span>
+    <span id="caseLabel">Case Studies</span>
+    <span id="aboutLabel">About</span>
   </div>
 </section>
 
-<!-- CASE STUDIES PAGE -->
+<!-- CASE STUDIES -->
 <section class="darkPage" id="casePage">
   <div class="cases">
     <div class="case"><span>Case Study 1</span><div class="caseContent"></div></div>
@@ -80,73 +79,75 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
   </div>
 </section>
 
-<!-- ABOUT PAGE -->
-<section class="darkPage" id="aboutPage">
-  <div>About Page Placeholder</div>
-</section>
+<!-- ABOUT -->
+<section class="darkPage" id="aboutPage"><div>About Page Placeholder</div></section>
 
 <!-- ICON TOGGLE -->
-<div class="iconToggle" id="iconToggle">
+<div class="iconToggle" id="iconToggle" style="display:none;">
   <i class="fa-solid fa-layer-group" title="Case Studies"></i>
   <i class="fa-solid fa-user" title="About"></i>
 </div>
 
 <script>
-/* ---------- TYPING ---------- */
+/* ---------- TYPING ANIMATION ---------- */
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
-const intro=document.getElementById("intro");
+const introEl=document.getElementById("intro");
+
 function type(){
  if(c<lines[l].length){
-   intro.textContent+=lines[l][c++];
+   introEl.textContent+=lines[l][c++];
    setTimeout(type,90);
- }else{
-   if(l<lines.length-1){setTimeout(erase,400);}else{setTimeout(showWelcome,300);}
+ } else {
+   if(l<lines.length-1){setTimeout(erase,500);}
+   else{setTimeout(showWelcome,400);}
  }
 }
+
 function erase(){
- if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
+ if(c>0){introEl.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
  else{l++;type();}
 }
+
 function showWelcome(){
  document.getElementById("hero").remove();
+ document.getElementById("welcome").style.transform="translateX(0)";
  document.getElementById("welcome").style.opacity=1;
+ document.getElementById("iconToggle").style.display="none";
 }
 
-/* ---------- TOGGLE ---------- */
-const toggle=document.getElementById("toggle");
-const leftLabel=document.getElementById("leftLabel");
-const rightLabel=document.getElementById("rightLabel");
+/* ---------- PAGE NAVIGATION ---------- */
+const toggleBtn=document.getElementById("toggle");
 const casePage=document.getElementById("casePage");
 const aboutPage=document.getElementById("aboutPage");
-const iconToggle=document.getElementById("iconToggle");
+const iconNav=document.getElementById("iconToggle");
 
-toggle.addEventListener("click",()=>{
-  toggle.classList.toggle("active");
-  if(toggle.classList.contains("active")){
-    // Show About
-    casePage.style.transform="translateX(100%)";
-    aboutPage.style.transform="translateX(0%)";
-  }else{
-    // Show Case Studies
-    aboutPage.style.transform="translateX(100%)";
-    casePage.style.transform="translateX(0%)";
-  }
+toggleBtn.addEventListener("click",()=>{
+ toggleBtn.classList.toggle("active");
+ if(toggleBtn.classList.contains("active")){
+   casePage.style.transform="translateX(100%)";
+   aboutPage.style.transform="translateX(0)";
+   iconNav.style.display="flex";
+ } else {
+   aboutPage.style.transform="translateX(100%)";
+   casePage.style.transform="translateX(0)";
+   iconNav.style.display="flex";
+ }
 });
 
-/* ---------- ICON TOGGLE ON DARK PAGES ---------- */
-iconToggle.addEventListener("click",(e)=>{
-  const target=e.target;
-  if(target.title==="Case Studies"){
-    aboutPage.style.transform="translateX(100%)";
-    casePage.style.transform="translateX(0%)";
-  }else if(target.title==="About"){
-    casePage.style.transform="translateX(100%)";
-    aboutPage.style.transform="translateX(0%)";
-  }
+/* ---------- ICON NAV CLICK ---------- */
+iconNav.addEventListener("click",(e)=>{
+ if(e.target.title==="Case Studies"){
+   aboutPage.style.transform="translateX(100%)";
+   casePage.style.transform="translateX(0)";
+ } else {
+   casePage.style.transform="translateX(100%)";
+   aboutPage.style.transform="translateX(0)";
+ }
 });
 
 window.onload=type;
 </script>
+
 </body>
 </html>
