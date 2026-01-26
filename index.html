@@ -12,24 +12,20 @@
 body{
   font-family:'Sulphur Point',sans-serif;
   overflow:hidden;
-  background:#e6e6e6;
+  background:#111; /* Dark theme background */
+  color:white;
 }
 
 /* ---------- INTRO ---------- */
 #intro{
-  border-right:2px solid #111; /* black cursor line */
-  animation:blink .7s step-end infinite;
-  z-index:5;
   position:fixed;
   inset:0;
   display:flex;
   justify-content:center;
   align-items:center;
   font-size:clamp(2.2rem,6vw,4.4rem);
-  background:#cfe9e0; /* new intro background */
-  color:#ed6339;       /* typing text color */
+  z-index:5;
 }
-@keyframes blink{50%{border-color:transparent;}}
 
 /* ---------- SECTIONS ---------- */
 section{
@@ -69,7 +65,7 @@ section{
   width:75px;
   height:50px;
   border-radius:50px;
-  background:#111; /* black */
+  background:#111; /* black switch */
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 #welcome-toggle button{
@@ -90,9 +86,8 @@ section{
   fill:none;
   transition:.3s;
 }
-/* ---------- ACTIVE STATES WELCOME TOGGLE ---------- */
 #welcome-toggle button.active svg{
-  stroke:white;   /* active icons white */
+  stroke:white;
   fill:none;
 }
 
@@ -118,7 +113,7 @@ section{
   left:0;
   width:100%;
   height:50%;
-  background:#111; /* black */
+  background:#111;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
@@ -145,7 +140,7 @@ section{
 
 /* ---------- PAGES ---------- */
 .page{
-  background:#111; /* black pages */
+  background:#111;
   color:white;
   transform:translateX(100%);
   transition:transform .8s cubic-bezier(.77,0,.18,1);
@@ -239,11 +234,16 @@ section{
 const intro=document.getElementById("intro");
 const welcome=document.getElementById("welcome");
 const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
+const colors=["#fcab19","#f3701f","#91489c","#a67fba","#cd2579","#f0154f","#295cab","#568ecd","#01ac50","#01ac50"];
 let l=0,c=0;
 
 function type(){
  if(c<lines[l].length){
-   intro.textContent+=lines[l][c++];
+   // Create span with colored letter
+   const span=document.createElement('span');
+   span.textContent = lines[l][c++];
+   span.style.color = colors[c % colors.length];
+   intro.appendChild(span);
    setTimeout(type,80);
  }else{
    if(l<lines.length-1){setTimeout(erase,600);}
@@ -251,8 +251,15 @@ function type(){
  }
 }
 function erase(){
- if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
- else{l++;type();}
+ if(c>0){
+   intro.removeChild(intro.lastChild);
+   c--;
+   setTimeout(erase,40);
+ }else{
+   l++;
+   c=0;
+   type();
+ }
 }
 function showWelcome(){
  intro.style.opacity=0;
