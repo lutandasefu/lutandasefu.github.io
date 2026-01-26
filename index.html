@@ -6,24 +6,26 @@
 <title>Lutanda | Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100;300&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
 
 <style>
-/* ---------- GLOBAL ---------- */
+/* ========== GLOBAL ========== */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Sulphur Point',sans-serif;background:#e6e6e6;color:#111;overflow:hidden;}
+body{font-family:'Sulphur Point',sans-serif; background:#e6e6e6; color:#111; overflow:hidden;}
 
-/* ---------- INTRO TYPING ---------- */
-section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;}
+/* ========== HERO TYPING ========= */
+section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;transition:opacity .6s ease;}
 #intro{font-size:4rem;border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
 
-/* ---------- WELCOME ---------- */
-#welcome{flex-direction:column;gap:20px;font-size:3.2rem;opacity:0;transition:opacity .8s ease;}
+/* ========== WELCOME ========= */
+#welcome{flex-direction:column;gap:20px;font-size:3.5rem;opacity:0;transition:opacity .7s ease;}
 .toggle{width:350px;height:60px;border-radius:60px;border:2px solid #111;background:#fff;
   display:flex;align-items:center;justify-content:space-between;padding:0 40px;
-  font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;transition:all .7s cubic-bezier(.77,0,.18,1);}
-.toggle span{z-index:2;font-size:1.1rem;color:#111;}
+  font-family:'Urbanist',sans-serif;font-weight:100;cursor:pointer;overflow:hidden;
+  transition:all .7s cubic-bezier(.77,0,.18,1);}
+.toggle span{z-index:2;font-size:1.2rem;color:#111;}
 .slider{position:absolute;height:100%;width:50%;background:#111;border-radius:60px;left:0;z-index:1;transition:transform .6s cubic-bezier(.77,0,.18,1);}
 .toggle.active .slider{transform:translateX(100%);}
 .toggle span:first-child{color:#fff;}
@@ -31,30 +33,36 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 .toggle span:last-child{color:#111;}
 .toggle.active span:last-child{color:#fff;}
 
-/* ---------- DARK PAGES ---------- */
-.darkPage{position:fixed;inset:0;display:flex;justify-content:center;align-items:flex-start;background:#111;color:#fff;transform:translateX(100%);transition:transform .8s ease;z-index:1000;padding-top:80px;}
+/* ========== DARK PAGES ========== */
+.darkPage{position:fixed;inset:0;display:flex;justify-content:center;align-items:flex-start;
+          background:#111;color:#fff;transform:translateX(100%);transition:transform .8s ease;z-index:1000;padding-top:80px;}
 
-/* ---------- CASE STUDIES CARDS ---------- */
+/* ========== CASE STUDIES ========= */
 .cases{width:90%;height:60vh;display:flex;gap:12px;}
-.case{flex:1;border-radius:20px;background:#1b1b1b;display:flex;justify-content:center;align-items:center;font-size:1.5rem;font-family:'Urbanist',sans-serif;font-weight:300;cursor:pointer;transition:flex 0.6s cubic-bezier(.77,0,.18,1), background 0.5s;color:#fff;position:relative;overflow:hidden;}
+.case{flex:1;border-radius:20px;background:#1b1b1b;display:flex;justify-content:center;align-items:center;
+      font-size:1.5rem;font-family:'Urbanist',sans-serif;font-weight:300;cursor:pointer;
+      transition:flex .6s cubic-bezier(.77,0,.18,1), background .5s;color:#fff;position:relative;overflow:hidden;}
 .case span{z-index:2;}
 .case:hover{flex:5;background:#fff;color:#111;}
-.caseContent{position:absolute;inset:0;opacity:0;display:flex;justify-content:center;align-items:center;font-size:1.2rem;transition:opacity .4s ease .3s;}
+.caseContent{position:absolute;inset:0;opacity:0;display:flex;justify-content:center;align-items:center;
+             font-size:1.2rem;transition:opacity .4s ease .3s;}
 .case:hover .caseContent{opacity:1;}
 .cases:hover .case:not(:hover){flex:0.8;}
 
-/* ---------- ICON TOGGLE ON DARK PAGES ---------- */
-.iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);width:70px;height:140px;background:#111;border-radius:50px;border:2px solid #fff;display:flex;flex-direction:column;justify-content:space-around;align-items:center;z-index:1100;}
+/* ========== ICON TOGGLE ========== */
+.iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);
+           width:70px;height:140px;background:#111;border-radius:50px;border:2px solid #fff;
+           display:flex;flex-direction:column;justify-content:space-around;align-items:center;z-index:1100;}
 .iconToggle i{font-size:1.6rem;color:#fff;cursor:pointer;}
 
-/* ---------- RESPONSIVE ---------- */
-@media(max-width:900px){.cases{flex-direction:column;height:75vh;} .case:hover{flex:3;} .cases:hover .case:not(:hover){flex:1;}}
+/* ========== RESPONSIVE ========== */
+@media(max-width:900px){.cases{flex-direction:column;height:75vh;}.case:hover{flex:3;}.cases:hover .case:not(:hover){flex:1;}}
 @media(max-width:480px){#intro{font-size:2.5rem;} #welcome{font-size:2rem;} .toggle{width:250px;padding:0 25px;}}
 </style>
 </head>
 <body>
 
-<!-- HERO TYPING -->
+<!-- HERO -->
 <section class="hero" id="hero"><div id="intro"></div></section>
 
 <!-- WELCOME -->
@@ -89,7 +97,7 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 </div>
 
 <script>
-/* ---------- TYPING ANIMATION ---------- */
+/* ---------- TYPE ANIMATION ---------- */
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 const introEl=document.getElementById("intro");
@@ -98,25 +106,24 @@ function type(){
  if(c<lines[l].length){
    introEl.textContent+=lines[l][c++];
    setTimeout(type,90);
+ } else if(l<lines.length-1){
+   setTimeout(erase,500);
  } else {
-   if(l<lines.length-1){setTimeout(erase,500);}
-   else{setTimeout(showWelcome,400);}
+   setTimeout(showWelcome,400);
  }
 }
-
 function erase(){
  if(c>0){introEl.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
  else{l++;type();}
 }
-
 function showWelcome(){
  document.getElementById("hero").remove();
  document.getElementById("welcome").style.transform="translateX(0)";
- document.getElementById("welcome").style.opacity=1;
  document.getElementById("iconToggle").style.display="none";
 }
+window.onload=type;
 
-/* ---------- PAGE NAVIGATION ---------- */
+/* ---------- PAGE NAV ---------- */
 const toggleBtn=document.getElementById("toggle");
 const casePage=document.getElementById("casePage");
 const aboutPage=document.getElementById("aboutPage");
@@ -135,7 +142,6 @@ toggleBtn.addEventListener("click",()=>{
  }
 });
 
-/* ---------- ICON NAV CLICK ---------- */
 iconNav.addEventListener("click",(e)=>{
  if(e.target.title==="Case Studies"){
    aboutPage.style.transform="translateX(100%)";
@@ -145,8 +151,6 @@ iconNav.addEventListener("click",(e)=>{
    aboutPage.style.transform="translateX(0)";
  }
 });
-
-window.onload=type;
 </script>
 
 </body>
