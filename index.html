@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100;300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -15,17 +14,21 @@ body{
   overflow:hidden;
   background:#e6e6e6;
   font-family:'Sulphur Point',sans-serif;
-}
-
-/* ---------- TRUE 3D PERSPECTIVE (THE MISSING PIECE) ---------- */
-#app{
-  perspective:1000px;
+  transition:background .6s ease;
 }
 
 /* ---------- INTRO ---------- */
-section{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;}
+section{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  text-align:center;
+}
 #intro{
-  font-size:4.2rem;
+  font-size:clamp(2rem,6vw,4.2rem);
   border-right:2px solid #111;
   animation:blink .7s step-end infinite;
 }
@@ -34,72 +37,86 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 /* ---------- WELCOME ---------- */
 .welcome{
   flex-direction:column;
-  gap:40px;          /* less space between text and menu */
-  font-size:4.4rem;  /* slightly bigger welcome text */
+  gap:35px;
+  font-size:clamp(2.2rem,6vw,4.4rem);
   opacity:0;
   transition:opacity .8s ease;
 }
 
 /* ---------- DEV LOOP MENU ---------- */
-#app ul{
-  position:relative;
-  width:520px;
+.menu{
+  width:90%;
+  max-width:520px;
   height:70px;
+  background:#fff;
+  border-radius:45px;
+  position:relative;
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  border-radius:45px;
-  background:#fff;
-  transform-style:preserve-3d;
   overflow:hidden;
+  font-family:'Urbanist',sans-serif;
 }
-
-#app li{
-  list-style:none;
+.menu div{
   display:grid;
   place-items:center;
-  font-family:'Urbanist',sans-serif;
-  font-weight:300;
-  font-size:1.2rem;
+  font-size:clamp(1rem,2.5vw,1.2rem);
   color:#666;
   cursor:pointer;
-  z-index:10;
+  z-index:2;
 }
-
-.focus-el{
+.focus{
   position:absolute;
   left:0;
   top:0;
   width:50%;
   height:100%;
-  border-radius:45px;
   background:#f2f2f2;
+  border-radius:45px;
+  transition:transform .6s cubic-bezier(.77,0,.18,1);
 }
 
 /* ---------- DARK ICON TOGGLE ---------- */
-.iconMode{
+.iconToggle{
   position:fixed;
-  right:40px;
+  right:30px;
   top:50%;
   transform:translateY(-50%);
   display:none;
   flex-direction:column;
-  gap:30px;
+  gap:25px;
   z-index:2000;
 }
-.iconMode button{
-  width:70px;height:70px;border-radius:50%;
-  border:2px solid #fff;background:#111;color:#fff;
-  font-size:1.6rem;cursor:pointer;
+.iconToggle button{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  border:2px solid #fff;
+  background:#111;
+  color:#fff;
+  font-size:1.5rem;
+  cursor:pointer;
 }
 
 /* ---------- DARK PAGE ---------- */
 .page{
-  position:fixed;inset:0;
-  display:flex;justify-content:center;align-items:center;
-  background:#111;color:#fff;
-  font-size:4rem;
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#111;
+  color:#fff;
+  font-size:clamp(2rem,6vw,4rem);
   transform:translateX(100%);
   transition:transform .8s ease;
+  z-index:1000;
+}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:600px){
+  .iconToggle{right:15px;}
+  .iconToggle button{width:55px;height:55px;font-size:1.2rem;}
+  .menu{height:60px;}
 }
 </style>
 </head>
@@ -114,19 +131,17 @@ section{position:fixed;inset:0;display:flex;justify-content:center;align-items:c
 <section class="welcome" id="welcome">
   <div>Welcome to my portfolio</div>
 
-  <div id="app">
-    <ul>
-      <li data-page="Case Studies">Case Studies</li>
-      <li data-page="About">About</li>
-      <span class="focus-el"></span>
-    </ul>
+  <div class="menu" id="menu">
+    <div class="focus" id="focus"></div>
+    <div id="caseBtn">Case Studies</div>
+    <div id="aboutBtn">About</div>
   </div>
 </section>
 
-<!-- Dark icon toggle -->
-<div class="iconMode" id="iconMode">
-  <button id="darkCase"><i class="far fa-file-lines"></i></button>
-  <button id="darkAbout"><i class="fas fa-user"></i></button>
+<!-- Icon Toggle for dark pages -->
+<div class="iconToggle" id="iconToggle">
+  <button id="caseIcon"><i class="fa-solid fa-layer-group"></i></button>
+  <button id="aboutIcon"><i class="fa-solid fa-user"></i></button>
 </div>
 
 <script>
@@ -140,56 +155,26 @@ function type(){
    intro.textContent+=lines[l][c++];
    setTimeout(type,90);
  }else{
-   if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,300);}
+   if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,500);}
  }
 }
 function erase(){
  if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
  else{l++;type();}
 }
+window.onload=type;
+
+/* ---------- SHOW WELCOME ---------- */
 function showWelcome(){
  document.getElementById("hero").remove();
  document.getElementById("welcome").style.opacity=1;
 }
 
-/* ---------- DEV LOOP MENU (FIXED) ---------- */
-const liEls=[...document.querySelectorAll("#app li")];
-const slideEl=document.querySelector(".focus-el");
-const liContainer=document.querySelector("#app ul");
-
-let activeIndex=-1; // FIX
-
-liEls.forEach((li,index)=>{
- li.addEventListener("click",()=>{
-   const x=index===0?-1:1;
-   const liRect=li.getBoundingClientRect();
-   const parentRect=liContainer.getBoundingClientRect();
-
-   gsap.to(liContainer,{duration:0.4,rotateY:`${x*25}deg`});
-   gsap.to(slideEl,{
-     duration:0.7,
-     left:`${liRect.left-parentRect.left}px`,
-     ease:"bounce.out"
-   });
-   gsap.to(liContainer,{duration:0.4,rotateY:"0deg",delay:0.3});
-
-   activeIndex=index;
-
-   // INSTANT PAGE CHANGE (no lag)
-   goToDarkPage(li.dataset.page);
- });
-});
-
-/* ---------- DARK PAGE SYSTEM ---------- */
+/* ---------- PAGE SYSTEM ---------- */
 let currentPage=null;
-const iconMode=document.getElementById("iconMode");
-
-function goToDarkPage(title){
- document.body.style.background="#111";
- document.getElementById("welcome").remove();
- iconMode.style.display="flex";
- createPage(title);
-}
+const focus=document.getElementById("focus");
+const iconToggle=document.getElementById("iconToggle");
+const body=document.body;
 
 function createPage(title){
  if(currentPage) currentPage.remove();
@@ -197,14 +182,35 @@ function createPage(title){
  p.className="page";
  p.textContent=title;
  document.body.appendChild(p);
- setTimeout(()=>{p.style.transform="translateX(0%)";},50);
+ setTimeout(()=>p.style.transform="translateX(0)",50);
  currentPage=p;
 }
 
-document.getElementById("darkCase").onclick=()=>createPage("Case Studies");
-document.getElementById("darkAbout").onclick=()=>createPage("About");
+function firstTransition(){
+ document.getElementById("welcome").remove();
+ body.style.background="#111";
+ iconToggle.style.display="flex";
+}
 
-window.onload=type;
+/* ---------- MENU CLICK ---------- */
+document.getElementById("caseBtn").onclick=()=>{
+ focus.style.transform="translateX(0)";
+ firstTransition();
+ createPage("Case Studies");
+}
+document.getElementById("aboutBtn").onclick=()=>{
+ focus.style.transform="translateX(100%)";
+ firstTransition();
+ createPage("About");
+}
+
+/* ---------- ICON TOGGLE ---------- */
+document.getElementById("caseIcon").onclick=()=>{
+ createPage("Case Studies");
+}
+document.getElementById("aboutIcon").onclick=()=>{
+ createPage("About");
+}
 </script>
 
 </body>
