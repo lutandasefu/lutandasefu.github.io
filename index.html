@@ -12,20 +12,16 @@
 body{
   font-family:'Sulphur Point',sans-serif;
   overflow:hidden;
-  background:#111; /* dark theme background */
-  color:white;
+  background:#e6e6e6;
 }
 
 /* ---------- INTRO ---------- */
 #intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:clamp(2.2rem,6vw,4.4rem);
+  border-right:2px solid #111; /* black */
+  animation:blink .7s step-end infinite;
   z-index:5;
 }
+@keyframes blink{50%{border-color:transparent;}}
 
 /* ---------- SECTIONS ---------- */
 section{
@@ -65,7 +61,7 @@ section{
   width:75px;
   height:50px;
   border-radius:50px;
-  background:#111; /* black switch */
+  background:#111; /* black */
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 #welcome-toggle button{
@@ -86,8 +82,9 @@ section{
   fill:none;
   transition:.3s;
 }
+/* ---------- ACTIVE STATES WELCOME TOGGLE ---------- */
 #welcome-toggle button.active svg{
-  stroke:white;
+  stroke:white;   /* active icons white */
   fill:none;
 }
 
@@ -113,7 +110,7 @@ section{
   left:0;
   width:100%;
   height:50%;
-  background:#111; /* black switch */
+  background:#111; /* black */
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
@@ -140,7 +137,7 @@ section{
 
 /* ---------- PAGES ---------- */
 .page{
-  background:#111;
+  background:#111; /* black */
   color:white;
   transform:translateX(100%);
   transition:transform .8s cubic-bezier(.77,0,.18,1);
@@ -238,10 +235,7 @@ let l=0,c=0;
 
 function type(){
  if(c<lines[l].length){
-   const span=document.createElement('span');
-   span.textContent = lines[l][c++];
-   span.style.color = "white"; // typing text is white
-   intro.appendChild(span);
+   intro.textContent+=lines[l][c++];
    setTimeout(type,80);
  }else{
    if(l<lines.length-1){setTimeout(erase,600);}
@@ -249,15 +243,8 @@ function type(){
  }
 }
 function erase(){
- if(c>0){
-   intro.removeChild(intro.lastChild);
-   c--;
-   setTimeout(erase,40);
- }else{
-   l++;
-   c=0;
-   type();
- }
+ if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
+ else{l++;type();}
 }
 function showWelcome(){
  intro.style.opacity=0;
