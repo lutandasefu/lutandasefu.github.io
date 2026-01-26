@@ -1,229 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{overflow:hidden;font-family:'Sulphur Point',sans-serif;background:#e6e6e6;}
+body{
+  font-family:'Sulphur Point',sans-serif;
+  overflow:hidden;
+  background:#e6e6e6;
+}
 
-/* ---------- Typing Intro ---------- */
-#introSection{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#e6e6e6;z-index:3;transition:opacity 0.8s;}
-#intro{font-size:clamp(2rem,6vw,4rem);border-right:2px solid #111;animation:blink .7s step-end infinite;}
+/* ---------- MASTER WRAPPER ---------- */
+.wrapper{
+  height:400vh;
+  width:100%;
+  transition:transform 1s cubic-bezier(.77,0,.18,1);
+}
+
+/* ---------- SECTIONS ---------- */
+section{
+  height:100vh;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  font-size:clamp(2rem,6vw,4rem);
+}
+
+/* ---------- INTRO ---------- */
+#intro{
+  background:#e6e6e6;
+  border-right:2px solid #111;
+  animation:blink .7s step-end infinite;
+}
 @keyframes blink{50%{border-color:transparent;}}
 
-/* ---------- Welcome Page ---------- */
-#welcome{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transform:translateY(50px);transition:opacity 0.8s ease, transform 0.8s ease;z-index:2;background:#e6e6e6;}
-.welcome-text{margin-top:20px;font-size:clamp(2.2rem,6vw,4rem);text-align:center;}
-
-/* ---------- Welcome Toggle ---------- */
+/* ---------- WELCOME ---------- */
+#welcome{background:#e6e6e6;}
 .welcome-switch{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  margin-top:30px;
-  width:160px;
+  margin-top:40px;
+  width:170px;
   height:60px;
   background:#fff;
   border-radius:50px;
-  border:2px solid #fff;
+  position:relative;
+  display:flex;
 }
-.welcome-focus{
+.focus{
   position:absolute;
   top:5px;
   left:5px;
-  width:70px;
+  width:75px;
   height:50px;
-  background:#111;
   border-radius:50px;
-  transition:transform 0.3s;
+  background:#111;
+  transition:transform .3s;
 }
 .welcome-switch button{
   flex:1;
   border:none;
-  background:transparent;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background:none;
+  font-size:26px;
   cursor:pointer;
   color:black;
-  transition:color 0.3s;
   z-index:1;
+  transition:.3s;
 }
-.welcome-switch button svg{width:24px;height:24px;}
-.welcome-switch button svg path{fill:currentColor;transition:fill 0.3s;}
 .welcome-switch button.active{color:white;}
 
-/* ---------- Pages ---------- */
-.page{position:fixed;inset:0;background:#111;color:#fff;font-size:clamp(2rem,6vw,4rem);display:flex;justify-content:center;align-items:center;flex-direction:column;transform:translateX(100%);transition:transform 0.8s ease;z-index:1;}
-.page.show{transform:translateX(0);}
-.page-text{cursor:pointer;margin-bottom:20px;position:relative;}
-
-/* ---------- Case/About Toggle Right ---------- */
-.iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);display:none;z-index:2000;}
-.switch{width:70px;height:150px;background:#fff;border-radius:45px;display:grid;grid-template-rows:1fr 1fr;position:relative;overflow:hidden;border:2px solid #fff;}
-.switch-focus{position:absolute;top:0;left:0;width:100%;height:50%;background:#000;border-radius:45px;transition:transform 0.3s;}
-.switch-btn{border:none;background:transparent;color:black;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color 0.3s;}
-.switch-btn svg{width:28px;height:28px;}
-.switch-btn svg path{fill:currentColor;transition:fill 0.3s;}
-.switch-btn.active{color:white;}
-
-/* ---------- Carousel ---------- */
-.carousel{display:none;margin-top:20px;width:90%;max-width:600px;overflow:hidden;border-radius:15px;position:relative;}
-.carousel-track{display:flex;transition:transform 0.5s ease-in-out;}
-.carousel-item{min-width:100%;flex-shrink:0;background:#222;color:#fff;display:flex;justify-content:center;align-items:center;height:200px;border-radius:10px;font-size:1.5rem;}
-.carousel-nav{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);padding:0 15px;}
-.carousel-nav button{background:rgba(0,0,0,0.2);border:none;color:#fff;font-size:2rem;border-radius:50%;cursor:pointer;}
-
-@media(max-width:600px){
-  .iconToggle{right:15px;}.switch{width:55px;height:120px;}.switch-btn svg{width:24px;height:24px;}.carousel-item{height:150px;font-size:1.2rem;}
-  .welcome-switch{width:140px;height:55px;}
-  .welcome-switch button svg{width:24px;height:24px;}
+/* ---------- CASE / ABOUT ---------- */
+.page{background:#111;color:#fff;}
+.right-toggle{
+  position:fixed;
+  right:30px;
+  top:50%;
+  transform:translateY(-50%);
+  width:70px;
+  height:150px;
+  background:#fff;
+  border-radius:45px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
 }
+.right-focus{
+  position:absolute;
+  width:100%;
+  height:50%;
+  background:#000;
+  transition:transform .3s;
+}
+.right-toggle button{
+  flex:1;
+  border:none;
+  background:none;
+  color:black;
+  font-size:26px;
+  z-index:1;
+  cursor:pointer;
+  transition:.3s;
+}
+.right-toggle button.active{color:white;}
+
 </style>
 </head>
 <body>
 
-<!-- Typing Intro -->
-<section id="introSection">
-  <div id="intro"></div>
-</section>
+<div class="wrapper" id="wrap">
 
-<!-- Welcome Page -->
-<section id="welcome">
-  <div class="welcome-text">Welcome to my portfolio</div>
-  <div class="welcome-switch">
-    <div class="welcome-focus" id="welcomeFocus"></div>
-    <button id="welcomeCaseIcon">
-      <svg viewBox="0 0 24 24"><path d="M3 4H21V20H3V4ZM5 6V18H19V6H5ZM7 8H17V10H7V8ZM7 12H17V14H7V12Z"/></svg>
-    </button>
-    <button id="welcomeAboutIcon">
-      <svg viewBox="0 0 24 24"><path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12ZM12 14C8.13 14 2 16.17 2 20V22H22V20C22 16.17 15.87 14 12 14Z"/></svg>
-    </button>
-  </div>
-</section>
+  <section id="introSection">
+    <div id="intro"></div>
+  </section>
 
-<!-- Right-side Case/About Toggle -->
-<div class="iconToggle" id="iconToggle">
-  <div class="switch">
-    <div class="switch-focus" id="switchFocus"></div>
-    <button class="switch-btn" id="caseIcon">
-      <svg viewBox="0 0 24 24"><path d="M3 4H21V20H3V4ZM5 6V18H19V6H5ZM7 8H17V10H7V8ZM7 12H17V14H7V12Z"/></svg>
-    </button>
-    <button class="switch-btn" id="aboutIcon">
-      <svg viewBox="0 0 24 24"><path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12ZM12 14C8.13 14 2 16.17 2 20V22H22V20C22 16.17 15.87 14 12 14Z"/></svg>
-    </button>
-  </div>
+  <section id="welcome">
+    <div>Welcome to my portfolio</div>
+    <div class="welcome-switch">
+      <div class="focus" id="wFocus"></div>
+      <button id="toCase">📄</button>
+      <button id="toAbout">👤</button>
+    </div>
+  </section>
+
+  <section id="case" class="page">
+    Case Studies
+  </section>
+
+  <section id="about" class="page">
+    About
+  </section>
+
 </div>
 
-<!-- Case Page -->
-<section id="case" class="page">
-  <div class="page-text" id="caseText">Case Studies</div>
-</section>
-
-<!-- About Page -->
-<section id="about" class="page">
-  <div class="page-text">About</div>
-</section>
+<!-- Right Toggle -->
+<div class="right-toggle" id="rightToggle" style="display:none;">
+  <div class="right-focus" id="rFocus"></div>
+  <button id="caseBtn">📄</button>
+  <button id="aboutBtn">👤</button>
+</div>
 
 <script>
-document.addEventListener("DOMContentLoaded",function(){
-
-// ---------- Typing Intro ----------
+const wrap=document.getElementById('wrap');
+const intro=document.getElementById("intro");
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
-const intro=document.getElementById("intro");
-function type(){if(c<lines[l].length){intro.textContent+=lines[l][c++];setTimeout(type,90);}else{if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,500);}}}
-function erase(){if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}else{l++;type();}}
-function showWelcome(){
-  document.getElementById("introSection").style.opacity=0;
-  setTimeout(()=>{
-    document.getElementById("introSection").style.display="none";
-    const welcome=document.getElementById("welcome");
-    welcome.style.opacity=1;
-    welcome.style.transform="translateY(0)";
-  },800);
+
+function type(){
+ if(c<lines[l].length){
+   intro.textContent+=lines[l][c++];
+   setTimeout(type,80);
+ }else{
+   if(l<lines.length-1){setTimeout(erase,600);}
+   else{setTimeout(()=>wrap.style.transform="translateY(-100vh)",700);}
+ }
+}
+function erase(){
+ if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
+ else{l++;type();}
+}
+type();
+
+/* ---------- Welcome Toggle ---------- */
+const wFocus=document.getElementById('wFocus');
+const toCase=document.getElementById('toCase');
+const toAbout=document.getElementById('toAbout');
+
+toCase.onclick=()=>{
+  wFocus.style.transform="translateX(100%)";
+  toCase.classList.add('active');
+  toAbout.classList.remove('active');
+  wrap.style.transform="translateY(-200vh)";
+  showRight("case");
+}
+toAbout.onclick=()=>{
+  wFocus.style.transform="translateX(100%)";
+  toAbout.classList.add('active');
+  toCase.classList.remove('active');
+  wrap.style.transform="translateY(-300vh)";
+  showRight("about");
 }
 
-// ---------- Welcome Toggle ----------
-const wCase=document.getElementById("welcomeCaseIcon");
-const wAbout=document.getElementById("welcomeAboutIcon");
-const welcomeFocus=document.getElementById("welcomeFocus");
-const casePage=document.getElementById("case");
-const aboutPage=document.getElementById("about");
-const iconToggle=document.getElementById("iconToggle");
-const switchFocus=document.getElementById("switchFocus");
-const caseIcon=document.getElementById("caseIcon");
-const aboutIcon=document.getElementById("aboutIcon");
+/* ---------- Right Toggle ---------- */
+const right=document.getElementById("rightToggle");
+const rFocus=document.getElementById("rFocus");
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
 
-function setActiveWelcome(btn){
-  if(btn===wCase){
-    welcomeFocus.style.transform="translateX(0)";
-    wCase.classList.add("active");
-    wAbout.classList.remove("active");
-  } else {
-    welcomeFocus.style.transform="translateX(100%)";
-    wAbout.classList.add("active");
-    wCase.classList.remove("active");
+function showRight(page){
+  right.style.display="flex";
+  if(page==="case"){
+    rFocus.style.transform="translateY(0)";
+    caseBtn.classList.add("active");
+    aboutBtn.classList.remove("active");
+  }else{
+    rFocus.style.transform="translateY(100%)";
+    aboutBtn.classList.add("active");
+    caseBtn.classList.remove("active");
   }
 }
 
-function slideWelcome(targetPage){
-  const welcome=document.getElementById("welcome");
-  welcome.style.transform="translateY(-100%)";
-  setTimeout(()=>{
-    targetPage.classList.add("show");
-    iconToggle.style.display="block";
-    if(targetPage===casePage){setActiveToggle("case");}else{setActiveToggle("about");}
-  },800);
+caseBtn.onclick=()=>{
+  wrap.style.transform="translateY(-200vh)";
+  showRight("case");
 }
-
-wCase.onclick=()=>{ setActiveWelcome(wCase); slideWelcome(casePage); }
-wAbout.onclick=()=>{ setActiveWelcome(wAbout); slideWelcome(aboutPage); }
-
-// ---------- Case/About Toggle ----------
-function setActiveToggle(active){
-  if(active==="case"){switchFocus.style.transform="translateY(0)";caseIcon.classList.add("active");aboutIcon.classList.remove("active");}
-  else{switchFocus.style.transform="translateY(100%)";caseIcon.classList.remove("active");aboutIcon.classList.add("active");}
+aboutBtn.onclick=()=>{
+  wrap.style.transform="translateY(-300vh)";
+  showRight("about");
 }
-caseIcon.onclick=()=>{showPage(casePage);setActiveToggle("case");}
-aboutIcon.onclick=()=>{showPage(aboutPage);setActiveToggle("about");}
-
-function showPage(page){
-  page.classList.add("show");
-  if(page===casePage){aboutPage.classList.remove("show");}else{casePage.classList.remove("show");}
-}
-
-// ---------- Carousel ----------
-const caseText=document.getElementById("caseText");
-const carousel=document.createElement("div");carousel.className="carousel";
-carousel.innerHTML=`
-<div class="carousel-track">
-  <div class="carousel-item">Project 1</div>
-  <div class="carousel-item">Project 2</div>
-  <div class="carousel-item">Project 3</div>
-</div>
-<div class="carousel-nav">
-  <button class="prev">&#10094;</button>
-  <button class="next">&#10095;</button>
-</div>`;
-caseText.appendChild(carousel);
-
-const track=carousel.querySelector(".carousel-track");
-const items=carousel.querySelectorAll(".carousel-item");
-let index=0;
-const prev=carousel.querySelector(".prev");
-const next=carousel.querySelector(".next");
-
-caseText.addEventListener("mouseenter",()=>carousel.style.display="block");
-caseText.addEventListener("mouseleave",()=>carousel.style.display="none");
-prev.onclick=()=>{index=(index-1+items.length)%items.length;track.style.transform=`translateX(-${index*100}%)`;}
-next.onclick=()=>{index=(index+1)%items.length;track.style.transform=`translateX(-${index*100}%)`;}
-
-});
 </script>
+
 </body>
 </html>
