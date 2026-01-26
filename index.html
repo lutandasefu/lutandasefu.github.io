@@ -5,252 +5,141 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lutanda | Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@100;300&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/6b8b2c6e52.js" crossorigin="anonymous"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Sulphur Point',sans-serif;overflow:hidden;background:#e6e6e6;}
-
-/* ---------- INTRO TYPE ---------- */
-#intro{
-  font-size:4.2rem;
-  border-right:2px solid #111;
-  animation:blink .7s step-end infinite;
-}
-@keyframes blink{50%{border-color:transparent;}}
-
-section{
-  position:fixed;inset:0;
-  display:flex;justify-content:center;align-items:center;
-}
-
-/* ---------- WELCOME ---------- */
-#welcome{
-  flex-direction:column;
-  gap:30px;
-  font-size:4.2rem;
-  opacity:0;
-  transition:opacity .8s ease;
-}
-
-.menuToggle{
-  position:relative;
-  width:420px;
-  height:65px;
-  border-radius:60px;
-  background:#fff;
-  border:2px solid #ddd;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 50px;
-  font-family:'Urbanist',sans-serif;
-  font-weight:100;
-  cursor:pointer;
+body{
+  font-family:'Sulphur Point',sans-serif;
+  background:#111;
+  color:#fff;
   overflow:hidden;
 }
-.menuToggle span{z-index:2;color:#777;font-size:1.2rem;}
-.slider{
-  position:absolute;
-  left:0;top:0;height:100%;width:50%;
-  background:#111;border-radius:60px;
-  transition:transform .6s cubic-bezier(.77,0,.18,1);
-}
-.menuToggle.active .slider{transform:translateX(100%);}
-.menuToggle.active span:first-child{color:#777;}
-.menuToggle.active span:last-child{color:#fff;}
-.menuToggle span:first-child{color:#fff;}
 
-/* ---------- CURTAIN FADE ---------- */
-#curtain{
-  position:fixed;inset:0;
+/* ===== CASE STUDIES PAGE ===== */
+.casePage{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   background:#111;
-  opacity:0;
+}
+
+/* container from CodePen logic */
+.cases{
+  width:90%;
+  height:85vh;
+  display:flex;
+  gap:12px;
+}
+
+/* each row */
+.case{
+  flex:1;
+  border-radius:20px;
+  background:#1b1b1b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:1.8rem;
+  font-family:'Urbanist',sans-serif;
+  font-weight:300;
+  cursor:pointer;
+  transition:flex 0.6s cubic-bezier(.77,0,.18,1), background 0.5s;
+  position:relative;
+  overflow:hidden;
+}
+
+/* label text */
+.case span{
+  z-index:2;
   pointer-events:none;
-  transition:opacity .7s ease;
-  z-index:900;
-}
-#curtain.show{opacity:1;}
-
-/* ---------- DARK PAGE ---------- */
-.page{
-  position:fixed;inset:0;
-  background:#111;color:#fff;
-  display:flex;justify-content:center;align-items:center;
-  transform:translateX(100%);
-  transition:transform .8s ease;
-  z-index:800;
 }
 
-/* ---------- ICON TOGGLE ---------- */
+/* expansion like CodePen */
+.case:hover{
+  flex:6;
+  background:#fff;
+  color:#111;
+}
+
+/* inner expanding panel */
+.caseContent{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:2rem;
+  transition:opacity .4s ease .3s;
+}
+
+/* show content when expanded */
+.case:hover .caseContent{
+  opacity:1;
+}
+
+/* collapse siblings */
+.cases:hover .case:not(:hover){
+  flex:0.8;
+}
+
+/* ===== ICON TOGGLE (right side) ===== */
 .iconToggle{
   position:fixed;
-  right:35px;
+  right:30px;
   top:50%;
   transform:translateY(-50%);
-  width:70px;height:170px;
+  width:70px;
+  height:180px;
+  background:#000;
   border-radius:50px;
-  background:#fff;
+  border:2px solid #fff;
   display:flex;
   flex-direction:column;
   justify-content:space-around;
   align-items:center;
-  z-index:1001;
+  z-index:1000;
 }
+
 .iconToggle i{
-  font-size:1.5rem;
-  color:#111;
-  cursor:pointer;
-}
-
-/* ---------- CASE STUDIES ---------- */
-.caseContainer{
-  width:90%;max-width:1100px;
-  display:flex;flex-direction:column;gap:18px;
-}
-.caseRow{
-  position:relative;
-  background:#1a1a1a;
-  border:1px solid #333;
-  padding:22px 30px;
   font-size:1.6rem;
+  color:#fff;
   cursor:pointer;
-  overflow:hidden;
-}
-.caseExpand{
-  position:absolute;inset:0;
-  background:#fff;
-  opacity:0;
-  transform:scaleY(.85);
-  transform-origin:top;
-  transition:.6s cubic-bezier(.77,0,.18,1);
-}
-.caseRow:hover .caseExpand{
-  opacity:1;
-  transform:scaleY(1);
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media(max-width:768px){
-  #intro{font-size:3rem;}
-  #welcome{font-size:3rem;}
-  .menuToggle{width:320px;padding:0 30px;}
-}
-@media(max-width:480px){
-  #intro{font-size:2.2rem;}
-  #welcome{font-size:2.2rem;}
-  .menuToggle{width:260px;}
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .cases{flex-direction:column;}
+  .case:hover{flex:4;}
+  .cases:hover .case:not(:hover){flex:1;}
 }
 </style>
 </head>
 <body>
 
-<section id="hero"><div id="intro"></div></section>
+<!-- CASE STUDIES PAGE -->
+<section class="casePage">
 
-<section id="welcome">
-  <div>Welcome to my portfolio</div>
-  <div class="menuToggle" id="menuToggle">
-    <div class="slider"></div>
-    <span>Case Studies</span>
-    <span>About</span>
+  <div class="cases">
+    <div class="case"><span>Case Study 1</span><div class="caseContent"></div></div>
+    <div class="case"><span>Case Study 2</span><div class="caseContent"></div></div>
+    <div class="case"><span>Case Study 3</span><div class="caseContent"></div></div>
+    <div class="case"><span>Case Study 4</span><div class="caseContent"></div></div>
+    <div class="case"><span>Case Study 5</span><div class="caseContent"></div></div>
+    <div class="case"><span>Case Study 6</span><div class="caseContent"></div></div>
   </div>
+
 </section>
 
-<div id="curtain"></div>
+<!-- ICON TOGGLE -->
+<div class="iconToggle">
+  <i class="fa-solid fa-layer-group" title="Case Studies"></i>
+  <i class="fa-solid fa-user" title="About"></i>
+</div>
 
-<script>
-/* ---------- TYPE INTRO ---------- */
-const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
-let l=0,c=0;
-const intro=document.getElementById("intro");
-
-function type(){
- if(c<lines[l].length){
-  intro.textContent+=lines[l][c++];
-  setTimeout(type,90);
- }else{
-  if(l<lines.length-1){setTimeout(erase,600);}
-  else{setTimeout(showWelcome,500);}
- }
-}
-function erase(){
- if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
- else{l++;type();}
-}
-function showWelcome(){
- document.getElementById("hero").remove();
- document.getElementById("welcome").style.opacity=1;
-}
-
-/* ---------- PAGE SYSTEM ---------- */
-const curtain=document.getElementById("curtain");
-const toggle=document.getElementById("menuToggle");
-let currentPage=null;
-
-function iconToggle(){
- const nav=document.createElement("div");
- nav.className="iconToggle";
- nav.innerHTML=`
-   <i class="fa-solid fa-layer-group" id="cs"></i>
-   <i class="fa-solid fa-user" id="ab"></i>
- `;
- document.body.appendChild(nav);
- document.getElementById("cs").onclick=()=>loadPage("Case Studies");
- document.getElementById("ab").onclick=()=>loadPage("About");
-}
-
-function createCaseStudies(){
- return `
-   <div class="caseContainer">
-   ${[1,2,3,4,5,6].map(n=>`
-     <div class="caseRow">
-       Case Study ${n}
-       <div class="caseExpand"></div>
-     </div>
-   `).join('')}
-   </div>
- `;
-}
-
-function loadPage(title){
- curtain.classList.add("show");
-
- setTimeout(()=>{
-  document.body.style.background="#111";
-  document.getElementById("welcome").style.display="none";
-
-  if(currentPage) currentPage.remove();
-
-  const p=document.createElement("section");
-  p.className="page";
-
-  if(title==="Case Studies"){
-    p.innerHTML=createCaseStudies();
-  }else{
-    p.innerHTML="<div style='font-size:4rem'>About</div>";
-  }
-
-  document.body.appendChild(p);
-  setTimeout(()=>p.style.transform="translateX(0)",50);
-  currentPage=p;
-
-  iconToggle();
-
-  setTimeout(()=>curtain.classList.remove("show"),600);
- },700);
-}
-
-toggle.onclick=()=>{
- toggle.classList.toggle("active");
- if(toggle.classList.contains("active")){
-   loadPage("About");
- }else{
-   loadPage("Case Studies");
- }
-};
-
-window.onload=type;
-</script>
 </body>
 </html>
