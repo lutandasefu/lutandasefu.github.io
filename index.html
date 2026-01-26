@@ -179,6 +179,7 @@ section{
 
 <section id="about" class="page">About</section>
 
+<!-- Right toggle stays exactly as before -->
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
 
@@ -267,8 +268,6 @@ const toAbout = document.getElementById('toAbout');
 
 function setWelcomeActive(activeBtn, inactiveBtn){
   wFocus.style.transform = activeBtn === toCase ? "translateX(0)" : "translateX(100%)";
-
-  // force colors
   activeBtn.classList.add("active");
   activeBtn.querySelector("svg").style.stroke = "white";
   inactiveBtn.classList.remove("active");
