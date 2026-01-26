@@ -9,30 +9,23 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{overflow:hidden;font-family:'Sulphur Point',sans-serif;background:#e6e6e6;}
 
-/* ---------- Sections ---------- */
-section{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:transform 0.8s ease;}
-
 /* ---------- Typing Intro ---------- */
-#welcomeIntro{font-size:clamp(2rem,6vw,4rem);border-right:2px solid #111;animation:blink .7s step-end infinite;}
+#introSection{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#e6e6e6;z-index:3;transition:opacity 0.8s ease;}
+#intro{font-size:clamp(2rem,6vw,4rem);border-right:2px solid #111;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
 
-/* ---------- Welcome ---------- */
-#welcome{background:#e6e6e6;z-index:2;}
+/* ---------- Welcome Page ---------- */
+#welcome{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transform:translateY(50px);transition:opacity 0.8s ease, transform 0.8s ease;z-index:2;background:#e6e6e6;}
 .welcome-text{margin-top:20px;font-size:clamp(2.2rem,6vw,4rem);text-align:center;}
-
-/* ---------- Welcome Toggle ---------- */
 .welcome-toggle{display:flex;flex-direction:column;gap:20px;margin-top:30px;}
 .welcome-toggle button{width:70px;height:70px;border-radius:50%;border:2px solid #fff;background:#111;color:#fff;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
 .welcome-toggle button:hover{transform:scale(1.1);}
 .welcome-toggle svg{width:32px;height:32px;fill:white;}
 
 /* ---------- Case/About Pages ---------- */
-.page{background:#111;color:#fff;font-size:clamp(2rem,6vw,4rem);z-index:1;}
+.page{position:fixed;inset:0;background:#111;color:#fff;font-size:clamp(2rem,6vw,4rem);display:flex;justify-content:center;align-items:center;flex-direction:column;transform:translateX(100%);transition:transform 0.8s ease;z-index:1;}
+.page.show{transform:translateX(0);}
 .page-text{cursor:pointer;margin-bottom:20px;position:relative;}
-.page-horizontal{transform:translateX(100%);}
-.page-horizontal.show{transform:translateX(0);}
-.page-vertical{transform:translateY(100%);}
-.page-vertical.show{transform:translateY(0);}
 
 /* ---------- Case/About Toggle Right ---------- */
 .iconToggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);display:none;z-index:2000;}
@@ -57,9 +50,13 @@ section{position:fixed;inset:0;display:flex;flex-direction:column;justify-conten
 </head>
 <body>
 
-<!-- Welcome Section -->
+<!-- Phase 1: Typing Intro -->
+<section id="introSection">
+  <div id="intro"></div>
+</section>
+
+<!-- Phase 2: Welcome Page -->
 <section id="welcome">
-  <div id="welcomeIntro"></div>
   <div class="welcome-text">Welcome to my portfolio</div>
   <div class="welcome-toggle">
     <button id="welcomeCaseIcon" title="Case Studies">
@@ -71,7 +68,7 @@ section{position:fixed;inset:0;display:flex;flex-direction:column;justify-conten
   </div>
 </section>
 
-<!-- Case/About Toggle -->
+<!-- Phase 3: Case/About Toggle Right -->
 <div class="iconToggle" id="iconToggle">
   <div class="switch">
     <div class="switch-focus" id="switchFocus"></div>
@@ -85,12 +82,12 @@ section{position:fixed;inset:0;display:flex;flex-direction:column;justify-conten
 </div>
 
 <!-- Case Page -->
-<section id="case" class="page page-horizontal">
+<section id="case" class="page">
   <div class="page-text" id="caseText">Case Studies</div>
 </section>
 
 <!-- About Page -->
-<section id="about" class="page page-horizontal">
+<section id="about" class="page">
   <div class="page-text">About</div>
 </section>
 
@@ -100,12 +97,16 @@ document.addEventListener("DOMContentLoaded",function(){
 // ---------- Typing Intro ----------
 const lines=["Hey, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
-const intro=document.getElementById("welcomeIntro");
-function type(){if(c<lines[l].length){intro.textContent+=lines[l][c++];setTimeout(type,90);}else{if(l<lines.length-1){setTimeout(erase,600);}else{return;}}}
+const intro=document.getElementById("intro");
+function type(){if(c<lines[l].length){intro.textContent+=lines[l][c++];setTimeout(type,90);}else{if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,500);}}}
 function erase(){if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}else{l++;type();}}
+function showWelcome(){
+  document.getElementById("introSection").style.opacity=0;
+  setTimeout(()=>{document.getElementById("introSection").style.display="none";document.getElementById("welcome").style.opacity=1;document.getElementById("welcome").style.transform="translateY(0)";},800);
+}
 type();
 
-// ---------- Welcome toggle ----------
+// ---------- Welcome Toggle ----------
 const wCase=document.getElementById("welcomeCaseIcon");
 const wAbout=document.getElementById("welcomeAboutIcon");
 const casePage=document.getElementById("case");
@@ -116,27 +117,26 @@ const caseIcon=document.getElementById("caseIcon");
 const aboutIcon=document.getElementById("aboutIcon");
 
 function slideWelcome(targetPage){
-  document.getElementById("welcome").style.transform="translateY(-100%)";
+  const welcome=document.getElementById("welcome");
+  welcome.style.transform="translateY(-100%)";
   setTimeout(()=>{
     targetPage.classList.add("show");
     iconToggle.style.display="block";
     if(targetPage===casePage){setActiveToggle("case");}else{setActiveToggle("about");}
   },800);
 }
-
 wCase.onclick=()=>slideWelcome(casePage);
 wAbout.onclick=()=>slideWelcome(aboutPage);
 
-// ---------- Case/About toggle ----------
+// ---------- Case/About Toggle ----------
 function setActiveToggle(active){
   if(active==="case"){switchFocus.style.transform="translateY(0)";caseIcon.classList.add("active");aboutIcon.classList.remove("active");}
   else{switchFocus.style.transform="translateY(100%)";caseIcon.classList.remove("active");aboutIcon.classList.add("active");}
 }
+caseIcon.onclick=()=>{showPage(casePage);setActiveToggle("case");}
+aboutIcon.onclick=()=>{showPage(aboutPage);setActiveToggle("about");}
 
-caseIcon.onclick=()=>{showPage(casePage,"horizontal");setActiveToggle("case");}
-aboutIcon.onclick=()=>{showPage(aboutPage,"horizontal");setActiveToggle("about");}
-
-function showPage(page,dir){
+function showPage(page){
   page.classList.add("show");
   if(page===casePage){aboutPage.classList.remove("show");}else{casePage.classList.remove("show");}
 }
