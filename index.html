@@ -34,14 +34,12 @@ section{
 
 /* ---------- INTRO ---------- */
 #intro{
-  background:#e6e6e6;
   border-right:2px solid #111;
   animation:blink .7s step-end infinite;
 }
 @keyframes blink{50%{border-color:transparent;}}
 
 /* ---------- WELCOME ---------- */
-#welcome{background:#e6e6e6;}
 .welcome-switch{
   margin-top:40px;
   width:170px;
@@ -50,6 +48,7 @@ section{
   border-radius:50px;
   position:relative;
   display:flex;
+  border:2px solid #fff;
 }
 .focus{
   position:absolute;
@@ -65,16 +64,25 @@ section{
   flex:1;
   border:none;
   background:none;
-  font-size:26px;
   cursor:pointer;
-  color:black;
   z-index:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.welcome-switch svg{
+  width:26px;
+  height:26px;
+  stroke:black;
   transition:.3s;
 }
-.welcome-switch button.active{color:white;}
+.welcome-switch button.active svg{
+  stroke:white;
+}
 
 /* ---------- CASE / ABOUT ---------- */
 .page{background:#111;color:#fff;}
+
 .right-toggle{
   position:fixed;
   right:30px;
@@ -87,6 +95,7 @@ section{
   display:flex;
   flex-direction:column;
   overflow:hidden;
+  border:2px solid #fff;
 }
 .right-focus{
   position:absolute;
@@ -99,14 +108,21 @@ section{
   flex:1;
   border:none;
   background:none;
-  color:black;
-  font-size:26px;
-  z-index:1;
   cursor:pointer;
+  z-index:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.right-toggle svg{
+  width:26px;
+  height:26px;
+  stroke:black;
   transition:.3s;
 }
-.right-toggle button.active{color:white;}
-
+.right-toggle button.active svg{
+  stroke:white;
+}
 </style>
 </head>
 <body>
@@ -121,26 +137,47 @@ section{
     <div>Welcome to my portfolio</div>
     <div class="welcome-switch">
       <div class="focus" id="wFocus"></div>
-      <button id="toCase">📄</button>
-      <button id="toAbout">👤</button>
+
+      <!-- Pages Icon -->
+      <button id="toCase">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+          <rect x="3" y="4" width="14" height="14" rx="2"/>
+          <path d="M7 8h6M7 12h6M7 16h4"/>
+        </svg>
+      </button>
+
+      <!-- Person Icon -->
+      <button id="toAbout">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c2-4 14-4 16 0"/>
+        </svg>
+      </button>
+
     </div>
   </section>
 
-  <section id="case" class="page">
-    Case Studies
-  </section>
-
-  <section id="about" class="page">
-    About
-  </section>
-
+  <section id="case" class="page">Case Studies</section>
+  <section id="about" class="page">About</section>
 </div>
 
 <!-- Right Toggle -->
 <div class="right-toggle" id="rightToggle" style="display:none;">
   <div class="right-focus" id="rFocus"></div>
-  <button id="caseBtn">📄</button>
-  <button id="aboutBtn">👤</button>
+
+  <button id="caseBtn">
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+      <rect x="3" y="4" width="14" height="14" rx="2"/>
+      <path d="M7 8h6M7 12h6M7 16h4"/>
+    </svg>
+  </button>
+
+  <button id="aboutBtn">
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 20c2-4 14-4 16 0"/>
+    </svg>
+  </button>
 </div>
 
 <script>
@@ -164,7 +201,7 @@ function erase(){
 }
 type();
 
-/* ---------- Welcome Toggle ---------- */
+/* Welcome toggle */
 const wFocus=document.getElementById('wFocus');
 const toCase=document.getElementById('toCase');
 const toAbout=document.getElementById('toAbout');
@@ -184,7 +221,7 @@ toAbout.onclick=()=>{
   showRight("about");
 }
 
-/* ---------- Right Toggle ---------- */
+/* Right toggle */
 const right=document.getElementById("rightToggle");
 const rFocus=document.getElementById("rFocus");
 const caseBtn=document.getElementById("caseBtn");
