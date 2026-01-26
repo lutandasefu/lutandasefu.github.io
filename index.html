@@ -21,9 +21,9 @@ body{overflow:hidden;font-family:'Sulphur Point',sans-serif;background:#e6e6e6;}
 /* ---------- Welcome Toggle Switch ---------- */
 .welcome-switch{display:flex;align-items:center;justify-content:center;gap:0;position:relative;margin-top:30px;width:180px;height:70px;background:#fff;border-radius:45px;border:2px solid #fff;}
 .welcome-focus{position:absolute;top:0;left:0;width:50%;height:100%;background:#111;border-radius:45px;transition:transform 0.3s;}
-.welcome-switch button{flex:1;border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color 0.3s;}
-.welcome-switch button svg{width:32px;height:32px;fill:#000;transition:fill 0.3s;}
-.welcome-switch button.active svg{fill:#fff !important;}
+.welcome-switch button{flex:1;border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color 0.3s;color:black;}
+.welcome-switch button svg path{fill:currentColor;transition:fill 0.3s;}
+.welcome-switch button.active{color:white;}
 
 /* ---------- Case/About Pages ---------- */
 .page{position:fixed;inset:0;background:#111;color:#fff;font-size:clamp(2rem,6vw,4rem);display:flex;justify-content:center;align-items:center;flex-direction:column;transform:translateX(100%);transition:transform 0.8s ease;z-index:1;}
@@ -35,8 +35,8 @@ body{overflow:hidden;font-family:'Sulphur Point',sans-serif;background:#e6e6e6;}
 .switch{width:70px;height:150px;background:#fff;border-radius:45px;display:grid;grid-template-rows:1fr 1fr;position:relative;overflow:hidden;border:2px solid #fff;}
 .switch-focus{position:absolute;top:0;left:0;width:100%;height:50%;background:#000;border-radius:45px;transition:transform 0.3s;}
 .switch-btn{border:none;background:transparent;color:black;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color 0.3s;}
-.switch-btn svg{width:32px;height:32px;fill:#000;transition:fill 0.3s;}
-.switch-btn.active svg{fill:#fff !important;}
+.switch-btn svg path{fill:currentColor;transition:fill 0.3s;}
+.switch-btn.active{color:white;}
 
 /* ---------- Carousel ---------- */
 .carousel{display:none;margin-top:20px;width:90%;max-width:600px;overflow:hidden;border-radius:15px;position:relative;}
