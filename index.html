@@ -12,7 +12,7 @@
 body{
   font-family:'Sulphur Point',sans-serif;
   overflow:hidden;
-  background:#111; /* Dark theme background */
+  background:#111; /* dark theme background */
   color:white;
 }
 
@@ -113,7 +113,7 @@ section{
   left:0;
   width:100%;
   height:50%;
-  background:#111;
+  background:#111; /* black switch */
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
@@ -234,15 +234,13 @@ section{
 const intro=document.getElementById("intro");
 const welcome=document.getElementById("welcome");
 const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
-const colors=["#fcab19","#f3701f","#91489c","#a67fba","#cd2579","#f0154f","#295cab","#568ecd","#01ac50","#01ac50"];
 let l=0,c=0;
 
 function type(){
  if(c<lines[l].length){
-   // Create span with colored letter
    const span=document.createElement('span');
    span.textContent = lines[l][c++];
-   span.style.color = colors[c % colors.length];
+   span.style.color = "white"; // typing text is white
    intro.appendChild(span);
    setTimeout(type,80);
  }else{
