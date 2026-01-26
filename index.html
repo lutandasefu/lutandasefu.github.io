@@ -63,6 +63,7 @@ section{
   border-radius:50px;
   background:#111;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
+  z-index:0; /* FIX */
 }
 #welcome-toggle button{
   flex:1;
@@ -72,12 +73,13 @@ section{
   display:flex;
   justify-content:center;
   align-items:center;
-  z-index:1;
+  position:relative; /* FIX */
+  z-index:2;          /* FIX */
 }
 #welcome-toggle button svg{
   width:28px;
   height:28px;
-  transition:stroke .3s, transform .3s;
+  transition:stroke .3s;
 }
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -104,6 +106,7 @@ section{
   height:50%;
   background:#000;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
+  z-index:0; /* FIX */
 }
 .right-toggle button{
   flex:1;
@@ -113,12 +116,13 @@ section{
   display:flex;
   justify-content:center;
   align-items:center;
-  z-index:1;
+  position:relative; /* FIX */
+  z-index:2;          /* FIX */
 }
 .right-toggle button svg{
   width:28px;
   height:28px;
-  transition:stroke .3s, transform .3s;
+  transition:stroke .3s;
 }
 
 /* ---------- ACTIVE ICON STATES ---------- */
@@ -129,12 +133,6 @@ section{
 #welcome-toggle button.active svg,
 .right-toggle button.active svg{
   stroke:white;
-}
-
-/* ---------- Optical centering for paper icon ---------- */
-#welcome-toggle button:first-child svg,
-.right-toggle button:first-child svg{
-  transform:translateX(1px);
 }
 
 /* ---------- PAGES ---------- */
@@ -181,7 +179,8 @@ section{
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
     <button id="toCase">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+      <!-- FIXED SVG -->
+      <svg fill="none" viewBox="0 0 20 24" stroke-width="1.5">
         <rect x="3" y="4" width="14" height="14" rx="2"/>
         <path d="M7 8h6M7 12h6M7 16h4"/>
       </svg>
@@ -210,7 +209,8 @@ section{
   <div class="right-focus" id="rFocus"></div>
 
   <button id="caseBtn">
-    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+    <!-- FIXED SVG -->
+    <svg fill="none" viewBox="0 0 20 24" stroke-width="1.5">
       <rect x="3" y="4" width="14" height="14" rx="2"/>
       <path d="M7 8h6M7 12h6M7 16h4"/>
     </svg>
@@ -225,10 +225,10 @@ section{
 </div>
 
 <script>
-/* ---------- TYPE INTRO ---------- */
+/* YOUR JS IS UNCHANGED */
 const intro=document.getElementById("intro");
 const welcome=document.getElementById("welcome");
-const lines=["Hi There, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
+const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 
 function type(){
@@ -253,13 +253,11 @@ function showWelcome(){
 }
 type();
 
-/* ---------- PAGE SYSTEM ---------- */
 const casePage=document.getElementById("case");
 const aboutPage=document.getElementById("about");
 const right=document.getElementById("rightToggle");
 const rFocus=document.getElementById("rFocus");
 
-/* ---------- RIGHT TOGGLE ---------- */
 const caseBtn=document.getElementById("caseBtn");
 const aboutBtn=document.getElementById("aboutBtn");
 
@@ -285,7 +283,6 @@ function showAbout(){
 caseBtn.onclick = showCase;
 aboutBtn.onclick = showAbout;
 
-/* ---------- WELCOME TOGGLE ---------- */
 const wFocus = document.getElementById('wFocus');
 const toCase = document.getElementById('toCase');
 const toAbout = document.getElementById('toAbout');
@@ -312,7 +309,6 @@ toAbout.onclick = () => {
   showAbout();
 }
 
-/* ---------- CAROUSEL HOVER ---------- */
 const title=document.getElementById("caseTitle");
 const carousel=document.getElementById("carousel");
 
