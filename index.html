@@ -5,27 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Urbanist:wght@300&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;overflow:hidden;background:#0f1115;font-family:'JetBrains Mono', monospace;color:#fff;}
 
-/* ---------- FUTURISTIC INTRO ---------- */
+/* ---------- INTRO ---------- */
 #intro{
   position:fixed;
   inset:0;
-  background:#0f1115;
+  overflow:hidden;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:flex-start;
   padding-left:8vw;
   gap:2rem;
-  overflow:hidden;
   perspective:1200px;
   z-index:5;
 }
-
 #introCanvas{
   position:absolute;
   inset:0;
@@ -151,8 +148,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1115;font-family:
   z-index:2;
 }
 .right-toggle button svg{
-  width:28px;
-  height:28px;
+  width:28px; height:28px;
   transform:translateY(2px);
   stroke:#fff;
   fill:none;
@@ -204,7 +200,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1115;font-family:
   <canvas id="introCanvas"></canvas>
   <div class="intro-line" id="l1">Hi, I’m Lutanda</div>
   <div class="intro-line" id="l2">A UI/UX Designer</div>
-  <div class="intro-line" id="l3">Crafting intuitive, futuristic experiences</div>
+  <div class="intro-line" id="l3">Crafting futuristic, intuitive experiences</div>
 </section>
 
 <!-- ---------- WELCOME ---------- -->
@@ -257,31 +253,45 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0f1115;font-family:
 </div>
 
 <script>
-// ---------- PARTICLE NETWORK ----------
-const canvas = document.getElementById('introCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// ---------- INTERACTIVE GRADIENT + PARTICLES ----------
+const canvas=document.getElementById('introCanvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
-const particles = Array.from({length:60}, ()=>{
+let mouseX=0, mouseY=0;
+document.addEventListener('mousemove', e=>{mouseX=e.clientX; mouseY=e.clientY;});
+
+const particles=Array.from({length:60},()=>{
   return {x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, dx:(Math.random()-0.5)*0.4, dy:(Math.random()-0.5)*0.4};
 });
 
-function drawParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+function drawBackground(){
+  const time=Date.now()*0.0002;
+
+  // Dynamic gradient
+  const grad=ctx.createLinearGradient(
+    0 + (mouseX/canvas.width)*200, 0 + (mouseY/canvas.height)*200,
+    canvas.width, canvas.height
+  );
+  grad.addColorStop(0, `hsl(${(time*360)%360}, 70%, 20%)`);
+  grad.addColorStop(0.5, `hsl(${((time+0.3)*360)%360}, 60%, 15%)`);
+  grad.addColorStop(1, `hsl(${((time+0.6)*360)%360}, 80%, 10%)`);
+  ctx.fillStyle=grad;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // Draw particles
   particles.forEach(p=>{
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(0,255,255,0.05)';
+    ctx.fillStyle='rgba(0,255,255,0.08)';
     ctx.fill();
     p.x+=p.dx; p.y+=p.dy;
-    if(p.x<0)p.x=canvas.width;
-    if(p.x>canvas.width)p.x=0;
-    if(p.y<0)p.y=canvas.height;
-    if(p.y>canvas.height)p.y=0;
+    if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
   });
 
-  // Connect close particles
+  // Connect particles
   for(let i=0;i<particles.length;i++){
     for(let j=i+1;j<particles.length;j++){
       let dx=particles[i].x-particles[j].x;
@@ -291,15 +301,15 @@ function drawParticles(){
         ctx.beginPath();
         ctx.moveTo(particles[i].x,particles[i].y);
         ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.strokeStyle='rgba(0,255,255,0.02)';
+        ctx.strokeStyle='rgba(0,255,255,0.03)';
         ctx.stroke();
       }
     }
   }
 
-  requestAnimationFrame(drawParticles);
+  requestAnimationFrame(drawBackground);
 }
-drawParticles();
+drawBackground();
 
 // ---------- LINES ----------
 const l1=document.getElementById("l1");
@@ -397,7 +407,7 @@ const title=document.getElementById("caseTitle");
 const carousel=document.getElementById("carousel");
 title.onmouseenter=()=>carousel.classList.add("showCarousel");
 title.onmouseleave=()=>carousel.classList.remove("showCarousel");
-
 </script>
+
 </body>
 </html>
