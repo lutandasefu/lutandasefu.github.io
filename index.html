@@ -9,11 +9,15 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
   font-family:'Sulphur Point',sans-serif;
   overflow:hidden;
-  background:#e6e6e6;
 }
+
+/* Dynamic backgrounds */
+body.grey-bg{ background:#e6e6e6; }
+body.black-bg{ background:#111; }
 
 /* ---------- INTRO ---------- */
 #intro{
@@ -43,12 +47,12 @@ section{
   z-index:4;
 }
 
-/* ---------- WELCOME TOGGLE (SPACING FIX) ---------- */
+/* ---------- WELCOME TOGGLE ---------- */
 #welcome-toggle{
   margin-top:40px;
   display:flex;
   position:relative;
-  width:190px;         /* slightly wider */
+  width:190px;
   height:60px;
   background:#fff;
   border-radius:50px;
@@ -58,7 +62,7 @@ section{
   position:absolute;
   top:6px;
   left:6px;
-  width:78px;          /* switch matches icon area */
+  width:78px;
   height:48px;
   border-radius:50px;
   background:#111;
@@ -74,10 +78,10 @@ section{
   align-items:center;
   position:relative;
   z-index:2;
-  padding:0 10px;      /* added horizontal breathing room */
+  padding:0 10px;
 }
 #welcome-toggle button svg{
-  width:24px;          /* slightly smaller icon for balance */
+  width:24px;
   height:24px;
   stroke:black;
   fill:none;
@@ -85,7 +89,6 @@ section{
 }
 #welcome-toggle button.active svg{
   stroke:white;
-  fill:none;
 }
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -169,7 +172,8 @@ section{
 }
 </style>
 </head>
-<body>
+
+<body class="grey-bg">
 
 <section id="intro"></section>
 
@@ -179,22 +183,19 @@ section{
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
 
-    <!-- Case Studies Button -->
     <button id="toCase">
-      <svg fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="1.5">
+      <svg viewBox="0 0 24 24" stroke-width="1.5">
         <rect x="3" y="4" width="14" height="14" rx="2"/>
         <path d="M7 8h6M7 12h6M7 16h4"/>
       </svg>
     </button>
 
-    <!-- About Button -->
     <button id="toAbout">
-      <svg fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="1.5">
+      <svg viewBox="0 0 24 24" stroke-width="1.5">
         <circle cx="12" cy="8" r="4"/>
         <path d="M4 20c2-4 14-4 16 0"/>
       </svg>
     </button>
-
   </div>
 </section>
 
@@ -213,14 +214,14 @@ section{
   <div class="right-focus" id="rFocus"></div>
 
   <button id="caseBtn">
-    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+    <svg viewBox="0 0 24 24" stroke-width="1.5">
       <rect x="3" y="4" width="14" height="14" rx="2"/>
       <path d="M7 8h6M7 12h6M7 16h4"/>
     </svg>
   </button>
 
   <button id="aboutBtn">
-    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+    <svg viewBox="0 0 24 24" stroke-width="1.5">
       <circle cx="12" cy="8" r="4"/>
       <path d="M4 20c2-4 14-4 16 0"/>
     </svg>
@@ -265,7 +266,13 @@ function setActive(active, inactive){
   inactive.classList.remove("active");
 }
 
+function activateBlackBg(){
+  document.body.classList.remove("grey-bg");
+  document.body.classList.add("black-bg");
+}
+
 function showCase(){
+  activateBlackBg();
   casePage.style.transform="translateX(0)";
   aboutPage.style.transform="translateX(100%)";
   rFocus.style.transform="translateY(0)";
@@ -273,6 +280,7 @@ function showCase(){
 }
 
 function showAbout(){
+  activateBlackBg();
   aboutPage.style.transform="translateX(0)";
   casePage.style.transform="translateX(-100%)";
   rFocus.style.transform="translateY(100%)";
@@ -286,7 +294,6 @@ const wFocus = document.getElementById('wFocus');
 const toCase = document.getElementById('toCase');
 const toAbout = document.getElementById('toAbout');
 
-/* DEFAULT ACTIVE ON LOAD */
 toCase.classList.add("active");
 
 function setWelcomeActive(activeBtn, inactiveBtn){
@@ -319,3 +326,4 @@ title.onmouseleave=()=>carousel.classList.remove("showCarousel");
 
 </body>
 </html>
+
