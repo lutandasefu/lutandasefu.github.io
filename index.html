@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slide Reveal Intro Test</title>
+<title>Word Slide Intro</title>
 <style>
   body {
     margin: 0;
@@ -17,48 +17,60 @@
     color: #fff;
   }
 
-  /* Mask wrapper for slide effect */
-  .line-mask {
-    overflow: hidden;
-    margin-bottom: 1rem;
+  .slide-wrapper {
+    display: flex;
+    gap: 1rem;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700;
   }
 
-  .intro-line {
-    transform: translateY(120%);
+  .word {
+    display: inline-block;
+    overflow: hidden;
+    height: 1em;
+  }
+
+  .word span {
+    display: inline-block;
+    transform: translateY(100%);
     opacity: 0;
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 600;
     transition: transform 1s cubic-bezier(.22,1,.36,1),
                 opacity 1s ease;
+  }
+
+  .word.interactive span {
+    transform: translateY(-100%);
   }
 
   .gradient {
     background: linear-gradient(90deg,#00f0ff,#ff00ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    display: inline-block;
+  }
+
+  /* Slide-in active class */
+  .slide-in span {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
   }
 </style>
 </head>
 <body>
 
-<div>
-  <div class="line-mask"><div class="intro-line" id="l1">Hi, I’m Lutanda</div></div>
-  <div class="line-mask"><div class="intro-line gradient" id="l2">A UI/UX Designer</div></div>
-  <div class="line-mask"><div class="intro-line" id="l3">Crafting futuristic, intuitive experiences</div></div>
+<div class="slide-wrapper">
+  <div class="word interactive"><span class="gradient">Interactive</span></div>
+  <div class="word development"><span>Development</span></div>
 </div>
 
 <script>
-  function slideInLine(line, delay) {
-    setTimeout(() => {
-      line.style.transform = 'translateY(0)';
-      line.style.opacity = '1';
-    }, delay);
-  }
+  const interactive = document.querySelector('.interactive');
+  const development = document.querySelector('.development');
 
-  slideInLine(document.getElementById('l1'), 400);
-  slideInLine(document.getElementById('l2'), 1200);
-  slideInLine(document.getElementById('l3'), 2200);
+  // Start the animation after a short delay
+  setTimeout(() => {
+    interactive.classList.add('slide-in');
+    development.classList.add('slide-in');
+  }, 500);
 </script>
 
 </body>
