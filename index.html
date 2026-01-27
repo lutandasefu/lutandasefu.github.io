@@ -14,12 +14,9 @@ body{
   font-family:'Sulphur Point',sans-serif;
   overflow:hidden;
 }
+body.grey-bg{background:#e6e6e6;}
+body.black-bg{background:#111;}
 
-/* Dynamic backgrounds */
-body.grey-bg{ background:#e6e6e6; }
-body.black-bg{ background:#111; }
-
-/* ---------- SECTIONS ---------- */
 section{
   position:fixed;
   inset:0;
@@ -28,168 +25,79 @@ section{
   align-items:center;
   flex-direction:column;
   text-align:center;
-  padding:20px;
   font-size:clamp(2.2rem,6vw,4.4rem);
 }
 
-/* ---------- INTRO (FIXED CURSOR) ---------- */
-#intro{
-  z-index:5;
+/* ---------- INTRO FIX ---------- */
+#introText{
   position:relative;
-}
-
-/* Blinking cursor attached to text */
-#intro::after{
-  content:"";
   display:inline-block;
+}
+#introText::after{
+  content:"";
   width:2px;
   height:1em;
   background:#111;
+  display:inline-block;
   margin-left:6px;
   animation:blink .7s step-end infinite;
-  vertical-align:bottom;
 }
-
-@keyframes blink{
-  50%{opacity:0;}
-}
+@keyframes blink{50%{opacity:0;}}
 
 /* ---------- WELCOME ---------- */
-#welcome{
-  opacity:0;
-  transition:opacity .8s ease, transform .8s ease;
-  z-index:4;
-}
+#welcome{opacity:0;transition:.8s;z-index:4;}
 
-/* ---------- WELCOME TOGGLE ---------- */
 #welcome-toggle{
   margin-top:40px;
   display:flex;
   position:relative;
-  width:190px;
-  height:60px;
-  background:#fff;
-  border-radius:50px;
-  border:2px solid #fff;
+  width:190px;height:60px;
+  background:#fff;border-radius:50px;border:2px solid #fff;
 }
 #welcome-toggle .focus{
-  position:absolute;
-  top:6px;
-  left:6px;
-  width:78px;
-  height:48px;
-  border-radius:50px;
-  background:#111;
-  transition:transform .35s cubic-bezier(.77,0,.18,1);
+  position:absolute;top:6px;left:6px;
+  width:78px;height:48px;border-radius:50px;
+  background:#111;transition:.35s cubic-bezier(.77,0,.18,1);
 }
 #welcome-toggle button{
-  flex:1;
-  border:none;
-  background:none;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  z-index:2;
-  padding:0 10px;
+  flex:1;border:none;background:none;cursor:pointer;
+  display:flex;justify-content:center;align-items:center;z-index:2;
 }
-#welcome-toggle button svg{
-  width:24px;
-  height:24px;
-  stroke:black;
-  fill:none;
-  transition:.3s;
-}
-#welcome-toggle button.active svg{
-  stroke:white;
-}
+#welcome-toggle svg{width:24px;height:24px;stroke:black;fill:none;transition:.3s;}
+#welcome-toggle button.active svg{stroke:white;}
 
 /* ---------- RIGHT TOGGLE ---------- */
 .right-toggle{
-  position:fixed;
-  right:30px;
-  top:50%;
-  transform:translateY(-50%);
-  width:75px;
-  height:160px;
-  background:#fff;
-  border-radius:45px;
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
-  border:2px solid #fff;
-  z-index:10;
+  position:fixed;right:30px;top:50%;transform:translateY(-50%);
+  width:75px;height:160px;background:#fff;border-radius:45px;
+  display:none;flex-direction:column;border:2px solid #fff;z-index:10;
 }
-.right-toggle .right-focus{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:50%;
-  background:#111;
-  transition:transform .35s cubic-bezier(.77,0,.18,1);
+.right-focus{
+  position:absolute;width:100%;height:50%;background:#111;
+  transition:.35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
-  flex:1;
-  border:none;
-  background:none;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  z-index:2;
+  flex:1;border:none;background:none;cursor:pointer;
+  display:flex;justify-content:center;align-items:center;z-index:2;
 }
-.right-toggle button svg{
-  width:28px;
-  height:28px;
-  stroke:black;
-  fill:none;
-  transition:.3s;
-}
-.right-toggle button.active svg{
-  stroke:white;
-}
+.right-toggle svg{width:28px;height:28px;stroke:black;fill:none;}
+.right-toggle button.active svg{stroke:white;}
 
 /* ---------- PAGES ---------- */
 .page{
-  background:#111;
-  color:white;
+  background:#111;color:#fff;
   transform:translateX(100%);
-  transition:transform .8s cubic-bezier(.77,0,.18,1);
+  transition:.8s cubic-bezier(.77,0,.18,1);
   z-index:3;
-}
-
-/* ---------- CAROUSEL ---------- */
-.carousel{
-  position:absolute;
-  bottom:10%;
-  width:80%;
-  height:200px;
-  opacity:0;
-  transform:scale(.8);
-  transition:.5s ease;
-  display:flex;
-  gap:20px;
-  justify-content:center;
-}
-.carousel img{
-  width:200px;
-  height:120px;
-  object-fit:cover;
-  border-radius:12px;
-}
-.showCarousel{
-  opacity:1;
-  transform:scale(1);
 }
 </style>
 </head>
 
 <body class="grey-bg">
 
-<section id="intro"></section>
+<section id="intro">
+  <div id="introText"></div>
+</section>
 
 <section id="welcome">
   <div>Welcome to my portfolio</div>
@@ -213,27 +121,17 @@ section{
   </div>
 </section>
 
-<section id="case" class="page">
-  <div id="caseTitle">Case Studies</div>
-  <div class="carousel" id="carousel">
-    <img src="https://picsum.photos/300/200?1">
-    <img src="https://picsum.photos/300/200?2">
-    <img src="https://picsum.photos/300/200?3">
-  </div>
-</section>
-
+<section id="case" class="page">Case Studies</section>
 <section id="about" class="page">About</section>
 
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
-
   <button id="caseBtn">
     <svg viewBox="0 0 24 24" stroke-width="1.5">
       <rect x="3" y="4" width="14" height="14" rx="2"/>
       <path d="M7 8h6M7 12h6M7 16h4"/>
     </svg>
   </button>
-
   <button id="aboutBtn">
     <svg viewBox="0 0 24 24" stroke-width="1.5">
       <circle cx="12" cy="8" r="4"/>
@@ -243,14 +141,13 @@ section{
 </div>
 
 <script>
-const intro=document.getElementById("intro");
-const welcome=document.getElementById("welcome");
+const introText=document.getElementById("introText");
 const lines=["Hi there...","I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
 
 function type(){
  if(c<lines[l].length){
-   intro.textContent+=lines[l][c++];
+   introText.textContent+=lines[l][c++];
    setTimeout(type,80);
  }else{
    if(l<lines.length-1){setTimeout(erase,600);}
@@ -258,14 +155,57 @@ function type(){
  }
 }
 function erase(){
- if(c>0){intro.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
+ if(c>0){introText.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}
  else{l++;type();}
 }
 function showWelcome(){
- intro.style.opacity=0;
- setTimeout(()=>{intro.remove();welcome.style.opacity=1;},600);
+ document.getElementById("intro").style.opacity=0;
+ setTimeout(()=>{document.getElementById("welcome").style.opacity=1;},600);
 }
 type();
+
+/* NAVIGATION */
+const casePage=document.getElementById("case");
+const aboutPage=document.getElementById("about");
+const rFocus=document.getElementById("rFocus");
+const right=document.getElementById("rightToggle");
+
+function activate(btnA,btnB,move){
+ btnA.classList.add("active");
+ btnB.classList.remove("active");
+ rFocus.style.transform=move;
+ document.body.classList.remove("grey-bg");
+ document.body.classList.add("black-bg");
+}
+
+document.getElementById("toCase").onclick=()=>{
+ document.getElementById("wFocus").style.transform="translateX(0)";
+ right.style.display="flex";
+ casePage.style.transform="translateX(0)";
+ activate(caseBtn,aboutBtn,"translateY(0)");
+}
+
+document.getElementById("toAbout").onclick=()=>{
+ document.getElementById("wFocus").style.transform="translateX(100%)";
+ right.style.display="flex";
+ aboutPage.style.transform="translateX(0)";
+ activate(aboutBtn,caseBtn,"translateY(100%)");
+}
+
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
+
+caseBtn.onclick=()=>{
+ casePage.style.transform="translateX(0)";
+ aboutPage.style.transform="translateX(100%)";
+ activate(caseBtn,aboutBtn,"translateY(0)");
+}
+
+aboutBtn.onclick=()=>{
+ aboutPage.style.transform="translateX(0)";
+ casePage.style.transform="translateX(-100%)";
+ activate(aboutBtn,caseBtn,"translateY(100%)");
+}
 </script>
 
 </body>
