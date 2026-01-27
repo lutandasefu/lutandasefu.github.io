@@ -1,338 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutanda | Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magnifying Glass Text</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
-body.grey-bg{background:#e6e6e6;}
-body.black-bg{background:#111;}
+  <!-- Outfit Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
 
-/* ---------- INTRO ---------- */
-#intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:5;
-}
-#introTextWrapper{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:clamp(2.2rem,6vw,4.4rem);
-}
-#introText { display:inline-block; }
-.cursor {
-  width:2px;
-  height:1em;
-  background:#111;
-  display:inline-block;
-  margin-left:6px;
-  animation: blink 0.7s step-end infinite;
-}
-@keyframes blink{50%{opacity:0;}}
-
-/* ---------- WELCOME ---------- */
-#welcome{
-  display:flex; flex-direction:column;
-  justify-content:center; align-items:center;
-  min-height:100vh;
-  opacity:0;
-  transition:opacity .8s ease, transform .8s ease;
-  z-index:4;
-}
-#welcome div{
-  margin-bottom:30px; /* Reduced from 50px */
-  font-size:clamp(3rem,6vw,5rem);
-  color:#111;
-  text-align:center;
-  font-weight:500;
-}
-
-/* ---------- WELCOME TOGGLE ---------- */
-#welcome-toggle{
-  display:flex;
-  position:relative;
-  width:190px; height:60px;
-  background:#fff;
-  border-radius:50px;
-  border:2px solid #fff;
-}
-#welcome-toggle .focus{
-  position:absolute; top:6px; left:6px;
-  width:78px; height:48px; border-radius:50px;
-  background:#111;
-  transition:transform .35s cubic-bezier(.77,0,.18,1);
-}
-#welcome-toggle button{
-  flex:1;
-  border:none;
-  background:none;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:2;
-  padding:0;
-}
-#welcome-toggle button svg{
-  width:24px; height:24px;
-  stroke:#111;
-  fill:none;
-  transition:stroke .3s ease;
-}
-#welcome-toggle button.active svg{
-  stroke:#fff;
-}
-
-/* ---------- RIGHT TOGGLE ---------- */
-.right-toggle{
-  position:fixed;
-  right:30px; top:50%;
-  transform:translateY(-50%);
-  width:75px; height:160px;
-  background:#fff;
-  border-radius:45px;
-  display:none;
-  flex-direction:column;
-  border:2px solid #fff;
-  z-index:10;
-}
-.right-toggle .right-focus{
-  position:absolute; top:0; left:0;
-  width:100%; height:50%;
-  background:#111;
-  border-radius:45px; /* Rounded movable focus */
-  transition:transform .35s cubic-bezier(.77,0,.18,1);
-}
-.right-toggle button{
-  flex:1;
-  border:none;
-  background:none;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:2;
-}
-.right-toggle button svg{
-  width:28px; height:28px;
-  stroke:#111;
-  fill:none;
-  transition:stroke .3s ease;
-}
-.right-toggle button.active svg{
-  stroke:#fff;
-}
-
-/* ---------- PAGES ---------- */
-.page{
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:#111; color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:clamp(2rem,5vw,3rem);
-  transform:translateX(100%);
-  transition:.8s cubic-bezier(.77,0,.18,1);
-  z-index:3;
-}
-
-/* ---------- CAROUSEL ---------- */
-.carousel{
-  position:absolute;
-  bottom:10%; width:80%; height:200px;
-  opacity:0; transform:scale(.8);
-  transition:.5s ease;
-  display:flex; gap:20px; justify-content:center;
-}
-.carousel img{
-  width:200px; height:120px;
-  object-fit:cover;
-  border-radius:12px;
-}
-.showCarousel{
-  opacity:1;
-  transform:scale(1);
-}
-</style>
-</head>
-
-<body class="grey-bg">
-
-<!-- ---------- INTRO ---------- -->
-<section id="intro">
-  <div id="introTextWrapper">
-    <span id="introText"></span>
-    <span class="cursor"></span>
-  </div>
-</section>
-
-<!-- ---------- WELCOME ---------- -->
-<section id="welcome">
-  <div>Welcome to my portfolio</div>
-  <div id="welcome-toggle">
-    <div class="focus" id="wFocus"></div>
-    <button id="toCase">
-      <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
-        <rect x="3" y="4" width="14" height="14" rx="2"/>
-        <path d="M7 8h6M7 12h6M7 16h4"/>
-      </svg>
-    </button>
-    <button id="toAbout">
-      <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
-        <circle cx="12" cy="8" r="4"/>
-        <path d="M4 20c2-4 14-4 16 0"/>
-      </svg>
-    </button>
-  </div>
-</section>
-
-<!-- ---------- PAGES ---------- -->
-<section id="case" class="page">
-  <div id="caseTitle">Case Studies</div>
-  <div class="carousel" id="carousel">
-    <img src="https://picsum.photos/300/200?1">
-    <img src="https://picsum.photos/300/200?2">
-    <img src="https://picsum.photos/300/200?3">
-  </div>
-</section>
-
-<section id="about" class="page">About</section>
-
-<!-- ---------- RIGHT TOGGLE ---------- -->
-<div class="right-toggle" id="rightToggle">
-  <div class="right-focus" id="rFocus"></div>
-  <button id="caseBtn">
-    <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
-      <rect x="3" y="4" width="14" height="14" rx="2"/>
-      <path d="M7 8h6M7 12h6M7 16h4"/>
-    </svg>
-  </button>
-  <button id="aboutBtn">
-    <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
-      <circle cx="12" cy="8" r="4"/>
-      <path d="M4 20c2-4 14-4 16 0"/>
-    </svg>
-  </button>
-</div>
-
-<script>
-/* ---------- TYPING INTRO WITH CURSOR ---------- */
-const introText = document.getElementById("introText");
-const welcome = document.getElementById("welcome");
-const lines = ["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
-let l=0, c=0;
-
-function type() {
-  if(c < lines[l].length){
-    introText.textContent += lines[l][c++];
-    setTimeout(type, 80);
-  } else {
-    if(l < lines.length - 1){
-      setTimeout(erase, 600);
-    } else {
-      setTimeout(showWelcome, 800);
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000; /* black background */
+      font-family: 'Outfit', sans-serif;
+      overflow: hidden;
     }
-  }
-}
 
-function erase() {
-  if(c > 0){
-    introText.textContent = lines[l].substring(0, --c);
-    setTimeout(erase, 40);
-  } else {
-    l++; 
-    type();
-  }
-}
+    .text-container {
+      position: relative;
+      font-size: 4rem;
+      color: #fff;
+      letter-spacing: 0.2rem;
+      cursor: none; /* hide default cursor */
+      user-select: none;
+    }
 
-function showWelcome(){
-  intro.style.opacity = 0;
-  setTimeout(()=>{
-    intro.remove();
-    welcome.style.opacity = 1;
-  },600);
-}
+    /* Each letter as a span */
+    .letter {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
 
-type();
+    /* Magnifier overlay */
+    .magnifier {
+      position: absolute;
+      pointer-events: none; /* so it doesn't block hover */
+      border-radius: 50%;
+      border: 2px solid #fff;
+      width: 150px;
+      height: 150px;
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
 
-/* ---------- NAVIGATION ---------- */
-const casePage = document.getElementById("case");
-const aboutPage = document.getElementById("about");
-const right = document.getElementById("rightToggle");
-const rFocus = document.getElementById("rFocus");
-const wFocus = document.getElementById("wFocus");
+    .magnifier span {
+      position: relative;
+      display: inline-block;
+      font-size: 4rem;
+      color: #fff;
+      transform-origin: center center;
+      transition: transform 0.1s ease;
+    }
 
-const caseBtn = document.getElementById("caseBtn");
-const aboutBtn = document.getElementById("aboutBtn");
-const toCase = document.getElementById("toCase");
-const toAbout = document.getElementById("toAbout");
+  </style>
+</head>
+<body>
 
-toCase.classList.add("active");
+  <div class="text-container" id="textContainer">
+    <!-- Letters injected via JS -->
+  </div>
 
-function setWelcomeActive(activeBtn, inactiveBtn){
-  wFocus.style.transform = activeBtn===toCase ? "translateX(0)" : "translateX(100%)";
-  activeBtn.classList.add("active");
-  inactiveBtn.classList.remove("active");
-}
+  <!-- Magnifier circle -->
+  <div class="magnifier" id="magnifier">
+    <div id="magnifiedText"></div>
+  </div>
 
-function activateBlackBg(){
-  document.body.classList.remove("grey-bg");
-  document.body.classList.add("black-bg");
-}
+  <script>
+    const text = "INTERACTIVE DESIGNER";
+    const container = document.getElementById('textContainer');
+    const magnifier = document.getElementById('magnifier');
+    const magnifiedText = document.getElementById('magnifiedText');
 
-function showCase(){
-  activateBlackBg();
-  casePage.style.transform = "translateX(0)";
-  aboutPage.style.transform = "translateX(100%)";
-  rFocus.style.transform = "translateY(0)";
-  caseBtn.classList.add("active");
-  aboutBtn.classList.remove("active");
-}
+    // Inject letters into main text and magnified text
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement('span');
+      span.className = 'letter';
+      span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+      container.appendChild(span);
 
-function showAbout(){
-  activateBlackBg();
-  aboutPage.style.transform = "translateX(0)";
-  casePage.style.transform = "translateX(-100%)";
-  rFocus.style.transform = "translateY(100%)";
-  aboutBtn.classList.add("active");
-  caseBtn.classList.remove("active");
-}
+      const mspan = document.createElement('span');
+      mspan.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+      magnifiedText.appendChild(mspan);
+    }
 
-toCase.onclick = () => {
-  setWelcomeActive(toCase, toAbout);
-  welcome.style.transform = "translateY(-100%)";
-  right.style.display = "flex";
-  showCase();
-};
+    const letters = container.querySelectorAll('.letter');
+    const mLetters = magnifiedText.querySelectorAll('span');
 
-toAbout.onclick = () => {
-  setWelcomeActive(toAbout, toCase);
-  welcome.style.transform = "translateY(-100%)";
-  right.style.display = "flex";
-  showAbout();
-};
+    // Track mouse for magnifier
+    document.addEventListener('mousemove', e => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX;
+      const y = e.clientY;
 
-caseBtn.onclick = showCase;
-aboutBtn.onclick = showAbout;
+      // Move magnifier
+      magnifier.style.left = x + 'px';
+      magnifier.style.top = y + 'px';
 
-/* ---------- CAROUSEL HOVER ---------- */
-const title = document.getElementById("caseTitle");
-const carousel = document.getElementById("carousel");
+      // Check each letter
+      letters.forEach((letter, i) => {
+        const lRect = letter.getBoundingClientRect();
+        const mLetter = mLetters[i];
 
-title.onmouseenter = () => carousel.classList.add("showCarousel");
-title.onmouseleave = () => carousel.classList.remove("showCarousel");
-</script>
+        // Distance from mouse to letter center
+        const cx = lRect.left + lRect.width/2;
+        const cy = lRect.top + lRect.height/2;
+        const dx = x - cx;
+        const dy = y - cy;
+        const distance = Math.sqrt(dx*dx + dy*dy);
+
+        // Apply scale inside magnifier radius
+        const radius = 75; // half magnifier width
+        if (distance < radius) {
+          const scale = 1 + (radius - distance)/radius * 1.5; // max scale 2.5
+          mLetter.style.transform = `scale(${scale})`;
+        } else {
+          mLetter.style.transform = 'scale(1)';
+        }
+      });
+
+      // Position magnified text inside magnifier
+      const offsetX = -x + magnifier.offsetWidth/2;
+      const offsetY = -y + magnifier.offsetHeight/2;
+      magnifiedText.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+  </script>
 
 </body>
 </html>
-
