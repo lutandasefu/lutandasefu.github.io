@@ -9,24 +9,34 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;overflow:hidden;}
-body{
-  font-family:'Sulphur Point',sans-serif;
-  background:#111;
-}
-body.grey-bg{background:#e6e6e6;}
-body.black-bg{background:#111;}
+body{font-family:'Sulphur Point',sans-serif;background:#111;}
 
-/* ---------- NEW CINEMATIC INTRO ---------- */
+/* ---------- CINEMATIC INTRO ---------- */
 #intro{
   position:fixed;
   inset:0;
-  background:#e6e6e6;
+  background:#111;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding-left:12vw;
+  padding-left:10vw;
   gap:2.5rem;
   z-index:6;
+  perspective:1000px;
+  overflow:hidden;
+}
+
+#intro::before{
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03), transparent 70%);
+  pointer-events:none;
+  animation: floatBG 12s infinite alternate;
+}
+
+@keyframes floatBG {
+  0%{transform: translate(0,0);}
+  100%{transform: translate(20px,30px);}
 }
 
 .intro-line{
@@ -34,31 +44,33 @@ body.black-bg{background:#111;}
   transform:translateY(40px);
   transition:all 1.2s cubic-bezier(.19,1,.22,1);
   font-family:'Urbanist',sans-serif;
-  color:#111;
+  color:#fff;
+  will-change: transform, opacity;
 }
 
 #l1{ font-size:clamp(3rem,7vw,6rem); }
-
 #l2{ 
   font-size:clamp(2.2rem,5vw,3.5rem);
-  margin-left:18vw;
+  margin-left:10vw;
+  background: linear-gradient(90deg,#FF8A00,#E52E71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
 #l3{ 
   font-size:clamp(1.6rem,3vw,2.2rem);
   line-height:1.6;
-  margin-left:6vw;
+  margin-left:5vw;
 }
 
 .show{
   opacity:1;
-  transform:translateY(0);
+  transform:translateY(0) scale(1);
 }
 
 #intro.exit{
-  transform:scale(.96);
+  transform: scale(0.96) rotateX(3deg);
   opacity:0;
-  transition:all 1.4s cubic-bezier(.77,0,.18,1);
+  transition: transform 1.4s cubic-bezier(.22,1,.36,1), opacity 1.2s ease;
 }
 
 /* ---------- WELCOME ---------- */
@@ -197,11 +209,11 @@ body.black-bg{background:#111;}
 
 <body class="grey-bg">
 
-<!-- ---------- NEW INTRO ---------- -->
+<!-- ---------- CINEMATIC INTRO ---------- -->
 <section id="intro">
   <div class="intro-line" id="l1">Hi, I’m Lutanda</div>
-  <div class="intro-line offset" id="l2">A UI/UX Designer</div>
-  <div class="intro-line small" id="l3">
+  <div class="intro-line" id="l2">A UI/UX Designer</div>
+  <div class="intro-line" id="l3">
     Designing for clarity<br>and purpose.
   </div>
 </section>
@@ -256,25 +268,32 @@ body.black-bg{background:#111;}
 </div>
 
 <script>
-/* ---------- CINEMATIC INTRO TIMING ---------- */
+/* ---------- CINEMATIC INTRO TIMING + MICRO-INTERACTION ---------- */
 const l1 = document.getElementById("l1");
 const l2 = document.getElementById("l2");
 const l3 = document.getElementById("l3");
 const intro = document.getElementById("intro");
 const welcome = document.getElementById("welcome");
 
+// Animate lines in sequence
 setTimeout(()=> l1.classList.add("show"), 400);
 setTimeout(()=> l2.classList.add("show"), 1600);
 setTimeout(()=> l3.classList.add("show"), 3000);
 
+// Exit intro
 setTimeout(()=>{
   intro.classList.add("exit");
-  setTimeout(()=>{
-    intro.remove();
-    welcome.style.opacity = 1;
-  },1400);
+  setTimeout(()=>{ intro.remove(); welcome.style.opacity = 1; },1400);
 },5200);
 
+// Cursor-based micro tilt
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX/window.innerWidth - 0.5)*2; 
+  const y = (e.clientY/window.innerHeight - 0.5)*2;
+  l1.style.transform = `translateY(0) rotateY(${x*2}deg) rotateX(${y*1.5}deg)`;
+  l2.style.transform = `translateY(0) translateX(2vw) rotateY(${x*1.5}deg) rotateX(${y*1}deg)`;
+});
+  
 /* ---------- NAVIGATION (unchanged) ---------- */
 const casePage = document.getElementById("case");
 const aboutPage = document.getElementById("about");
