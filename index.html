@@ -4,55 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Urbanist:wght@300&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{width:100%;height:100%;overflow:hidden;}
-body{font-family:'Sulphur Point',sans-serif;background:#111;}
+html,body{width:100%;height:100%;overflow:hidden;background:#0f1115;font-family:'JetBrains Mono', monospace;color:#fff;}
 
-/* ---------- CINEMATIC INTRO ---------- */
+/* ---------- FUTURISTIC INTRO ---------- */
 #intro{
   position:fixed;
   inset:0;
-  background:#111;
+  background:#0f1115;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding-left:10vw;
-  gap:2.5rem;
-  z-index:6;
-  perspective:1000px;
+  align-items:flex-start;
+  padding-left:8vw;
+  gap:2rem;
   overflow:hidden;
+  perspective:1200px;
+  z-index:5;
 }
 
+#introCanvas{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+/* ---------- LINES ---------- */
 .intro-line{
   opacity:0;
-  transform:translateY(40px);
-  transition:all 1.2s cubic-bezier(.19,1,.22,1);
+  transform:translateY(60px) scale(0.98);
+  transition:all 1s cubic-bezier(.19,1,.22,1);
   font-family:'Urbanist',sans-serif;
   color:#fff;
   will-change: transform, opacity;
 }
 
-#l1{ font-size:clamp(3rem,7vw,6rem); }
-#l2{ 
+#l1{font-size:clamp(3rem,7vw,6rem);}
+#l2{
   font-size:clamp(2.2rem,5vw,3.5rem);
-  margin-left:10vw;
-  background: linear-gradient(90deg,#FF8A00,#E52E71);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg,#00f0ff,#ff00ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-#l3{ 
+#l3{
   font-size:clamp(1.6rem,3vw,2.2rem);
-  line-height:1.6;
-  margin-left:5vw;
+  line-height:1.4;
+  color:#aaa;
+  font-weight:300;
 }
 
+/* ---------- EXIT ---------- */
 #intro.exit{
-  transform: scale(0.96) rotateX(3deg);
+  transform: scale(0.95) rotateX(4deg);
   opacity:0;
-  transition: transform 1.4s cubic-bezier(.22,1,.36,1), opacity 1.2s ease;
+  transition: transform 1.2s cubic-bezier(.22,1,.36,1), opacity 1.2s ease;
 }
 
 /* ---------- WELCOME ---------- */
@@ -66,29 +74,29 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
   opacity:0;
   transition:opacity .8s ease, transform .8s ease;
   z-index:4;
-  background:#e6e6e6;
+  background:#0f1115;
 }
 #welcome div{
   margin-bottom:30px;
   font-size:clamp(3rem,6vw,5rem);
-  color:#111;
+  color:#fff;
   text-align:center;
   font-weight:500;
 }
 
-/* ---------- WELCOME TOGGLE ---------- */
+/* ---------- TOGGLES ---------- */
 #welcome-toggle{
   display:flex;
   position:relative;
   width:190px; height:60px;
-  background:#fff;
+  background:#111;
   border-radius:50px;
-  border:2px solid #fff;
+  border:2px solid #222;
 }
 #welcome-toggle .focus{
   position:absolute; top:6px; left:6px;
   width:78px; height:48px; border-radius:50px;
-  background:#111;
+  background:#00f0ff;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 #welcome-toggle button{
@@ -104,12 +112,12 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
 }
 #welcome-toggle button svg{
   width:24px; height:24px;
-  stroke:#111;
+  stroke:#fff;
   fill:none;
   transition:stroke .3s ease;
 }
 #welcome-toggle button.active svg *{
-  stroke:#fff !important;
+  stroke:#00f0ff !important;
 }
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -118,17 +126,17 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
   right:30px; top:50%;
   transform:translateY(-50%);
   width:75px; height:160px;
-  background:#fff;
+  background:#111;
   border-radius:45px;
   display:none;
   flex-direction:column;
-  border:2px solid #fff;
+  border:2px solid #222;
   z-index:10;
 }
 .right-toggle .right-focus{
   position:absolute; top:0; left:0;
   width:100%; height:50%;
-  background:#111;
+  background:#00f0ff;
   border-radius:45px;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
@@ -146,11 +154,11 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
   width:28px;
   height:28px;
   transform:translateY(2px);
-  stroke:#111;
+  stroke:#fff;
   fill:none;
 }
 .right-toggle button.active svg{
-  stroke:#fff;
+  stroke:#00f0ff;
 }
 
 /* ---------- PAGES ---------- */
@@ -191,14 +199,12 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
 
 <body class="grey-bg">
 
-<!-- ---------- CINEMATIC INTRO ---------- -->
+<!-- ---------- INTRO ---------- -->
 <section id="intro">
   <canvas id="introCanvas"></canvas>
   <div class="intro-line" id="l1">Hi, I’m Lutanda</div>
   <div class="intro-line" id="l2">A UI/UX Designer</div>
-  <div class="intro-line" id="l3">
-    Designing for clarity<br>and purpose.
-  </div>
+  <div class="intro-line" id="l3">Crafting intuitive, futuristic experiences</div>
 </section>
 
 <!-- ---------- WELCOME ---------- -->
@@ -251,14 +257,14 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
 </div>
 
 <script>
-// ---------- PARTICLE BACKGROUND ----------
+// ---------- PARTICLE NETWORK ----------
 const canvas = document.getElementById('introCanvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const particles = Array.from({length:50}, ()=>{
-  return {x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*3+1, dx:(Math.random()-0.5)*0.3, dy:(Math.random()-0.5)*0.3};
+const particles = Array.from({length:60}, ()=>{
+  return {x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, dx:(Math.random()-0.5)*0.4, dy:(Math.random()-0.5)*0.4};
 });
 
 function drawParticles(){
@@ -266,58 +272,73 @@ function drawParticles(){
   particles.forEach(p=>{
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(255,255,255,0.05)';
+    ctx.fillStyle='rgba(0,255,255,0.05)';
     ctx.fill();
-    p.x += p.dx;
-    p.y += p.dy;
+    p.x+=p.dx; p.y+=p.dy;
     if(p.x<0)p.x=canvas.width;
     if(p.x>canvas.width)p.x=0;
     if(p.y<0)p.y=canvas.height;
     if(p.y>canvas.height)p.y=0;
   });
+
+  // Connect close particles
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      let dx=particles[i].x-particles[j].x;
+      let dy=particles[i].y-particles[j].y;
+      let dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle='rgba(0,255,255,0.02)';
+        ctx.stroke();
+      }
+    }
+  }
+
   requestAnimationFrame(drawParticles);
 }
 drawParticles();
 
 // ---------- LINES ----------
-const l1 = document.getElementById("l1");
-const l2 = document.getElementById("l2");
-const l3 = document.getElementById("l3");
-const intro = document.getElementById("intro");
-const welcome = document.getElementById("welcome");
+const l1=document.getElementById("l1");
+const l2=document.getElementById("l2");
+const l3=document.getElementById("l3");
+const intro=document.getElementById("intro");
+const welcome=document.getElementById("welcome");
 
-function animateLine(line, delay, offset=40){
+function animateLine(line, delay, offset=60){
   line.style.transition='none';
-  line.style.transform=`translateY(${offset}px)`;
+  line.style.transform=`translateY(${offset}px) scale(0.98)`;
   setTimeout(()=>{
     line.style.transition='transform 1s cubic-bezier(.22,1,.36,1), opacity 1s ease';
-    line.style.transform='translateY(0)';
+    line.style.transform='translateY(0) scale(1)';
     line.style.opacity=1;
   },delay);
 }
 
-// Springy layered animation
 animateLine(l1,400);
-animateLine(l2,1400,60);
-animateLine(l3,2600,80);
+animateLine(l2,1400,80);
+animateLine(l3,2600,100);
 
 // Cursor parallax
 document.addEventListener('mousemove', e=>{
-  const x=(e.clientX/window.innerWidth-0.5)*30;
-  const y=(e.clientY/window.innerHeight-0.5)*30;
-  l1.style.transform=`translateY(0) rotateY(${x*0.3}deg) rotateX(${y*0.3}deg)`;
-  l2.style.transform=`translateY(0) translateX(2vw) rotateY(${x*0.5}deg) rotateX(${y*0.5}deg)`;
-  l3.style.transform=`translateY(0) translateX(4vw) rotateY(${x*0.7}deg) rotateX(${y*0.7}deg)`;
+  const x=(e.clientX/window.innerWidth-0.5)*40;
+  const y=(e.clientY/window.innerHeight-0.5)*40;
+  l1.style.transform=`translateY(0) rotateY(${x*0.3}deg) rotateX(${y*0.3}deg) scale(1)`;
+  l2.style.transform=`translateY(0) translateX(2vw) rotateY(${x*0.5}deg) rotateX(${y*0.5}deg) scale(1)`;
+  l3.style.transform=`translateY(0) translateX(4vw) rotateY(${x*0.7}deg) rotateX(${y*0.7}deg) scale(1)`;
 });
 
-// Micro flourish on final line
+// Final micro flourish
 setTimeout(()=>{
   l3.style.transition='transform 0.6s cubic-bezier(.22,1,.36,1)';
-  l3.style.transform='translateY(0) translateX(4vw) scale(1.03)';
+  l3.style.transform='translateY(0) translateX(4vw) scale(1.04)';
   setTimeout(()=> l3.style.transform='translateY(0) translateX(4vw) scale(1)',600);
 },4000);
 
-// Exit intro to welcome
+// Exit to welcome
 setTimeout(()=>{
   intro.classList.add("exit");
   setTimeout(()=>{ intro.remove(); welcome.style.opacity=1; },1400);
@@ -368,17 +389,15 @@ function showAbout(){
 
 toCase.onclick=()=>{setWelcomeActive(toCase,toAbout); welcome.style.transform="translateY(-100%)"; right.style.display="flex"; showCase();}
 toAbout.onclick=()=>{setWelcomeActive(toAbout,toCase); welcome.style.transform="translateY(-100%)"; right.style.display="flex"; showAbout();}
-
 caseBtn.onclick=showCase;
 aboutBtn.onclick=showAbout;
 
 // ---------- CAROUSEL HOVER ----------
 const title=document.getElementById("caseTitle");
 const carousel=document.getElementById("carousel");
-
 title.onmouseenter=()=>carousel.classList.add("showCarousel");
 title.onmouseleave=()=>carousel.classList.remove("showCarousel");
-</script>
 
+</script>
 </body>
 </html>
