@@ -23,32 +23,32 @@
     gap: 4rem;
     font-size: clamp(3rem, 8vw, 8rem);
     font-weight: 700;
-    height: 5em; /* height to allow sliding */
+    height: 100vh; /* full height for vertical sliding */
+    align-items: center;
   }
 
   .word-wrapper {
     position: relative;
     overflow: hidden;
-    height: 100%;
+    height: 1em;
     display: flex;
+    justify-content: center;
     align-items: center;
   }
 
   .word-wrapper span {
     display: inline-block;
-    position: absolute;
-    left: 0;
-    transform: translateY(0%);
+    transform: translateY(0);
     transition: transform 2s cubic-bezier(.22,1,.36,1);
     white-space: nowrap;
   }
 
   .interactive span {
-    transform: translateY(-150%);
+    transform: translateY(-120vh); /* start well above screen */
   }
 
   .development span {
-    transform: translateY(150%);
+    transform: translateY(120vh); /* start well below screen */
   }
 
   .gradient {
@@ -57,6 +57,7 @@
     -webkit-text-fill-color: transparent;
   }
 
+  /* Slide-in active class */
   .slide-in .interactive span {
     transform: translateY(0);
   }
@@ -83,3 +84,4 @@
 
 </body>
 </html>
+
