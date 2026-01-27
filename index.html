@@ -26,19 +26,6 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
   overflow:hidden;
 }
 
-#intro::before{
-  content:'';
-  position:absolute; inset:0;
-  background:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03), transparent 70%);
-  pointer-events:none;
-  animation: floatBG 12s infinite alternate;
-}
-
-@keyframes floatBG {
-  0%{transform: translate(0,0);}
-  100%{transform: translate(20px,30px);}
-}
-
 .intro-line{
   opacity:0;
   transform:translateY(40px);
@@ -60,11 +47,6 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
   font-size:clamp(1.6rem,3vw,2.2rem);
   line-height:1.6;
   margin-left:5vw;
-}
-
-.show{
-  opacity:1;
-  transform:translateY(0) scale(1);
 }
 
 #intro.exit{
@@ -211,6 +193,7 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
 
 <!-- ---------- CINEMATIC INTRO ---------- -->
 <section id="intro">
+  <canvas id="introCanvas"></canvas>
   <div class="intro-line" id="l1">Hi, I’m Lutanda</div>
   <div class="intro-line" id="l2">A UI/UX Designer</div>
   <div class="intro-line" id="l3">
@@ -268,48 +251,94 @@ body{font-family:'Sulphur Point',sans-serif;background:#111;}
 </div>
 
 <script>
-/* ---------- CINEMATIC INTRO TIMING + MICRO-INTERACTION ---------- */
+// ---------- PARTICLE BACKGROUND ----------
+const canvas = document.getElementById('introCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = Array.from({length:50}, ()=>{
+  return {x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*3+1, dx:(Math.random()-0.5)*0.3, dy:(Math.random()-0.5)*0.3};
+});
+
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,0.05)';
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+    if(p.x<0)p.x=canvas.width;
+    if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;
+    if(p.y>canvas.height)p.y=0;
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// ---------- LINES ----------
 const l1 = document.getElementById("l1");
 const l2 = document.getElementById("l2");
 const l3 = document.getElementById("l3");
 const intro = document.getElementById("intro");
 const welcome = document.getElementById("welcome");
 
-// Animate lines in sequence
-setTimeout(()=> l1.classList.add("show"), 400);
-setTimeout(()=> l2.classList.add("show"), 1600);
-setTimeout(()=> l3.classList.add("show"), 3000);
+function animateLine(line, delay, offset=40){
+  line.style.transition='none';
+  line.style.transform=`translateY(${offset}px)`;
+  setTimeout(()=>{
+    line.style.transition='transform 1s cubic-bezier(.22,1,.36,1), opacity 1s ease';
+    line.style.transform='translateY(0)';
+    line.style.opacity=1;
+  },delay);
+}
 
-// Exit intro
+// Springy layered animation
+animateLine(l1,400);
+animateLine(l2,1400,60);
+animateLine(l3,2600,80);
+
+// Cursor parallax
+document.addEventListener('mousemove', e=>{
+  const x=(e.clientX/window.innerWidth-0.5)*30;
+  const y=(e.clientY/window.innerHeight-0.5)*30;
+  l1.style.transform=`translateY(0) rotateY(${x*0.3}deg) rotateX(${y*0.3}deg)`;
+  l2.style.transform=`translateY(0) translateX(2vw) rotateY(${x*0.5}deg) rotateX(${y*0.5}deg)`;
+  l3.style.transform=`translateY(0) translateX(4vw) rotateY(${x*0.7}deg) rotateX(${y*0.7}deg)`;
+});
+
+// Micro flourish on final line
+setTimeout(()=>{
+  l3.style.transition='transform 0.6s cubic-bezier(.22,1,.36,1)';
+  l3.style.transform='translateY(0) translateX(4vw) scale(1.03)';
+  setTimeout(()=> l3.style.transform='translateY(0) translateX(4vw) scale(1)',600);
+},4000);
+
+// Exit intro to welcome
 setTimeout(()=>{
   intro.classList.add("exit");
-  setTimeout(()=>{ intro.remove(); welcome.style.opacity = 1; },1400);
+  setTimeout(()=>{ intro.remove(); welcome.style.opacity=1; },1400);
 },5200);
 
-// Cursor-based micro tilt
-document.addEventListener('mousemove', e => {
-  const x = (e.clientX/window.innerWidth - 0.5)*2; 
-  const y = (e.clientY/window.innerHeight - 0.5)*2;
-  l1.style.transform = `translateY(0) rotateY(${x*2}deg) rotateX(${y*1.5}deg)`;
-  l2.style.transform = `translateY(0) translateX(2vw) rotateY(${x*1.5}deg) rotateX(${y*1}deg)`;
-});
-  
-/* ---------- NAVIGATION (unchanged) ---------- */
-const casePage = document.getElementById("case");
-const aboutPage = document.getElementById("about");
-const right = document.getElementById("rightToggle");
-const rFocus = document.getElementById("rFocus");
-const wFocus = document.getElementById("wFocus");
+// ---------- NAVIGATION ----------
+const casePage=document.getElementById("case");
+const aboutPage=document.getElementById("about");
+const right=document.getElementById("rightToggle");
+const rFocus=document.getElementById("rFocus");
+const wFocus=document.getElementById("wFocus");
 
-const caseBtn = document.getElementById("caseBtn");
-const aboutBtn = document.getElementById("aboutBtn");
-const toCase = document.getElementById("toCase");
-const toAbout = document.getElementById("toAbout");
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
+const toCase=document.getElementById("toCase");
+const toAbout=document.getElementById("toAbout");
 
 toCase.classList.add("active");
 
-function setWelcomeActive(activeBtn, inactiveBtn){
-  wFocus.style.transform = activeBtn===toCase ? "translateX(0)" : "translateX(100%)";
+function setWelcomeActive(activeBtn,inactiveBtn){
+  wFocus.style.transform=activeBtn===toCase?"translateX(0)":"translateX(100%)";
   activeBtn.classList.add("active");
   inactiveBtn.classList.remove("active");
 }
@@ -321,45 +350,34 @@ function activateBlackBg(){
 
 function showCase(){
   activateBlackBg();
-  casePage.style.transform = "translateX(0)";
-  aboutPage.style.transform = "translateX(100%)";
-  rFocus.style.transform = "translateY(0)";
+  casePage.style.transform="translateX(0)";
+  aboutPage.style.transform="translateX(100%)";
+  rFocus.style.transform="translateY(0)";
   caseBtn.classList.add("active");
   aboutBtn.classList.remove("active");
 }
 
 function showAbout(){
   activateBlackBg();
-  aboutPage.style.transform = "translateX(0)";
-  casePage.style.transform = "translateX(-100%)";
-  rFocus.style.transform = "translateY(100%)";
+  aboutPage.style.transform="translateX(0)";
+  casePage.style.transform="translateX(-100%)";
+  rFocus.style.transform="translateY(100%)";
   aboutBtn.classList.add("active");
   caseBtn.classList.remove("active");
 }
 
-toCase.onclick = () => {
-  setWelcomeActive(toCase, toAbout);
-  welcome.style.transform = "translateY(-100%)";
-  right.style.display = "flex";
-  showCase();
-};
+toCase.onclick=()=>{setWelcomeActive(toCase,toAbout); welcome.style.transform="translateY(-100%)"; right.style.display="flex"; showCase();}
+toAbout.onclick=()=>{setWelcomeActive(toAbout,toCase); welcome.style.transform="translateY(-100%)"; right.style.display="flex"; showAbout();}
 
-toAbout.onclick = () => {
-  setWelcomeActive(toAbout, toCase);
-  welcome.style.transform = "translateY(-100%)";
-  right.style.display = "flex";
-  showAbout();
-};
+caseBtn.onclick=showCase;
+aboutBtn.onclick=showAbout;
 
-caseBtn.onclick = showCase;
-aboutBtn.onclick = showAbout;
+// ---------- CAROUSEL HOVER ----------
+const title=document.getElementById("caseTitle");
+const carousel=document.getElementById("carousel");
 
-/* ---------- CAROUSEL HOVER ---------- */
-const title = document.getElementById("caseTitle");
-const carousel = document.getElementById("carousel");
-
-title.onmouseenter = () => carousel.classList.add("showCarousel");
-title.onmouseleave = () => carousel.classList.remove("showCarousel");
+title.onmouseenter=()=>carousel.classList.add("showCarousel");
+title.onmouseleave=()=>carousel.classList.remove("showCarousel");
 </script>
 
 </body>
