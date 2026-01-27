@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
@@ -13,73 +14,62 @@ body.black-bg{background:#111;}
 
 /* ---------- INTRO ---------- */
 #intro{
+  position:fixed;
+  inset:0;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  font-size:clamp(2.2rem,6vw,4.4rem);
-  text-align:center;
+  z-index:5;
 }
-#introText { display:inline-block; }
+
+#introTextWrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:clamp(2.2rem,6vw,4.4rem);
+}
+
+#introText {
+  display:inline-block;
+}
+
 .cursor {
   width:2px;
   height:1em;
   background:#111;
   display:inline-block;
   margin-left:6px;
-  animation:blink 0.7s step-end infinite;
+  animation: blink 0.7s step-end infinite;
 }
+
 @keyframes blink{50%{opacity:0;}}
 
 /* ---------- WELCOME ---------- */
 #welcome{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
   opacity:0;
   transition:opacity .8s ease, transform .8s ease;
   z-index:4;
 }
-#welcomeText{margin-bottom:30px;font-size:clamp(2rem,5vw,3rem);color:#111;}
+#welcome div{margin-bottom:30px; font-size:clamp(2rem,5vw,3rem); color:#111;}
 
-/* ---------- WELCOME TOGGLE ---------- */
+/* ---------- TOGGLES ---------- */
 #welcome-toggle{
-  margin-top:40px;
-  display:flex;
-  position:relative;
-  width:190px;
-  height:60px;
-  background:#fff;
-  border-radius:50px;
-  border:2px solid #fff;
+  margin-top:40px; display:flex; position:relative;
+  width:190px; height:60px; background:#fff;
+  border-radius:50px; border:2px solid #fff;
 }
 #welcome-toggle .focus{
   position:absolute; top:6px; left:6px;
-  width:78px; height:48px;
-  border-radius:50px;
-  background:#111;
-  transition:transform .35s cubic-bezier(.77,0,.18,1);
+  width:78px; height:48px; border-radius:50px;
+  background:#111; transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 #welcome-toggle button{
-  flex:1;
-  border:none;
-  background:none;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  z-index:2;
-  padding:0 10px;
+  flex:1; border:none; background:none; cursor:pointer;
+  display:flex; justify-content:center; align-items:center; z-index:2;
 }
-#welcome-toggle button svg{
-  width:24px;
-  height:24px;
-  stroke:black;
-  fill:none;
-  transition:.3s;
-}
+#welcome-toggle svg{width:24px;height:24px;stroke:black;transition:.3s;}
 #welcome-toggle button.active svg{stroke:white;}
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -91,16 +81,13 @@ body.black-bg{background:#111;}
 }
 .right-focus{
   position:absolute; top:0; left:0; width:100%; height:50%;
-  background:#111;
-  transition:transform .35s cubic-bezier(.77,0,.18,1);
+  background:#111; transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
   flex:1; border:none; background:none; cursor:pointer;
   display:flex; justify-content:center; align-items:center; z-index:2;
 }
-.right-toggle button svg{
-  width:28px; height:28px; stroke:black; fill:none; transition:.3s;
-}
+.right-toggle svg{width:28px;height:28px;stroke:black;transition:.3s;}
 .right-toggle button.active svg{stroke:white;}
 
 /* ---------- PAGES ---------- */
@@ -108,7 +95,7 @@ body.black-bg{background:#111;}
   position:absolute; top:0; left:0; width:100%; height:100%;
   background:#111; color:white;
   transform:translateX(100%);
-  transition:transform .8s cubic-bezier(.77,0,.18,1);
+  transition:.8s cubic-bezier(.77,0,.18,1);
   z-index:3;
 }
 
@@ -121,21 +108,23 @@ body.black-bg{background:#111;}
 .carousel img{
   width:200px; height:120px; object-fit:cover; border-radius:12px;
 }
-.showCarousel{
-  opacity:1; transform:scale(1);
-}
+.showCarousel{opacity:1; transform:scale(1);}
 </style>
 </head>
+
 <body class="grey-bg">
 
 <!-- ---------- INTRO ---------- -->
 <section id="intro">
-  <span id="introText"></span><span class="cursor"></span>
+  <div id="introTextWrapper">
+    <span id="introText"></span>
+    <span class="cursor"></span>
+  </div>
 </section>
 
 <!-- ---------- WELCOME ---------- -->
 <section id="welcome">
-  <div id="welcomeText">Welcome to my portfolio</div>
+  <div>Welcome to my portfolio</div>
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
     <button id="toCase">
@@ -165,7 +154,7 @@ body.black-bg{background:#111;}
 
 <section id="about" class="page">About</section>
 
-<!-- ---------- RIGHT SIDEBAR ---------- -->
+<!-- ---------- RIGHT TOGGLE ---------- -->
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
   <button id="caseBtn">
@@ -183,53 +172,63 @@ body.black-bg{background:#111;}
 </div>
 
 <script>
-// ---------- TYPING INTRO ----------
+/* ---------- TYPING INTRO WITH CURSOR ---------- */
 const introText = document.getElementById("introText");
-const cursor = document.querySelector(".cursor");
 const lines = ["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
-let l=0,c=0;
+let l=0, c=0;
 
 function type() {
   if(c < lines[l].length){
     introText.textContent += lines[l][c++];
     setTimeout(type, 80);
   } else {
-    if(l < lines.length-1) setTimeout(erase, 600);
-    else setTimeout(showWelcome, 800);
+    if(l < lines.length - 1){
+      setTimeout(erase, 600);
+    } else {
+      setTimeout(showWelcome, 800);
+    }
   }
 }
 
 function erase() {
   if(c > 0){
-    introText.textContent = lines[l].substring(0,--c);
-    setTimeout(erase,40);
-  } else { l++; type(); }
+    introText.textContent = lines[l].substring(0, --c);
+    setTimeout(erase, 40);
+  } else {
+    l++; 
+    type();
+  }
 }
 
-function showWelcome() {
-  introText.parentElement.style.opacity=0;
+function showWelcome(){
+  intro.style.opacity = 0;
   setTimeout(()=>{
-    introText.parentElement.remove();
-    document.getElementById("welcome").style.opacity=1;
+    intro.remove();
+    welcome.style.opacity = 1;
   },600);
 }
 
 type();
 
-// ---------- NAVIGATION ----------
-const wFocus = document.getElementById('wFocus');
-const toCase = document.getElementById('toCase');
-const toAbout = document.getElementById('toAbout');
-const right = document.getElementById('rightToggle');
-const rFocus = document.getElementById('rFocus');
-const caseBtn = document.getElementById('caseBtn');
-const aboutBtn = document.getElementById('aboutBtn');
-const casePage = document.getElementById('case');
-const aboutPage = document.getElementById('about');
+/* ---------- NAVIGATION ---------- */
+const welcome = document.getElementById("welcome");
+const casePage = document.getElementById("case");
+const aboutPage = document.getElementById("about");
+const right = document.getElementById("rightToggle");
+const rFocus = document.getElementById("rFocus");
+const wFocus = document.getElementById("wFocus");
 
-function setActive(active,inactive){
-  active.classList.add("active");
-  inactive.classList.remove("active");
+const caseBtn = document.getElementById("caseBtn");
+const aboutBtn = document.getElementById("aboutBtn");
+const toCase = document.getElementById("toCase");
+const toAbout = document.getElementById("toAbout");
+
+toCase.classList.add("active");
+
+function setWelcomeActive(activeBtn, inactiveBtn){
+  wFocus.style.transform = activeBtn===toCase ? "translateX(0)" : "translateX(100%)";
+  activeBtn.classList.add("active");
+  inactiveBtn.classList.remove("active");
 }
 
 function activateBlackBg(){
@@ -239,43 +238,45 @@ function activateBlackBg(){
 
 function showCase(){
   activateBlackBg();
-  casePage.style.transform="translateX(0)";
-  aboutPage.style.transform="translateX(100%)";
-  rFocus.style.transform="translateY(0)";
-  setActive(caseBtn, aboutBtn);
+  casePage.style.transform = "translateX(0)";
+  aboutPage.style.transform = "translateX(100%)";
+  rFocus.style.transform = "translateY(0)";
+  caseBtn.classList.add("active");
+  aboutBtn.classList.remove("active");
 }
 
 function showAbout(){
   activateBlackBg();
-  aboutPage.style.transform="translateX(0)";
-  casePage.style.transform="translateX(-100%)";
-  rFocus.style.transform="translateY(100%)";
-  setActive(aboutBtn, caseBtn);
+  aboutPage.style.transform = "translateX(0)";
+  casePage.style.transform = "translateX(-100%)";
+  rFocus.style.transform = "translateY(100%)";
+  aboutBtn.classList.add("active");
+  caseBtn.classList.remove("active");
 }
 
-// Welcome toggle
 toCase.onclick = () => {
-  wFocus.style.transform="translateX(0)";
-  document.getElementById("welcome").style.transform="translateY(-100%)";
-  right.style.display="flex";
+  setWelcomeActive(toCase, toAbout);
+  welcome.style.transform = "translateY(-100%)";
+  right.style.display = "flex";
   showCase();
-}
-toAbout.onclick = () => {
-  wFocus.style.transform="translateX(100%)";
-  document.getElementById("welcome").style.transform="translateY(-100%)";
-  right.style.display="flex";
-  showAbout();
-}
+};
 
-// Right toggle
+toAbout.onclick = () => {
+  setWelcomeActive(toAbout, toCase);
+  welcome.style.transform = "translateY(-100%)";
+  right.style.display = "flex";
+  showAbout();
+};
+
 caseBtn.onclick = showCase;
 aboutBtn.onclick = showAbout;
 
-// Carousel
+/* ---------- CAROUSEL HOVER ---------- */
 const title = document.getElementById("caseTitle");
 const carousel = document.getElementById("carousel");
-title.onmouseenter = ()=>carousel.classList.add("showCarousel");
-title.onmouseleave = ()=>carousel.classList.remove("showCarousel");
+
+title.onmouseenter = () => carousel.classList.add("showCarousel");
+title.onmouseleave = () => carousel.classList.remove("showCarousel");
 </script>
 
 </body>
