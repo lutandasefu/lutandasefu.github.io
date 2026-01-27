@@ -19,14 +19,6 @@ body{
 body.grey-bg{ background:#e6e6e6; }
 body.black-bg{ background:#111; }
 
-/* ---------- INTRO ---------- */
-#intro{
-  border-right:2px solid #111;
-  animation:blink .7s step-end infinite;
-  z-index:5;
-}
-@keyframes blink{50%{border-color:transparent;}}
-
 /* ---------- SECTIONS ---------- */
 section{
   position:fixed;
@@ -38,6 +30,28 @@ section{
   text-align:center;
   padding:20px;
   font-size:clamp(2.2rem,6vw,4.4rem);
+}
+
+/* ---------- INTRO (FIXED CURSOR) ---------- */
+#intro{
+  z-index:5;
+  position:relative;
+}
+
+/* Blinking cursor attached to text */
+#intro::after{
+  content:"";
+  display:inline-block;
+  width:2px;
+  height:1em;
+  background:#111;
+  margin-left:6px;
+  animation:blink .7s step-end infinite;
+  vertical-align:bottom;
+}
+
+@keyframes blink{
+  50%{opacity:0;}
 }
 
 /* ---------- WELCOME ---------- */
@@ -252,78 +266,7 @@ function showWelcome(){
  setTimeout(()=>{intro.remove();welcome.style.opacity=1;},600);
 }
 type();
-
-const casePage=document.getElementById("case");
-const aboutPage=document.getElementById("about");
-const right=document.getElementById("rightToggle");
-const rFocus=document.getElementById("rFocus");
-
-const caseBtn=document.getElementById("caseBtn");
-const aboutBtn=document.getElementById("aboutBtn");
-
-function setActive(active, inactive){
-  active.classList.add("active");
-  inactive.classList.remove("active");
-}
-
-function activateBlackBg(){
-  document.body.classList.remove("grey-bg");
-  document.body.classList.add("black-bg");
-}
-
-function showCase(){
-  activateBlackBg();
-  casePage.style.transform="translateX(0)";
-  aboutPage.style.transform="translateX(100%)";
-  rFocus.style.transform="translateY(0)";
-  setActive(caseBtn, aboutBtn);
-}
-
-function showAbout(){
-  activateBlackBg();
-  aboutPage.style.transform="translateX(0)";
-  casePage.style.transform="translateX(-100%)";
-  rFocus.style.transform="translateY(100%)";
-  setActive(aboutBtn, caseBtn);
-}
-
-caseBtn.onclick = showCase;
-aboutBtn.onclick = showAbout;
-
-const wFocus = document.getElementById('wFocus');
-const toCase = document.getElementById('toCase');
-const toAbout = document.getElementById('toAbout');
-
-toCase.classList.add("active");
-
-function setWelcomeActive(activeBtn, inactiveBtn){
-  wFocus.style.transform =
-    activeBtn === toCase ? "translateX(0)" : "translateX(100%)";
-  activeBtn.classList.add("active");
-  inactiveBtn.classList.remove("active");
-}
-
-toCase.onclick = () => {
-  setWelcomeActive(toCase, toAbout);
-  welcome.style.transform = "translateY(-100%)";
-  right.style.display = "flex";
-  showCase();
-}
-
-toAbout.onclick = () => {
-  setWelcomeActive(toAbout, toCase);
-  welcome.style.transform = "translateY(-100%)";
-  right.style.display = "flex";
-  showAbout();
-}
-
-const title=document.getElementById("caseTitle");
-const carousel=document.getElementById("carousel");
-
-title.onmouseenter=()=>carousel.classList.add("showCarousel");
-title.onmouseleave=()=>carousel.classList.remove("showCarousel");
 </script>
 
 </body>
 </html>
-
