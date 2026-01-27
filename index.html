@@ -8,47 +8,74 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{
+  font-family:'Sulphur Point',sans-serif;
+  background:#111;
+}
 body.grey-bg{background:#e6e6e6;}
 body.black-bg{background:#111;}
 
-/* ---------- INTRO ---------- */
+/* ---------- NEW CINEMATIC INTRO ---------- */
 #intro{
   position:fixed;
   inset:0;
+  background:#e6e6e6;
   display:flex;
+  flex-direction:column;
   justify-content:center;
-  align-items:center;
-  z-index:5;
+  padding-left:12vw;
+  gap:2.5rem;
+  z-index:6;
 }
-#introTextWrapper{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:clamp(2.2rem,6vw,4.4rem);
+
+.intro-line{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 1.2s cubic-bezier(.19,1,.22,1);
+  font-family:'Urbanist',sans-serif;
+  color:#111;
 }
-#introText { display:inline-block; }
-.cursor {
-  width:2px;
-  height:1em;
-  background:#111;
-  display:inline-block;
-  margin-left:6px;
-  animation: blink 0.7s step-end infinite;
+
+#l1{ font-size:clamp(3rem,7vw,6rem); }
+
+#l2{ 
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  margin-left:18vw;
 }
-@keyframes blink{50%{opacity:0;}}
+
+#l3{ 
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  line-height:1.6;
+  margin-left:6vw;
+}
+
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+#intro.exit{
+  transform:scale(.96);
+  opacity:0;
+  transition:all 1.4s cubic-bezier(.77,0,.18,1);
+}
 
 /* ---------- WELCOME ---------- */
 #welcome{
-  display:flex; flex-direction:column;
-  justify-content:center; align-items:center;
-  min-height:100vh;
+  position:fixed;
+  inset:0;
+  display:flex; 
+  flex-direction:column;
+  justify-content:center; 
+  align-items:center;
   opacity:0;
   transition:opacity .8s ease, transform .8s ease;
   z-index:4;
+  background:#e6e6e6;
 }
 #welcome div{
-  margin-bottom:30px; /* Reduced from 50px */
+  margin-bottom:30px;
   font-size:clamp(3rem,6vw,5rem);
   color:#111;
   text-align:center;
@@ -87,8 +114,8 @@ body.black-bg{background:#111;}
   fill:none;
   transition:stroke .3s ease;
 }
-#welcome-toggle button.active svg{
-  stroke:#fff;
+#welcome-toggle button.active svg *{
+  stroke:#fff !important;
 }
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -108,7 +135,7 @@ body.black-bg{background:#111;}
   position:absolute; top:0; left:0;
   width:100%; height:50%;
   background:#111;
-  border-radius:45px; /* Rounded movable focus */
+  border-radius:45px;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
@@ -122,10 +149,11 @@ body.black-bg{background:#111;}
   z-index:2;
 }
 .right-toggle button svg{
-  width:28px; height:28px;
+  width:28px;
+  height:28px;
+  transform:translateY(2px);
   stroke:#111;
   fill:none;
-  transition:stroke .3s ease;
 }
 .right-toggle button.active svg{
   stroke:#fff;
@@ -133,10 +161,10 @@ body.black-bg{background:#111;}
 
 /* ---------- PAGES ---------- */
 .page{
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:#111; color:white;
+  position:fixed;
+  inset:0;
+  background:#111; 
+  color:white;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -144,6 +172,7 @@ body.black-bg{background:#111;}
   transform:translateX(100%);
   transition:.8s cubic-bezier(.77,0,.18,1);
   z-index:3;
+  backface-visibility:hidden;
 }
 
 /* ---------- CAROUSEL ---------- */
@@ -168,11 +197,12 @@ body.black-bg{background:#111;}
 
 <body class="grey-bg">
 
-<!-- ---------- INTRO ---------- -->
+<!-- ---------- NEW INTRO ---------- -->
 <section id="intro">
-  <div id="introTextWrapper">
-    <span id="introText"></span>
-    <span class="cursor"></span>
+  <div class="intro-line" id="l1">Hi, I’m Lutanda</div>
+  <div class="intro-line offset" id="l2">A UI/UX Designer</div>
+  <div class="intro-line small" id="l3">
+    Designing for clarity<br>and purpose.
   </div>
 </section>
 
@@ -226,46 +256,26 @@ body.black-bg{background:#111;}
 </div>
 
 <script>
-/* ---------- TYPING INTRO WITH CURSOR ---------- */
-const introText = document.getElementById("introText");
+/* ---------- CINEMATIC INTRO TIMING ---------- */
+const l1 = document.getElementById("l1");
+const l2 = document.getElementById("l2");
+const l3 = document.getElementById("l3");
+const intro = document.getElementById("intro");
 const welcome = document.getElementById("welcome");
-const lines = ["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
-let l=0, c=0;
 
-function type() {
-  if(c < lines[l].length){
-    introText.textContent += lines[l][c++];
-    setTimeout(type, 80);
-  } else {
-    if(l < lines.length - 1){
-      setTimeout(erase, 600);
-    } else {
-      setTimeout(showWelcome, 800);
-    }
-  }
-}
+setTimeout(()=> l1.classList.add("show"), 400);
+setTimeout(()=> l2.classList.add("show"), 1600);
+setTimeout(()=> l3.classList.add("show"), 3000);
 
-function erase() {
-  if(c > 0){
-    introText.textContent = lines[l].substring(0, --c);
-    setTimeout(erase, 40);
-  } else {
-    l++; 
-    type();
-  }
-}
-
-function showWelcome(){
-  intro.style.opacity = 0;
+setTimeout(()=>{
+  intro.classList.add("exit");
   setTimeout(()=>{
     intro.remove();
     welcome.style.opacity = 1;
-  },600);
-}
+  },1400);
+},5200);
 
-type();
-
-/* ---------- NAVIGATION ---------- */
+/* ---------- NAVIGATION (unchanged) ---------- */
 const casePage = document.getElementById("case");
 const aboutPage = document.getElementById("about");
 const right = document.getElementById("rightToggle");
@@ -335,4 +345,3 @@ title.onmouseleave = () => carousel.classList.remove("showCarousel");
 
 </body>
 </html>
-
