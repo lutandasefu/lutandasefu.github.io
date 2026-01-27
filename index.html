@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word Slide Intro</title>
+<title>Vertical Opposite Slide</title>
 <style>
   body {
     margin: 0;
@@ -17,29 +17,38 @@
     color: #fff;
   }
 
-  .slide-wrapper {
+  .slide-container {
+    position: relative;
     display: flex;
-    gap: 1rem;
-    font-size: clamp(3rem, 7vw, 6rem);
+    gap: 4rem;
+    font-size: clamp(3rem, 8vw, 8rem);
     font-weight: 700;
+    height: 5em; /* height to allow sliding */
   }
 
-  .word {
-    display: inline-block;
+  .word-wrapper {
+    position: relative;
     overflow: hidden;
-    height: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
-  .word span {
+  .word-wrapper span {
     display: inline-block;
-    transform: translateY(100%);
-    opacity: 0;
-    transition: transform 1s cubic-bezier(.22,1,.36,1),
-                opacity 1s ease;
+    position: absolute;
+    left: 0;
+    transform: translateY(0%);
+    transition: transform 2s cubic-bezier(.22,1,.36,1);
+    white-space: nowrap;
   }
 
-  .word.interactive span {
-    transform: translateY(-100%);
+  .interactive span {
+    transform: translateY(-150%);
+  }
+
+  .development span {
+    transform: translateY(150%);
   }
 
   .gradient {
@@ -48,28 +57,27 @@
     -webkit-text-fill-color: transparent;
   }
 
-  /* Slide-in active class */
-  .slide-in span {
-    transform: translateY(0) !important;
-    opacity: 1 !important;
+  .slide-in .interactive span {
+    transform: translateY(0);
+  }
+
+  .slide-in .development span {
+    transform: translateY(0);
   }
 </style>
 </head>
 <body>
 
-<div class="slide-wrapper">
-  <div class="word interactive"><span class="gradient">Interactive</span></div>
-  <div class="word development"><span>Development</span></div>
+<div class="slide-container" id="slideContainer">
+  <div class="word-wrapper interactive"><span class="gradient">Interactive</span></div>
+  <div class="word-wrapper development"><span>Development</span></div>
 </div>
 
 <script>
-  const interactive = document.querySelector('.interactive');
-  const development = document.querySelector('.development');
+  const container = document.getElementById('slideContainer');
 
-  // Start the animation after a short delay
   setTimeout(() => {
-    interactive.classList.add('slide-in');
-    development.classList.add('slide-in');
+    container.classList.add('slide-in');
   }, 500);
 </script>
 
