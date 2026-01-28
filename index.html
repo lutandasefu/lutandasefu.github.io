@@ -21,7 +21,6 @@ body.black-bg{background:#111;color:#fff}
 /* ---------- WELCOME ---------- */
 #welcome{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;opacity:0;transition:.8s;z-index:4;}
 #welcome div{margin-bottom:30px;font-size:clamp(3rem,6vw,5rem);color:#111;text-align:center;}
-
 #welcome-toggle{display:flex;position:relative;width:190px;height:60px;background:#fff;border-radius:50px;border:2px solid #fff;}
 #welcome-toggle .focus{position:absolute;top:6px;left:6px;width:78px;height:48px;border-radius:50px;background:#111;transition:.35s;}
 #welcome-toggle button{flex:1;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;}
@@ -36,31 +35,34 @@ body.black-bg{background:#111;color:#fff}
 .right-toggle button.active svg{stroke:#fff}
 
 /* ---------- PAGES ---------- */
-.page{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;transform:translateX(100%);transition:.8s cubic-bezier(.77,0,.18,1);}
+.page{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;transform:translateX(100%);transition:.8s cubic-bezier(.77,0,.18,1);background:#111;}
 
-/* ---------- CASE SLIDER ---------- */
-#case{background:#111;}
-.case-slider{width:90%;max-width:1400px;}
-.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;}
-.head h2{font-size:clamp(2rem,4vw,3rem);font-weight:500;}
-.controls{display:flex;gap:.5rem;}
-.nav-btn{width:40px;height:40px;border-radius:50%;border:none;background:#222;color:#fff;font-size:22px;cursor:pointer;}
-.slider{overflow:hidden;}
-.track{display:flex;gap:1.25rem;align-items:center;scroll-behavior:smooth;}
-.project-card{position:relative;flex:0 0 5rem;height:26rem;border-radius:1rem;overflow:hidden;cursor:pointer;transition:.55s cubic-bezier(.25,.46,.45,.94);}
-.project-card[active]{flex-basis:30rem;transform:translateY(-6px);}
-.project-card__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.75);}
-.project-card__content{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;background:linear-gradient(transparent 40%,rgba(0,0,0,.85));}
-.project-card__title{color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);font-size:1.2rem;}
-.project-card[active] .project-card__title{writing-mode:horizontal-tb;transform:none;font-size:2.2rem;}
-.dots{display:flex;justify-content:center;gap:.5rem;margin-top:25px;}
-.dot{width:12px;height:12px;border-radius:50%;background:#444;cursor:pointer;}
-.dot.active{background:#fff}
+/* ---------- CASE STUDIES HOVER GRID ---------- */
+#case {
+  flex-direction: column;
+}
+.hover-grid{
+  display:grid;
+  grid-template-rows: repeat(6, 80px);
+  gap: 10px;
+  width: 80%;
+}
+.hover-grid div{
+  background:#444;
+  transition: all 0.4s ease;
+  cursor:pointer;
+}
+.hover-grid div:hover{
+  flex-grow:1;
+  transform: scaleX(1.3);
+  background:#ff6b35;
+}
 </style>
 </head>
 
 <body class="grey-bg">
 
+<!-- ---------- INTRO ---------- -->
 <section id="intro">
   <div id="introTextWrapper">
     <span id="introText"></span>
@@ -68,49 +70,60 @@ body.black-bg{background:#111;color:#fff}
   </div>
 </section>
 
+<!-- ---------- WELCOME ---------- -->
 <section id="welcome">
   <div>Welcome to my portfolio</div>
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
-    <button id="toCase"></button>
-    <button id="toAbout"></button>
+    <button id="toCase">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
+        <rect x="3" y="4" width="14" height="14" rx="2"/>
+        <path d="M7 8h6M7 12h6M7 16h4"/>
+      </svg>
+    </button>
+    <button id="toAbout">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c2-4 14-4 16 0"/>
+      </svg>
+    </button>
   </div>
 </section>
 
+<!-- ---------- CASE STUDIES PAGE ---------- -->
 <section id="case" class="page">
-  <div class="case-slider">
-
-    <div class="head">
-      <h2>Case Studies</h2>
-      <div class="controls">
-        <button id="prev" class="nav-btn">‹</button>
-        <button id="next" class="nav-btn">›</button>
-      </div>
-    </div>
-
-    <div class="slider">
-      <div class="track" id="track">
-
-        <!-- paste your project-card articles here exactly -->
-
-      </div>
-    </div>
-
-    <div class="dots" id="dots"></div>
-
+  <div class="hover-grid">
+    <div style="background:#e74c3c"></div>
+    <div style="background:#3498db"></div>
+    <div style="background:#2ecc71"></div>
+    <div style="background:#f1c40f"></div>
+    <div style="background:#9b59b6"></div>
+    <div style="background:#e67e22"></div>
   </div>
 </section>
 
+<!-- ---------- ABOUT PAGE ---------- -->
 <section id="about" class="page">About</section>
 
+<!-- ---------- RIGHT TOGGLE ---------- -->
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
-  <button id="caseBtn"></button>
-  <button id="aboutBtn"></button>
+  <button id="caseBtn">
+    <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
+      <rect x="3" y="4" width="14" height="14" rx="2"/>
+      <path d="M7 8h6M7 12h6M7 16h4"/>
+    </svg>
+  </button>
+  <button id="aboutBtn">
+    <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 20c2-4 14-4 16 0"/>
+    </svg>
+  </button>
 </div>
 
 <script>
-/* intro typing unchanged */
+/* ---------- TYPING INTRO ---------- */
 const introText=document.getElementById("introText");
 const welcome=document.getElementById("welcome");
 const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
@@ -120,45 +133,31 @@ function erase(){if(c>0){introText.textContent=lines[l].substring(0,--c);setTime
 function showWelcome(){intro.style.opacity=0;setTimeout(()=>{intro.remove();welcome.style.opacity=1;},600);}
 type();
 
-/* navigation unchanged */
+/* ---------- NAVIGATION ---------- */
 const casePage=document.getElementById("case");
 const aboutPage=document.getElementById("about");
 const right=document.getElementById("rightToggle");
+const rFocus=document.getElementById("rFocus");
+const wFocus=document.getElementById("wFocus");
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
+const toCase=document.getElementById("toCase");
+const toAbout=document.getElementById("toAbout");
+
+toCase.classList.add("active");
+
+function setWelcomeActive(activeBtn,inactiveBtn){wFocus.style.transform=activeBtn===toCase?"translateX(0)":"translateX(100%)";activeBtn.classList.add("active");inactiveBtn.classList.remove("active");}
 function activateBlackBg(){document.body.classList.remove("grey-bg");document.body.classList.add("black-bg");}
-function showCase(){activateBlackBg();casePage.style.transform="translateX(0)";aboutPage.style.transform="translateX(100%)";}
-function showAbout(){activateBlackBg();aboutPage.style.transform="translateX(0)";casePage.style.transform="translateX(-100%)";}
-toCase.onclick=()=>{welcome.style.transform="translateY(-100%)";right.style.display="flex";showCase();}
-toAbout.onclick=()=>{welcome.style.transform="translateY(-100%)";right.style.display="flex";showAbout();}
+
+function showCase(){activateBlackBg();casePage.style.transform="translateX(0)";aboutPage.style.transform="translateX(100%)";rFocus.style.transform="translateY(0)";caseBtn.classList.add("active");aboutBtn.classList.remove("active");}
+function showAbout(){activateBlackBg();aboutPage.style.transform="translateX(0)";casePage.style.transform="translateX(-100%)";rFocus.style.transform="translateY(100%)";aboutBtn.classList.add("active");caseBtn.classList.remove("active");}
+
+toCase.onclick=()=>{setWelcomeActive(toCase,toAbout);welcome.style.transform="translateY(-100%)";right.style.display="flex";showCase();}
+toAbout.onclick=()=>{setWelcomeActive(toAbout,toCase);welcome.style.transform="translateY(-100%)";right.style.display="flex";showAbout();}
 caseBtn.onclick=showCase;
 aboutBtn.onclick=showAbout;
-
-/* slider JS */
-(() => {
-  const track=document.getElementById("track");
-  const wrap=track.parentElement;
-  const cards=Array.from(track.children);
-  const prev=document.getElementById("prev");
-  const next=document.getElementById("next");
-  const dotsBox=document.getElementById("dots");
-  cards.forEach((_,i)=>{const d=document.createElement("span");d.className="dot";d.onclick=()=>activate(i,true);dotsBox.appendChild(d);});
-  const dots=Array.from(dotsBox.children);
-  let current=0;
-  function center(i){
-    const card=cards[i];
-    wrap.scrollTo({left:card.offsetLeft-(wrap.clientWidth/2-card.clientWidth/2),behavior:"smooth"});
-  }
-  function toggleUI(i){
-    cards.forEach((c,k)=>c.toggleAttribute("active",k===i));
-    dots.forEach((d,k)=>d.classList.toggle("active",k===i));
-  }
-  function activate(i,s){current=i;toggleUI(i);if(s)center(i);}
-  function go(s){activate(Math.min(Math.max(current+s,0),cards.length-1),true);}
-  prev.onclick=()=>go(-1);
-  next.onclick=()=>go(1);
-  cards.forEach((card,i)=>card.onclick=()=>activate(i,true));
-  toggleUI(0);center(0);
-})();
 </script>
 
 </body>
 </html>
+
