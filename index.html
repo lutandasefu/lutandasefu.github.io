@@ -35,7 +35,7 @@ body.black-bg{background:#111;}
   flex:1;border:none;background:none;cursor:pointer;
   display:flex;justify-content:center;align-items:center;z-index:2;
 }
-#welcome-toggle svg{width:24px;height:24px;stroke:#111;fill:none;}
+#welcome-toggle svg{width:24px;height:24px;stroke:#111;fill:none;transition:stroke .3s;}
 #welcome-toggle button.active svg{stroke:#fff;}
 
 /* RIGHT TOGGLE */
@@ -53,7 +53,7 @@ body.black-bg{background:#111;}
   flex:1;border:none;background:none;cursor:pointer;
   display:flex;justify-content:center;align-items:center;z-index:2;
 }
-.right-toggle svg{width:28px;height:28px;stroke:#111;fill:none;}
+.right-toggle svg{width:28px;height:28px;stroke:#111;fill:none;transition:stroke .3s;}
 .right-toggle button.active svg{stroke:#fff;}
 
 /* PAGES */
@@ -176,21 +176,45 @@ const right=document.getElementById("rightToggle");
 const rFocus=document.getElementById("rFocus");
 const wFocus=document.getElementById("wFocus");
 
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
+const toCase=document.getElementById("toCase");
+const toAbout=document.getElementById("toAbout");
+
+function setActiveButtons(activeBtn, inactiveBtn, activeRightBtn, inactiveRightBtn){
+  activeBtn.classList.add("active");
+  inactiveBtn.classList.remove("active");
+  activeRightBtn.classList.add("active");
+  inactiveRightBtn.classList.remove("active");
+}
+
 function showCase(){
   document.body.classList.replace("grey-bg","black-bg");
   casePage.style.transform="translateX(0)";
   aboutPage.style.transform="translateX(100%)";
   rFocus.style.transform="translateY(0)";
+  setActiveButtons(toCase,toAbout,caseBtn,aboutBtn);
 }
 function showAbout(){
   document.body.classList.replace("grey-bg","black-bg");
   aboutPage.style.transform="translateX(0)";
   casePage.style.transform="translateX(-100%)";
   rFocus.style.transform="translateY(100%)";
+  setActiveButtons(toAbout,toCase,aboutBtn,caseBtn);
 }
 
-toCase.onclick=()=>{wFocus.style.transform="translateX(0)";welcome.style.transform="translateY(-100%)";right.style.display="flex";showCase();}
-toAbout.onclick=()=>{wFocus.style.transform="translateX(100%)";welcome.style.transform="translateY(-100%)";right.style.display="flex";showAbout();}
+toCase.onclick=()=>{
+  wFocus.style.transform="translateX(0)";
+  welcome.style.transform="translateY(-100%)";
+  right.style.display="flex";
+  showCase();
+};
+toAbout.onclick=()=>{
+  wFocus.style.transform="translateX(100%)";
+  welcome.style.transform="translateY(-100%)";
+  right.style.display="flex";
+  showAbout();
+};
 caseBtn.onclick=showCase;
 aboutBtn.onclick=showAbout;
 
