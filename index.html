@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
 
 <style>
+/* ---------- GLOBAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
 body.grey-bg{background:#e6e6e6;}
@@ -30,12 +31,17 @@ body.black-bg{background:#111;}
 #welcome-toggle .focus{
   position:absolute;top:6px;left:6px;width:78px;height:48px;border-radius:50px;
   background:#111;transition:transform .35s cubic-bezier(.77,0,.18,1);
+  pointer-events:none;
+  z-index:1;
 }
 #welcome-toggle button{
   flex:1;border:none;background:none;cursor:pointer;
   display:flex;justify-content:center;align-items:center;z-index:2;
 }
-#welcome-toggle svg{width:24px;height:24px;stroke:#111;fill:none;transition:stroke .3s;}
+#welcome-toggle button svg{
+  width:24px;height:24px;stroke:#111;fill:none;transition:stroke .3s;
+}
+/* Icons turn white when button has active class or focus pill overlaps */
 #welcome-toggle button.active svg{stroke:#fff;}
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -163,10 +169,10 @@ body.black-bg{background:#111;}
 
 <script>
 /* ---------- TYPING INTRO ---------- */
-const introText = document.getElementById("introText");
-const welcome = document.getElementById("welcome");
-const lines = ["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
-let l = 0, c = 0;
+const introText=document.getElementById("introText");
+const welcome=document.getElementById("welcome");
+const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
+let l=0,c=0;
 function type(){if(c<lines[l].length){introText.textContent+=lines[l][c++];setTimeout(type,80);}
 else{if(l<lines.length-1){setTimeout(erase,600);}else{setTimeout(showWelcome,800);}}}
 function erase(){if(c>0){introText.textContent=lines[l].substring(0,--c);setTimeout(erase,40);}else{l++;type();}}
@@ -179,7 +185,6 @@ const aboutPage=document.getElementById("about");
 const right=document.getElementById("rightToggle");
 const rFocus=document.getElementById("rFocus");
 const wFocus=document.getElementById("wFocus");
-
 const caseBtn=document.getElementById("caseBtn");
 const aboutBtn=document.getElementById("aboutBtn");
 const toCase=document.getElementById("toCase");
@@ -220,41 +225,40 @@ function showAbout(){
 }
 
 /* ---------- TOGGLE BUTTONS ---------- */
-toCase.onclick = ()=>{
+toCase.onclick=()=>{
   welcome.style.transform="translateY(-100%)";
   right.style.display="flex";
   showCase();
 };
-toAbout.onclick = ()=>{
+toAbout.onclick=()=>{
   welcome.style.transform="translateY(-100%)";
   right.style.display="flex";
   showAbout();
 };
-
-caseBtn.onclick = showCase;
-aboutBtn.onclick = showAbout;
+caseBtn.onclick=showCase;
+aboutBtn.onclick=showAbout;
 
 /* ---------- HOVER ROWS ---------- */
-const caseSection = document.getElementById("case");
-const grid = document.getElementById("hoverGrid");
-const rows = [...grid.children];
-const title = document.getElementById("caseTitle");
+const caseSection=document.getElementById("case");
+const grid=document.getElementById("hoverGrid");
+const rows=[...grid.children];
+const title=document.getElementById("caseTitle");
 
-title.onmouseenter = ()=>caseSection.classList.add("showRows");
-grid.onmouseleave = ()=>caseSection.classList.remove("showRows");
+title.onmouseenter=()=>caseSection.classList.add("showRows");
+grid.onmouseleave=()=>caseSection.classList.remove("showRows");
 
-const ease = 0.12, baseWidth = 60, maxExtra = 220;
-const sizes = rows.map(()=>baseWidth);
+const ease=0.12, baseWidth=60, maxExtra=220;
+const sizes=rows.map(()=>baseWidth);
 
 function animate(){
   rows.forEach((row,i)=>{
-    sizes[i] += ((row.targetWidth??baseWidth)-sizes[i])*ease;
-    row.style.width = sizes[i]+"px";
+    sizes[i]+=(row.targetWidth??baseWidth)-sizes[i]*ease;
+    row.style.width=sizes[i]+"px";
   });
   requestAnimationFrame(animate);
 }
 
-grid.onmousemove = e=>{
+grid.onmousemove=e=>{
   rows.forEach(r=>r.targetWidth=baseWidth);
   rows.forEach(row=>{
     const rect=row.getBoundingClientRect();
