@@ -42,16 +42,16 @@ body.black-bg{background:#111;color:#fff}
   display:flex;
   flex-direction:column;
   align-items:center;
+  justify-content:center;
   width:100%;
-  position:relative;
   height:100%;
-  justify-content:center; /* Vertically center */
+  position:relative;
 }
 
 /* Case Studies title */
 .case-title{
   font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 30px;
+  margin-bottom: 0;
   color: #fff;
   cursor: pointer;
   z-index: 2;
@@ -61,24 +61,21 @@ body.black-bg{background:#111;color:#fff}
 /* Hover Grid */
 .hover-grid{
   display:flex;
-  flex-direction:column; /* Stack rows vertically */
-  align-items:center; /* Center horizontally */
-  gap: 15px;
+  flex-direction:column; /* stack rows vertically */
+  align-items:center;
   position:absolute;
-  top:50%; /* Center vertically */
-  left:50%; /* Center horizontally */
-  transform: translate(-50%, -50%) scale(0.9);
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
   opacity: 0;
-  transition: all 0.4s ease;
   pointer-events: none;
   z-index: 1;
-  width: 300px; /* Row width */
+  width: 300px;
 }
 
-/* Hover effect: show grid & hide text */
+/* Show grid & hide title on hover */
 .case-container:hover .hover-grid{
   opacity:1;
-  transform: translate(-50%, -50%) scale(1);
   pointer-events:auto;
 }
 .case-container:hover .case-title{
@@ -89,13 +86,14 @@ body.black-bg{background:#111;color:#fff}
 .hover-grid div{
   width: 100%;
   height: 50px;
+  margin: 0; /* remove gap so stacked tightly */
   background: #444;
   transition: all 0.4s ease;
   cursor: pointer;
-  border-radius:8px;
+  margin-bottom: 2px; /* tiny spacing between rows */
 }
 .hover-grid div:hover{
-  transform: scaleX(1.3);
+  transform: scaleX(1.5); /* expand horizontally */
   background: #ff6b35;
 }
 </style>
