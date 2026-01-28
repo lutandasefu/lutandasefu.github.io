@@ -1,120 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Solar</title>
 
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
-
-body{
-  background:#0b0f14;
-  color:#fff;
-}
-
-.nav{
-  position:absolute;
-  top:30px;
-  left:60px;
-  right:60px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:10;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:600;
-}
-
-nav a{
-  margin:0 20px;
-  text-decoration:none;
-  color:#fff;
-  font-weight:300;
-  opacity:0.8;
-}
-
-.btn-outline{
-  padding:10px 22px;
-  border:1px solid #fff;
-  text-decoration:none;
-  color:#fff;
-  border-radius:30px;
-}
-
-.hero{
-  height:100vh;
-  background:url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=2070') center/cover no-repeat;
-  position:relative;
-  display:flex;
-  align-items:center;
-  padding-left:80px;
-}
-
-.overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.55);
-}
-
-.hero-content{
-  position:relative;
-  max-width:600px;
-  z-index:2;
-}
-
-.hero h1{
-  font-size:64px;
-  font-weight:600;
-  line-height:1.1;
-  margin-bottom:20px;
-}
-
-.hero h1 span{
-  color:#7CFFB2;
-}
-
-.hero p{
-  font-size:16px;
-  line-height:1.7;
-  margin-bottom:30px;
-  opacity:0.9;
-}
-
-.cta{
-  display:inline-block;
-  padding:14px 32px;
-  background:#7CFFB2;
-  color:#000;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-.question{
-  padding:120px 80px;
-  background:#fff;
-  color:#111;
-}
-
-.question h2{
-  font-size:40px;
-}
-</style>
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- ---------- NAVIGATION ---------- -->
 <header class="nav">
     <div class="logo">Solar</div>
     <nav>
@@ -126,6 +26,7 @@ nav a{
     <a href="#" class="btn-outline">See More</a>
 </header>
 
+<!-- ---------- HERO SECTION ---------- -->
 <section class="hero">
     <div class="overlay"></div>
 
@@ -137,7 +38,7 @@ nav a{
 
         <p>
             No need to give up daily comfort if you care about the environment.
-            Nature gives what you need and we know how to take it for you.
+            Nature gives what you need, and we know how to take it for you.
             Get a smart, sustainable home with innovative solar panels
             for safe and healthy energy.
         </p>
@@ -146,8 +47,16 @@ nav a{
     </div>
 </section>
 
+<!-- ---------- QUESTION SECTION ---------- -->
 <section class="question">
     <h2>Do I really need it?</h2>
+    <div class="question-tabs">
+        <span class="tab active">Day</span>
+        <span class="tab">Night</span>
+        <span class="tab">Benefits</span>
+        <span class="tab">Inside</span>
+    </div>
+    <div class="tab-underline"></div>
 </section>
 
 </body>
