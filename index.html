@@ -15,24 +15,23 @@
 }
 
 body{
-  height:100vh;
   background:#111;
   font-family:'Sulphur Point', sans-serif;
+  color:#fff;
+  height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
-  color:#fff;
 }
 
-/* Container */
+/* ---------- CASE CONTAINER ---------- */
 .case-container{
   position:relative;
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
-  width:100%;
-  height:100%;
 }
 
 /* Title */
@@ -43,7 +42,7 @@ body{
   transition:opacity .4s ease;
 }
 
-/* Horizontal blocks */
+/* Grid */
 .hover-grid{
   position:absolute;
   display:flex;
@@ -56,7 +55,7 @@ body{
   transition:opacity .4s ease;
 }
 
-/* Show blocks + hide title */
+/* Show grid / hide title */
 .case-container:hover .hover-grid{
   opacity:1;
   pointer-events:auto;
@@ -66,43 +65,62 @@ body{
   opacity:0;
 }
 
-/* Rectangles */
-.hover-grid div{
-  height:140px;
+/* Rows */
+.row{
+  height:160px;
   width:60px;
-  transition:width .4s ease;
   border-radius:6px;
-}
-
-/* Expand sideways */
-.hover-grid div:hover{
-  width:200px;
+  transition:width .35s cubic-bezier(.2,.8,.2,1);
+  cursor:pointer;
 }
 
 /* Demo colors */
-.hover-grid div:nth-child(1){background:#e74c3c;}
-.hover-grid div:nth-child(2){background:#3498db;}
-.hover-grid div:nth-child(3){background:#2ecc71;}
-.hover-grid div:nth-child(4){background:#f1c40f;}
-.hover-grid div:nth-child(5){background:#9b59b6;}
-.hover-grid div:nth-child(6){background:#e67e22;}
+.row:nth-child(1){background:#e74c3c;}
+.row:nth-child(2){background:#3498db;}
+.row:nth-child(3){background:#2ecc71;}
+.row:nth-child(4){background:#f1c40f;}
+.row:nth-child(5){background:#9b59b6;}
+.row:nth-child(6){background:#e67e22;}
 </style>
 </head>
 
 <body>
 
-<div class="case-container">
+<section class="case-container">
   <h2 class="case-title">Case Studies</h2>
 
-  <div class="hover-grid">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+  <div class="hover-grid" id="hoverGrid">
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
   </div>
-</div>
+</section>
+
+<script>
+const grid = document.getElementById('hoverGrid');
+const rows = [...grid.children];
+
+grid.addEventListener('mousemove', e => {
+  rows.forEach(row => {
+    const rect = row.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
+    const distance = Math.abs(e.clientX - center);
+
+    const influence = 300;
+    const expand = Math.max(0, influence - distance) / influence;
+    const width = 60 + expand * 180;
+
+    row.style.width = width + 'px';
+  });
+});
+
+grid.addEventListener('mouseleave', () => {
+  rows.forEach(r => r.style.width = '60px');
+});
+</script>
 
 </body>
 </html>
