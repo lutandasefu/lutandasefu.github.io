@@ -3,93 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case Studies Interaction</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&display=swap" rel="stylesheet">
+<title>Lutanda | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
+body.grey-bg{background:#e6e6e6;}
+body.black-bg{background:#111;color:#fff}
 
-body{
-  background:#111;
-  font-family:'Sulphur Point', sans-serif;
-  color:#fff;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+/* INTRO */
+#intro{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:5;}
+#introTextWrapper{display:flex;align-items:center;font-size:clamp(2.2rem,6vw,4.4rem);}
+.cursor{width:2px;height:1em;background:#111;margin-left:6px;animation:blink .7s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
 
-/* ---------- CASE CONTAINER ---------- */
-.case-container{
+/* WELCOME */
+#welcome{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;opacity:0;transition:.8s ease;}
+#welcome div{margin-bottom:30px;font-size:clamp(3rem,6vw,5rem);}
+
+/* PAGE */
+.page{position:absolute;inset:0;background:#111;display:flex;justify-content:center;align-items:center;transform:translateX(100%);transition:.8s cubic-bezier(.77,0,.18,1);}
+
+/* CASE TITLE */
+#caseTitle{
+  font-size:clamp(3rem,6vw,5rem);
   position:relative;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* Title */
-.case-title{
-  font-size:clamp(2rem,4vw,3rem);
-  cursor:pointer;
   z-index:2;
   transition:opacity .4s ease;
-}
-
-/* Grid */
-.hover-grid{
-  position:absolute;
-  display:flex;
-  gap:8px;
-  opacity:0;
-  pointer-events:none;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  transition:opacity .4s ease;
-}
-
-/* Show grid / hide title */
-.case-container:hover .hover-grid{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.case-container:hover .case-title{
-  opacity:0;
-}
-
-/* Rows */
-.row{
-  height:160px;
-  width:60px;
-  border-radius:6px;
-  transition:width .35s cubic-bezier(.2,.8,.2,1);
   cursor:pointer;
 }
 
-/* Demo colors */
-.row:nth-child(1){background:#e74c3c;}
-.row:nth-child(2){background:#3498db;}
-.row:nth-child(3){background:#2ecc71;}
-.row:nth-child(4){background:#f1c40f;}
-.row:nth-child(5){background:#9b59b6;}
-.row:nth-child(6){background:#e67e22;}
+/* ROW GRID */
+#hoverGrid{
+  position:absolute;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .4s ease;
+}
+
+.row{
+  height:260px;
+  width:60px;
+  border-radius:14px;
+  transition:background .3s ease;
+}
+
+/* COLORS */
+.row:nth-child(1){background:#e63946;}
+.row:nth-child(2){background:#f4a261;}
+.row:nth-child(3){background:#2a9d8f;}
+.row:nth-child(4){background:#457b9d;}
+.row:nth-child(5){background:#9b5de5;}
+.row:nth-child(6){background:#ff006e;}
+
+.showRows #hoverGrid{opacity:1;pointer-events:auto;}
+.showRows #caseTitle{opacity:0;}
+
 </style>
 </head>
+<body class="grey-bg">
 
-<body>
+<!-- INTRO -->
+<section id="intro">
+  <div id="introTextWrapper">
+    <span id="introText"></span>
+    <span class="cursor"></span>
+  </div>
+</section>
 
-<section class="case-container">
-  <h2 class="case-title">Case Studies</h2>
+<!-- WELCOME -->
+<section id="welcome">
+  <div>Welcome to my portfolio</div>
+</section>
 
-  <div class="hover-grid" id="hoverGrid">
+<!-- CASE PAGE -->
+<section id="case" class="page">
+  <div id="caseTitle">Case Studies</div>
+
+  <div id="hoverGrid">
     <div class="row"></div>
     <div class="row"></div>
     <div class="row"></div>
@@ -100,27 +96,83 @@ body{
 </section>
 
 <script>
-const grid = document.getElementById('hoverGrid');
-const rows = [...grid.children];
+/* TYPING INTRO */
+const introText=document.getElementById("introText");
+const welcome=document.getElementById("welcome");
+const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
+let l=0,c=0;
 
-grid.addEventListener('mousemove', e => {
-  rows.forEach(row => {
-    const rect = row.getBoundingClientRect();
-    const center = rect.left + rect.width / 2;
-    const distance = Math.abs(e.clientX - center);
+function type(){
+  if(c<lines[l].length){
+    introText.textContent+=lines[l][c++];
+    setTimeout(type,80);
+  }else{
+    if(l<lines.length-1){setTimeout(erase,600);}
+    else{setTimeout(showWelcome,800);}
+  }
+}
+function erase(){
+  if(c>0){
+    introText.textContent=lines[l].substring(0,--c);
+    setTimeout(erase,40);
+  }else{l++;type();}
+}
+function showWelcome(){
+  intro.style.opacity=0;
+  setTimeout(()=>{intro.remove();welcome.style.opacity=1;},600);
+}
+type();
 
-    const influence = 300;
-    const expand = Math.max(0, influence - distance) / influence;
-    const width = 60 + expand * 180;
+/* SHOW CASE PAGE AFTER CLICK */
+welcome.onclick=()=>{
+  document.body.classList.remove("grey-bg");
+  document.body.classList.add("black-bg");
+  document.getElementById("case").style.transform="translateX(0)";
+};
 
-    row.style.width = width + 'px';
+/* ROW HOVER LOGIC */
+const caseSection=document.getElementById("case");
+const grid=document.getElementById("hoverGrid");
+const rows=[...grid.children];
+const title=document.getElementById("caseTitle");
+
+title.addEventListener("mouseenter",()=>caseSection.classList.add("showRows"));
+grid.addEventListener("mouseleave",()=>caseSection.classList.remove("showRows"));
+
+/* SMOOTH LERP ANIMATION */
+const ease=0.12;
+const baseWidth=60;
+const maxExtra=220;
+const sizes=rows.map(()=>baseWidth);
+
+function animate(){
+  rows.forEach((row,i)=>{
+    const current=sizes[i];
+    const target=row.targetWidth??baseWidth;
+    sizes[i]=current+(target-current)*ease;
+    row.style.width=sizes[i]+"px";
+  });
+  requestAnimationFrame(animate);
+}
+
+grid.addEventListener("mousemove",e=>{
+  rows.forEach(r=>r.targetWidth=baseWidth);
+  rows.forEach(row=>{
+    const rect=row.getBoundingClientRect();
+    const center=rect.left+rect.width/2;
+    const distance=Math.abs(e.clientX-center);
+    const influence=320;
+    const extra=Math.max(0,influence-distance)/influence*maxExtra;
+    row.targetWidth=baseWidth+extra;
   });
 });
 
-grid.addEventListener('mouseleave', () => {
-  rows.forEach(r => r.style.width = '60px');
+grid.addEventListener("mouseleave",()=>{
+  rows.forEach(r=>r.targetWidth=baseWidth);
 });
-</script>
 
+animate();
+</script>
 </body>
 </html>
+
