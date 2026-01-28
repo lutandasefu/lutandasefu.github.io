@@ -181,28 +181,37 @@ const aboutBtn=document.getElementById("aboutBtn");
 const toCase=document.getElementById("toCase");
 const toAbout=document.getElementById("toAbout");
 
-function setActiveButtons(activeBtn, inactiveBtn, activeRightBtn, inactiveRightBtn){
-  activeBtn.classList.add("active");
-  inactiveBtn.classList.remove("active");
-  activeRightBtn.classList.add("active");
-  inactiveRightBtn.classList.remove("active");
+function setActiveAll(activePage){
+  if(activePage==="case"){
+    toCase.classList.add("active");
+    toAbout.classList.remove("active");
+    caseBtn.classList.add("active");
+    aboutBtn.classList.remove("active");
+    rFocus.style.transform="translateY(0)";
+  }else{
+    toCase.classList.remove("active");
+    toAbout.classList.add("active");
+    caseBtn.classList.remove("active");
+    aboutBtn.classList.add("active");
+    rFocus.style.transform="translateY(100%)";
+  }
 }
 
 function showCase(){
   document.body.classList.replace("grey-bg","black-bg");
   casePage.style.transform="translateX(0)";
   aboutPage.style.transform="translateX(100%)";
-  rFocus.style.transform="translateY(0)";
-  setActiveButtons(toCase,toAbout,caseBtn,aboutBtn);
+  setActiveAll("case");
 }
+
 function showAbout(){
   document.body.classList.replace("grey-bg","black-bg");
   aboutPage.style.transform="translateX(0)";
   casePage.style.transform="translateX(-100%)";
-  rFocus.style.transform="translateY(100%)";
-  setActiveButtons(toAbout,toCase,aboutBtn,caseBtn);
+  setActiveAll("about");
 }
 
+/* Welcome toggle */
 toCase.onclick=()=>{
   wFocus.style.transform="translateX(0)";
   welcome.style.transform="translateY(-100%)";
@@ -215,6 +224,8 @@ toAbout.onclick=()=>{
   right.style.display="flex";
   showAbout();
 };
+
+/* Right nav toggle */
 caseBtn.onclick=showCase;
 aboutBtn.onclick=showAbout;
 
@@ -237,6 +248,7 @@ function animate(){
   });
   requestAnimationFrame(animate);
 }
+
 grid.onmousemove=e=>{
   rows.forEach(r=>r.targetWidth=baseWidth);
   rows.forEach(row=>{
