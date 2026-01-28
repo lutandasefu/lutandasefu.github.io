@@ -1,1 +1,114 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background:#111;
+    color:#fff;
+}
+
+/* ---------------- NAV ---------------- */
+
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:30px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:10;
+}
+
+.logo{
+    font-weight:700;
+    font-size:22px;
+    color:#f4b400;
+}
+
+.nav nav{
+    display:flex;
+    gap:40px;
+}
+
+.nav nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:300;
+    opacity:0.85;
+}
+
+.btn-outline{
+    border:1px solid #f4b400;
+    padding:10px 22px;
+    border-radius:25px;
+    text-decoration:none;
+    color:#f4b400;
+    font-size:14px;
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero{
+    height:100vh;
+    background:url('hero.jpg') center/cover no-repeat;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:0 80px;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+}
+
+.hero-content{
+    position:relative;
+    max-width:650px;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:86px;
+    line-height:1.05;
+    font-weight:300;
+}
+
+.hero h1 span{
+    font-weight:700;
+}
+
+.hero p{
+    margin-top:25px;
+    font-size:18px;
+    line-height:1.7;
+    opacity:0.9;
+}
+
+.cta{
+    display:inline-block;
+    margin-top:25px;
+    color:#f4b400;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* ---------------- NEXT SECTION ---------------- */
+
+.question{
+    padding:100px 80px;
+    background:#111;
+}
+
+.question h2{
+    font-size:42px;
+    font-weight:600;
+}
 
