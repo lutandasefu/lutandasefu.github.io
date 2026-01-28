@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
-
 <style>
-/* ---------- GLOBAL ---------- */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
 body.grey-bg{background:#e6e6e6;}
@@ -40,7 +38,6 @@ body.black-bg{background:#111;}
 #welcome-toggle button svg{
   width:24px;height:24px;stroke:#111;fill:none;transition:stroke .3s;
 }
-/* Icons turn white when button has active class */
 #welcome-toggle button.active svg{stroke:#fff;}
 
 /* ---------- RIGHT TOGGLE ---------- */
@@ -81,7 +78,7 @@ body.black-bg{background:#111;}
 #hoverGrid{
   position:absolute;bottom:12%;left:50%;
   transform:translateX(-50%);
-  display:flex;gap:14px;
+  display:flex;gap:10px;
   opacity:0;pointer-events:none;
   transition:opacity .4s ease;
 }
@@ -111,17 +108,14 @@ body.black-bg{background:#111;}
 <!-- ---------- WELCOME ---------- -->
 <section id="welcome">
   <div>Welcome to my portfolio</div>
-
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
-
-    <button id="toCase">
+    <button id="toCase" class="active">
       <svg viewBox="0 0 24 24" stroke-width="1.5">
         <rect x="3" y="4" width="14" height="14" rx="2"/>
         <path d="M7 8h6M7 12h6M7 16h4"/>
       </svg>
     </button>
-
     <button id="toAbout">
       <svg viewBox="0 0 24 24" stroke-width="1.5">
         <circle cx="12" cy="8" r="4"/>
@@ -150,14 +144,12 @@ body.black-bg{background:#111;}
 <!-- ---------- RIGHT TOGGLE ---------- -->
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
-
-  <button id="caseBtn">
+  <button id="caseBtn" class="active">
     <svg viewBox="0 0 24 24" stroke-width="1.5">
       <rect x="3" y="4" width="14" height="14" rx="2"/>
       <path d="M7 8h6M7 12h6M7 16h4"/>
     </svg>
   </button>
-
   <button id="aboutBtn">
     <svg viewBox="0 0 24 24" stroke-width="1.5">
       <circle cx="12" cy="8" r="4"/>
@@ -189,13 +181,13 @@ const aboutBtn=document.getElementById("aboutBtn");
 const toCase=document.getElementById("toCase");
 const toAbout=document.getElementById("toAbout");
 
-function setWelcomeActive(activeBtn, inactiveBtn){
-  wFocus.style.transform = activeBtn===toCase ? "translateX(0)" : "translateX(100%)";
+function setWelcomeActive(activeBtn,inactiveBtn){
+  wFocus.style.transform=activeBtn===toCase?"translateX(0)":"translateX(100%)";
   activeBtn.classList.add("active");
   inactiveBtn.classList.remove("active");
 }
 
-function setRightActive(activeBtn, inactiveBtn){
+function setRightActive(activeBtn,inactiveBtn){
   rFocus.style.transform=activeBtn===caseBtn?"translateY(0)":"translateY(100%)";
   activeBtn.classList.add("active");
   inactiveBtn.classList.remove("active");
@@ -232,7 +224,7 @@ const title=document.getElementById("caseTitle");
 title.onmouseenter=()=>caseSection.classList.add("showRows");
 grid.onmouseleave=()=>caseSection.classList.remove("showRows");
 
-const ease=0.12, baseWidth=60, maxExtra=220;
+const ease=0.12, baseWidth=60, maxExtra=80;
 const sizes=rows.map(()=>baseWidth);
 
 function animate(){
@@ -249,13 +241,13 @@ grid.onmousemove=e=>{
     const rect=row.getBoundingClientRect();
     const center=rect.left+rect.width/2;
     const distance=Math.abs(e.clientX-center);
-    const influence=320;
+    const influence=180;
     const extra=Math.max(0,influence-distance)/influence*maxExtra;
     row.targetWidth=baseWidth+extra;
   });
 };
 animate();
 </script>
-
 </body>
 </html>
+
