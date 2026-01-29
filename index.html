@@ -70,6 +70,21 @@ body.black-bg{background:#111;color:#fff}
 .row:nth-child(4){background:#457b9d;}
 .row:nth-child(5){background:#9b5de5;}
 .row:nth-child(6){background:#ff006e;}
+
+/* NEW ROW SECTIONS */
+.row-page{
+  position:absolute;
+  inset:0;
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:clamp(2rem,5vw,3rem);
+  transform:translateX(100%);
+  transition:.8s;
+  z-index:8;
+}
+.row-page.active{transform:translateX(0);}
 </style>
 </head>
 
@@ -106,13 +121,13 @@ body.black-bg{background:#111;color:#fff}
 <section id="case" class="page">
   <div id="caseTitle">Case Studies</div>
   <div id="hoverGrid">
-    <!-- Rows as links to new pages -->
-    <a href="row1.html" class="row"></a>
-    <a href="row2.html" class="row"></a>
-    <a href="row3.html" class="row"></a>
-    <a href="row4.html" class="row"></a>
-    <a href="row5.html" class="row"></a>
-    <a href="row6.html" class="row"></a>
+    <div class="row" data-page="row1"></div>
+    <div class="row" data-page="row2"></div>
+    <div class="row" data-page="row2"></div>
+    <div class="row" data-page="row3"></div>
+    <div class="row" data-page="row4"></div>
+    <div class="row" data-page="row5"></div>
+    <div class="row" data-page="row6"></div>
   </div>
 </section>
 
@@ -135,6 +150,14 @@ body.black-bg{background:#111;color:#fff}
     </svg>
   </button>
 </div>
+
+<!-- ROW PAGES -->
+<div id="row1" class="row-page">Content for Row 1</div>
+<div id="row2" class="row-page">Content for Row 2</div>
+<div id="row3" class="row-page">Content for Row 3</div>
+<div id="row4" class="row-page">Content for Row 4</div>
+<div id="row5" class="row-page">Content for Row 5</div>
+<div id="row6" class="row-page">Content for Row 6</div>
 
 <script>
 /* INTRO TYPING */
@@ -202,26 +225,35 @@ grid.onmouseleave = () => caseSection.classList.remove("showRows");
 const base=40, max=140;
 let targetWidths = rows.map(() => base);
 
-// Smooth animation loop
 function animateRows() {
   rows.forEach((r, i) => {
     const current = parseFloat(r.style.width) || base;
     const diff = targetWidths[i] - current;
-    r.style.width = current + diff * 0.2 + "px"; // easing factor
+    r.style.width = current + diff * 0.2 + "px";
   });
   requestAnimationFrame(animateRows);
 }
 animateRows();
 
-// Update target widths based on mouse position
 grid.onmousemove = e => {
   rows.forEach((r, i) => {
     const rect = r.getBoundingClientRect();
-    const d = Math.abs(e.clientX - (rect.left + rect.width / 2));
-    targetWidths[i] = base + Math.max(0, 180 - d) / 180 * max;
+    const d = Math.abs(e.clientX - (rect.left + rect.width/2));
+    targetWidths[i] = base + Math.max(0,180-d)/180*max;
   });
 };
 grid.onmouseleave = () => targetWidths = rows.map(() => base);
+
+/* CLICK TO SHOW NEW SECTION */
+rows.forEach(row => {
+  row.addEventListener("click", ()=>{
+    const pageId = row.dataset.page;
+    const section = document.getElementById(pageId);
+    // Hide carousel and title
+    caseSection.style.opacity = 0;
+    section.classList.add("active");
+  });
+});
 </script>
 </body>
 </html>
