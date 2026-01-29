@@ -40,7 +40,7 @@ body.black-bg{background:#111;color:#fff}
 #caseTitle{cursor:pointer;transition:.3s;}
 .showRows #caseTitle{opacity:0}
 
-/* ✅ CENTERED ROW CAROUSEL */
+/* CENTERED ROW CAROUSEL */
 #hoverGrid{
   position:absolute;
   top:50%;
@@ -58,7 +58,11 @@ body.black-bg{background:#111;color:#fff}
   width:40px;
   height:220px;
   border-radius:14px;
-  transition:width .25s ease, height .25s ease;
+  transition:width .25s ease;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 .row:nth-child(1){background:#e63946;}
 .row:nth-child(2){background:#f4a261;}
@@ -102,8 +106,13 @@ body.black-bg{background:#111;color:#fff}
 <section id="case" class="page">
   <div id="caseTitle">Case Studies</div>
   <div id="hoverGrid">
-    <div class="row"></div><div class="row"></div><div class="row"></div>
-    <div class="row"></div><div class="row"></div><div class="row"></div>
+    <!-- Rows as links to new pages -->
+    <a href="row1.html" class="row"></a>
+    <a href="row2.html" class="row"></a>
+    <a href="row3.html" class="row"></a>
+    <a href="row4.html" class="row"></a>
+    <a href="row5.html" class="row"></a>
+    <a href="row6.html" class="row"></a>
   </div>
 </section>
 
@@ -181,7 +190,7 @@ toAbout.onclick=goAbout;
 caseBtn.onclick=goCase;
 aboutBtn.onclick=goAbout;
 
-/* SMOOTH ROW HOVER — EXPAND UP */
+/* SMOOTH ROW HOVER */
 const caseSection=document.getElementById("case");
 const grid=document.getElementById("hoverGrid");
 const rows=[...grid.children];
@@ -190,37 +199,29 @@ const caseTitle=document.getElementById("caseTitle");
 caseTitle.onmouseenter = () => caseSection.classList.add("showRows");
 grid.onmouseleave = () => caseSection.classList.remove("showRows");
 
-const baseWidth=40, maxWidth=140;
-const baseHeight=220, maxHeight=300;
-let targetWidths = rows.map(() => baseWidth);
-let targetHeights = rows.map(() => baseHeight);
+const base=40, max=140;
+let targetWidths = rows.map(() => base);
 
 // Smooth animation loop
 function animateRows() {
   rows.forEach((r, i) => {
-    const cw = parseFloat(r.style.width) || baseWidth;
-    const ch = parseFloat(r.style.height) || baseHeight;
-    r.style.width = cw + (targetWidths[i] - cw) * 0.2 + "px";
-    r.style.height = ch + (targetHeights[i] - ch) * 0.2 + "px";
+    const current = parseFloat(r.style.width) || base;
+    const diff = targetWidths[i] - current;
+    r.style.width = current + diff * 0.2 + "px"; // easing factor
   });
   requestAnimationFrame(animateRows);
 }
 animateRows();
 
-// Update target widths & heights based on mouse
+// Update target widths based on mouse position
 grid.onmousemove = e => {
   rows.forEach((r, i) => {
     const rect = r.getBoundingClientRect();
-    const dx = Math.abs(e.clientX - (rect.left + rect.width / 2));
-    targetWidths[i] = baseWidth + Math.max(0, 180 - dx) / 180 * maxWidth;
-    // expand vertically only for the hovered column
-    targetHeights[i] = baseHeight + Math.max(0, 100 - dx) / 100 * (maxHeight - baseHeight);
+    const d = Math.abs(e.clientX - (rect.left + rect.width / 2));
+    targetWidths[i] = base + Math.max(0, 180 - d) / 180 * max;
   });
 };
-grid.onmouseleave = () => {
-  targetWidths = rows.map(() => baseWidth);
-  targetHeights = rows.map(() => baseHeight);
-};
+grid.onmouseleave = () => targetWidths = rows.map(() => base);
 </script>
 </body>
 </html>
