@@ -58,7 +58,7 @@ body.black-bg{background:#111;color:#fff}
   width:40px;
   height:220px;
   border-radius:14px;
-  transition:width .25s ease;
+  transition:width .25s ease, height .25s ease;
 }
 .row:nth-child(1){background:#e63946;}
 .row:nth-child(2){background:#f4a261;}
@@ -181,7 +181,7 @@ toAbout.onclick=goAbout;
 caseBtn.onclick=goCase;
 aboutBtn.onclick=goAbout;
 
-/* SMOOTH ROW HOVER */
+/* SMOOTH ROW HOVER — EXPAND UP */
 const caseSection=document.getElementById("case");
 const grid=document.getElementById("hoverGrid");
 const rows=[...grid.children];
@@ -190,29 +190,37 @@ const caseTitle=document.getElementById("caseTitle");
 caseTitle.onmouseenter = () => caseSection.classList.add("showRows");
 grid.onmouseleave = () => caseSection.classList.remove("showRows");
 
-const base=40, max=140;
-let targetWidths = rows.map(() => base);
+const baseWidth=40, maxWidth=140;
+const baseHeight=220, maxHeight=300;
+let targetWidths = rows.map(() => baseWidth);
+let targetHeights = rows.map(() => baseHeight);
 
 // Smooth animation loop
 function animateRows() {
   rows.forEach((r, i) => {
-    const current = parseFloat(r.style.width) || base;
-    const diff = targetWidths[i] - current;
-    r.style.width = current + diff * 0.2 + "px"; // easing factor 0.2
+    const cw = parseFloat(r.style.width) || baseWidth;
+    const ch = parseFloat(r.style.height) || baseHeight;
+    r.style.width = cw + (targetWidths[i] - cw) * 0.2 + "px";
+    r.style.height = ch + (targetHeights[i] - ch) * 0.2 + "px";
   });
   requestAnimationFrame(animateRows);
 }
 animateRows();
 
-// Update target widths based on mouse position
+// Update target widths & heights based on mouse
 grid.onmousemove = e => {
   rows.forEach((r, i) => {
     const rect = r.getBoundingClientRect();
-    const d = Math.abs(e.clientX - (rect.left + rect.width / 2));
-    targetWidths[i] = base + Math.max(0, 180 - d) / 180 * max;
+    const dx = Math.abs(e.clientX - (rect.left + rect.width / 2));
+    targetWidths[i] = baseWidth + Math.max(0, 180 - dx) / 180 * maxWidth;
+    // expand vertically only for the hovered column
+    targetHeights[i] = baseHeight + Math.max(0, 100 - dx) / 100 * (maxHeight - baseHeight);
   });
 };
-grid.onmouseleave = () => targetWidths = rows.map(() => base);
+grid.onmouseleave = () => {
+  targetWidths = rows.map(() => baseWidth);
+  targetHeights = rows.map(() => baseHeight);
+};
 </script>
 </body>
 </html>
