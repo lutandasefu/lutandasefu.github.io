@@ -40,7 +40,7 @@ body.black-bg{background:#111;color:#fff}
 #caseTitle{cursor:pointer;transition:.3s;}
 .showRows #caseTitle{opacity:0}
 
-/* ✅ CENTERED ROW CAROUSEL */
+/* CENTERED ROW CAROUSEL */
 #hoverGrid{
   position:absolute;
   top:50%;
@@ -128,7 +128,85 @@ body.black-bg{background:#111;color:#fff}
 </div>
 
 <script>
-/* YOUR ORIGINAL JS — UNCHANGED */
+/* INTRO TYPING */
+const intro=document.getElementById("intro");
+const welcome=document.getElementById("welcome");
+const introText=document.getElementById("introText");
+const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
+let l=0,c=0;
+function type(){
+  if(c<lines[l].length){
+    introText.textContent+=lines[l][c++];
+    setTimeout(type,80);
+  } else if(l<lines.length-1){
+    setTimeout(()=>{introText.textContent="";c=0;l++;type();},600);
+  } else {
+    setTimeout(()=>{intro.remove();welcome.style.opacity=1;},800);
+  }
+}
+type();
+
+/* NAVIGATION TOGGLE */
+const casePage=document.getElementById("case");
+const aboutPage=document.getElementById("about");
+const rightToggle=document.getElementById("rightToggle");
+const wFocus=document.getElementById("wFocus");
+const rFocus=document.getElementById("rFocus");
+const toCase=document.getElementById("toCase");
+const toAbout=document.getElementById("toAbout");
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
+
+function activate(a,b,focus,dir){
+  a.classList.add("active");
+  b.classList.remove("active");
+  focus.style.transform=dir;
+}
+
+function goCase(){
+  document.body.classList.replace("grey-bg","black-bg");
+  welcome.style.transform="translateY(-100%)";
+  rightToggle.style.display="flex";
+  casePage.style.transform="translateX(0)";
+  aboutPage.style.transform="translateX(100%)";
+  activate(toCase,toAbout,wFocus,"translateX(0)");
+  activate(caseBtn,aboutBtn,rFocus,"translateY(0)");
+}
+function goAbout(){
+  document.body.classList.replace("grey-bg","black-bg");
+  welcome.style.transform="translateY(-100%)";
+  rightToggle.style.display="flex";
+  aboutPage.style.transform="translateX(0)";
+  casePage.style.transform="translateX(-100%)";
+  activate(toAbout,toCase,wFocus,"translateX(100%)");
+  activate(aboutBtn,caseBtn,rFocus,"translateY(100%)");
+}
+toCase.onclick=goCase;
+toAbout.onclick=goAbout;
+caseBtn.onclick=goCase;
+aboutBtn.onclick=goAbout;
+
+/* CASE STUDIES ROW HOVER */
+const caseSection=document.getElementById("case");
+const grid=document.getElementById("hoverGrid");
+const rows=[...grid.children];
+const caseTitle=document.getElementById("caseTitle");
+
+// Show rows and hide title
+caseTitle.onmouseenter=()=>caseSection.classList.add("showRows");
+grid.onmouseleave=()=>caseSection.classList.remove("showRows");
+
+// Smooth horizontal expansion
+const base=40,max=140;
+grid.onmousemove=e=>{
+  rows.forEach(r=>{
+    const rect=r.getBoundingClientRect();
+    const d=Math.abs(e.clientX-(rect.left+rect.width/2));
+    const extra=Math.max(0,180-d)/180*max;
+    r.style.width=base+extra+"px";
+  });
+};
+grid.onmouseleave=()=>rows.forEach(r=>r.style.width=base+"px");
 </script>
 </body>
 </html>
