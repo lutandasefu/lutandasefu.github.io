@@ -36,20 +36,11 @@ body.black-bg{background:#111;color:#fff}
 
 /* PAGES */
 .page{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font-size:clamp(2rem,5vw,3rem);transform:translateX(100%);transition:.8s;}
-
-/* ✅ EDIT 1 */
-#case{
-  position:relative;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:40px;
-}
-
+#case{flex-direction:column;gap:40px;}
 #caseTitle{cursor:pointer;transition:.3s;}
 .showRows #caseTitle{opacity:0}
 
-/* ✅ EDIT 2 */
+/* ✅ CENTERED ROW CAROUSEL */
 #hoverGrid{
   position:absolute;
   top:50%;
@@ -61,7 +52,6 @@ body.black-bg{background:#111;color:#fff}
   pointer-events:none;
   transition:.4s;
 }
-
 .showRows #hoverGrid{opacity:1;pointer-events:auto;}
 
 .row{
@@ -138,7 +128,7 @@ body.black-bg{background:#111;color:#fff}
 </div>
 
 <script>
-/* (your original JS unchanged) */
+/* YOUR ORIGINAL JS — UNCHANGED */
 </script>
 </body>
 </html>
