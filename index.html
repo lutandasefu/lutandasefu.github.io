@@ -15,7 +15,7 @@ body.black-bg{background:#111;color:#fff}
 /* INTRO */
 #intro{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:5;}
 #introTextWrapper{font-size:clamp(2.2rem,6vw,4.4rem);}
-.cursor{width:2px;height:1em;background:#111;display:inline-block;margin-left:6px;animation:blink .7s step-end infinite;}
+.cursor{width:2px;height:1em;background:#111;margin-left:6px;animation:blink .7s step-end infinite;}
 @keyframes blink{50%{opacity:0;}}
 
 /* WELCOME */
@@ -70,12 +70,14 @@ body.black-bg{background:#111;color:#fff}
 
 <body class="grey-bg">
 
+<!-- INTRO -->
 <section id="intro">
   <div id="introTextWrapper">
     <span id="introText"></span><span class="cursor"></span>
   </div>
 </section>
 
+<!-- WELCOME -->
 <section id="welcome">
   <div>Welcome to my portfolio</div>
   <div id="welcome-toggle">
@@ -95,6 +97,7 @@ body.black-bg{background:#111;color:#fff}
   </div>
 </section>
 
+<!-- CASE -->
 <section id="case" class="page">
   <div id="caseTitle">Case Studies</div>
   <div id="hoverGrid">
@@ -103,8 +106,10 @@ body.black-bg{background:#111;color:#fff}
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about" class="page">About</section>
 
+<!-- RIGHT TOGGLE -->
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
   <button id="caseBtn" class="active">
@@ -122,7 +127,9 @@ body.black-bg{background:#111;color:#fff}
 </div>
 
 <script>
-/* INTRO TYPING */
+/* INTRO */
+const intro=document.getElementById("intro");
+const welcome=document.getElementById("welcome");
 const introText=document.getElementById("introText");
 const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
 let l=0,c=0;
@@ -134,22 +141,32 @@ function type(){
 type();
 
 /* NAV */
-const casePage=case,aboutPage=about;
-const wFocus=wFocus,rFocus=rFocus;
-function activate(btnA,btnB,focus,dir){
- btnA.classList.add("active");
- btnB.classList.remove("active");
+const casePage=document.getElementById("case");
+const aboutPage=document.getElementById("about");
+const rightToggle=document.getElementById("rightToggle");
+const wFocus=document.getElementById("wFocus");
+const rFocus=document.getElementById("rFocus");
+const toCase=document.getElementById("toCase");
+const toAbout=document.getElementById("toAbout");
+const caseBtn=document.getElementById("caseBtn");
+const aboutBtn=document.getElementById("aboutBtn");
+
+function activate(a,b,focus,dir){
+ a.classList.add("active");
+ b.classList.remove("active");
  focus.style.transform=dir;
 }
-toCase.onclick=()=>{
+
+function goCase(){
  document.body.classList.replace("grey-bg","black-bg");
  welcome.style.transform="translateY(-100%)";
  rightToggle.style.display="flex";
  casePage.style.transform="translateX(0)";
+ aboutPage.style.transform="translateX(100%)";
  activate(toCase,toAbout,wFocus,"translateX(0)");
  activate(caseBtn,aboutBtn,rFocus,"translateY(0)");
-};
-toAbout.onclick=()=>{
+}
+function goAbout(){
  document.body.classList.replace("grey-bg","black-bg");
  welcome.style.transform="translateY(-100%)";
  rightToggle.style.display="flex";
@@ -157,14 +174,18 @@ toAbout.onclick=()=>{
  casePage.style.transform="translateX(-100%)";
  activate(toAbout,toCase,wFocus,"translateX(100%)");
  activate(aboutBtn,caseBtn,rFocus,"translateY(100%)");
-};
-caseBtn.onclick=toCase.onclick;
-aboutBtn.onclick=toAbout.onclick;
+}
+toCase.onclick=goCase;
+toAbout.onclick=goAbout;
+caseBtn.onclick=goCase;
+aboutBtn.onclick=goAbout;
 
 /* ROW HOVER */
 const caseSection=document.getElementById("case");
 const grid=document.getElementById("hoverGrid");
 const rows=[...grid.children];
+const caseTitle=document.getElementById("caseTitle");
+
 caseTitle.onmouseenter=()=>caseSection.classList.add("showRows");
 grid.onmouseleave=()=>caseSection.classList.remove("showRows");
 
