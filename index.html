@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
 body.grey-bg{background:#e6e6e6;}
-body.black-bg{background:#111;color:#fff;}
+body.black-bg{background:#111;color:#fff}
 
 /* INTRO */
 #intro{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:5;}
@@ -37,9 +38,9 @@ body.black-bg{background:#111;color:#fff;}
 .page{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font-size:clamp(2rem,5vw,3rem);transform:translateX(100%);transition:.8s;}
 #case{flex-direction:column;gap:40px;}
 #caseTitle{cursor:pointer;transition:.3s;}
-.showRows #caseTitle{opacity:0;}
+.showRows #caseTitle{opacity:0}
 
-/* CENTERED ROW CAROUSEL */
+/* ROW GRID */
 #hoverGrid{
   position:absolute;
   top:50%;
@@ -59,6 +60,8 @@ body.black-bg{background:#111;color:#fff;}
   border-radius:14px;
   transition:width .25s ease;
   cursor:pointer;
+  position:relative;
+  overflow:hidden;
 }
 .row:nth-child(1){background:#e63946;}
 .row:nth-child(2){background:#f4a261;}
@@ -67,29 +70,29 @@ body.black-bg{background:#111;color:#fff;}
 .row:nth-child(5){background:#9b5de5;}
 .row:nth-child(6){background:#ff006e;}
 
-/* ROW PAGES */
-.row-page{
+.row a{
   position:absolute;
-  inset:0;
-  background:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:2rem;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:8px 14px;
+  font-size:12px;
+  border-radius:20px;
+  text-decoration:none;
   opacity:0;
   pointer-events:none;
-  transition:opacity .6s;
-  z-index:3;
+  transition:.3s;
+  font-family:'Urbanist',sans-serif;
 }
-.row-page.active{
+.row:hover a{
   opacity:1;
   pointer-events:auto;
 }
-
-/* ABOUT PAGE */
-#about{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font-size:2.5rem;transform:translateX(100%);transition:.8s;}
 </style>
 </head>
+
 <body class="grey-bg">
 
 <!-- INTRO -->
@@ -104,18 +107,8 @@ body.black-bg{background:#111;color:#fff;}
   <div>Welcome to my portfolio</div>
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
-    <button id="toCase" class="active">
-      <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
-        <rect x="3" y="4" width="14" height="14" rx="2"/>
-        <path d="M7 8h6M7 12h6M7 16h4"/>
-      </svg>
-    </button>
-    <button id="toAbout">
-      <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
-        <circle cx="12" cy="8" r="4"/>
-        <path d="M4 20c2-4 14-4 16 0"/>
-      </svg>
-    </button>
+    <button id="toCase" class="active">...</button>
+    <button id="toAbout">...</button>
   </div>
 </section>
 
@@ -123,41 +116,20 @@ body.black-bg{background:#111;color:#fff;}
 <section id="case" class="page">
   <div id="caseTitle">Case Studies</div>
   <div id="hoverGrid">
-    <div class="row"></div><div class="row"></div><div class="row"></div>
-    <div class="row"></div><div class="row"></div><div class="row"></div>
+    <div class="row"><a href="row1.html">View Case</a></div>
+    <div class="row"><a href="row2.html">View Case</a></div>
+    <div class="row"><a href="row3.html">View Case</a></div>
+    <div class="row"><a href="row4.html">View Case</a></div>
+    <div class="row"><a href="row5.html">View Case</a></div>
+    <div class="row"><a href="row6.html">View Case</a></div>
   </div>
 </section>
-
-<!-- ROW PAGES -->
-<section id="row1" class="row-page">Row 1 Page</section>
-<section id="row2" class="row-page">Row 2 Page</section>
-<section id="row3" class="row-page">Row 3 Page</section>
-<section id="row4" class="row-page">Row 4 Page</section>
-<section id="row5" class="row-page">Row 5 Page</section>
-<section id="row6" class="row-page">Row 6 Page</section>
 
 <!-- ABOUT -->
 <section id="about" class="page">About</section>
 
-<!-- RIGHT TOGGLE -->
-<div class="right-toggle" id="rightToggle">
-  <div class="right-focus" id="rFocus"></div>
-  <button id="caseBtn" class="active">
-    <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
-      <rect x="3" y="4" width="14" height="14" rx="2"/>
-      <path d="M7 8h6M7 12h6M7 16h4"/>
-    </svg>
-  </button>
-  <button id="aboutBtn">
-    <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
-      <circle cx="12" cy="8" r="4"/>
-      <path d="M4 20c2-4 14-4 16 0"/>
-    </svg>
-  </button>
-</div>
-
 <script>
-/* INTRO TYPING */
+/* Intro typing */
 const intro=document.getElementById("intro");
 const welcome=document.getElementById("welcome");
 const introText=document.getElementById("introText");
@@ -170,94 +142,14 @@ function type(){
 }
 type();
 
-/* NAVIGATION */
-const casePage=document.getElementById("case");
-const aboutPage=document.getElementById("about");
-const rightToggle=document.getElementById("rightToggle");
-const wFocus=document.getElementById("wFocus");
-const rFocus=document.getElementById("rFocus");
-const toCase=document.getElementById("toCase");
-const toAbout=document.getElementById("toAbout");
-const caseBtn=document.getElementById("caseBtn");
-const aboutBtn=document.getElementById("aboutBtn");
-
-function activate(a,b,focus,dir){
- a.classList.add("active");
- b.classList.remove("active");
- focus.style.transform=dir;
-}
-
-function goCase(){
- document.body.classList.replace("grey-bg","black-bg");
- welcome.style.transform="translateY(-100%)";
- rightToggle.style.display="flex";
- casePage.style.transform="translateX(0)";
- aboutPage.style.transform="translateX(100%)";
- activate(toCase,toAbout,wFocus,"translateX(0)");
- activate(caseBtn,aboutBtn,rFocus,"translateY(0)");
-}
-function goAbout(){
- document.body.classList.replace("grey-bg","black-bg");
- welcome.style.transform="translateY(-100%)";
- rightToggle.style.display="flex";
- aboutPage.style.transform="translateX(0)";
- casePage.style.transform="translateX(-100%)";
- activate(toAbout,toCase,wFocus,"translateX(100%)");
- activate(aboutBtn,caseBtn,rFocus,"translateY(100%)");
-}
-toCase.onclick=goCase;
-toAbout.onclick=goAbout;
-caseBtn.onclick=goCase;
-aboutBtn.onclick=goAbout;
-
-/* SMOOTH ROW HOVER */
+/* Show rows */
 const caseSection=document.getElementById("case");
-const grid=document.getElementById("hoverGrid");
-const rows=[...grid.children];
 const caseTitle=document.getElementById("caseTitle");
+const grid=document.getElementById("hoverGrid");
 
-caseTitle.onmouseenter = () => caseSection.classList.add("showRows");
-grid.onmouseleave = () => caseSection.classList.remove("showRows");
-
-const base=40, max=140;
-let targetWidths = rows.map(() => base);
-
-// Smooth animation loop
-function animateRows() {
-  rows.forEach((r, i) => {
-    const current = parseFloat(r.style.width) || base;
-    const diff = targetWidths[i] - current;
-    r.style.width = current + diff * 0.2 + "px"; // easing factor 0.2
-  });
-  requestAnimationFrame(animateRows);
-}
-animateRows();
-
-// Update target widths based on mouse position
-grid.onmousemove = e => {
-  rows.forEach((r, i) => {
-    const rect = r.getBoundingClientRect();
-    const d = Math.abs(e.clientX - (rect.left + rect.width / 2));
-    targetWidths[i] = base + Math.max(0, 180 - d) / 180 * max;
-  });
-};
-grid.onmouseleave = () => targetWidths = rows.map(() => base);
-
-/* CLICK ROW TO SHOW PAGE */
-rows.forEach((row,i)=>{
-  row.dataset.page=`row${i+1}`;
-  row.addEventListener("click", (e)=>{
-    e.preventDefault();
-    const pageId = row.dataset.page;
-    const section = document.getElementById(pageId);
-    if(section){
-      caseSection.classList.remove("showRows");
-      caseTitle.style.opacity=0;
-      document.querySelectorAll(".row-page").forEach(p=>p.classList.remove("active"));
-      section.classList.add("active");
-    }
-  });
-});
+caseTitle.onmouseenter=()=>caseSection.classList.add("showRows");
+grid.onmouseleave=()=>caseSection.classList.remove("showRows");
 </script>
+
 </body>
 </html>
