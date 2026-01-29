@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lutanda | Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
 body.grey-bg{background:#e6e6e6;}
-body.black-bg{background:#111;color:#fff}
+body.black-bg{background:#111;color:#fff;}
 
 /* INTRO */
 #intro{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:5;}
@@ -38,7 +37,7 @@ body.black-bg{background:#111;color:#fff}
 .page{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font-size:clamp(2rem,5vw,3rem);transform:translateX(100%);transition:.8s;}
 #case{flex-direction:column;gap:40px;}
 #caseTitle{cursor:pointer;transition:.3s;}
-.showRows #caseTitle{opacity:0}
+.showRows #caseTitle{opacity:0;}
 
 /* CENTERED ROW CAROUSEL */
 #hoverGrid{
@@ -60,9 +59,6 @@ body.black-bg{background:#111;color:#fff}
   border-radius:14px;
   transition:width .25s ease;
   cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 .row:nth-child(1){background:#e63946;}
 .row:nth-child(2){background:#f4a261;}
@@ -71,23 +67,29 @@ body.black-bg{background:#111;color:#fff}
 .row:nth-child(5){background:#9b5de5;}
 .row:nth-child(6){background:#ff006e;}
 
-/* NEW ROW SECTIONS */
+/* ROW PAGES */
 .row-page{
   position:absolute;
   inset:0;
-  background:#fff;
+  background:white;
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:clamp(2rem,5vw,3rem);
-  transform:translateX(100%);
-  transition:.8s;
-  z-index:8;
+  font-size:2rem;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s;
+  z-index:3;
 }
-.row-page.active{transform:translateX(0);}
+.row-page.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ABOUT PAGE */
+#about{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font-size:2.5rem;transform:translateX(100%);transition:.8s;}
 </style>
 </head>
-
 <body class="grey-bg">
 
 <!-- INTRO -->
@@ -121,15 +123,18 @@ body.black-bg{background:#111;color:#fff}
 <section id="case" class="page">
   <div id="caseTitle">Case Studies</div>
   <div id="hoverGrid">
-    <div class="row" data-page="row1"></div>
-    <div class="row" data-page="row2"></div>
-    <div class="row" data-page="row2"></div>
-    <div class="row" data-page="row3"></div>
-    <div class="row" data-page="row4"></div>
-    <div class="row" data-page="row5"></div>
-    <div class="row" data-page="row6"></div>
+    <div class="row"></div><div class="row"></div><div class="row"></div>
+    <div class="row"></div><div class="row"></div><div class="row"></div>
   </div>
 </section>
+
+<!-- ROW PAGES -->
+<section id="row1" class="row-page">Row 1 Page</section>
+<section id="row2" class="row-page">Row 2 Page</section>
+<section id="row3" class="row-page">Row 3 Page</section>
+<section id="row4" class="row-page">Row 4 Page</section>
+<section id="row5" class="row-page">Row 5 Page</section>
+<section id="row6" class="row-page">Row 6 Page</section>
 
 <!-- ABOUT -->
 <section id="about" class="page">About</section>
@@ -150,14 +155,6 @@ body.black-bg{background:#111;color:#fff}
     </svg>
   </button>
 </div>
-
-<!-- ROW PAGES -->
-<div id="row1" class="row-page">Content for Row 1</div>
-<div id="row2" class="row-page">Content for Row 2</div>
-<div id="row3" class="row-page">Content for Row 3</div>
-<div id="row4" class="row-page">Content for Row 4</div>
-<div id="row5" class="row-page">Content for Row 5</div>
-<div id="row6" class="row-page">Content for Row 6</div>
 
 <script>
 /* INTRO TYPING */
@@ -225,33 +222,40 @@ grid.onmouseleave = () => caseSection.classList.remove("showRows");
 const base=40, max=140;
 let targetWidths = rows.map(() => base);
 
+// Smooth animation loop
 function animateRows() {
   rows.forEach((r, i) => {
     const current = parseFloat(r.style.width) || base;
     const diff = targetWidths[i] - current;
-    r.style.width = current + diff * 0.2 + "px";
+    r.style.width = current + diff * 0.2 + "px"; // easing factor 0.2
   });
   requestAnimationFrame(animateRows);
 }
 animateRows();
 
+// Update target widths based on mouse position
 grid.onmousemove = e => {
   rows.forEach((r, i) => {
     const rect = r.getBoundingClientRect();
-    const d = Math.abs(e.clientX - (rect.left + rect.width/2));
-    targetWidths[i] = base + Math.max(0,180-d)/180*max;
+    const d = Math.abs(e.clientX - (rect.left + rect.width / 2));
+    targetWidths[i] = base + Math.max(0, 180 - d) / 180 * max;
   });
 };
 grid.onmouseleave = () => targetWidths = rows.map(() => base);
 
-/* CLICK TO SHOW NEW SECTION */
-rows.forEach(row => {
-  row.addEventListener("click", ()=>{
+/* CLICK ROW TO SHOW PAGE */
+rows.forEach((row,i)=>{
+  row.dataset.page=`row${i+1}`;
+  row.addEventListener("click", (e)=>{
+    e.preventDefault();
     const pageId = row.dataset.page;
     const section = document.getElementById(pageId);
-    // Hide carousel and title
-    caseSection.style.opacity = 0;
-    section.classList.add("active");
+    if(section){
+      caseSection.classList.remove("showRows");
+      caseTitle.style.opacity=0;
+      document.querySelectorAll(".row-page").forEach(p=>p.classList.remove("active"));
+      section.classList.add("active");
+    }
   });
 });
 </script>
