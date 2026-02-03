@@ -10,145 +10,327 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
 body.grey-bg{background:#e6e6e6;}
-body.black-bg{background:#111;color:#fff}
+body.black-bg{background:#111;}
 
-/* INTRO */
-#intro{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:5;}
-#introTextWrapper{font-size:clamp(2.2rem,6vw,4.4rem);}
-.cursor{width:2px;height:1em;background:#111;margin-left:6px;animation:blink .7s step-end infinite;}
+/* ---------- INTRO ---------- */
+#intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:5;
+}
+#introTextWrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:clamp(2.2rem,6vw,4.4rem);
+}
+#introText { display:inline-block; }
+.cursor {
+  width:2px;
+  height:1em;
+  background:#111;
+  display:inline-block;
+  margin-left:6px;
+  animation: blink 0.7s step-end infinite;
+}
 @keyframes blink{50%{opacity:0;}}
 
-/* WELCOME */
-#welcome{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;opacity:0;transition:.8s;z-index:4;}
-#welcome div{margin-bottom:30px;font-size:clamp(3rem,6vw,5rem);color:#111;text-align:center;}
-#welcome-toggle{position:relative;width:190px;height:60px;background:#fff;border-radius:50px;border:2px solid #fff;display:flex;}
-#welcome-toggle .focus{position:absolute;top:6px;left:6px;width:78px;height:48px;border-radius:50px;background:#111;transition:.35s;}
-#welcome-toggle button{flex:1;border:none;background:none;cursor:pointer;display:flex;justify-content:center;align-items:center;z-index:2;}
-#welcome-toggle svg{width:24px;height:24px;stroke:#111;transition:.3s;}
-#welcome-toggle button.active svg{stroke:#fff;}
+/* ---------- WELCOME ---------- */
+#welcome{
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+  min-height:100vh;
+  opacity:0;
+  transition:opacity .8s ease, transform .8s ease;
+  z-index:4;
+}
+#welcome div{
+  margin-bottom:30px; /* Reduced from 50px */
+  font-size:clamp(3rem,6vw,5rem);
+  color:#111;
+  text-align:center;
+  font-weight:500;
+}
 
-/* RIGHT TOGGLE */
-.right-toggle{position:fixed;right:30px;top:50%;transform:translateY(-50%);width:75px;height:160px;background:#fff;border-radius:45px;display:none;flex-direction:column;border:2px solid #fff;z-index:10;}
-.right-focus{position:absolute;width:100%;height:50%;background:#111;border-radius:45px;transition:.35s;}
-.right-toggle button{flex:1;border:none;background:none;display:flex;justify-content:center;align-items:center;z-index:2;cursor:pointer;}
-.right-toggle svg{width:28px;height:28px;stroke:#111;transition:.3s;}
-.right-toggle button.active svg{stroke:#fff;}
-
-/* PAGES */
-.page{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font-size:clamp(2rem,5vw,3rem);transform:translateX(100%);transition:.8s;}
-#case{flex-direction:column;gap:40px;}
-#caseTitle{cursor:pointer;transition:.3s;}
-.showRows #caseTitle{opacity:0}
-
-/* ROW GRID */
-#hoverGrid{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
+/* ---------- WELCOME TOGGLE ---------- */
+#welcome-toggle{
   display:flex;
-  gap:10px;
-  opacity:0;
-  pointer-events:none;
-  transition:.4s;
-}
-.showRows #hoverGrid{opacity:1;pointer-events:auto;}
-
-.row{
-  width:40px;
-  height:220px;
-  border-radius:14px;
-  transition:width .25s ease;
-  cursor:pointer;
   position:relative;
-  overflow:hidden;
+  width:190px; height:60px;
+  background:#fff;
+  border-radius:50px;
+  border:2px solid #fff;
 }
-.row:nth-child(1){background:#e63946;}
-.row:nth-child(2){background:#f4a261;}
-.row:nth-child(3){background:#2a9d8f;}
-.row:nth-child(4){background:#457b9d;}
-.row:nth-child(5){background:#9b5de5;}
-.row:nth-child(6){background:#ff006e;}
-
-.row a{
-  position:absolute;
-  bottom:15px;
-  left:50%;
-  transform:translateX(-50%);
+#welcome-toggle .focus{
+  position:absolute; top:6px; left:6px;
+  width:78px; height:48px; border-radius:50px;
   background:#111;
-  color:#fff;
-  padding:8px 14px;
-  font-size:12px;
-  border-radius:20px;
-  text-decoration:none;
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  font-family:'Urbanist',sans-serif;
+  transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
-.row:hover a{
+#welcome-toggle button{
+  flex:1;
+  border:none;
+  background:none;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:2;
+  padding:0;
+}
+#welcome-toggle button svg{
+  width:24px; height:24px;
+  stroke:#111;
+  fill:none;
+  transition:stroke .3s ease;
+}
+#welcome-toggle button.active svg{
+  stroke:#fff;
+}
+
+/* ---------- RIGHT TOGGLE ---------- */
+.right-toggle{
+  position:fixed;
+  right:30px; top:50%;
+  transform:translateY(-50%);
+  width:75px; height:160px;
+  background:#fff;
+  border-radius:45px;
+  display:none;
+  flex-direction:column;
+  border:2px solid #fff;
+  z-index:10;
+}
+.right-toggle .right-focus{
+  position:absolute; top:0; left:0;
+  width:100%; height:50%;
+  background:#111;
+  border-radius:45px; /* Rounded movable focus */
+  transition:transform .35s cubic-bezier(.77,0,.18,1);
+}
+.right-toggle button{
+  flex:1;
+  border:none;
+  background:none;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:2;
+}
+.right-toggle button svg{
+  width:28px; height:28px;
+  stroke:#111;
+  fill:none;
+  transition:stroke .3s ease;
+}
+.right-toggle button.active svg{
+  stroke:#fff;
+}
+
+/* ---------- PAGES ---------- */
+.page{
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:#111; color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:clamp(2rem,5vw,3rem);
+  transform:translateX(100%);
+  transition:.8s cubic-bezier(.77,0,.18,1);
+  z-index:3;
+}
+
+/* ---------- CAROUSEL ---------- */
+.carousel{
+  position:absolute;
+  bottom:10%; width:80%; height:200px;
+  opacity:0; transform:scale(.8);
+  transition:.5s ease;
+  display:flex; gap:20px; justify-content:center;
+}
+.carousel img{
+  width:200px; height:120px;
+  object-fit:cover;
+  border-radius:12px;
+}
+.showCarousel{
   opacity:1;
-  pointer-events:auto;
+  transform:scale(1);
 }
 </style>
 </head>
 
 <body class="grey-bg">
 
-<!-- INTRO -->
+<!-- ---------- INTRO ---------- -->
 <section id="intro">
   <div id="introTextWrapper">
-    <span id="introText"></span><span class="cursor"></span>
+    <span id="introText"></span>
+    <span class="cursor"></span>
   </div>
 </section>
 
-<!-- WELCOME -->
+<!-- ---------- WELCOME ---------- -->
 <section id="welcome">
   <div>Welcome to my portfolio</div>
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
-    <button id="toCase" class="active">...</button>
-    <button id="toAbout">...</button>
+    <button id="toCase">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
+        <rect x="3" y="4" width="14" height="14" rx="2"/>
+        <path d="M7 8h6M7 12h6M7 16h4"/>
+      </svg>
+    </button>
+    <button id="toAbout">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c2-4 14-4 16 0"/>
+      </svg>
+    </button>
   </div>
 </section>
 
-<!-- CASE -->
+<!-- ---------- PAGES ---------- -->
 <section id="case" class="page">
   <div id="caseTitle">Case Studies</div>
-  <div id="hoverGrid">
-    <div class="row"><a href="row1.html">View Case</a></div>
-    <div class="row"><a href="row2.html">View Case</a></div>
-    <div class="row"><a href="row3.html">View Case</a></div>
-    <div class="row"><a href="row4.html">View Case</a></div>
-    <div class="row"><a href="row5.html">View Case</a></div>
-    <div class="row"><a href="row6.html">View Case</a></div>
+  <div class="carousel" id="carousel">
+    <img src="https://picsum.photos/300/200?1">
+    <img src="https://picsum.photos/300/200?2">
+    <img src="https://picsum.photos/300/200?3">
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="page">About</section>
 
+<!-- ---------- RIGHT TOGGLE ---------- -->
+<div class="right-toggle" id="rightToggle">
+  <div class="right-focus" id="rFocus"></div>
+  <button id="caseBtn">
+    <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
+      <rect x="3" y="4" width="14" height="14" rx="2"/>
+      <path d="M7 8h6M7 12h6M7 16h4"/>
+    </svg>
+  </button>
+  <button id="aboutBtn">
+    <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 20c2-4 14-4 16 0"/>
+    </svg>
+  </button>
+</div>
+
 <script>
-/* Intro typing */
-const intro=document.getElementById("intro");
-const welcome=document.getElementById("welcome");
-const introText=document.getElementById("introText");
-const lines=["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
-let l=0,c=0;
-function type(){
- if(c<lines[l].length){introText.textContent+=lines[l][c++];setTimeout(type,80);}
- else if(l<lines.length-1){setTimeout(()=>{introText.textContent="";c=0;l++;type();},600);}
- else setTimeout(()=>{intro.remove();welcome.style.opacity=1;},800);
+/* ---------- TYPING INTRO WITH CURSOR ---------- */
+const introText = document.getElementById("introText");
+const welcome = document.getElementById("welcome");
+const lines = ["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
+let l=0, c=0;
+
+function type() {
+  if(c < lines[l].length){
+    introText.textContent += lines[l][c++];
+    setTimeout(type, 80);
+  } else {
+    if(l < lines.length - 1){
+      setTimeout(erase, 600);
+    } else {
+      setTimeout(showWelcome, 800);
+    }
+  }
 }
+
+function erase() {
+  if(c > 0){
+    introText.textContent = lines[l].substring(0, --c);
+    setTimeout(erase, 40);
+  } else {
+    l++; 
+    type();
+  }
+}
+
+function showWelcome(){
+  intro.style.opacity = 0;
+  setTimeout(()=>{
+    intro.remove();
+    welcome.style.opacity = 1;
+  },600);
+}
+
 type();
 
-/* Show rows */
-const caseSection=document.getElementById("case");
-const caseTitle=document.getElementById("caseTitle");
-const grid=document.getElementById("hoverGrid");
+/* ---------- NAVIGATION ---------- */
+const casePage = document.getElementById("case");
+const aboutPage = document.getElementById("about");
+const right = document.getElementById("rightToggle");
+const rFocus = document.getElementById("rFocus");
+const wFocus = document.getElementById("wFocus");
 
-caseTitle.onmouseenter=()=>caseSection.classList.add("showRows");
-grid.onmouseleave=()=>caseSection.classList.remove("showRows");
+const caseBtn = document.getElementById("caseBtn");
+const aboutBtn = document.getElementById("aboutBtn");
+const toCase = document.getElementById("toCase");
+const toAbout = document.getElementById("toAbout");
+
+toCase.classList.add("active");
+
+function setWelcomeActive(activeBtn, inactiveBtn){
+  wFocus.style.transform = activeBtn===toCase ? "translateX(0)" : "translateX(100%)";
+  activeBtn.classList.add("active");
+  inactiveBtn.classList.remove("active");
+}
+
+function activateBlackBg(){
+  document.body.classList.remove("grey-bg");
+  document.body.classList.add("black-bg");
+}
+
+function showCase(){
+  activateBlackBg();
+  casePage.style.transform = "translateX(0)";
+  aboutPage.style.transform = "translateX(100%)";
+  rFocus.style.transform = "translateY(0)";
+  caseBtn.classList.add("active");
+  aboutBtn.classList.remove("active");
+}
+
+function showAbout(){
+  activateBlackBg();
+  aboutPage.style.transform = "translateX(0)";
+  casePage.style.transform = "translateX(-100%)";
+  rFocus.style.transform = "translateY(100%)";
+  aboutBtn.classList.add("active");
+  caseBtn.classList.remove("active");
+}
+
+toCase.onclick = () => {
+  setWelcomeActive(toCase, toAbout);
+  welcome.style.transform = "translateY(-100%)";
+  right.style.display = "flex";
+  showCase();
+};
+
+toAbout.onclick = () => {
+  setWelcomeActive(toAbout, toCase);
+  welcome.style.transform = "translateY(-100%)";
+  right.style.display = "flex";
+  showAbout();
+};
+
+caseBtn.onclick = showCase;
+aboutBtn.onclick = showAbout;
+
+/* ---------- CAROUSEL HOVER ---------- */
+const title = document.getElementById("caseTitle");
+const carousel = document.getElementById("carousel");
+
+title.onmouseenter = () => carousel.classList.add("showCarousel");
+title.onmouseleave = () => carousel.classList.remove("showCarousel");
 </script>
 
 </body>
