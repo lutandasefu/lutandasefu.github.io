@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lutanda | Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300&family=Urbanist:wght@300&display=swap" rel="stylesheet">
+<title>Lutanda | UX/UI Designer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&family=Urbanist:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Sulphur Point',sans-serif;overflow:hidden;}
+body{font-family:'Sulphur Point',sans-serif;overflow-x:hidden;}
 body.grey-bg{background:#e6e6e6;}
 body.black-bg{background:#111;}
 
@@ -20,6 +20,7 @@ body.black-bg{background:#111;}
   justify-content:center;
   align-items:center;
   z-index:5;
+  background:#e6e6e6;
 }
 #introTextWrapper{
   display:flex;
@@ -27,7 +28,7 @@ body.black-bg{background:#111;}
   align-items:center;
   font-size:clamp(2.2rem,6vw,4.4rem);
 }
-#introText { display:inline-block; }
+#introText { display:inline-block; color:#111; }
 .cursor {
   width:2px;
   height:1em;
@@ -46,13 +47,15 @@ body.black-bg{background:#111;}
   opacity:0;
   transition:opacity .8s ease, transform .8s ease;
   z-index:4;
+  background:#e6e6e6;
 }
 #welcome div{
-  margin-bottom:30px; /* Reduced from 50px */
+  margin-bottom:30px;
   font-size:clamp(3rem,6vw,5rem);
   color:#111;
   text-align:center;
   font-weight:500;
+  padding:0 20px;
 }
 
 /* ---------- WELCOME TOGGLE ---------- */
@@ -63,6 +66,7 @@ body.black-bg{background:#111;}
   background:#fff;
   border-radius:50px;
   border:2px solid #fff;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 #welcome-toggle .focus{
   position:absolute; top:6px; left:6px;
@@ -103,12 +107,13 @@ body.black-bg{background:#111;}
   flex-direction:column;
   border:2px solid #fff;
   z-index:10;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 .right-toggle .right-focus{
   position:absolute; top:0; left:0;
   width:100%; height:50%;
   background:#111;
-  border-radius:45px; /* Rounded movable focus */
+  border-radius:45px;
   transition:transform .35s cubic-bezier(.77,0,.18,1);
 }
 .right-toggle button{
@@ -135,7 +140,7 @@ body.black-bg{background:#111;}
 .page{
   position:absolute;
   top:0; left:0;
-  width:100%; height:100%;
+  width:100%; min-height:100%;
   background:#111; color:white;
   display:flex;
   justify-content:center;
@@ -144,6 +149,8 @@ body.black-bg{background:#111;}
   transform:translateX(100%);
   transition:.8s cubic-bezier(.77,0,.18,1);
   z-index:3;
+  padding:40px 20px;
+  flex-direction:column;
 }
 
 /* ---------- CAROUSEL ---------- */
@@ -153,15 +160,245 @@ body.black-bg{background:#111;}
   opacity:0; transform:scale(.8);
   transition:.5s ease;
   display:flex; gap:20px; justify-content:center;
+  flex-wrap:wrap;
 }
 .carousel img{
   width:200px; height:120px;
   object-fit:cover;
   border-radius:12px;
+  cursor:pointer;
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.carousel img:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
 }
 .showCarousel{
   opacity:1;
   transform:scale(1);
+}
+
+/* ---------- CASE STUDY MODAL ---------- */
+.case-study {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90%; max-width: 1000px;
+  height: 80vh;
+  background: #222;
+  border-radius: 24px;
+  padding: 40px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow-y: auto;
+  border: 1px solid #333;
+  color: white;
+}
+
+.case-study.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.case-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.case-nav button {
+  background: #333;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.case-nav button:hover {
+  background: #444;
+}
+
+.case-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.case-meta {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.case-tag {
+  background: #333;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.case-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 30px;
+  max-width: 800px;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.case-images img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* ---------- ABOUT PAGE ---------- */
+.about-content {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-top: 30px;
+  color: #ccc;
+  font-family: 'Urbanist', sans-serif;
+  max-width: 800px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 40px;
+  max-width: 800px;
+}
+
+.skill-item {
+  background: #222;
+  padding: 20px 30px;
+  border-radius: 12px;
+  min-width: 150px;
+  flex: 1;
+  text-align: center;
+}
+
+.skill-item h3 {
+  color: white;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.skill-item p {
+  color: #999;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* ---------- CONTACT ---------- */
+.contact-links {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contact-link {
+  background: #222;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.contact-link:hover {
+  background: #333;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 768px) {
+  .carousel {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    bottom: 5%;
+    position: relative;
+    margin-top: 40px;
+  }
+  
+  .carousel img {
+    width: 90%;
+    height: auto;
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
+  
+  .right-toggle {
+    right: 20px;
+    width: 60px;
+    height: 140px;
+  }
+  
+  .case-study {
+    width: 95%;
+    height: 90vh;
+    padding: 20px;
+  }
+  
+  .case-title {
+    font-size: 1.8rem;
+  }
+  
+  #welcome-toggle {
+    width: 160px;
+    height: 50px;
+  }
+  
+  .skills {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .skill-item {
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  #welcome div {
+    font-size: 2rem;
+  }
+  
+  .carousel {
+    gap: 10px;
+  }
+  
+  .right-toggle {
+    right: 10px;
+    width: 50px;
+    height: 120px;
+  }
+  
+  .right-toggle button svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 </style>
 </head>
@@ -181,13 +418,13 @@ body.black-bg{background:#111;}
   <div>Welcome to my portfolio</div>
   <div id="welcome-toggle">
     <div class="focus" id="wFocus"></div>
-    <button id="toCase">
+    <button id="toCase" aria-label="View case studies">
       <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
         <rect x="3" y="4" width="14" height="14" rx="2"/>
         <path d="M7 8h6M7 12h6M7 16h4"/>
       </svg>
     </button>
-    <button id="toAbout">
+    <button id="toAbout" aria-label="View about page">
       <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
         <circle cx="12" cy="8" r="4"/>
         <path d="M4 20c2-4 14-4 16 0"/>
@@ -197,27 +434,73 @@ body.black-bg{background:#111;}
 </section>
 
 <!-- ---------- PAGES ---------- -->
-<section id="case" class="page">
+<section id="case" class="page" aria-labelledby="caseTitle">
   <div id="caseTitle">Case Studies</div>
   <div class="carousel" id="carousel">
-    <img src="https://picsum.photos/300/200?1">
-    <img src="https://picsum.photos/300/200?2">
-    <img src="https://picsum.photos/300/200?3">
+    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="E-commerce App Design">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Fitness App Design">
+    <img src="https://images.unsplash.com/photo-1551836026-d5c2c0b4d2a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Banking App Design">
   </div>
 </section>
 
-<section id="about" class="page">About</section>
+<section id="about" class="page" aria-label="About section">
+  <h1>About Me</h1>
+  <div class="about-content">
+    <p>I'm a UI/UX designer with a passion for creating intuitive, user-centered digital experiences. With a background in psychology and visual design, I bridge the gap between user needs and business goals.</p>
+    <p>My approach combines thorough research with thoughtful design execution, always keeping the end-user at the center of the process.</p>
+  </div>
+  <div class="skills">
+    <div class="skill-item">
+      <h3>UX Research</h3>
+      <p>User interviews, usability testing, persona creation, user journey mapping</p>
+    </div>
+    <div class="skill-item">
+      <h3>UI Design</h3>
+      <p>Wireframing, prototyping, design systems, visual design</p>
+    </div>
+    <div class="skill-item">
+      <h3>Tools</h3>
+      <p>Figma, Adobe XD, Sketch, Framer, ProtoPie, Miro</p>
+    </div>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:hello@lutanda.design" class="contact-link">✉️ Email</a>
+    <a href="https://linkedin.com/in/lutanda" target="_blank" class="contact-link">💼 LinkedIn</a>
+    <a href="https://dribbble.com/lutanda" target="_blank" class="contact-link">🏀 Dribbble</a>
+  </div>
+</section>
+
+<!-- ---------- CASE STUDY MODAL ---------- -->
+<div class="case-study" id="caseStudy">
+  <div class="case-nav">
+    <button class="case-close" aria-label="Close case study">×</button>
+    <button class="case-prev" aria-label="Previous case study">←</button>
+    <button class="case-next" aria-label="Next case study">→</button>
+  </div>
+  <div class="case-content">
+    <h2 class="case-title" id="caseStudyTitle">Project Title</h2>
+    <div class="case-meta" id="caseStudyMeta">
+      <!-- Tags will be inserted here -->
+    </div>
+    <p class="case-description" id="caseStudyDescription">
+      Project description will appear here.
+    </p>
+    <div class="case-images" id="caseStudyImages">
+      <!-- Images will be inserted here -->
+    </div>
+  </div>
+</div>
 
 <!-- ---------- RIGHT TOGGLE ---------- -->
 <div class="right-toggle" id="rightToggle">
   <div class="right-focus" id="rFocus"></div>
-  <button id="caseBtn">
+  <button id="caseBtn" aria-label="View case studies">
     <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
       <rect x="3" y="4" width="14" height="14" rx="2"/>
       <path d="M7 8h6M7 12h6M7 16h4"/>
     </svg>
   </button>
-  <button id="aboutBtn">
+  <button id="aboutBtn" aria-label="View about page">
     <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none">
       <circle cx="12" cy="8" r="4"/>
       <path d="M4 20c2-4 14-4 16 0"/>
@@ -228,16 +511,17 @@ body.black-bg{background:#111;}
 <script>
 /* ---------- TYPING INTRO WITH CURSOR ---------- */
 const introText = document.getElementById("introText");
+const intro = document.getElementById("intro");
 const welcome = document.getElementById("welcome");
 const lines = ["Hi there, I'm Lutanda","A UI/UX designer","I design for clarity","And purpose."];
-let l=0, c=0;
+let l = 0, c = 0;
 
 function type() {
-  if(c < lines[l].length){
+  if (c < lines[l].length) {
     introText.textContent += lines[l][c++];
     setTimeout(type, 80);
   } else {
-    if(l < lines.length - 1){
+    if (l < lines.length - 1) {
       setTimeout(erase, 600);
     } else {
       setTimeout(showWelcome, 800);
@@ -246,7 +530,7 @@ function type() {
 }
 
 function erase() {
-  if(c > 0){
+  if (c > 0) {
     introText.textContent = lines[l].substring(0, --c);
     setTimeout(erase, 40);
   } else {
@@ -255,12 +539,12 @@ function erase() {
   }
 }
 
-function showWelcome(){
+function showWelcome() {
   intro.style.opacity = 0;
-  setTimeout(()=>{
-    intro.remove();
+  setTimeout(() => {
+    intro.style.display = 'none';
     welcome.style.opacity = 1;
-  },600);
+  }, 600);
 }
 
 type();
@@ -279,18 +563,18 @@ const toAbout = document.getElementById("toAbout");
 
 toCase.classList.add("active");
 
-function setWelcomeActive(activeBtn, inactiveBtn){
-  wFocus.style.transform = activeBtn===toCase ? "translateX(0)" : "translateX(100%)";
+function setWelcomeActive(activeBtn, inactiveBtn) {
+  wFocus.style.transform = activeBtn === toCase ? "translateX(0)" : "translateX(100%)";
   activeBtn.classList.add("active");
   inactiveBtn.classList.remove("active");
 }
 
-function activateBlackBg(){
+function activateBlackBg() {
   document.body.classList.remove("grey-bg");
   document.body.classList.add("black-bg");
 }
 
-function showCase(){
+function showCase() {
   activateBlackBg();
   casePage.style.transform = "translateX(0)";
   aboutPage.style.transform = "translateX(100%)";
@@ -299,7 +583,7 @@ function showCase(){
   aboutBtn.classList.remove("active");
 }
 
-function showAbout(){
+function showAbout() {
   activateBlackBg();
   aboutPage.style.transform = "translateX(0)";
   casePage.style.transform = "translateX(-100%)";
@@ -311,15 +595,17 @@ function showAbout(){
 toCase.onclick = () => {
   setWelcomeActive(toCase, toAbout);
   welcome.style.transform = "translateY(-100%)";
+  welcome.style.opacity = "0";
   right.style.display = "flex";
-  showCase();
+  setTimeout(() => showCase(), 300);
 };
 
 toAbout.onclick = () => {
   setWelcomeActive(toAbout, toCase);
   welcome.style.transform = "translateY(-100%)";
+  welcome.style.opacity = "0";
   right.style.display = "flex";
-  showAbout();
+  setTimeout(() => showAbout(), 300);
 };
 
 caseBtn.onclick = showCase;
@@ -331,6 +617,103 @@ const carousel = document.getElementById("carousel");
 
 title.onmouseenter = () => carousel.classList.add("showCarousel");
 title.onmouseleave = () => carousel.classList.remove("showCarousel");
+
+/* ---------- CASE STUDY FUNCTIONALITY ---------- */
+const carouselImages = document.querySelectorAll('.carousel img');
+const caseStudy = document.getElementById('caseStudy');
+const caseClose = document.querySelector('.case-close');
+const casePrev = document.querySelector('.case-prev');
+const caseNext = document.querySelector('.case-next');
+const caseTitle = document.getElementById('caseStudyTitle');
+const caseDescription = document.getElementById('caseStudyDescription');
+const caseMeta = document.getElementById('caseStudyMeta');
+const caseImages = document.getElementById('caseStudyImages');
+
+const caseStudies = [
+  {
+    title: "E-commerce App Redesign",
+    tags: ["UX Research", "UI Design", "Prototyping", "User Testing"],
+    description: "Redesigned a major e-commerce platform's mobile app to improve conversion rates by 35%. Conducted extensive user interviews to identify pain points in the checkout process. Created wireframes, interactive prototypes, and conducted A/B testing to validate design decisions. The final design reduced cart abandonment by 42% and improved overall user satisfaction scores.",
+    images: ["https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80"]
+  },
+  {
+    title: "Health & Fitness Tracker",
+    tags: ["User Research", "UI Design", "Motion Design", "Accessibility"],
+    description: "Designed a comprehensive fitness tracking app with personalized workout plans and nutrition guidance. Implemented motion design for smooth transitions between workout states. Focused on accessibility features including voice commands and high contrast modes for users with visual impairments. The app achieved 4.8-star rating on app stores with 95% user retention after 30 days.",
+    images: ["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80"]
+  },
+  {
+    title: "Banking App Modernization",
+    tags: ["UX Research", "Design System", "Accessibility", "Security"],
+    description: "Led the modernization of a legacy banking application, focusing on accessibility and improved user flows for financial transactions. Created a comprehensive design system that reduced development time by 30%. Implemented security best practices while maintaining intuitive user experience. The redesign resulted in 50% reduction in customer support calls related to transaction errors.",
+    images: ["https://images.unsplash.com/photo-1551836026-d5c2c0b4d2a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80"]
+  }
+];
+
+let currentCaseIndex = 0;
+
+carouselImages.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    currentCaseIndex = index;
+    loadCaseStudy(index);
+    caseStudy.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function loadCaseStudy(index) {
+  const study = caseStudies[index];
+  caseTitle.textContent = study.title;
+  caseDescription.textContent = study.description;
+  
+  caseMeta.innerHTML = study.tags.map(tag => 
+    `<span class="case-tag">${tag}</span>`
+  ).join('');
+  
+  caseImages.innerHTML = study.images.map(img => 
+    `<img src="${img}" alt="${study.title}">`
+  ).join('');
+}
+
+caseClose.addEventListener('click', () => {
+  caseStudy.classList.remove('active');
+  document.body.style.overflow = 'auto';
+});
+
+casePrev.addEventListener('click', () => {
+  currentCaseIndex = (currentCaseIndex - 1 + caseStudies.length) % caseStudies.length;
+  loadCaseStudy(currentCaseIndex);
+});
+
+caseNext.addEventListener('click', () => {
+  currentCaseIndex = (currentCaseIndex + 1) % caseStudies.length;
+  loadCaseStudy(currentCaseIndex);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && caseStudy.classList.contains('active')) {
+    caseStudy.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+  if (e.key === 'ArrowLeft' && caseStudy.classList.contains('active')) {
+    currentCaseIndex = (currentCaseIndex - 1 + caseStudies.length) % caseStudies.length;
+    loadCaseStudy(currentCaseIndex);
+  }
+  if (e.key === 'ArrowRight' && caseStudy.classList.contains('active')) {
+    currentCaseIndex = (currentCaseIndex + 1) % caseStudies.length;
+    loadCaseStudy(currentCaseIndex);
+  }
+});
+
+/* ---------- SMOOTH PAGE TRANSITIONS ---------- */
+document.querySelectorAll('button[aria-label^="View"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      document.body.style.overflow = 'auto';
+    }, 800);
+  });
+});
 </script>
 
 </body>
