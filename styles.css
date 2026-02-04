@@ -1,1 +1,58 @@
+/* Add to your portfolio CSS */
+body.black-bg {
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
 
+body.black-bg::before {
+  content: '';
+  position: fixed;
+  width: 400vmax;
+  height: 400vmax;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(120px);
+  animation: gradient-rotate 30s linear infinite;
+  background: radial-gradient(
+    circle at center,
+    #00ffcc 0%,
+    #ff6600 100%
+  );
+  top: -150vmax;
+  left: -150vmax;
+  z-index: -1;
+}
+
+body.black-bg::after {
+  content: '';
+  position: fixed;
+  width: 400vmax;
+  height: 400vmax;
+  border-radius: 50%;
+  opacity: 0.2;
+  filter: blur(100px);
+  animation: gradient-rotate 25s linear infinite reverse;
+  background: radial-gradient(
+    circle at center,
+    #ff0066 0%,
+    #00ccff 100%
+  );
+  top: -150vmax;
+  right: -150vmax;
+  z-index: -1;
+}
+
+@keyframes gradient-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Make sure your content stays above the gradient */
+.page, .right-toggle, .case-study {
+  z-index: 2;
+}
