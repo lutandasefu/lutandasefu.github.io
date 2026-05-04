@@ -97,3 +97,7 @@ margin-top:25px;
 padding:12px 24px;
 border:1px solid white;
 }
+
+nav{
+transition: transform 0.4s ease;
+}
