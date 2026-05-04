@@ -101,3 +101,7 @@ border:1px solid white;
 nav{
 transition: transform 0.4s ease;
 }
+
+html, body {
+  height: 100%;
+}
