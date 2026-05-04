@@ -1,14 +1,22 @@
-*{margin:0;padding:0;box-sizing:border-box;}
+/* ================= RESET ================= */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html, body {
+height: 100%;
+overflow-x: hidden;
+}
 
 body{
 background:#0a0a0a;
 color:white;
-font-family:Helvetica,Arial,sans-serif;
-overflow-x:hidden;
+font-family:Helvetica, Arial, sans-serif;
 }
 
-/* LOADER */
-
+/* ================= LOADER ================= */
 #loader{
 position:fixed;
 inset:0;
@@ -25,39 +33,57 @@ font-size:5rem;
 letter-spacing:10px;
 }
 
-/* NAV */
-
+/* ================= NAV ================= */
 nav{
 position:fixed;
+top:0;
+left:0;
 width:100%;
 padding:30px 60px;
 display:flex;
 justify-content:space-between;
+align-items:center;
 z-index:10;
 mix-blend-mode:difference;
+transition: transform 0.4s ease;
 }
 
-/* HERO */
+nav a{
+color:white;
+text-decoration:none;
+}
 
+.logo a{
+color:white;
+text-decoration:none;
+font-weight:600;
+}
+
+/* ================= HERO ================= */
 .hero{
 height:100vh;
 display:flex;
 align-items:center;
-padding-left:8%;
+justify-content:flex-start;
+padding:0 8%;
 }
 
 .hero h1{
 font-size:clamp(4rem,10vw,10rem);
 line-height:.9;
+max-width:900px;
 }
 
-/* PROJECTS */
-
+/* ================= PROJECTS ================= */
 .projects{
 padding:150px 8%;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
 gap:80px;
+}
+
+.project{
+overflow:hidden;
 }
 
 .project img{
@@ -77,8 +103,7 @@ transform:scale(1.05);
 margin-top:15px;
 }
 
-/* ABOUT */
-
+/* ================= ABOUT ================= */
 .about{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -91,23 +116,68 @@ align-items:center;
 width:100%;
 }
 
+/* ================= BUTTON ================= */
 .button{
 display:inline-block;
 margin-top:25px;
 padding:12px 24px;
 border:1px solid white;
+transition:0.3s ease;
 }
 
+.button:hover{
+background:white;
+color:black;
+}
+
+/* ================= PROJECT PAGE CONTENT ================= */
+.container{
+max-width:900px;
+margin:0 auto;
+padding:120px 8%;
+}
+
+.container h2{
+margin-top:60px;
+}
+
+.container p{
+margin-top:10px;
+line-height:1.6;
+opacity:0.8;
+}
+
+/* ================= ANIMATION SUPPORT ================= */
 nav{
 transition: transform 0.4s ease;
 }
 
-html, body {
-  height: 100%;
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px){
+
+.hero h1{
+font-size:3.5rem;
 }
 
-.container{
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 120px 8%;
+.projects{
+grid-template-columns:1fr;
+gap:40px;
+}
+
+.about{
+grid-template-columns:1fr;
+}
+
+nav{
+padding:20px 25px;
+}
+
+.project img{
+height:350px;
+}
+
+#loader h1{
+font-size:2.5rem;
+letter-spacing:5px;
+}
 }
