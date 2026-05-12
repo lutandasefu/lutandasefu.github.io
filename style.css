@@ -103,11 +103,10 @@ body {
   line-height: 1;
 }
 
-/* ===== TOGGLE ===== */
+/* ===== SECTION PICKER ===== */
 #toggle-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 12px;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -118,103 +117,61 @@ body {
   transform: translateY(0);
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: auto;
-  height: auto;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-}
-
-.slider {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 220px;
-  height: 48px;
-  background-color: #1a1a1a;
-  border-radius: 48px;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08), 
-              0 4px 24px rgba(0, 0, 0, 0.4),
-              inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transition: box-shadow 0.4s ease;
-  padding: 4px;
-  box-sizing: border-box;
-}
-
-.slider:hover {
-  box-shadow: 0 0 28px rgba(255, 255, 255, 0.12), 
-              0 4px 24px rgba(0, 0, 0, 0.4),
-              inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.toggle-thumb {
-  position: absolute;
-  left: 4px;
-  width: calc(50% - 4px);
-  height: calc(100% - 8px);
-  background-color: #ffffff;
-  border-radius: 40px;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  z-index: 0;
-}
-
-input:checked ~ label .toggle-thumb,
-input:checked + label .toggle-thumb {
-  transform: translateX(calc(100% + 0px));
-}
-
-.toggle-option {
-  position: relative;
-  z-index: 1;
+.section-btn {
   flex: 1;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 40px;
+  border-radius: 12px;
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.section-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.section-btn.active {
+  background: #ffffff;
+  color: #0d0d0d;
+  border-color: #ffffff;
+}
+
+.section-btn i {
+  font-size: 20px;
+}
+
+.btn-title {
   font-family: 'CxMono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: color 0.4s ease;
-  color: #aaaaaa;
-  user-select: none;
+  font-weight: 500;
 }
 
-/* Active state — left option (Design) active by default */
-.toggle-option.left {
-  color: #0d0d0d;
-}
-
-.toggle-option.right {
-  color: #aaaaaa;
-}
-
-/* When toggled — right becomes dark, left becomes light */
-input:checked + label .toggle-option.left {
-  color: #aaaaaa;
-}
-
-input:checked + label .toggle-option.right {
-  color: #0d0d0d;
+.btn-sub {
+  font-family: 'CxMono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
 }
 
 /* Mobile */
 @media (max-width: 480px) {
-  .slider {
-    width: 180px;
-    height: 40px;
+  .section-btn {
+    padding: 20px 24px;
   }
 
-  .toggle-option {
-    font-size: 0.6rem;
+  .btn-title {
+    font-size: 0.65rem;
   }
 }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   #custom-navbar {
