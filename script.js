@@ -9,6 +9,12 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
+/* ===== FONT PRELOAD ===== */
+document.fonts.ready.then(function() {
+  var heading = document.getElementById("hero-heading");
+  if (heading) heading.classList.add("font-ready");
+});
+
 /* ===== NAVBAR HIDE/SHOW ON SCROLL ===== */
 const navbar = document.getElementById("custom-navbar");
 let lastScroll = 0;
