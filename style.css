@@ -1,181 +1,215 @@
-/* ================= RESET ================= */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+/* ===== FONTS ===== */
+@font-face {
+  font-family: 'CxMono';
+  src: url('fonts/CxMonoTrial-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
 }
 
-html, body {
-height: 100%;
-overflow-x: hidden;
+@font-face {
+  font-family: 'Become';
+  src: url('fonts/Become-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
 }
 
-body{
-background:#0a0a0a;
-color:white;
-font-family:Helvetica, Arial, sans-serif;
+/* ===== RESET ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ================= LOADER ================= */
-#loader{
-position:fixed;
-inset:0;
-background:#000;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:999;
-transition:1s;
+body {
+  background-color: #0d0d0d;
+  color: #ffffff;
+  padding-top: 64px;
 }
 
-#loader h1{
-font-size:5rem;
-letter-spacing:10px;
+/* ===== NAVBAR ===== */
+#custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: #0d0d0d;
+  box-sizing: border-box;
 }
 
-/* ================= NAV ================= */
-nav{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-padding:30px 60px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:10;
-/* optional: remove if it causes visibility issues */
-mix-blend-mode:difference;
-transition: transform 0.4s ease;
+#custom-navbar a {
+  text-decoration: none;
+  color: #ffffff;
+  font-family: 'CxMono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
 }
 
-nav a{
-color:white;
-text-decoration:none;
+#custom-navbar a:hover {
+  color: #aaaaaa;
 }
 
-.logo,
-.logo a{
-color:white;
-text-decoration:none;
-font-weight:600;
+#custom-navbar .nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-/* ================= HERO ================= */
-.hero{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:flex-start;
-padding:0 8%;
+/* ===== HERO ===== */
+#hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 80px 20px;
+  gap: 24px;
 }
 
-.hero h1{
-font-size:clamp(4rem,10vw,10rem);
-line-height:.9;
-max-width:900px;
+#typing-container {
+  font-family: 'CxMono', monospace;
+  font-size: 1rem;
+  color: #aaaaaa;
+  letter-spacing: 0.1em;
+  min-height: 1.5em;
 }
 
-/* ================= PROJECTS ================= */
-.projects{
-padding:150px 8%;
-display:grid;
-grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-gap:80px;
+#cursor {
+  display: inline-block;
+  font-weight: 300;
+  margin-left: 2px;
+  animation: blink 1s infinite;
 }
 
-.project{
-overflow:hidden;
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-.project img{
-width:100%;
-height:500px;
-object-fit:cover;
-filter:grayscale(100%);
-transition: transform 0.8s ease, filter 0.8s ease;
+#hero-heading {
+  font-family: 'Become', sans-serif;
+  font-size: 8rem;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
 }
 
-.project:hover img{
-filter:none;
-transform:scale(1.05);
+/* ===== TOGGLE ===== */
+#toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.project h3{
-margin-top:15px;
+#toggle-container.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* ================= ABOUT ================= */
-.about{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:80px;
-padding:150px 8%;
-align-items:center;
+.toggle-label {
+  font-family: 'CxMono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaaaaa;
 }
 
-.about img{
-width:100%;
-height:auto;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
 }
 
-/* ================= BUTTON ================= */
-.button{
-display:inline-block;
-margin-top:25px;
-padding:12px 24px;
-border:1px solid white;
-transition:0.3s ease;
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.button:hover{
-background:white;
-color:black;
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #333;
+  border-radius: 24px;
+  transition: 0.4s;
 }
 
-/* ================= PROJECT PAGE CONTENT ================= */
-.container{
-max-width:900px;
-margin:0 auto;
-padding:120px 8%;
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
 }
 
-.container h2{
-margin-top:60px;
+input:checked + .slider {
+  background-color: #ffffff;
 }
 
-.container p{
-margin-top:10px;
-line-height:1.6;
-opacity:0.8;
+input:checked + .slider:before {
+  background-color: #0d0d0d;
+  transform: translateX(24px);
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px){
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  #custom-navbar {
+    padding: 0 24px;
+    height: 56px;
+  }
 
-.hero h1{
-font-size:3.5rem;
+  #custom-navbar a {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+
+  #hero-heading {
+    font-size: 4rem;
+  }
 }
 
-.projects{
-grid-template-columns:1fr;
-gap:40px;
-}
+@media (max-width: 480px) {
+  #custom-navbar {
+    padding: 0 12px;
+    height: 56px;
+  }
 
-.about{
-grid-template-columns:1fr;
-}
+  #custom-navbar .nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+  }
 
-nav{
-padding:20px 25px;
-}
+  #custom-navbar .nav-left,
+  #custom-navbar .nav-right {
+    font-size: 0.6rem;
+    letter-spacing: 0.03em;
+  }
 
-.project img{
-height:350px;
-}
+  #hero-heading {
+    font-size: 3rem;
+  }
 
-#loader h1{
-font-size:2.5rem;
-letter-spacing:5px;
-}
+  body {
+    padding-top: 56px;
+  }
 }
