@@ -1,56 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Brand Identity — Lutanda</title>
-
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lutanda Sefu — Digital Designer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- ================= NAV ================= -->
-<nav id="nav">
-    <div class="logo">
-        <a href="index.html">LUTANDA</a>
+  <!-- NAVBAR -->
+  <nav id="custom-navbar">
+    <a href="#uiux" class="nav-left">UI/UX Design</a>
+    <a href="index.html" class="nav-center">Lutanda Sefu</a>
+    <a href="#graphic" class="nav-right">Graphic Design</a>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero-container">
+    <div id="typing-container">
+      <span id="typing-text"></span><span id="cursor">|</span>
     </div>
-
-    <div class="nav-links">
-        <a href="index.html#work">WORK</a>
-        <a href="index.html#about">ABOUT</a>
+    <h1 id="hero-heading">Digital Designer</h1>
+    <div id="toggle-container">
+      <span class="toggle-label">UI/UX</span>
+      <label class="switch">
+        <input type="checkbox" id="designToggle">
+        <span class="slider"></span>
+      </label>
+      <span class="toggle-label">Graphic Design</span>
     </div>
-</nav>
+  </div>
 
-<!-- ================= HERO ================= -->
-<section class="hero">
-    <h1>
-        Brand<br>
-        Identity
-    </h1>
-</section>
+  <script>
+    (function() {
+      var text = "Hi, I'm Lutanda Sefu, welcome to my portfolio";
+      var typingElement = document.getElementById("typing-text");
+      var cursor = document.getElementById("cursor");
+      var toggle = document.getElementById("toggle-container");
+      var index = 0;
+      var typingSpeed = 80;
 
-<!-- ================= CONTENT ================= -->
-<section class="container">
+      function type() {
+        if (index < text.length) {
+          typingElement.textContent += text.charAt(index);
+          index++;
+          setTimeout(type, typingSpeed);
+        } else {
+          cursor.style.animation = "blink 1s infinite";
+          setTimeout(function() {
+            toggle.classList.add("visible");
+          }, 500);
+        }
+      }
 
-    <h2>Overview</h2>
-    <p>
-        Client needed a modern identity system aligned with digital-first audiences.
-    </p>
-
-    <h2>Process</h2>
-    <p>
-        Research → Strategy → Visual System → Implementation
-    </p>
-
-    <h2>Outcome</h2>
-    <p>
-        Created scalable brand language across digital platforms.
-    </p>
-
-</section>
+      setTimeout(type, 500);
+    })();
+  </script>
 
 </body>
 </html>
