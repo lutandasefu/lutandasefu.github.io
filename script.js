@@ -3,18 +3,15 @@ const lenis = new Lenis({
   duration: 1.2,
   smoothWheel: true
 });
-
 function raf(time) {
   lenis.raf(time);
   requestAnimationFrame(raf);
 }
-
 requestAnimationFrame(raf);
 
 /* ===== NAVBAR HIDE/SHOW ON SCROLL ===== */
 const navbar = document.getElementById("custom-navbar");
 let lastScroll = 0;
-
 window.addEventListener("scroll", () => {
   let current = window.scrollY;
   if (current > lastScroll && current > 80) {
@@ -30,7 +27,7 @@ window.addEventListener("scroll", () => {
   var text = "Hi, I'm Lutanda Sefu, welcome to my portfolio";
   var typingElement = document.getElementById("typing-text");
   var cursor = document.getElementById("cursor");
-  var toggle = document.getElementById("toggle-container");
+  var viewBtn = document.getElementById("view-btn");
   var index = 0;
   var typingSpeed = 80;
 
@@ -44,7 +41,7 @@ window.addEventListener("scroll", () => {
     } else {
       cursor.style.animation = "blink 1s infinite";
       setTimeout(function() {
-        toggle.classList.add("visible");
+        if (viewBtn) viewBtn.classList.add("visible");
       }, 500);
     }
   }
