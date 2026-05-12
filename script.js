@@ -54,3 +54,12 @@ window.addEventListener("scroll", () => {
 
   setTimeout(type, 500);
 })();
+
+/* ===== ACCORDION CARDS ===== */
+const accCards = document.querySelectorAll('.acc-card');
+accCards.forEach(card => {
+  card.addEventListener('click', () => {
+    accCards.forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+  });
+});
