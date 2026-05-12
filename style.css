@@ -213,3 +213,56 @@ input:checked + .slider:before {
     padding-top: 56px;
   }
 }
+
+/* ===== PROJECT PAGE ===== */
+.project-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.project-title {
+  font-family: 'Become', sans-serif;
+  font-size: 6rem;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.project-content {
+  padding: 80px 20px;
+}
+
+.project-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.project-block h2 {
+  font-family: 'CxMono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #aaaaaa;
+  margin-bottom: 16px;
+}
+
+.project-block p {
+  font-family: 'CxMono', monospace;
+  font-size: 1rem;
+  color: #ffffff;
+  line-height: 1.8;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .project-title {
+    font-size: 3.5rem;
+  }
+}
