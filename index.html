@@ -31,31 +31,6 @@
     </div>
   </div>
 
-  <script>
-    (function() {
-      var text = "Hi, I'm Lutanda Sefu, welcome to my portfolio";
-      var typingElement = document.getElementById("typing-text");
-      var cursor = document.getElementById("cursor");
-      var toggle = document.getElementById("toggle-container");
-      var index = 0;
-      var typingSpeed = 80;
-
-      function type() {
-        if (index < text.length) {
-          typingElement.textContent += text.charAt(index);
-          index++;
-          setTimeout(type, typingSpeed);
-        } else {
-          cursor.style.animation = "blink 1s infinite";
-          setTimeout(function() {
-            toggle.classList.add("visible");
-          }, 500);
-        }
-      }
-
-      setTimeout(type, 500);
-    })();
-  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
