@@ -22,14 +22,16 @@
     </div>
     <h1 id="hero-heading">Digital Designer</h1>
     
-   <div id="toggle-container">
-  <div class="switch">
-    <input type="checkbox" id="designToggle">
-    <label for="designToggle" class="slider">
-      <span class="toggle-option left">Design</span>
-      <span class="toggle-option right">Profile</span>
-      <span class="toggle-thumb"></span>
-    </label>
+<div id="toggle-container">
+  <div class="section-btn active" id="btn-designs" onclick="switchSection('designs')">
+    <i class="ti ti-layout-grid"></i>
+    <span class="btn-title">Designs</span>
+    <span class="btn-sub">View my work</span>
+  </div>
+  <div class="section-btn" id="btn-profile" onclick="switchSection('profile')">
+    <i class="ti ti-user"></i>
+    <span class="btn-title">Profile</span>
+    <span class="btn-sub">About me</span>
   </div>
 </div>
 
