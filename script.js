@@ -1,42 +1,53 @@
-const loader = document.getElementById("loader");
-const nav = document.getElementById("nav");
-
-/* LOADER */
-if (loader) {
-  window.onload = () => {
-    setTimeout(() => {
-      loader.style.opacity = "0";
-      setTimeout(() => loader.remove(), 800);
-    }, 1200);
-  };
-}
-
-/* LENIS */
+/* ===== SMOOTH SCROLL (LENIS) ===== */
 const lenis = new Lenis({
   duration: 1.2,
   smoothWheel: true
 });
 
-function raf(time){
+function raf(time) {
   lenis.raf(time);
   requestAnimationFrame(raf);
 }
 
 requestAnimationFrame(raf);
 
-/* NAV */
-if (nav) {
-  let lastScroll = 0;
+/* ===== NAVBAR HIDE/SHOW ON SCROLL ===== */
+const navbar = document.getElementById("custom-navbar");
+let lastScroll = 0;
 
-  window.addEventListener("scroll", () => {
-    let current = window.scrollY;
+window.addEventListener("scroll", () => {
+  let current = window.scrollY;
+  if (current > lastScroll && current > 80) {
+    navbar.style.transform = "translateY(-100%)";
+  } else {
+    navbar.style.transform = "translateY(0)";
+  }
+  lastScroll = current;
+});
 
-    if (current > lastScroll && current > 80) {
-      nav.style.transform = "translateY(-100%)";
+/* ===== TYPING ANIMATION ===== */
+(function() {
+  var text = "Hi, I'm Lutanda Sefu, welcome to my portfolio";
+  var typingElement = document.getElementById("typing-text");
+  var cursor = document.getElementById("cursor");
+  var toggle = document.getElementById("toggle-container");
+  var index = 0;
+  var typingSpeed = 80;
+
+  if (!typingElement) return;
+
+  function type() {
+    if (index < text.length) {
+      typingElement.textContent += text.charAt(index);
+      index++;
+      setTimeout(type, typingSpeed);
     } else {
-      nav.style.transform = "translateY(0)";
+      cursor.style.animation = "blink 1s infinite";
+      setTimeout(function() {
+        toggle.classList.add("visible");
+      }, 500);
     }
+  }
 
-    lastScroll = current;
-  });
-}
+  setTimeout(type, 500);
+})();
