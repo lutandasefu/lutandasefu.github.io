@@ -1,43 +1,181 @@
 /* ===== SMOOTH SCROLL (LENIS) ===== */
-const lenis = new Lenis({
-  duration: 1.2,
-  smoothWheel: true
-});
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
+const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
-/* ===== FONT PRELOAD ===== */
-document.fonts.ready.then(function() {
-  var heading = document.getElementById("hero-heading");
-  if (heading) heading.classList.add("font-ready");
-});
+/* ===== CUSTOM CURSOR ===== */
+const cursorDot = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring');
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
 
-/* ===== NAVBAR HIDE/SHOW ON SCROLL ===== */
-const navbar = document.getElementById("custom-navbar");
-let lastScroll = 0;
-window.addEventListener("scroll", () => {
-  let current = window.scrollY;
-  if (current > lastScroll && current > 80) {
-    navbar.style.transform = "translateY(-100%)";
-  } else {
-    navbar.style.transform = "translateY(0)";
+if (cursorDot && cursorRing) {
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
   }
-  lastScroll = current;
-});
+  animateRing();
+
+  document.querySelectorAll('a, button, .acc-view-btn, #entry-prompt').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { document.body.classList.add('cursor-hover'); });
+    el.addEventListener('mouseleave', function() { document.body.classList.remove('cursor-hover'); });
+  });
+
+  var heroHeading = document.getElementById('hero-heading');
+  if (heroHeading) {
+    heroHeading.addEventListener('mouseenter', function() {
+      document.body.classList.add('cursor-heading');
+      document.body.classList.remove('cursor-hover');
+    });
+    heroHeading.addEventListener('mouseleave', function() {
+      document.body.classList.remove('cursor-heading');
+    });
+  }
+}
+
+/* ===== DOT GRID ===== */
+var canvas = document.getElementById('dot-grid');
+if (canvas) {
+  var ctx = canvas.getContext('2d');
+  var dotSpacing = 28;
+  var dotRadius = 1;
+  var cursorInfluence = { x: -999, y: -999 };
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  document.addEventListener('mousemove', function(e) {
+    cursorInfluence.x = e.clientX;
+    cursorInfluence.y = e.clientY;
+  });
+
+  function drawDots() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var cols = Math.ceil(canvas.width / dotSpacing);
+    var rows = Math.ceil(canvas.height / dotSpacing);
+
+    for (var r = 0; r <= rows; r++) {
+      for (var c = 0; c <= cols; c++) {
+        var x = c * dotSpacing;
+        var y = r * dotSpacing;
+        var dist = Math.sqrt(
+          Math.pow(x - cursorInfluence.x, 2) +
+          Math.pow(y - cursorInfluence.y, 2)
+        );
+        var maxDist = 120;
+        var alpha = 0.06;
+        if (dist < maxDist) {
+          alpha = 0.06 + (1 - dist / maxDist) * 0.25;
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + alpha + ')';
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(drawDots);
+  }
+  drawDots();
+}
+
+/* ===== PRELOADER ===== */
+var preloader = document.getElementById('preloader');
+var preloaderScan = document.getElementById('preloader-scan');
+var preloaderName = document.getElementById('preloader-name');
+
+if (preloader) {
+  var nameText = 'LUTANDA SEFU';
+  var nameIndex = 0;
+
+  function typeName() {
+    if (nameIndex < nameText.length) {
+      preloaderName.textContent += nameText.charAt(nameIndex);
+      nameIndex++;
+      setTimeout(typeName, 80);
+    }
+  }
+
+  setTimeout(function() {
+    preloaderScan.classList.add('active');
+    setTimeout(typeName, 200);
+  }, 300);
+
+  setTimeout(function() {
+    preloader.classList.add('curtain-open');
+    setTimeout(function() {
+      preloader.classList.add('hidden');
+      setTimeout(function() {
+        preloader.style.display = 'none';
+        showEntryScreen();
+      }, 400);
+    }, 900);
+  }, 2800);
+}
+
+/* ===== ENTRY SCREEN ===== */
+var entryScreen = document.getElementById('entry-screen');
+
+function showEntryScreen() {
+  if (!entryScreen) return;
+  entryScreen.classList.add('visible');
+  entryScreen.addEventListener('click', enterSite);
+}
+
+function enterSite() {
+  if (!entryScreen) return;
+  entryScreen.classList.add('exit');
+  entryScreen.removeEventListener('click', enterSite);
+
+  var navbar = document.getElementById('custom-navbar');
+  var heroLine = document.getElementById('hero-line');
+  var typingContainer = document.getElementById('typing-container');
+  var heading = document.getElementById('hero-heading');
+  var viewBtn = document.getElementById('view-btn');
+
+  setTimeout(function() {
+    if (navbar) navbar.classList.add('visible');
+  }, 200);
+
+  setTimeout(function() {
+    if (heroLine) heroLine.classList.add('active');
+  }, 600);
+
+  setTimeout(function() {
+    if (typingContainer) typingContainer.classList.add('visible');
+    startTyping(function() {
+      setTimeout(function() {
+        if (heading) heading.classList.add('revealed');
+        setTimeout(function() {
+          if (viewBtn) viewBtn.classList.add('visible');
+        }, 600);
+      }, 300);
+    });
+  }, 900);
+}
 
 /* ===== TYPING ANIMATION ===== */
-(function() {
+function startTyping(callback) {
   var text = "Hi, I'm Lutanda Sefu, welcome to my portfolio";
-  var typingElement = document.getElementById("typing-text");
-  var cursor = document.getElementById("cursor");
-  var viewBtn = document.getElementById("view-btn");
+  var typingElement = document.getElementById('typing-text');
+  var cursor = document.getElementById('cursor');
   var index = 0;
-  var typingSpeed = 80;
+  var typingSpeed = 60;
 
-  if (!typingElement) return;
+  if (!typingElement) { if (callback) callback(); return; }
 
   function type() {
     if (index < text.length) {
@@ -45,70 +183,95 @@ window.addEventListener("scroll", () => {
       index++;
       setTimeout(type, typingSpeed);
     } else {
-      cursor.style.animation = "blink 1s infinite";
-      setTimeout(function() {
-        if (viewBtn) viewBtn.classList.add("visible");
-      }, 500);
+      if (cursor) cursor.style.animation = 'blink 1s infinite';
+      if (callback) setTimeout(callback, 300);
     }
   }
+  type();
+}
 
-  setTimeout(type, 500);
-})();
+/* ===== FONT PRELOAD ===== */
+document.fonts.ready.then(function() {
+  var heading = document.getElementById('hero-heading');
+});
+
+/* ===== NAVBAR HIDE/SHOW ON SCROLL ===== */
+var navbar = document.getElementById('custom-navbar');
+var lastScroll = 0;
+window.addEventListener('scroll', function() {
+  var current = window.scrollY;
+  if (current > lastScroll && current > 80) {
+    navbar.style.transform = 'translateY(-100%)';
+  } else {
+    navbar.style.transform = 'translateY(0)';
+  }
+  lastScroll = current;
+});
 
 /* ===== ACCORDION CARDS ===== */
-const accCards = document.querySelectorAll('.acc-card');
-accCards.forEach(card => {
-  card.addEventListener('click', () => {
-    accCards.forEach(c => c.classList.remove('active'));
+var accCards = document.querySelectorAll('.acc-card');
+accCards.forEach(function(card) {
+  card.addEventListener('click', function() {
+    accCards.forEach(function(c) { c.classList.remove('active'); });
     card.classList.add('active');
   });
 });
 
 /* ===== PROFILE PAGE ANIMATION ===== */
 (function() {
-  var profileHeading = document.getElementById("profile-heading");
+  var profileHeading = document.getElementById('profile-heading');
   if (!profileHeading) return;
-
-  var typingText = document.getElementById("profile-typing-text");
-  var profileCursor = document.getElementById("profile-cursor");
-  var image = document.getElementById("profile-image-wrap");
-  var typingWrap = document.getElementById("profile-typing-wrap");
-  var bio = document.getElementById("profile-bio");
-  var contact = document.getElementById("profile-contact");
-
+  var typingText = document.getElementById('profile-typing-text');
+  var profileCursor = document.getElementById('profile-cursor');
+  var image = document.getElementById('profile-image-wrap');
+  var typingWrap = document.getElementById('profile-typing-wrap');
+  var bio = document.getElementById('profile-bio');
+  var contact = document.getElementById('profile-contact');
   var introText = "My name's Lutanda Sefu — lead graphic designer and founder of Epic Branding, a Johannesburg-based graphic design agency I've been running for over six years.";
   var index = 0;
   var typingSpeed = 40;
 
   function revealElement(el, delay) {
     setTimeout(function() {
-      if (el) el.classList.add("visible");
+      if (el) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }
     }, delay);
   }
 
-  function typeLine(callback) {
+  function typeProfile(callback) {
     if (index < introText.length) {
       typingText.textContent += introText.charAt(index);
       index++;
-      setTimeout(function() { typeLine(callback); }, typingSpeed);
+      setTimeout(function() { typeProfile(callback); }, typingSpeed);
     } else {
-      profileCursor.style.animation = "blink 1s infinite";
+      if (profileCursor) profileCursor.style.animation = 'blink 1s infinite';
       if (callback) setTimeout(callback, 400);
     }
   }
 
-  // Sequence: heading → image → typing → bio → contact
   revealElement(profileHeading, 300);
   revealElement(image, 800);
-
   setTimeout(function() {
     revealElement(typingWrap, 0);
     setTimeout(function() {
-      typeLine(function() {
+      typeProfile(function() {
         revealElement(bio, 300);
         revealElement(contact, 700);
       });
     }, 500);
   }, 1400);
+})();
 
+/* ===== PAGE PRELOADER (non-homepage) ===== */
+(function() {
+  if (document.getElementById('preloader')) return;
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:#0d0d0d;z-index:99999;pointer-events:none;transition:opacity 0.6s ease;';
+  document.body.appendChild(overlay);
+  setTimeout(function() {
+    overlay.style.opacity = '0';
+    setTimeout(function() { overlay.remove(); }, 600);
+  }, 500);
 })();
