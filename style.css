@@ -547,6 +547,9 @@ body {
   text-align: center;
   margin: 0;
 }
+#profile-contact * {
+  font-family: 'CxMono', monospace !important;
+}
 
 #profile-contact {
   display: flex;
