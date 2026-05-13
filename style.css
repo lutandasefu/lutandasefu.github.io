@@ -133,6 +133,72 @@ body {
   transform: translateY(0);
 }
 
+/* Watermark number */
+.acc-number {
+  position: absolute;
+  bottom: -20px;
+  right: 24px;
+  font-family: 'Become', sans-serif;
+  font-size: 18rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.4s ease;
+}
+
+.acc-card.active .acc-number {
+  opacity: 1;
+}
+
+/* Marquee strip */
+.acc-marquee-wrap {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.3s;
+  pointer-events: none;
+}
+
+.acc-card.active .acc-marquee-wrap {
+  opacity: 1;
+}
+
+.acc-marquee {
+  display: inline-block;
+  animation: marquee 12s linear infinite;
+}
+
+.acc-marquee span {
+  font-family: 'CxMono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.08);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .acc-number {
+    font-size: 8rem;
+    bottom: -10px;
+    right: 12px;
+  }
+
+  .acc-marquee-wrap {
+    top: 30%;
+  }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   #custom-navbar {
