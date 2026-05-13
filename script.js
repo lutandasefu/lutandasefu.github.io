@@ -111,7 +111,7 @@ window.addEventListener('scroll', function() {
 
 /* ===== TYPING ANIMATION ===== */
 (function() {
-  var text = "Hi, I'm Lutanda Sefu, welcome to my portfolio";
+  var text = "Welcome to my portfolio";
   var typingElement = document.getElementById('typing-text');
   var cursor = document.getElementById('cursor');
   var viewBtn = document.getElementById('view-btn');
