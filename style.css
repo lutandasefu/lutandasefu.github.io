@@ -577,6 +577,14 @@ body {
   opacity: 0.6;
 }
 
+.contact-item {
+  font-family: 'CxMono', monospace;
+}
+
+.contact-item span {
+  font-family: 'CxMono', monospace;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   #profile-heading {
