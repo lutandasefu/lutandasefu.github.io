@@ -4,10 +4,10 @@ function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
 /* ===== CUSTOM CURSOR ===== */
-const cursorDot = document.getElementById('cursor-dot');
-const cursorRing = document.getElementById('cursor-ring');
-let mouseX = 0, mouseY = 0;
-let ringX = 0, ringY = 0;
+var cursorDot = document.getElementById('cursor-dot');
+var cursorRing = document.getElementById('cursor-ring');
+var mouseX = 0, mouseY = 0;
+var ringX = 0, ringY = 0;
 
 if (cursorDot && cursorRing) {
   document.addEventListener('mousemove', function(e) {
@@ -26,7 +26,7 @@ if (cursorDot && cursorRing) {
   }
   animateRing();
 
-  document.querySelectorAll('a, button, .acc-view-btn, #entry-prompt').forEach(function(el) {
+  document.querySelectorAll('a, button, .acc-view-btn').forEach(function(el) {
     el.addEventListener('mouseenter', function() { document.body.classList.add('cursor-hover'); });
     el.addEventListener('mouseleave', function() { document.body.classList.remove('cursor-hover'); });
   });
@@ -67,7 +67,6 @@ if (canvas) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var cols = Math.ceil(canvas.width / dotSpacing);
     var rows = Math.ceil(canvas.height / dotSpacing);
-
     for (var r = 0; r <= rows; r++) {
       for (var c = 0; c <= cols; c++) {
         var x = c * dotSpacing;
@@ -92,107 +91,10 @@ if (canvas) {
   drawDots();
 }
 
-/* ===== PRELOADER ===== */
-var preloader = document.getElementById('preloader');
-var preloaderScan = document.getElementById('preloader-scan');
-var preloaderName = document.getElementById('preloader-name');
-
-if (preloader) {
-  var nameText = 'LUTANDA SEFU';
-  var nameIndex = 0;
-
-  function typeName() {
-    if (nameIndex < nameText.length) {
-      preloaderName.textContent += nameText.charAt(nameIndex);
-      nameIndex++;
-      setTimeout(typeName, 80);
-    }
-  }
-
-  setTimeout(function() {
-    preloaderScan.classList.add('active');
-    setTimeout(typeName, 200);
-  }, 300);
-
-  setTimeout(function() {
-    preloader.classList.add('curtain-open');
-    setTimeout(function() {
-      preloader.classList.add('hidden');
-      setTimeout(function() {
-        preloader.style.display = 'none';
-        showEntryScreen();
-      }, 400);
-    }, 900);
-  }, 2800);
-}
-
-/* ===== ENTRY SCREEN ===== */
-var entryScreen = document.getElementById('entry-screen');
-
-function showEntryScreen() {
-  if (!entryScreen) return;
-  entryScreen.classList.add('visible');
-  entryScreen.addEventListener('click', enterSite);
-}
-
-function enterSite() {
-  if (!entryScreen) return;
-  entryScreen.classList.add('exit');
-  entryScreen.removeEventListener('click', enterSite);
-
-  var navbar = document.getElementById('custom-navbar');
-  var heroLine = document.getElementById('hero-line');
-  var typingContainer = document.getElementById('typing-container');
-  var heading = document.getElementById('hero-heading');
-  var viewBtn = document.getElementById('view-btn');
-
-  setTimeout(function() {
-    if (navbar) navbar.classList.add('visible');
-  }, 200);
-
-  setTimeout(function() {
-    if (heroLine) heroLine.classList.add('active');
-  }, 600);
-
-  setTimeout(function() {
-    if (typingContainer) typingContainer.classList.add('visible');
-    startTyping(function() {
-      setTimeout(function() {
-        if (heading) heading.classList.add('revealed');
-        setTimeout(function() {
-          if (viewBtn) viewBtn.classList.add('visible');
-        }, 600);
-      }, 300);
-    });
-  }, 900);
-}
-
-/* ===== TYPING ANIMATION ===== */
-function startTyping(callback) {
-  var text = "Hi, I'm Lutanda Sefu, welcome to my portfolio";
-  var typingElement = document.getElementById('typing-text');
-  var cursor = document.getElementById('cursor');
-  var index = 0;
-  var typingSpeed = 60;
-
-  if (!typingElement) { if (callback) callback(); return; }
-
-  function type() {
-    if (index < text.length) {
-      typingElement.textContent += text.charAt(index);
-      index++;
-      setTimeout(type, typingSpeed);
-    } else {
-      if (cursor) cursor.style.animation = 'blink 1s infinite';
-      if (callback) setTimeout(callback, 300);
-    }
-  }
-  type();
-}
-
 /* ===== FONT PRELOAD ===== */
 document.fonts.ready.then(function() {
   var heading = document.getElementById('hero-heading');
+  if (heading) heading.classList.add('font-ready');
 });
 
 /* ===== NAVBAR HIDE/SHOW ON SCROLL ===== */
@@ -207,6 +109,30 @@ window.addEventListener('scroll', function() {
   }
   lastScroll = current;
 });
+
+/* ===== TYPING ANIMATION ===== */
+(function() {
+  var text = "Hi, I'm Lutanda Sefu, welcome to my portfolio";
+  var typingElement = document.getElementById('typing-text');
+  var cursor = document.getElementById('cursor');
+  var viewBtn = document.getElementById('view-btn');
+  var index = 0;
+  var typingSpeed = 80;
+  if (!typingElement) return;
+  function type() {
+    if (index < text.length) {
+      typingElement.textContent += text.charAt(index);
+      index++;
+      setTimeout(type, typingSpeed);
+    } else {
+      if (cursor) cursor.style.animation = 'blink 1s infinite';
+      setTimeout(function() {
+        if (viewBtn) viewBtn.classList.add('visible');
+      }, 500);
+    }
+  }
+  setTimeout(type, 500);
+})();
 
 /* ===== ACCORDION CARDS ===== */
 var accCards = document.querySelectorAll('.acc-card');
@@ -262,16 +188,4 @@ accCards.forEach(function(card) {
       });
     }, 500);
   }, 1400);
-})();
-
-/* ===== PAGE PRELOADER (non-homepage) ===== */
-(function() {
-  if (document.getElementById('preloader')) return;
-  var overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:#0d0d0d;z-index:99999;pointer-events:none;transition:opacity 0.6s ease;';
-  document.body.appendChild(overlay);
-  setTimeout(function() {
-    overlay.style.opacity = '0';
-    setTimeout(function() { overlay.remove(); }, 600);
-  }, 500);
 })();
