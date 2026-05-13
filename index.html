@@ -5,26 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lutanda Sefu — Digital Designer</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div id="preloader-scan"></div>
+    <div id="preloader-text">
+      <span id="preloader-name"></span>
+    </div>
+    <div id="preloader-curtain-top"></div>
+    <div id="preloader-curtain-bottom"></div>
+  </div>
+
+  <!-- CURSOR -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ENTRY PROMPT -->
+  <div id="entry-screen">
+    <div id="entry-meta-tl">Epic Branding</div>
+    <div id="entry-meta-tr">2025</div>
+    <div id="entry-meta-bl">JHB · ZA</div>
+    <div id="entry-meta-br">Graphic Design · UI/UX</div>
+    <div id="entry-prompt">[ enter ]</div>
+  </div>
+
   <!-- NAVBAR -->
   <nav id="custom-navbar">
-  <a href="designs.html" class="nav-left">UI/UX Design</a>
-  <a href="index.html" class="nav-center">Lutanda Sefu</a>
-  <a href="designs.html" class="nav-right">Graphic Design</a>
-</nav>
+    <a href="designs.html" class="nav-left">UI/UX Design</a>
+    <a href="index.html" class="nav-center">Lutanda Sefu</a>
+    <a href="designs.html" class="nav-right">Graphic Design</a>
+  </nav>
 
   <!-- HERO -->
   <div id="hero-container">
+    <div id="hero-line"></div>
     <div id="typing-container">
       <span id="typing-text"></span><span id="cursor">|</span>
     </div>
-    <h1 id="hero-heading">Digital Designer</h1>
-
+    <div id="hero-heading-wrap">
+      <h1 id="hero-heading">
+        <span class="heading-solid">Digital</span>
+        <span class="heading-outline">Designer</span>
+      </h1>
+    </div>
     <a href="explore.html" id="view-btn">View</a>
   </div>
+
+  <!-- DOT GRID -->
+  <canvas id="dot-grid"></canvas>
 
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
