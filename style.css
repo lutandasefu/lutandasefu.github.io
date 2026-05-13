@@ -510,11 +510,11 @@ body {
 }
 
 #profile-image-wrap {
-  width: 280px;
-  height: 280px;
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
   overflow: hidden;
-  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  
 }
 
 #profile-image {
