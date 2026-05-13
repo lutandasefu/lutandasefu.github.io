@@ -63,3 +63,59 @@ accCards.forEach(card => {
     card.classList.add('active');
   });
 });
+
+/* ===== PROFILE PAGE ANIMATION ===== */
+(function() {
+  var profileHeading = document.getElementById("profile-heading");
+  if (!profileHeading) return;
+
+  var typingText = document.getElementById("profile-typing-text");
+  var profileCursor = document.getElementById("profile-cursor");
+  var image = document.getElementById("profile-image-wrap");
+  var typingWrap = document.getElementById("profile-typing-wrap");
+  var bio = document.getElementById("profile-bio");
+  var bioParagraphs = document.querySelectorAll(".bio-para");
+  var contact = document.getElementById("profile-contact");
+
+  var introText = "My name's Lutanda Sefu — lead graphic designer and founder of Epic Branding, a Johannesburg-based graphic design agency I've been running for over six years.";
+  var index = 0;
+  var typingSpeed = 40;
+
+  function revealElement(el, delay) {
+    setTimeout(function() {
+      if (el) el.classList.add("visible");
+    }, delay);
+  }
+
+  function typeLine(callback) {
+    if (index < introText.length) {
+      typingText.textContent += introText.charAt(index);
+      index++;
+      setTimeout(function() { typeLine(callback); }, typingSpeed);
+    } else {
+      profileCursor.style.animation = "blink 1s infinite";
+      if (callback) setTimeout(callback, 400);
+    }
+  }
+
+  // Sequence: heading → image → typing → bio paragraphs → contact
+  revealElement(profileHeading, 300);
+
+  revealElement(image, 800);
+
+  // Start typing after image appears
+  setTimeout(function() {
+    revealElement(typingWrap, 0);
+    setTimeout(function() {
+      typeLine(function() {
+        // After typing finishes reveal bio paragraphs one by one
+        bioParagraphs.forEach(function(para, i) {
+          revealElement(para, i * 300);
+        });
+        // Then contact
+        revealElement(contact, bioParagraphs.length * 300 + 300);
+      });
+    }, 500);
+  }, 1400);
+
+})();
