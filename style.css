@@ -65,6 +65,12 @@ body {
   transform: translateX(-50%);
 }
 
+/* ===== HOME PAGE NO SCROLL ===== */
+body.home {
+  overflow: hidden;
+  height: 100vh;
+}
+
 /* ===== HERO ===== */
 #hero-container {
   display: flex;
