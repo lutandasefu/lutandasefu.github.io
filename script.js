@@ -74,7 +74,6 @@ accCards.forEach(card => {
   var image = document.getElementById("profile-image-wrap");
   var typingWrap = document.getElementById("profile-typing-wrap");
   var bio = document.getElementById("profile-bio");
-  var bioParagraphs = document.querySelectorAll(".bio-para");
   var contact = document.getElementById("profile-contact");
 
   var introText = "My name's Lutanda Sefu — lead graphic designer and founder of Epic Branding, a Johannesburg-based graphic design agency I've been running for over six years.";
@@ -98,22 +97,16 @@ accCards.forEach(card => {
     }
   }
 
-  // Sequence: heading → image → typing → bio paragraphs → contact
+  // Sequence: heading → image → typing → bio → contact
   revealElement(profileHeading, 300);
-
   revealElement(image, 800);
 
-  // Start typing after image appears
   setTimeout(function() {
     revealElement(typingWrap, 0);
     setTimeout(function() {
       typeLine(function() {
-        // After typing finishes reveal bio paragraphs one by one
-        bioParagraphs.forEach(function(para, i) {
-          revealElement(para, i * 300);
-        });
-        // Then contact
-        revealElement(contact, bioParagraphs.length * 300 + 300);
+        revealElement(bio, 300);
+        revealElement(contact, 700);
       });
     }, 500);
   }, 1400);
