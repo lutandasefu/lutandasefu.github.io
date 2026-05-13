@@ -1021,8 +1021,18 @@ body.cursor-heading #cursor-ring {
   }
 
   #home-meta {
-    padding: 0 24px;
-    bottom: 20px;
-    font-size: 0.55rem;
-  }
+  position: fixed;
+  bottom: 32px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: 'CxMono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  z-index: 1;
+  pointer-events: none;
+}
 }
