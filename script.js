@@ -75,10 +75,9 @@ if (canvas) {
           Math.pow(x - cursorInfluence.x, 2) +
           Math.pow(y - cursorInfluence.y, 2)
         );
-        var maxDist = 120;
         var alpha = 0.06;
-        if (dist < maxDist) {
-          alpha = 0.06 + (1 - dist / maxDist) * 0.25;
+        if (dist < 120) {
+          alpha = 0.06 + (1 - dist / 120) * 0.25;
         }
         ctx.beginPath();
         ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
