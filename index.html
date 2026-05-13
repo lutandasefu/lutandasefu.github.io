@@ -12,28 +12,12 @@
 </head>
 <body>
 
-  <!-- PRELOADER -->
-  <div id="preloader">
-    <div id="preloader-scan"></div>
-    <div id="preloader-text">
-      <span id="preloader-name"></span>
-    </div>
-    <div id="preloader-curtain-top"></div>
-    <div id="preloader-curtain-bottom"></div>
-  </div>
-
   <!-- CURSOR -->
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
-  <!-- ENTRY PROMPT -->
-  <div id="entry-screen">
-    <div id="entry-meta-tl">Epic Branding</div>
-    <div id="entry-meta-tr">2025</div>
-    <div id="entry-meta-bl">JHB · ZA</div>
-    <div id="entry-meta-br">Graphic Design · UI/UX</div>
-    <div id="entry-prompt">[ enter ]</div>
-  </div>
+  <!-- DOT GRID -->
+  <canvas id="dot-grid"></canvas>
 
   <!-- NAVBAR -->
   <nav id="custom-navbar">
@@ -44,21 +28,19 @@
 
   <!-- HERO -->
   <div id="hero-container">
-    <div id="hero-line"></div>
     <div id="typing-container">
       <span id="typing-text"></span><span id="cursor">|</span>
     </div>
-    <div id="hero-heading-wrap">
-      <h1 id="hero-heading">
-        <span class="heading-solid">Digital</span>
-        <span class="heading-outline">Designer</span>
-      </h1>
-    </div>
+    <h1 id="hero-heading">Digital Designer</h1>
     <a href="explore.html" id="view-btn">View</a>
   </div>
 
-  <!-- DOT GRID -->
-  <canvas id="dot-grid"></canvas>
+  <!-- BOTTOM METADATA -->
+  <div id="home-meta">
+    <span>JHB · ZA</span>
+    <span>Epic Branding</span>
+    <span>2025</span>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
