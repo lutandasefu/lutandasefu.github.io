@@ -44,10 +44,6 @@ body {
   box-sizing: border-box;
 }
 
-#custom-navbar.visible {
-  transform: translateY(0);
-}
-
 #custom-navbar a {
   text-decoration: none;
   color: #ffffff;
