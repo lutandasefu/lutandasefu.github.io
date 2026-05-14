@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Identity — Lutanda Sefu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="dot-grid"></canvas>
+
+  <nav id="custom-navbar">
+    <a href="designs.html" class="nav-left">UI/UX Design</a>
+    <a href="index.html" class="nav-center">Lutanda Sefu</a>
+    <a href="designs.html" class="nav-right">Graphic Design</a>
+  </nav>
+
+  <!-- HERO -->
+  <div id="category-hero">
+    <p class="category-tag">Epic Branding · Brand Identity</p>
+    <h1 class="category-title">
+      <span class="category-title-inner">Brand<br>Identity</span>
+    </h1>
+    <p class="category-desc">Cohesive visual systems that define how a brand looks, feels, and communicates — from logo conception through to full brand guidelines.</p>
+  </div>
+
+  <!-- PROJECT GRID -->
+  <div id="project-grid">
+
+    <div class="project-card" style="background:#1a1a2e;"
+      onclick="openOverlay('Project One', 'Brand Identity · 2024', 'A complete brand identity system developed for a forward-thinking digital startup. The project encompassed logo design, colour system, typography selection, and a comprehensive brand guidelines document.')">
+      <div class="project-placeholder">01</div>
+      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
+      <div class="project-card-inner">
+        <div class="project-meta">
+          <span class="project-tag">Brand Identity</span>
+          <span class="project-name">Project One</span>
+          <span class="project-year">2024</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" style="background:#16213e;"
+      onclick="openOverlay('Project Two', 'Brand Identity · 2024', 'A brand refresh for an established business entering new markets. Focused on modernising the visual language while preserving brand equity and recognition built over years.')">
+      <div class="project-placeholder">02</div>
+      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
+      <div class="project-card-inner">
+        <div class="project-meta">
+          <span class="project-tag">Brand Refresh</span>
+          <span class="project-name">Project Two</span>
+          <span class="project-year">2023</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" style="background:#0f3460;"
+      onclick="openOverlay('Project Three', 'Brand Identity · 2023', 'A luxury brand identity created for a boutique consultancy firm. The visual system draws on premium aesthetics — restrained colour, refined typography, and considered spatial relationships.')">
+      <div class="project-placeholder">03</div>
+      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
+      <div class="project-card-inner">
+        <div class="project-meta">
+          <span class="project-tag">Luxury Branding</span>
+          <span class="project-name">Project Three</span>
+          <span class="project-year">2023</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OVERLAY -->
+  <div id="project-overlay">
+    <div id="overlay-backdrop"></div>
+    <div id="overlay-panel">
+      <div id="overlay-header">
+        <div>
+          <h2 id="overlay-title">Project One</h2>
+          <p id="overlay-subtitle">Brand Identity · 2024</p>
+        </div>
+        <button id="overlay-close"><i class="ti ti-x"></i></button>
+      </div>
+      <div id="overlay-body">
+        <p class="overlay-desc" id="overlay-desc">Project description loads here.</p>
+        <div>
+          <p class="overlay-section-title">Work Samples</p>
+          <div class="overlay-image-grid">
+            <div class="overlay-image-slot">Insert Image</div>
+            <div class="overlay-image-slot">Insert Image</div>
+            <div class="overlay-image-slot">Insert Image</div>
+            <div class="overlay-image-slot">Insert Image</div>
+          </div>
+        </div>
+        <div>
+          <p class="overlay-section-title">Project Details</p>
+          <div class="overlay-details">
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Client</span>
+              <span class="overlay-detail-value">Insert Client</span>
+            </div>
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Year</span>
+              <span class="overlay-detail-value">2024</span>
+            </div>
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Services</span>
+              <span class="overlay-detail-value">Brand Identity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
