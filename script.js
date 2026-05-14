@@ -361,5 +361,17 @@ function createParticle(x, y, colors) {
 
 /* attach confetti to all buttons */
 document.querySelectorAll('#view-btn, .acc-view-btn').forEach(function(btn) {
-  btn.addEventListener('click', launchConfetti);
+  btn.addEventListener('click', function(e) {
+    var href = btn.getAttribute('href');
+
+    if (href && href !== '#' && href !== '') {
+      e.preventDefault();
+      launchConfetti(e);
+      setTimeout(function() {
+        window.location.href = href;
+      }, 1000);
+    } else {
+      launchConfetti(e);
+    }
+  });
 });
