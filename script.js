@@ -250,3 +250,25 @@ document.addEventListener('keydown', function(e) {
     }, 700 + i * 150);
   });
 })();
+
+/* ===== SCROLL REVEAL ===== */
+const revealElements = document.querySelectorAll(
+  '.project-card, .category-desc, .bio-para, .explore-btn, .project-block, .overlay-detail-item, .overlay-image-slot'
+);
+
+const revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('scroll-revealed');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+revealElements.forEach(function(el) {
+  el.classList.add('scroll-hidden');
+  revealObserver.observe(el);
+});
