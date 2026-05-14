@@ -204,6 +204,12 @@ function openOverlay(title, subtitle, desc) {
   if (overlayDescEl) overlayDescEl.textContent = desc;
   overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
+  var panel = document.getElementById('overlay-panel');
+  if (panel) {
+    panel.scrollTop = 0;
+    panel.style.overflowY = 'auto';
+    panel.style.webkitOverflowScrolling = 'touch';
+  }
 }
 
 function closeOverlay() {
