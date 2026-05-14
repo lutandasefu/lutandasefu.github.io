@@ -203,19 +203,22 @@ function openOverlay(title, subtitle, desc) {
   if (overlaySubtitle) overlaySubtitle.textContent = subtitle;
   if (overlayDescEl) overlayDescEl.textContent = desc;
   overlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  
+  // Stop Lenis so background doesn't scroll
+  lenis.stop();
+  
   var panel = document.getElementById('overlay-panel');
   if (panel) {
     panel.scrollTop = 0;
-    panel.style.overflowY = 'auto';
-    panel.style.webkitOverflowScrolling = 'touch';
   }
 }
 
 function closeOverlay() {
   if (!overlay) return;
   overlay.classList.remove('active');
-  document.body.style.overflow = '';
+  
+  // Resume Lenis when overlay closes
+  lenis.start();
 }
 
 if (overlayBackdrop) overlayBackdrop.addEventListener('click', closeOverlay);
