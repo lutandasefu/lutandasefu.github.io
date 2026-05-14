@@ -1227,3 +1227,16 @@ body.cursor-heading #cursor-ring {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
 }
+
+/* ===== SCROLL REVEAL ===== */
+.scroll-hidden {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
