@@ -1231,12 +1231,12 @@ body.cursor-heading #cursor-ring {
 /* ===== SCROLL REVEAL ===== */
 .scroll-hidden {
   opacity: 0;
-  transform: translateY(-40px) scale(0.98);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1.6s cubic-bezier(0.34, 1.2, 0.64, 1);
+  transform: translateY(28px);
+  transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-revealed {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
