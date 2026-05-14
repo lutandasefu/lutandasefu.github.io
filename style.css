@@ -921,7 +921,7 @@ body.cursor-heading #cursor-ring {
 }
 
 .project-year {
-  font-family: 'CxMono', monospace;
+  font-family: 'Space Mono', monospace !important;
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   color: rgba(255, 255, 255, 0.25);
