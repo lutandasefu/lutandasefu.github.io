@@ -773,7 +773,7 @@ body.cursor-heading #cursor-ring {
 }
 
 .category-tag {
-  font-family: 'CxMono', monospace;
+  font-family: 'Space Mono', monospace !important;
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   color: rgba(255, 255, 255, 0.35);
@@ -905,12 +905,13 @@ body.cursor-heading #cursor-ring {
 }
 
 .project-tag {
-  font-family: 'CxMono', monospace;
+  font-family: 'Space Mono', monospace !important;
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
 }
+
 
 .project-name {
   font-family: 'Become', sans-serif;
@@ -1052,7 +1053,7 @@ body.cursor-heading #cursor-ring {
 }
 
 #overlay-subtitle {
-  font-family: 'CxMono', monospace;
+  font-family: 'Space Mono', monospace !important;
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   color: rgba(255, 255, 255, 0.35);
@@ -1136,7 +1137,7 @@ body.cursor-heading #cursor-ring {
 }
 
 .overlay-detail-value {
-  font-family: 'CxMono', monospace;
+  font-family: 'Space Mono', monospace !important;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.7);
 }
