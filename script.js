@@ -106,7 +106,10 @@ document.fonts.ready.then(function() {
 /* ===== NAVBAR HIDE/SHOW ON SCROLL ===== */
 var navbar = document.getElementById('custom-navbar');
 var lastScroll = 0;
+var isHomePage = document.body.classList.contains('home');
+
 window.addEventListener('scroll', function() {
+  if (isHomePage) return;
   var current = window.scrollY;
   if (current > lastScroll && current > 80) {
     navbar.style.transform = 'translateY(-100%)';
