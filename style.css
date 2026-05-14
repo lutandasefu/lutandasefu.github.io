@@ -245,6 +245,128 @@ body.home {
   height: 100vh;
 }
 
+/* ===== VIEW BUTTONS & ACC-VIEW-BTN ===== */
+:root {
+  --btn-radius: 100px;
+  --btn-border: 1.5px;
+  --brand-dark: #0d0d0d;
+  --brand-white: #ffffff;
+}
+
+#view-btn,
+.acc-view-btn,
+.acc-view-btn:visited {
+  display: inline-block;
+  position: relative;
+  padding: 16px 48px;
+  background: transparent;
+  color: #ffffff;
+  font-family: 'CxMono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  overflow: hidden;
+  animation: btnPulse 2.5s ease-in-out infinite;
+  transition: color 0.3s ease;
+  z-index: 0;
+}
+
+/* spinning conic gradient border */
+#view-btn::before,
+.acc-view-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1/1;
+  width: 160%;
+  height: auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.08) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: btnSpin 3s linear infinite;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* inner dark fill with blur */
+#view-btn::after,
+.acc-view-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - var(--btn-border) * 2);
+  height: calc(100% - var(--btn-border) * 2);
+  background: rgba(13, 13, 13, 0.92);
+  transform: translate(-50%, -50%);
+  border-radius: var(--btn-radius);
+  backdrop-filter: blur(8px);
+  z-index: -1;
+  transition: background 0.4s ease;
+}
+
+/* hover — fill with white */
+#view-btn:hover::after,
+.acc-view-btn:hover::after {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+#view-btn:hover,
+.acc-view-btn:hover {
+  color: #0d0d0d;
+}
+
+/* click — squeeze in then expand */
+#view-btn:active,
+.acc-view-btn:active {
+  animation: btnSqueeze 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+
+/* view btn opacity for homepage */
+#view-btn {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease,
+              transform 0.6s ease,
+              color 0.3s ease;
+  animation: none;
+}
+
+#view-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: btnPulse 2.5s ease-in-out infinite 1s;
+}
+
+/* ===== BUTTON ANIMATIONS ===== */
+@keyframes btnSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes btnPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@keyframes btnSqueeze {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.88); }
+  70% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
 /* ===== HERO ===== */
 #hero-container {
   display: flex;
@@ -295,34 +417,6 @@ body.home {
   opacity: 1;
 }
 
-/* ===== VIEW BUTTON ===== */
-#view-btn {
-  display: inline-block;
-  font-family: 'CxMono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #ffffff;
-  text-decoration: none;
-  border: 0.5px solid rgba(255, 255, 255, 0.3);
-  padding: 16px 48px;
-  border-radius: 100px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s ease, color 0.3s ease;
-  position: relative;
-  z-index: 2;
-}
-
-#view-btn:hover {
-  background: #ffffff;
-  color: #0d0d0d;
-}
-
-#view-btn.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* ===== CUSTOM CURSOR ===== */
 #cursor-dot {
@@ -729,26 +823,6 @@ body.cursor-heading #cursor-ring {
   max-width: 380px;
 }
 
-.acc-view-btn {
-  display: inline-block;
-  font-family: 'CxMono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #ffffff;
-  text-decoration: none;
-  border: 0.5px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 36px;
-  border-radius: 100px;
-  transition: background 0.3s ease, color 0.3s ease;
-  width: fit-content;
-  margin-top: 8px;
-}
-
-.acc-view-btn:hover {
-  background: #ffffff;
-  color: #0d0d0d;
-}
 
 @media (max-width: 768px) {
   #accordion-container {
