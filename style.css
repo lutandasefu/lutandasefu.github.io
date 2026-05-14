@@ -349,6 +349,11 @@ body.home {
   animation: btnPulse 2.5s ease-in-out infinite 1s;
 }
 
+.acc-view-btn {
+  align-self: flex-start;
+  width: auto !important;
+}
+
 /* ===== BUTTON ANIMATIONS ===== */
 @keyframes btnSpin {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
