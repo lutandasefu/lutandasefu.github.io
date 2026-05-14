@@ -253,7 +253,7 @@ document.addEventListener('keydown', function(e) {
 
 /* ===== SCROLL REVEAL ===== */
 const revealElements = document.querySelectorAll(
-  '.project-card, .category-desc, .bio-para, .explore-btn, .project-block, .overlay-detail-item, .overlay-image-slot'
+  '.category-desc, .bio-para, .explore-btn, .project-block, .overlay-detail-item, .overlay-image-slot, .overlay-desc'
 );
 
 const revealObserver = new IntersectionObserver(function(entries) {
@@ -262,7 +262,7 @@ const revealObserver = new IntersectionObserver(function(entries) {
       var el = entry.target;
       var siblings = Array.from(el.parentElement.children);
       var index = siblings.indexOf(el);
-      el.style.transitionDelay = (index * 0.12) + 's';
+      el.style.transitionDelay = (index * 0.1) + 's';
       el.classList.add('scroll-revealed');
       revealObserver.unobserve(el);
     }
