@@ -294,7 +294,7 @@ function launchConfetti(e) {
     '#aaaaaa',
     '#cccccc'
   ];
-  var count = 40;
+  var count = 60;
 
   for (var i = 0; i < count; i++) {
     createParticle(originX, originY, colors);
@@ -306,7 +306,7 @@ function createParticle(x, y, colors) {
   var color = colors[Math.floor(Math.random() * colors.length)];
   var size = Math.random() * 6 + 3;
   var angle = Math.random() * Math.PI * 2;
-  var velocity = Math.random() * 120 + 60;
+  var velocity = Math.random() * 180 + 80;
   var vx = Math.cos(angle) * velocity;
   var vy = Math.sin(angle) * velocity;
   var rotation = Math.random() * 360;
@@ -330,7 +330,7 @@ function createParticle(x, y, colors) {
   document.body.appendChild(particle);
 
   var start = null;
-  var duration = Math.random() * 600 + 600;
+  var duration = Math.random() * 1000 + 1200;
   var gravity = 180;
 
   function animateParticle(timestamp) {
