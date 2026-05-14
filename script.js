@@ -259,13 +259,17 @@ const revealElements = document.querySelectorAll(
 const revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
-      entry.target.classList.add('scroll-revealed');
-      revealObserver.unobserve(entry.target);
+      var el = entry.target;
+      var siblings = Array.from(el.parentElement.children);
+      var index = siblings.indexOf(el);
+      el.style.transitionDelay = (index * 0.08) + 's';
+      el.classList.add('scroll-revealed');
+      revealObserver.unobserve(el);
     }
   });
 }, {
-  threshold: 0.12,
-  rootMargin: '0px 0px -40px 0px'
+  threshold: 0.08,
+  rootMargin: '0px 0px -20px 0px'
 });
 
 revealElements.forEach(function(el) {
