@@ -262,7 +262,7 @@ const revealObserver = new IntersectionObserver(function(entries) {
       var el = entry.target;
       var siblings = Array.from(el.parentElement.children);
       var index = siblings.indexOf(el);
-      el.style.transitionDelay = (index * 0.08) + 's';
+      el.style.transitionDelay = (index * 0.12) + 's';
       el.classList.add('scroll-revealed');
       revealObserver.unobserve(el);
     }
