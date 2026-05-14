@@ -209,22 +209,19 @@ function openOverlay(title, subtitle, desc) {
   if (overlaySubtitle) overlaySubtitle.textContent = subtitle;
   if (overlayDescEl) overlayDescEl.textContent = desc;
   overlay.classList.add('active');
-  
-  // Stop Lenis so background doesn't scroll
   lenis.stop();
-  
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
   var panel = document.getElementById('overlay-panel');
-  if (panel) {
-    panel.scrollTop = 0;
-  }
+  if (panel) panel.scrollTop = 0;
 }
 
 function closeOverlay() {
   if (!overlay) return;
   overlay.classList.remove('active');
-  
-  // Resume Lenis when overlay closes
   lenis.start();
+  document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
 }
 
 if (overlayBackdrop) overlayBackdrop.addEventListener('click', closeOverlay);
