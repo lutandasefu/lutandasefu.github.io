@@ -188,3 +188,52 @@ accCards.forEach(function(card) {
     }, 500);
   }, 1400);
 })();
+
+/* ===== PROJECT OVERLAY ===== */
+var overlay = document.getElementById('project-overlay');
+var overlayBackdrop = document.getElementById('overlay-backdrop');
+var overlayClose = document.getElementById('overlay-close');
+var overlayTitle = document.getElementById('overlay-title');
+var overlaySubtitle = document.getElementById('overlay-subtitle');
+var overlayDescEl = document.getElementById('overlay-desc');
+
+function openOverlay(title, subtitle, desc) {
+  if (!overlay) return;
+  if (overlayTitle) overlayTitle.textContent = title;
+  if (overlaySubtitle) overlaySubtitle.textContent = subtitle;
+  if (overlayDescEl) overlayDescEl.textContent = desc;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay() {
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+if (overlayBackdrop) overlayBackdrop.addEventListener('click', closeOverlay);
+if (overlayClose) overlayClose.addEventListener('click', closeOverlay);
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeOverlay();
+});
+
+/* ===== CATEGORY PAGE ANIMATIONS ===== */
+(function() {
+  var tag = document.querySelector('.category-tag');
+  var titleInner = document.querySelector('.category-title-inner');
+  var desc = document.querySelector('.category-desc');
+  var cards = document.querySelectorAll('.project-card');
+  if (!tag) return;
+
+  setTimeout(function() { tag.classList.add('visible'); }, 200);
+  setTimeout(function() { if (titleInner) titleInner.classList.add('visible'); }, 400);
+  setTimeout(function() { if (desc) desc.classList.add('visible'); }, 600);
+
+  cards.forEach(function(card, i) {
+    setTimeout(function() {
+      card.classList.add('visible');
+    }, 700 + i * 150);
+  });
+})();
