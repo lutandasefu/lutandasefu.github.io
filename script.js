@@ -1,5 +1,11 @@
 /* ===== SMOOTH SCROLL (LENIS) ===== */
-const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+
+/* ===== SMOOTH SCROLL (LENIS) ===== */
+const lenis = new Lenis({ 
+  duration: 1.2, 
+  smoothWheel: true,
+  wrapper: document.documentElement
+});
 function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
