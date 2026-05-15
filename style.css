@@ -65,7 +65,7 @@ body {
   transform: translateX(-50%);
 }
 
-/* ===== NAVBAR — HOMEPAGE LIQUID GLASS ===== */
+/* ===== NAVBAR — HOMEPAGE ===== */
 body.home #custom-navbar {
   top: 32px;
   left: 0;
@@ -85,59 +85,38 @@ body.home #custom-navbar ul {
   align-items: center;
   list-style: none;
   margin: 0 auto;
-  padding: 6px;
+  padding: 0;
   text-align: center;
   position: relative;
   z-index: 1;
   border-radius: 100px;
-  background: rgba(20, 25, 30, 0.55);
-  backdrop-filter: blur(40px) saturate(160%) brightness(0.9);
-  -webkit-backdrop-filter: blur(40px) saturate(160%) brightness(0.9);
-  border: 0.5px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 40px rgba(0, 0, 0, 0.5),
-              0 1px 0 rgba(255, 255, 255, 0.08) inset,
-              0 -1px 0 rgba(0, 0, 0, 0.3) inset,
-              0 0 0 0.5px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  background: rgba(13, 13, 13, 0.92);
+  border: none;
+  backdrop-filter: blur(8px);
 }
 
-/* top shine reflection */
-body.home #custom-navbar ul::before {
+/* spinning conic gradient border */
+body.home #custom-navbar::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 5%;
-  right: 5%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.15) 30%,
-    rgba(255, 255, 255, 0.25) 50%,
-    rgba(255, 255, 255, 0.15) 70%,
-    transparent 100%
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.08) 80%,
+    rgba(255, 255, 255, 0) 100%
   );
-  border-radius: 100px;
+  animation: btnSpin 3s linear infinite;
+  transform: translate(-50%, -50%);
+  z-index: 0;
   pointer-events: none;
-  z-index: 2;
-}
-
-/* bottom depth line */
-body.home #custom-navbar ul::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    transparent 100%
-  );
-  border-radius: 100px;
-  pointer-events: none;
-  z-index: 2;
 }
 
 body.home #custom-navbar ul li {
@@ -148,42 +127,32 @@ body.home #custom-navbar ul li {
 
 body.home #custom-navbar ul li a {
   display: block;
-  padding: 14px 36px;
+  padding: 22px 48px;
   font-family: 'CxMono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  border-radius: 100px;
   transition: color 0.3s ease, background 0.3s ease;
   white-space: nowrap;
   position: relative;
 }
 
 body.home #custom-navbar ul li a:hover {
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-/* active center item — solid dark pill like the image */
+/* center name brighter with dividers */
 body.home #custom-navbar ul li:nth-child(2) a {
   color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.22em;
-  font-size: 0.78rem;
-  padding: 14px 44px;
-  background: rgba(15, 20, 25, 0.85);
-  border-radius: 100px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5),
-              0 1px 0 rgba(255, 255, 255, 0.08) inset,
-              0 -1px 0 rgba(0, 0, 0, 0.4) inset;
-  border: 0.5px solid rgba(255, 255, 255, 0.08);
-}
-
-body.home #custom-navbar ul li:nth-child(2) a:hover {
-  background: rgba(20, 28, 35, 0.9);
-  color: #ffffff;
+  letter-spacing: 0.25em;
+  font-size: 0.85rem;
+  padding: 22px 56px;
+  border-left: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-right: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 
 body.home #custom-navbar .nav-center {
@@ -192,6 +161,23 @@ body.home #custom-navbar .nav-center {
   transform: none;
 }
 
+/* mobile */
+@media (max-width: 768px) {
+  body.home #custom-navbar {
+    top: 20px;
+  }
+
+  body.home #custom-navbar ul li a {
+    padding: 16px 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+  }
+
+  body.home #custom-navbar ul li:nth-child(2) a {
+    padding: 16px 24px;
+    font-size: 0.65rem;
+  }
+}
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
   body.home #custom-navbar {
