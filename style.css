@@ -85,51 +85,59 @@ body.home #custom-navbar ul {
   align-items: center;
   list-style: none;
   margin: 0 auto;
-  padding: 0;
+  padding: 6px;
   text-align: center;
   position: relative;
   z-index: 1;
   border-radius: 100px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 0.5px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2),
-              inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-  mask-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    #ffffff 12%,
-    #ffffff 88%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    #ffffff 12%,
-    #ffffff 88%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: rgba(20, 25, 30, 0.55);
+  backdrop-filter: blur(40px) saturate(160%) brightness(0.9);
+  -webkit-backdrop-filter: blur(40px) saturate(160%) brightness(0.9);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 40px rgba(0, 0, 0, 0.5),
+              0 1px 0 rgba(255, 255, 255, 0.08) inset,
+              0 -1px 0 rgba(0, 0, 0, 0.3) inset,
+              0 0 0 0.5px rgba(0, 0, 0, 0.4);
 }
 
-/* glass shine effect */
+/* top shine reflection */
 body.home #custom-navbar ul::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
+  left: 5%;
+  right: 5%;
+  height: 1px;
   background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0) 100%
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent 100%
   );
-  border-radius: 100px 100px 0 0;
+  border-radius: 100px;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
+}
+
+/* bottom depth line */
+body.home #custom-navbar ul::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+  border-radius: 100px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 body.home #custom-navbar ul li {
@@ -140,47 +148,42 @@ body.home #custom-navbar ul li {
 
 body.home #custom-navbar ul li a {
   display: block;
-  padding: 22px 48px;
+  padding: 14px 36px;
   font-family: 'CxMono', monospace;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.45);
   text-decoration: none;
+  border-radius: 100px;
   transition: color 0.3s ease, background 0.3s ease;
   white-space: nowrap;
   position: relative;
 }
 
-body.home #custom-navbar ul li a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0.5px;
-  background: rgba(255, 255, 255, 0.6);
-  transition: width 0.3s ease;
-}
-
 body.home #custom-navbar ul li a:hover {
-  color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 0.8);
   background: rgba(255, 255, 255, 0.06);
 }
 
-body.home #custom-navbar ul li a:hover::after {
-  width: 40%;
-}
-
+/* active center item — solid dark pill like the image */
 body.home #custom-navbar ul li:nth-child(2) a {
   color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.25em;
-  font-size: 0.85rem;
-  padding: 22px 56px;
-  border-left: 0.5px solid rgba(255, 255, 255, 0.12);
-  border-right: 0.5px solid rgba(255, 255, 255, 0.12);
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  padding: 14px 44px;
+  background: rgba(15, 20, 25, 0.85);
+  border-radius: 100px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5),
+              0 1px 0 rgba(255, 255, 255, 0.08) inset,
+              0 -1px 0 rgba(0, 0, 0, 0.4) inset;
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+body.home #custom-navbar ul li:nth-child(2) a:hover {
+  background: rgba(20, 28, 35, 0.9);
+  color: #ffffff;
 }
 
 body.home #custom-navbar .nav-center {
@@ -189,6 +192,27 @@ body.home #custom-navbar .nav-center {
   transform: none;
 }
 
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  body.home #custom-navbar {
+    top: 20px;
+  }
+
+  body.home #custom-navbar ul {
+    padding: 4px;
+  }
+
+  body.home #custom-navbar ul li a {
+    padding: 12px 18px;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+  }
+
+  body.home #custom-navbar ul li:nth-child(2) a {
+    padding: 12px 22px;
+    font-size: 0.6rem;
+  }
+}
 /* ===== MOBILE — HOMEPAGE NAVBAR ===== */
 @media (max-width: 768px) {
   body.home #custom-navbar {
