@@ -103,6 +103,15 @@ document.fonts.ready.then(function() {
   if (heading) heading.classList.add('font-ready');
 });
 
+/* fallback in case fonts.ready doesn't fire */
+setTimeout(function() {
+  var heading = document.getElementById('hero-heading');
+  if (heading && !heading.classList.contains('font-ready')) {
+    heading.classList.add('font-ready');
+  }
+}, 1000);
+
+
 /* ===== NAVBAR HIDE/SHOW ON SCROLL ===== */
 var navbar = document.getElementById('custom-navbar');
 var lastScroll = 0;
