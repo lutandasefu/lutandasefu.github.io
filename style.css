@@ -65,7 +65,7 @@ body {
   transform: translateX(-50%);
 }
 
-/* ===== NAVBAR — HOMEPAGE ONLY ===== */
+/* ===== NAVBAR — HOMEPAGE LIQUID GLASS ===== */
 body.home #custom-navbar {
   top: 32px;
   left: 0;
@@ -77,6 +77,7 @@ body.home #custom-navbar {
   padding: 0;
   justify-content: center;
   display: flex;
+  border: none;
 }
 
 body.home #custom-navbar ul {
@@ -86,61 +87,100 @@ body.home #custom-navbar ul {
   margin: 0 auto;
   padding: 0;
   text-align: center;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.95) 20%,
-    rgba(255, 255, 255, 0.95) 80%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  position: relative;
+  z-index: 1;
+  border-radius: 100px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-              inset 0 0 1px rgba(255, 255, 255, 0.8);
+              inset 0 1px 0 rgba(255, 255, 255, 0.2),
+              inset 0 -1px 0 rgba(255, 255, 255, 0.05);
   mask-image: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    #ffffff 15%,
-    #ffffff 85%,
+    #ffffff 12%,
+    #ffffff 88%,
     rgba(255, 255, 255, 0) 100%
   );
   -webkit-mask-image: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    #ffffff 15%,
-    #ffffff 85%,
+    #ffffff 12%,
+    #ffffff 88%,
     rgba(255, 255, 255, 0) 100%
   );
 }
 
+/* glass shine effect */
+body.home #custom-navbar ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 100px 100px 0 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
 body.home #custom-navbar ul li {
   display: inline-block;
+  position: relative;
+  z-index: 1;
 }
 
 body.home #custom-navbar ul li a {
   display: block;
-  padding: 28px 56px;
+  padding: 22px 48px;
   font-family: 'CxMono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(13, 13, 13, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: color 0.3s ease, background 0.3s ease;
   white-space: nowrap;
+  position: relative;
+}
+
+body.home #custom-navbar ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width 0.3s ease;
 }
 
 body.home #custom-navbar ul li a:hover {
-  color: rgba(13, 13, 13, 0.9);
-  background: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+body.home #custom-navbar ul li a:hover::after {
+  width: 40%;
 }
 
 body.home #custom-navbar ul li:nth-child(2) a {
-  color: rgba(13, 13, 13, 0.85);
-  letter-spacing: 0.3em;
-  font-size: 0.95rem;
-  padding: 28px 64px;
-  border-left: 0.5px solid rgba(13, 13, 13, 0.1);
-  border-right: 0.5px solid rgba(13, 13, 13, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.25em;
+  font-size: 0.85rem;
+  padding: 22px 56px;
+  border-left: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-right: 0.5px solid rgba(255, 255, 255, 0.12);
 }
 
 body.home #custom-navbar .nav-center {
@@ -149,6 +189,28 @@ body.home #custom-navbar .nav-center {
   transform: none;
 }
 
+/* ===== MOBILE — HOMEPAGE NAVBAR ===== */
+@media (max-width: 768px) {
+  body.home #custom-navbar {
+    top: 20px;
+  }
+
+  body.home #custom-navbar ul {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  body.home #custom-navbar ul li a {
+    padding: 16px 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+  }
+
+  body.home #custom-navbar ul li:nth-child(2) a {
+    padding: 16px 24px;
+    font-size: 0.65rem;
+  }
+}
 /* ===== HAMBURGER — HOMEPAGE MOBILE ONLY ===== */
 #hamburger {
   display: none;
