@@ -28,23 +28,23 @@ body {
   padding-top: 64px;
 }
 
-/* ===== NAVBAR — HOMEPAGE ===== */
-body.home #custom-navbar {
-  top: 32px;
+/* ===== NAVBAR — ALL PAGES ===== */
+#custom-navbar {
+  position: fixed;
+  top: 0;
   left: 0;
-  right: 0;
-  transform: none;
   width: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: auto;
   background: transparent;
   padding: 0;
-  justify-content: center;
-  display: flex;
-  border: none;
-  position: fixed;
+  box-sizing: border-box;
 }
 
-body.home #custom-navbar ul {
+#custom-navbar ul {
   display: flex;
   align-items: center;
   list-style: none;
@@ -57,10 +57,11 @@ body.home #custom-navbar ul {
   overflow: hidden;
   background: rgba(13, 13, 13, 0.92);
   backdrop-filter: blur(8px);
+  width: 100%;
+  border-radius: 0;
 }
 
-/* spinning border contained to the ul */
-body.home #custom-navbar ul::before {
+#custom-navbar ul::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -81,27 +82,31 @@ body.home #custom-navbar ul::before {
   pointer-events: none;
 }
 
-/* dark inner fill to create border effect */
-body.home #custom-navbar ul::after {
+#custom-navbar ul::after {
   content: '';
   position: absolute;
-  top: 1.5px;
-  left: 1.5px;
-  right: 1.5px;
-  bottom: 1.5px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(13, 13, 13, 0.95);
-  border-radius: 100px;
   z-index: 0;
   pointer-events: none;
 }
 
-body.home #custom-navbar ul li {
+#custom-navbar ul li {
   display: inline-block;
   position: relative;
   z-index: 2;
+  flex: 1;
+  text-align: center;
 }
 
-body.home #custom-navbar ul li a {
+#custom-navbar ul li:nth-child(2) {
+  flex: 1;
+}
+
+#custom-navbar ul li a {
   display: block;
   padding: 22px 48px;
   font-family: 'CxMono', monospace;
@@ -111,17 +116,17 @@ body.home #custom-navbar ul li a {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  transition: color 0.3s ease, background 0.3s ease;
+  transition: color 0.3s ease;
   white-space: nowrap;
   position: relative;
   z-index: 2;
 }
 
-body.home #custom-navbar ul li a:hover {
+#custom-navbar ul li a:hover {
   color: rgba(255, 255, 255, 1);
 }
 
-body.home #custom-navbar ul li:nth-child(2) a {
+#custom-navbar ul li:nth-child(2) a {
   color: rgba(255, 255, 255, 0.95);
   letter-spacing: 0.25em;
   font-size: 0.85rem;
@@ -130,159 +135,53 @@ body.home #custom-navbar ul li:nth-child(2) a {
   border-right: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 
-body.home #custom-navbar .nav-center {
-  position: relative;
-  left: auto;
-  transform: none;
+/* ===== NAVBAR — HOMEPAGE PILL OVERRIDE ===== */
+body.home #custom-navbar {
+  top: 32px;
+  justify-content: center;
 }
 
-/* mobile */
-@media (max-width: 768px) {
-  body.home #custom-navbar {
-    top: 20px;
-  }
+body.home #custom-navbar ul {
+  width: auto;
+  border-radius: 100px;
+}
 
-  body.home #custom-navbar ul li a {
+body.home #custom-navbar ul::after {
+  top: 1.5px;
+  left: 1.5px;
+  right: 1.5px;
+  bottom: 1.5px;
+  border-radius: 100px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  #custom-navbar ul li a {
     padding: 16px 20px;
     font-size: 0.6rem;
     letter-spacing: 0.12em;
   }
 
-  body.home #custom-navbar ul li:nth-child(2) a {
+  #custom-navbar ul li:nth-child(2) a {
     padding: 16px 24px;
     font-size: 0.65rem;
   }
-}
-/* ===== MOBILE ===== */
-@media (max-width: 768px) {
+
   body.home #custom-navbar {
     top: 20px;
   }
+}
 
-  body.home #custom-navbar ul {
-    padding: 4px;
-  }
-
-  body.home #custom-navbar ul li a {
-    padding: 12px 18px;
+@media (max-width: 480px) {
+  #custom-navbar ul li a {
+    padding: 14px 12px;
     font-size: 0.55rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
-  body.home #custom-navbar ul li:nth-child(2) a {
-    padding: 12px 22px;
+  #custom-navbar ul li:nth-child(2) a {
+    padding: 14px 16px;
     font-size: 0.6rem;
-  }
-}
-/* ===== MOBILE — HOMEPAGE NAVBAR ===== */
-@media (max-width: 768px) {
-  body.home #custom-navbar {
-    top: 20px;
-  }
-
-  body.home #custom-navbar ul {
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-
-  body.home #custom-navbar ul li a {
-    padding: 16px 20px;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-  }
-
-  body.home #custom-navbar ul li:nth-child(2) a {
-    padding: 16px 24px;
-    font-size: 0.65rem;
-  }
-}
-/* ===== HAMBURGER — HOMEPAGE MOBILE ONLY ===== */
-#hamburger {
-  display: none;
-}
-
-#mobile-menu {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  body.home #custom-navbar {
-    top: 24px;
-    justify-content: flex-end;
-    padding: 0 24px;
-  }
-
-  body.home #custom-navbar ul {
-    display: none;
-  }
-
-  #hamburger {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 99999;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 0.5px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-  }
-
-  #hamburger span {
-    display: block;
-    width: 22px;
-    height: 1px;
-    background: #ffffff;
-    transition: all 0.3s ease;
-  }
-
-  #hamburger.open span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
-
-  #hamburger.open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  #hamburger.open span:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
-  }
-
-  #mobile-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #0d0d0d;
-    z-index: 9998;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-
-  #mobile-menu.open {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  #mobile-menu a {
-    font-family: 'Become', sans-serif;
-    font-size: 3rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    transition: color 0.3s ease;
-  }
-
-  #mobile-menu a:hover {
-    color: #ffffff;
   }
 }
 
