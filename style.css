@@ -360,7 +360,6 @@ body.home {
 }
 
 /* ===== HERO ===== */
-/* ===== HERO ===== */
 #hero-container {
   display: flex;
   flex-direction: column;
@@ -492,11 +491,6 @@ body.home {
   position: relative;
   z-index: 1;
 }
-
-#hero-heading.font-ready {
-  opacity: 1;
-}
-
 
 /* ===== CUSTOM CURSOR ===== */
 #cursor-dot {
