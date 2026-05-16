@@ -128,29 +128,6 @@ window.addEventListener('scroll', function() {
   lastScroll = current;
 });
 
-/* ===== TYPING ANIMATION ===== */
-(function() {
-  var text = "Welcome to my portfolio";
-  var typingElement = document.getElementById('typing-text');
-  var cursor = document.getElementById('cursor');
-  var viewBtn = document.getElementById('view-btn');
-  var index = 0;
-  var typingSpeed = 80;
-  if (!typingElement) return;
-  function type() {
-    if (index < text.length) {
-      typingElement.textContent += text.charAt(index);
-      index++;
-      setTimeout(type, typingSpeed);
-    } else {
-      if (cursor) cursor.style.animation = 'blink 1s infinite';
-      setTimeout(function() {
-        if (viewBtn) viewBtn.classList.add('visible');
-      }, 500);
-    }
-  }
-  setTimeout(type, 500);
-})();
 
 /* ===== ACCORDION CARDS ===== */
 var accCards = document.querySelectorAll('.acc-card');
@@ -384,3 +361,80 @@ document.querySelectorAll('#view-btn, .acc-view-btn').forEach(function(btn) {
     }
   });
 });
+
+/* ===== HERO TEXT ANIMATION ===== */
+(function() {
+  var heroName = document.getElementById('hero-name');
+  var heroHeading = document.getElementById('hero-heading');
+  var heroSub = document.getElementById('hero-sub');
+  var viewBtn = document.getElementById('view-btn');
+
+  if (!heroHeading) return;
+
+  setTimeout(function() {
+    if (heroName) heroName.classList.add('visible');
+  }, 300);
+
+  setTimeout(function() {
+    heroHeading.classList.add('visible');
+  }, 600);
+
+  setTimeout(function() {
+    if (heroSub) heroSub.classList.add('visible');
+  }, 1200);
+
+  setTimeout(function() {
+    if (viewBtn) {
+      viewBtn.classList.add('visible');
+      viewBtn.style.animation = 'btnPulse 2.5s ease-in-out infinite';
+    }
+  }, 1600);
+})();
+
+/* ===== CLICK SOUND ===== */
+(function() {
+  var audioCtx = null;
+
+  function getAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioCtx;
+  }
+
+  function playClick() {
+    try {
+      var ctx = getAudioContext();
+      var oscillator = ctx.createOscillator();
+      var gainNode = ctx.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(180, ctx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.08);
+
+      gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + 0.12);
+    } catch(e) {}
+  }
+
+  document.addEventListener('click', function(e) {
+    var target = e.target;
+    var isClickable =
+      target.tagName === 'A' ||
+      target.tagName === 'BUTTON' ||
+      target.closest('a') ||
+      target.closest('button') ||
+      target.closest('.acc-card') ||
+      target.closest('.explore-btn') ||
+      target.closest('.project-card') ||
+      target.closest('#overlay-close');
+
+    if (isClickable) playClick();
+  });
+})();
