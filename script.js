@@ -50,6 +50,27 @@ if (cursorDot && cursorRing) {
   }
 }
 
+/* ===== HAMBURGER MENU ===== */
+var hamburgerIcon = document.getElementById('hamburger-icon');
+var hamburgerDropdown = document.getElementById('hamburger-dropdown');
+
+if (hamburgerIcon && hamburgerDropdown) {
+  hamburgerIcon.addEventListener('click', function(e) {
+    e.stopPropagation();
+    hamburgerDropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', function() {
+    hamburgerDropdown.classList.remove('open');
+  });
+
+  hamburgerDropdown.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      hamburgerDropdown.classList.remove('open');
+    });
+  });
+}
+
 /* ===== DOT GRID ===== */
 var canvas = document.getElementById('dot-grid');
 if (canvas) {
