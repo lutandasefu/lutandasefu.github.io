@@ -371,6 +371,7 @@ document.querySelectorAll('#view-btn, .acc-view-btn').forEach(function(btn) {
 
 /* ===== HERO TEXT ANIMATION ===== */
 (function() {
+  var badge = document.getElementById('availability-badge');
   var heroName = document.getElementById('hero-name');
   var heroHeading = document.getElementById('hero-heading');
   var heroSub = document.getElementById('hero-sub');
@@ -379,23 +380,27 @@ document.querySelectorAll('#view-btn, .acc-view-btn').forEach(function(btn) {
   if (!heroHeading) return;
 
   setTimeout(function() {
+    if (badge) badge.classList.add('visible');
+  }, 200);
+
+  setTimeout(function() {
     if (heroName) heroName.classList.add('visible');
-  }, 300);
+  }, 500);
 
   setTimeout(function() {
     heroHeading.classList.add('visible');
-  }, 600);
+  }, 800);
 
   setTimeout(function() {
     if (heroSub) heroSub.classList.add('visible');
-  }, 1200);
+  }, 1400);
 
   setTimeout(function() {
     if (viewBtn) {
       viewBtn.classList.add('visible');
       viewBtn.style.animation = 'btnPulse 2.5s ease-in-out infinite';
     }
-  }, 1600);
+  }, 1800);
 })();
 
 /* ===== CLICK SOUND ===== */
