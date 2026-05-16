@@ -46,14 +46,13 @@ body {
 
 #custom-navbar ul {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   list-style: none;
   margin: 0 auto;
   padding: 0;
   text-align: center;
   position: relative;
   z-index: 1;
-  border-radius: 100px;
   overflow: hidden;
   background: rgba(13, 13, 13, 0.92);
   backdrop-filter: blur(8px);
@@ -100,6 +99,7 @@ body {
   z-index: 2;
   flex: 1;
   text-align: center;
+  height: 100%;
 }
 
 #custom-navbar ul li:nth-child(2) {
@@ -107,7 +107,10 @@ body {
 }
 
 #custom-navbar ul li a {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   padding: 22px 48px;
   font-family: 'CxMono', monospace;
   font-size: 0.78rem;
@@ -120,6 +123,7 @@ body {
   white-space: nowrap;
   position: relative;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 #custom-navbar ul li a:hover {
@@ -144,6 +148,7 @@ body.home #custom-navbar {
 body.home #custom-navbar ul {
   width: auto;
   border-radius: 100px;
+  align-items: stretch;
 }
 
 body.home #custom-navbar ul::after {
@@ -152,6 +157,34 @@ body.home #custom-navbar ul::after {
   right: 1.5px;
   bottom: 1.5px;
   border-radius: 100px;
+}
+
+body.home #custom-navbar ul li {
+  height: 100%;
+}
+
+body.home #custom-navbar ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 22px 48px;
+  box-sizing: border-box;
+}
+
+body.home #custom-navbar ul li:nth-child(2) a {
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.25em;
+  font-size: 0.85rem;
+  padding: 22px 56px;
+  border-left: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-right: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+body.home #custom-navbar .nav-center {
+  position: relative;
+  left: auto;
+  transform: none;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -169,6 +202,14 @@ body.home #custom-navbar ul::after {
 
   body.home #custom-navbar {
     top: 20px;
+  }
+
+  body.home #custom-navbar ul li a {
+    padding: 16px 20px;
+  }
+
+  body.home #custom-navbar ul li:nth-child(2) a {
+    padding: 16px 24px;
   }
 }
 
