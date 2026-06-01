@@ -493,11 +493,12 @@ body.home {
 }
 
 /* ===== CUSTOM CURSOR ===== */
+
 #cursor-dot {
   position: fixed;
   width: 6px;
   height: 6px;
-  background: #ffffff;
+  background: #cc0000;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
@@ -509,7 +510,7 @@ body.home {
   position: fixed;
   width: 32px;
   height: 32px;
-  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  border: 0.5px solid rgba(204, 0, 0, 0.7);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99997;
@@ -520,13 +521,14 @@ body.home {
 body.cursor-hover #cursor-ring {
   width: 48px;
   height: 48px;
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(204, 0, 0, 0.08);
+  border-color: rgba(204, 0, 0, 0.9);
 }
 
 body.cursor-heading #cursor-ring {
   width: 80px;
   height: 32px;
+  border-color: rgba(204, 0, 0, 0.5);
 }
 
 /* ===== DOT GRID ===== */
