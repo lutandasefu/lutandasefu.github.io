@@ -803,15 +803,6 @@ body.explore-page {
   overflow: visible;
 }
 
-#split-middle::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 0.5px;
-  background: rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-}
 
 #home-btn {
   position: absolute;
