@@ -395,19 +395,6 @@ body.home {
   opacity: 1;
 }
 
-#hero-heading {
-  font-family: 'Become', sans-serif;
-  font-size: 8rem;
-  font-weight: 400;
-  color: #ffffff;
-  line-height: 1;
-  margin: 0;
-  opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 #hero-heading.visible {
   opacity: 1;
   transform: scale(1);
@@ -1896,17 +1883,6 @@ body.explore-page {
     padding: 10px 18px;
     font-size: 0.6rem;
   }
-}
-
-/* ===== BUTTON FILL PULSE ===== */
-.btn-pulse-active::after {
-  background: rgba(255, 255, 255, 0.95) !important;
-  transition: background 0.05s ease !important;
-}
-
-.btn-pulse-active {
-  color: #0d0d0d !important;
-  transition: color 0.05s ease !important;
 }
 
 /* ===== BUTTON FILL PULSE ===== */
