@@ -710,6 +710,7 @@ body.explore-page {
 #explore-split {
   position: fixed;
   inset: 0;
+  top: 64px;
   display: flex;
   flex-direction: column;
   z-index: 1;
