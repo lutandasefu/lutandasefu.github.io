@@ -273,98 +273,24 @@ revealElements.forEach(function(el) {
   revealObserver.observe(el);
 });
 
-/* ===== CONFETTI ON BUTTON CLICK ===== */
-function launchConfetti(e) {
+/* ===== BUTTON FILL PULSE ===== */
+function fillPulse(e) {
   var btn = e.currentTarget;
-  var rect = btn.getBoundingClientRect();
-  var originX = rect.left + rect.width / 2;
-  var originY = rect.top + rect.height / 2;
-  var colors = [
-    '#ffffff',
-    'rgba(255,255,255,0.8)',
-    'rgba(255,255,255,0.4)',
-    'rgba(255,255,255,0.6)',
-    '#aaaaaa',
-    '#cccccc'
-  ];
-  var count = 60;
-
-  for (var i = 0; i < count; i++) {
-    createParticle(originX, originY, colors);
-  }
+  btn.classList.add('btn-pulse-active');
+  setTimeout(function() {
+    btn.classList.remove('btn-pulse-active');
+  }, 400);
 }
 
-function createParticle(x, y, colors) {
-  var particle = document.createElement('div');
-  var color = colors[Math.floor(Math.random() * colors.length)];
-  var size = Math.random() * 6 + 3;
-  var angle = Math.random() * Math.PI * 2;
-  var velocity = Math.random() * 180 + 80;
-  var vx = Math.cos(angle) * velocity;
-  var vy = Math.sin(angle) * velocity;
-  var rotation = Math.random() * 360;
-  var rotationSpeed = Math.random() * 360 - 180;
-  var isRect = Math.random() > 0.5;
-
-  particle.style.cssText = [
-    'position: fixed',
-    'pointer-events: none',
-    'z-index: 999999',
-    'left: ' + x + 'px',
-    'top: ' + y + 'px',
-    'width: ' + size + 'px',
-    'height: ' + (isRect ? size * 0.4 : size) + 'px',
-    'background: ' + color,
-    'border-radius: ' + (isRect ? '1px' : '50%'),
-    'transform: translate(-50%, -50%) rotate(' + rotation + 'deg)',
-    'opacity: 1'
-  ].join(';');
-
-  document.body.appendChild(particle);
-
-  var start = null;
-  var duration = Math.random() * 1000 + 1200;
-  var gravity = 180;
-
-  function animateParticle(timestamp) {
-    if (!start) start = timestamp;
-    var elapsed = timestamp - start;
-    var progress = elapsed / duration;
-
-    if (progress >= 1) {
-      particle.remove();
-      return;
-    }
-
-    var currentX = x + vx * progress;
-    var currentY = y + vy * progress + 0.5 * gravity * progress * progress;
-    var currentRotation = rotation + rotationSpeed * progress;
-    var opacity = 1 - progress;
-
-    particle.style.left = currentX + 'px';
-    particle.style.top = currentY + 'px';
-    particle.style.transform = 'translate(-50%, -50%) rotate(' + currentRotation + 'deg)';
-    particle.style.opacity = opacity;
-
-    requestAnimationFrame(animateParticle);
-  }
-
-  requestAnimationFrame(animateParticle);
-}
-
-/* attach confetti to all buttons */
 document.querySelectorAll('#view-btn, .acc-view-btn').forEach(function(btn) {
   btn.addEventListener('click', function(e) {
     var href = btn.getAttribute('href');
-
+    fillPulse(e);
     if (href && href !== '#' && href !== '') {
       e.preventDefault();
-      launchConfetti(e);
       setTimeout(function() {
         window.location.href = href;
-      }, 1000);
-    } else {
-      launchConfetti(e);
+      }, 400);
     }
   });
 });
