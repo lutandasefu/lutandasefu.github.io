@@ -702,154 +702,153 @@ body.cursor-heading #cursor-ring {
 }
 
 /* ===== EXPLORE PAGE ===== */
-#explore-container {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  padding: 80px 48px;
-  min-height: calc(100vh - 64px);
-  align-items: center;
-  justify-content: center;
+body.explore-page {
+  overflow: hidden;
+  height: 100vh;
 }
 
-.explore-btn {
-  flex: 1;
+#explore-split {
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 80px 40px;
-  border-radius: 16px;
-  color: #ffffff;
-  cursor: pointer;
-  max-width: 480px;
-  position: relative;
-  overflow: hidden;
-  background: rgba(13, 13, 13, 0.92);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              flex 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* travelling light border — kept */
-.explore-btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  aspect-ratio: 1/1;
-  width: 300%;
-  border-radius: 50%;
-  background: conic-gradient(
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0) 35%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0) 65%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  animation: btnSpin 4s linear infinite;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* dark inner fill — creates the border effect */
-.explore-btn::after {
-  content: '';
-  position: absolute;
-  top: 1.5px;
-  left: 1.5px;
-  right: 1.5px;
-  bottom: 1.5px;
-  background: #0d0d0d;
-  border-radius: 14px;
-  z-index: 0;
-  transition: background 0.4s ease;
-}
-
-/* hover — card expands */
-.explore-btn:hover {
-  flex: 1.4;
-  transform: none;
-}
-
-.explore-btn:hover::after {
-  background: rgba(13, 13, 13, 0.85);
-}
-
-.explore-btn i,
-.explore-title,
-.explore-sub {
-  position: relative;
   z-index: 1;
 }
 
-.explore-btn i {
-  font-size: 32px;
-  opacity: 0.6;
-  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.split-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.4s ease;
+  background: transparent;
 }
 
-.explore-btn:hover i {
-  opacity: 1;
-  transform: scale(1.15);
+.split-panel:hover {
+  flex: 1.6;
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.explore-title {
+.split-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.split-panel:hover .split-content {
+  transform: scale(1.06);
+}
+
+.split-icon {
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.split-panel:hover .split-icon {
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-4px);
+}
+
+.split-title {
   font-family: 'Become', sans-serif;
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  color: #ffffff;
+  line-height: 1;
+  margin: 0;
   transition: font-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.explore-btn:hover .explore-title {
-  font-size: 3.4rem;
+.split-panel:hover .split-title {
+  font-size: 5.8rem;
 }
 
-.explore-sub {
+.split-sub {
   font-family: 'CxMono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  margin: 0;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.explore-btn:hover .explore-sub {
-  opacity: 0.4;
+.split-panel:hover .split-sub {
+  opacity: 1;
   transform: translateY(0);
+}
+
+/* divider */
+#split-divider {
+  position: relative;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+#divider-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* home button */
+#home-btn {
+  position: relative;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0d0d0d;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+#home-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  transform: scale(1.15);
 }
 
 /* mobile */
 @media (max-width: 768px) {
-  #explore-container {
-    flex-direction: column;
-    padding: 40px 24px;
+  .split-title {
+    font-size: 3.5rem;
   }
 
-  .explore-btn {
-    width: 100%;
-    max-width: 100%;
-    padding: 60px 40px;
-    flex: none;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  .split-panel:hover .split-title {
+    font-size: 4rem;
   }
 
-  .explore-btn:hover {
-    flex: none;
-    transform: scale(1.02);
-  }
-
-  .explore-title {
-    font-size: 2.5rem;
-  }
-
-  .explore-btn:hover .explore-title {
-    font-size: 2.7rem;
+  .split-icon {
+    font-size: 24px;
   }
 }
+
 /* ===== ACCORDION CARDS ===== */
 #accordion-container {
   display: flex;
