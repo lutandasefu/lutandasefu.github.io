@@ -16,77 +16,81 @@
   <div id="cursor-ring"></div>
   <canvas id="dot-grid"></canvas>
 
-<nav id="custom-navbar">
-  <ul>
-    <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
-    <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
-    <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
-  </ul>
-</nav>
-  
+  <nav id="custom-navbar">
+    <ul>
+      <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
+      <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
+      <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
+    </ul>
+  </nav>
+
   <!-- HERO -->
   <div id="category-hero">
-   <p class="category-tag">Epic Branding · Graphic Design</p>
-<h1 class="category-title"><span class="category-title-inner">Brand Identity<br>Design</span></h1>
-<p class="category-desc">Intuitive digital experiences — wireframes, prototypes, and polished interfaces that balance aesthetics with usability across web and mobile.</p>
-<!-- card colors: #1a1a1a, #212121, #2c2c2c -->
+    <p class="category-tag">Epic Branding · Brand Identity</p>
+    <h1 class="category-title">
+      <span class="category-title-inner">Brand<br>Identity</span>
+    </h1>
+    <p class="category-desc">Cohesive visual systems crafted for real businesses — from logo conception and colour systems through to brand guidelines and collateral that communicate with purpose.</p>
   </div>
 
   <!-- PROJECT GRID -->
   <div id="project-grid">
 
+    <!-- CARD 1 — Boercorp -->
     <div class="project-card" style="background:#1a1a2e;"
-      onclick="openOverlay('Project One', 'Brand Identity · 2024', 'A complete brand identity system developed for a forward-thinking digital startup. The project encompassed logo design, colour system, typography selection, and a comprehensive brand guidelines document.')">
+      onclick="openOverlay(
+        'Boercorp',
+        'Brand Identity · Agricultural Consortium · 2022',
+        'A complete brand identity developed for Boercorp, a South African farming consortium specialising in fresh produce, vegetables, meat and dairy. The visual system was built to communicate trust, freshness, and agricultural heritage while feeling modern and competitive in the retail market.'
+      )">
+      <img
+        src="cups.png"
+        alt="Boercorp Brand Identity"
+        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.6;"
+      >
       <div class="project-placeholder">01</div>
       <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
       <div class="project-card-inner">
         <div class="project-meta">
-          <span class="project-tag">Brand Identity</span>
-          <span class="project-name">Project Ones</span>
-          <span class="project-year">2023</span>
+          <span class="project-tag">Agricultural · Fresh Produce</span>
+          <span class="project-name">Boercorp</span>
+          <span class="project-year">2022</span>
         </div>
       </div>
     </div>
 
+    <!-- CARD 2 — Zuri Holdings -->
     <div class="project-card" style="background:#16213e;"
-      onclick="openOverlay('Project Two', 'Brand Identity · 2024', 'A brand refresh for an established business entering new markets. Focused on modernising the visual language while preserving brand equity and recognition built over years.')">
+      onclick="openOverlay(
+        'Zuri Holdings',
+        'Brand Identity · Finance Consulting · 2023',
+        'A refined brand identity developed for Zuri Holdings, a finance consulting firm. The visual language draws on precision, authority, and sophistication — communicating credibility and trust to high-value clients across corporate and private sectors.'
+      )">
       <div class="project-placeholder">02</div>
       <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
       <div class="project-card-inner">
         <div class="project-meta">
-          <span class="project-tag">Brand Refresh</span>
-          <span class="project-name">Project Two</span>
+          <span class="project-tag">Finance · Consulting</span>
+          <span class="project-name">Zuri Holdings</span>
           <span class="project-year">2023</span>
-          <div class="project-card" style="background:#1a1a2e;"
-  onclick="openOverlay('Logo Design', 'Brand Identity · Mark & Wordmark Systems', 'Creating distinctive logo marks and wordmark systems that form the foundation of a brand identity. Each mark is crafted to be versatile, memorable, and timeless across all applications.')">
-  <img 
-    src="cups.png" 
-    alt="Logo Design Project"
-    style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.6;"
-  >
-  <div class="project-placeholder">01</div>
-  <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
-  <div class="project-card-inner">
-    <div class="project-meta">
-      <span class="project-tag">Brand Identity</span>
-      <span class="project-name">Logo Design</span>
-      <span class="project-year">2024</span>
-    </div>
-  </div>
-</div>
         </div>
       </div>
     </div>
 
+    <!-- CARD 3 — Dough Jo -->
     <div class="project-card" style="background:#0f3460;"
-      onclick="openOverlay('Project Three', 'Brand Identity · 2023', 'A luxury brand identity created for a boutique consultancy firm. The visual system draws on premium aesthetics — restrained colour, refined typography, and considered spatial relationships.')">
+      onclick="openOverlay(
+        'Dough Jo',
+        'Brand Identity · Lifestyle Brand · 2024',
+        'A bold and energetic brand identity created for Dough Jo, a unique concept combining a doughnut shop and gym. The visual system balances indulgence with energy — playful typography, a vibrant colour palette, and a brand language that celebrates both treating yourself and pushing your limits.'
+      )">
       <div class="project-placeholder">03</div>
       <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
       <div class="project-card-inner">
         <div class="project-meta">
-          <span class="project-tag">Luxury Branding</span>
-          <span class="project-name">Project Three</span>
-          <span class="project-year">2023</span>
+          <span class="project-tag">Lifestyle · Food & Fitness</span>
+          <span class="project-name">Dough Jo</span>
+          <span class="project-year">2024</span>
         </div>
       </div>
     </div>
@@ -95,13 +99,12 @@
 
   <!-- OVERLAY -->
   <div id="project-overlay">
-    <div id="overlay-panel" data-lenis-prevent>
     <div id="overlay-backdrop"></div>
-    <div id="overlay-panel">
+    <div id="overlay-panel" data-lenis-prevent>
       <div id="overlay-header">
         <div>
-          <h2 id="overlay-title">Project One</h2>
-          <p id="overlay-subtitle">Brand Identity · 2024</p>
+          <h2 id="overlay-title">Boercorp</h2>
+          <p id="overlay-subtitle">Brand Identity · 2022</p>
         </div>
         <button id="overlay-close"><i class="ti ti-x"></i></button>
       </div>
@@ -121,11 +124,11 @@
           <div class="overlay-details">
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Client</span>
-              <span class="overlay-detail-value">Insert Client</span>
+              <span class="overlay-detail-value" id="overlay-client">Boercorp</span>
             </div>
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Year</span>
-              <span class="overlay-detail-value">2024</span>
+              <span class="overlay-detail-value" id="overlay-year">2022</span>
             </div>
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Services</span>
@@ -137,14 +140,14 @@
     </div>
   </div>
 
+  <!-- BACK PILL -->
+  <a href="javascript:history.back()" id="back-pill">
+    <i class="ti ti-arrow-left"></i>
+    <span>Back</span>
+  </a>
+
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
-
-    <!-- BACK PILL -->
-<a href="javascript:history.back()" id="back-pill">
-  <i class="ti ti-arrow-left"></i>
-  <span>Back</span>
-</a>
 
 </body>
 </html>
