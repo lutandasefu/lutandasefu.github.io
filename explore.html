@@ -5,42 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Explore — Lutanda Sefu</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="explore-page">
 
   <div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
-<canvas id="dot-grid"></canvas>
-  
-<nav id="custom-navbar">
-  <ul>
-    <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
-    <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
-    <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
-  </ul>
-</nav>
-  
-  <!-- EXPLORE SECTION -->
-  <div id="explore-container">
-    <div class="explore-btn" id="btn-designs" onclick="window.location.href='designs.html'">
-      <i class="ti ti-layout-grid"></i>
-      <span class="explore-title">Designs</span>
-      <span class="explore-sub">View my work</span>
+  <div id="cursor-ring"></div>
+  <canvas id="dot-grid"></canvas>
+
+  <!-- NAVBAR -->
+  <nav id="custom-navbar">
+    <ul>
+      <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
+      <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
+      <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
+    </ul>
+  </nav>
+
+  <!-- SPLIT EXPLORE -->
+  <div id="explore-split">
+
+    <!-- TOP — DESIGNS -->
+    <div class="split-panel" id="split-designs" onclick="window.location.href='designs.html'">
+      <div class="split-content">
+        <i class="ti ti-layout-grid split-icon"></i>
+        <h2 class="split-title">Designs</h2>
+        <p class="split-sub">View my work</p>
+      </div>
     </div>
-    <div class="explore-btn" id="btn-profile" onclick="window.location.href='profile.html'">
-      <i class="ti ti-user"></i>
-      <span class="explore-title">Profile</span>
-      <span class="explore-sub">About me</span>
+
+    <!-- DIVIDER WITH HOME BUTTON -->
+    <div id="split-divider">
+      <div id="divider-line"></div>
+      <a href="index.html" id="home-btn">
+        <i class="ti ti-home"></i>
+      </a>
     </div>
+
+    <!-- BOTTOM — PROFILE -->
+    <div class="split-panel" id="split-profile" onclick="window.location.href='profile.html'">
+      <div class="split-content">
+        <i class="ti ti-user split-icon"></i>
+        <h2 class="split-title">Profile</h2>
+        <p class="split-sub">About me</p>
+      </div>
+    </div>
+
   </div>
+
+  <!-- BACK PILL -->
+  <a href="javascript:history.back()" id="back-pill">
+    <i class="ti ti-arrow-left"></i>
+    <span>Back</span>
+  </a>
+
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 
-  <!-- BACK PILL -->
-<a href="javascript:history.back()" id="back-pill">
-  <i class="ti ti-arrow-left"></i>
-  <span>Back</span>
-</a>
 </body>
 </html>
