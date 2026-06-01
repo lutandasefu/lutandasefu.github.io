@@ -1813,3 +1813,90 @@ body.cursor-heading #cursor-ring {
     font-size: 0.5rem;
   }
 }
+
+/* ===== BACK PILL ===== */
+#back-pill {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: rgba(13, 13, 13, 0.92);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-family: 'CxMono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s ease;
+  border: none;
+}
+
+#back-pill::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: conic-gradient(
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: btnSpin 4s linear infinite;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+#back-pill::after {
+  content: '';
+  position: absolute;
+  top: 1.5px;
+  left: 1.5px;
+  right: 1.5px;
+  bottom: 1.5px;
+  background: rgba(13, 13, 13, 0.95);
+  border-radius: 100px;
+  z-index: 0;
+}
+
+#back-pill i,
+#back-pill span {
+  position: relative;
+  z-index: 1;
+}
+
+#back-pill i {
+  font-size: 14px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#back-pill:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+#back-pill:hover i {
+  transform: translateX(-3px);
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  #back-pill {
+    bottom: 24px;
+    left: 20px;
+    padding: 10px 18px;
+    font-size: 0.6rem;
+  }
+}
