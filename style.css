@@ -723,14 +723,17 @@ body.explore-page {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.4s ease;
+  transition: background 0.4s ease,
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
   background: transparent;
 }
 
 .split-panel:hover {
-  flex: 1.6;
   background: rgba(255, 255, 255, 0.03);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  z-index: 2;
 }
 
 .split-content {
@@ -744,7 +747,7 @@ body.explore-page {
 }
 
 .split-panel:hover .split-content {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 .split-icon {
@@ -765,11 +768,10 @@ body.explore-page {
   color: #ffffff;
   line-height: 1;
   margin: 0;
-  transition: font-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .split-panel:hover .split-title {
-  font-size: 5.8rem;
+  font-size: 5rem;
 }
 
 .split-sub {
@@ -791,24 +793,24 @@ body.explore-page {
 
 /* ===== MIDDLE DIVIDER — NEVER MOVES ===== */
 #split-middle {
-  flex: 0 0 48px;
+  flex: 0 0 1px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 10;
-  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
-  background: rgba(13, 13, 13, 0.6);
+  background: rgba(255, 255, 255, 0.1);
   flex-shrink: 0;
+  overflow: visible;
 }
 
 #home-btn {
-  width: 36px;
-  height: 36px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  background: #0d0d0d;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -816,6 +818,7 @@ body.explore-page {
   font-size: 15px;
   text-decoration: none;
   transition: all 0.3s ease;
+  z-index: 11;
 }
 
 #home-btn:hover {
@@ -827,16 +830,12 @@ body.explore-page {
 
 /* mobile */
 @media (max-width: 768px) {
-  #split-middle {
-    flex: 0 0 40px;
+  .split-panel:hover {
+    transform: translateY(-4px);
   }
 
   .split-title {
     font-size: 3.5rem;
-  }
-
-  .split-panel:hover .split-title {
-    font-size: 4rem;
   }
 
   .split-icon {
