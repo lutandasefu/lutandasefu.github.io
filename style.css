@@ -1895,3 +1895,19 @@ body.explore-page {
   color: #0d0d0d !important;
   transition: color 0.05s ease !important;
 }
+
+/* ===== BOERCORP SEAL ===== */
+.boercorp-seal {
+  height: 280px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.4s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 0 0px rgba(255,255,255,0));
+}
+
+.boercorp-seal:hover {
+  transform: scale(1.12);
+  filter: drop-shadow(0 8px 32px rgba(235, 231, 228, 0.15));
+}
