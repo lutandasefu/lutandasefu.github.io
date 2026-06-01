@@ -1913,3 +1913,14 @@ body.cursor-heading #cursor-ring {
   color: #0d0d0d !important;
   transition: color 0.05s ease !important;
 }
+
+/* ===== BUTTON FILL PULSE ===== */
+.btn-pulse-active::after {
+  background: rgba(255, 255, 255, 0.95) !important;
+  transition: background 0.05s ease !important;
+}
+
+.btn-pulse-active {
+  color: #0d0d0d !important;
+  transition: color 0.05s ease !important;
+}
