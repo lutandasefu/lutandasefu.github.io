@@ -1623,33 +1623,6 @@ body.cursor-heading #cursor-ring {
   }
 }
 
-.acc-card::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  aspect-ratio: 1/1;
-  width: 200%;
-  height: auto;
-  border-radius: 50%;
-  background: conic-gradient(
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.02) 20%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0.02) 80%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  opacity: 0;
-  animation: btnSpin 6s linear infinite;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
-}
-
-.acc-card.active::before {
-  opacity: 1;
-}
 
 /* ===== AVAILABILITY BADGE ===== */
 #availability-badge {
