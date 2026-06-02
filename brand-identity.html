@@ -33,11 +33,11 @@
     <p class="category-desc">Cohesive visual systems crafted for real businesses — from logo conception and colour systems through to brand guidelines and collateral that communicate with purpose.</p>
   </div>
 
-  <!-- PROJECT GRID -->
-  <div id="project-grid">
+  <!-- PROJECT GRID — single card full width -->
+  <div id="project-grid" style="grid-template-columns:1fr;">
 
     <!-- CARD 1 — Boercorp -->
-    <div class="project-card" style="background:#1a1a2e;"
+    <div class="project-card" style="background:#1a1a2e; grid-column:1;"
       onclick="openOverlay(
         'Boercorp',
         'Brand Identity · Agricultural Consortium · 2022',
@@ -48,49 +48,13 @@
         alt="Boercorp Brand Identity"
         style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.6;"
       >
-      <div class="project-placeholder">VIEW</div>
+      <div class="project-placeholder" style="font-size:4rem;">View</div>
       <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
       <div class="project-card-inner">
         <div class="project-meta">
           <span class="project-tag">Agricultural · Fresh Produce</span>
           <span class="project-name">Boercorp</span>
           <span class="project-year">2022</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 2 — Zuri Holdings -->
-    <div class="project-card" style="background:#16213e;"
-      onclick="openOverlay(
-        'Zuri Holdings',
-        'Brand Identity · Finance Consulting · 2023',
-        'A refined brand identity developed for Zuri Holdings, a finance consulting firm. The visual language draws on precision, authority, and sophistication — communicating credibility and trust to high-value clients across corporate and private sectors.'
-      )">
-      <div class="project-placeholder">02</div>
-      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
-      <div class="project-card-inner">
-        <div class="project-meta">
-          <span class="project-tag">Finance · Consulting</span>
-          <span class="project-name">Zuri Holdings</span>
-          <span class="project-year">2023</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 3 — Dough Jo -->
-    <div class="project-card" style="background:#0f3460;"
-      onclick="openOverlay(
-        'Dough Jo',
-        'Brand Identity · Lifestyle Brand · 2024',
-        'A bold and energetic brand identity created for Dough Jo, a unique concept combining a doughnut shop and gym. The visual system balances indulgence with energy — playful typography, a vibrant colour palette, and a brand language that celebrates both treating yourself and pushing your limits.'
-      )">
-      <div class="project-placeholder">03</div>
-      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
-      <div class="project-card-inner">
-        <div class="project-meta">
-          <span class="project-tag">Lifestyle · Food & Fitness</span>
-          <span class="project-name">Dough Jo</span>
-          <span class="project-year">2024</span>
         </div>
       </div>
     </div>
@@ -128,12 +92,23 @@
           <p class="overlay-desc">Boercorp Farmers is a collaboration of local farmers committed to delivering premium fresh produce and dairy with integrity, care and sustainability. The brand identity reflects trust, quality, and a deep-rooted connection to the land — translating agricultural heritage into a refined, modern visual system.</p>
         </div>
 
-        <!-- LOGO EXPLORATION PLACEHOLDER -->
+        <!-- LOGO EXPLORATION -->
         <div>
           <p class="overlay-section-title">01 · Logo Exploration</p>
           <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">Exploring a balance between heritage, authenticity and a modern, refined identity across three directions — Heritage Seal, Modern Balance, and Contemporary Mark.</p>
-          <div style="aspect-ratio:16/7; background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; border-radius:8px;">
-            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:rgba(255,255,255,0.15); text-transform:uppercase;">Logo Exploration — Coming Soon</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px;">
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px; border-radius:4px;">
+              <img src="logo_exploration_1.png" alt="Logo Exploration A" style="width:100%; object-fit:contain; max-height:160px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; letter-spacing:0.15em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Heritage Seal</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px; border-radius:4px;">
+              <img src="logo_exploration_2.png" alt="Logo Exploration B" style="width:100%; object-fit:contain; max-height:160px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; letter-spacing:0.15em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Modern Balance</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px; border-radius:4px;">
+              <img src="logo_exploration_3.png" alt="Logo Exploration C" style="width:100%; object-fit:contain; max-height:160px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; letter-spacing:0.15em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Contemporary Mark</p>
+            </div>
           </div>
         </div>
 
@@ -229,19 +204,43 @@
           </div>
         </div>
 
-        <!-- LOGO CONSTRUCTION PLACEHOLDER -->
+        <!-- LOGO CONSTRUCTION -->
         <div>
           <p class="overlay-section-title">07 · Logo Construction</p>
-          <div style="aspect-ratio:16/7; background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; border-radius:8px;">
-            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:rgba(255,255,255,0.15); text-transform:uppercase;">Logo Construction — Coming Soon</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:24px;">The Boercorp logo is built on a foundation of geometric precision and intentional proportion. Each element — the circular seal, brandmark illustration, script logotype, and consortium ring text — occupies a defined zone within the construction grid, ensuring consistent reproduction across all scales and applications.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone 1 — Outer Ring</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The circular border and consortium text form the outer boundary. This ring provides structure and frames all inner elements.</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone 2 — Brandmark</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The farm illustration occupies the upper centre, anchoring the visual identity in agricultural heritage and community.</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone 3 — Script Logotype</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The Boercorp script sits centrally below the brandmark, forming the focal point of the seal with expressive, flowing letterforms.</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone 4 — Proportions</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">Carefully balanced proportions create a harmonious and scalable identity that reads clearly from 24mm to billboard scale.</p>
+            </div>
           </div>
         </div>
 
-        <!-- CLEAR SPACE PLACEHOLDER -->
+        <!-- CLEAR SPACE -->
         <div>
           <p class="overlay-section-title">08 · Clear Space & Minimum Size</p>
-          <div style="aspect-ratio:16/7; background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; border-radius:8px;">
-            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:rgba(255,255,255,0.15); text-transform:uppercase;">Clear Space & Minimum Size — Coming Soon</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:24px;">To preserve the integrity and legibility of the Boercorp logo, a defined clear space must always be maintained around the mark. No other graphic elements, text, or imagery should encroach within this protected zone.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Clear Space Rule</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The minimum clear space on all sides equals the height of the letter "B" in the Boercorp script. This applies to both the seal and horizontal lockup.</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Minimum Size</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The seal logo should never be reproduced smaller than 24mm in print or 72px digitally. The horizontal lockup minimum is 25mm or 80px to ensure legibility.</p>
+            </div>
           </div>
         </div>
 
