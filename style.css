@@ -1898,7 +1898,7 @@ body.explore-page {
 
 /* ===== BOERCORP SEAL ===== */
 .boercorp-seal {
-  height: 140px;
+  height: 200px;
   width: auto;
   object-fit: contain;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
