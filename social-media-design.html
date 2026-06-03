@@ -16,60 +16,44 @@
   <div id="cursor-ring"></div>
   <canvas id="dot-grid"></canvas>
 
-<nav id="custom-navbar">
-  <ul>
-    <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
-    <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
-    <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
-  </ul>
-</nav>
+  <nav id="custom-navbar">
+    <ul>
+      <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
+      <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
+      <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
+    </ul>
+  </nav>
 
-  <!-- HERO -->
+  <!-- CATEGORY HERO -->
   <div id="category-hero">
- <p class="category-tag">Epic Branding · Social Media Design</p>
-<h1 class="category-title"><span class="category-title-inner">Social Media<br>Design</span></h1>
-<p class="category-desc">Designing scroll-stopping social content — cohesive feeds, campaign assets, and branded templates that build presence and engage audiences across platforms.</p>
-<!-- card colors: #0d1117, #161b22, #21262d -->
+    <p class="category-tag">Epic Branding · Social Media Design</p>
+    <h1 class="category-title">
+      <span class="category-title-inner">Social Media<br>Design</span>
+    </h1>
+    <p class="category-desc">Designing scroll-stopping social content — cohesive feeds, campaign assets, and branded templates that build presence and engage audiences across platforms.</p>
   </div>
 
-  <!-- PROJECT GRID -->
-  <div id="project-grid">
+  <!-- PROJECT GRID — single card full width -->
+  <div id="project-grid" style="grid-template-columns:1fr;">
 
-    <div class="project-card" style="background:#1a1a2e;"
-      onclick="openOverlay('Project One', 'Brand Identity · 2024', 'A complete brand identity system developed for a forward-thinking digital startup. The project encompassed logo design, colour system, typography selection, and a comprehensive brand guidelines document.')">
-      <div class="project-placeholder">01</div>
+    <div class="project-card" style="background:#271009; grid-column:1;"
+      onclick="openOverlay(
+        'Dough Jo',
+        'Social Media Design · Doughnut & Gym Brand · 2024',
+        'A playful yet bold social media identity designed for Dough Jo — a unique brand that fuses a doughnut shop with a gym. The feed was designed to balance indulgence and energy, creating content that is as irresistible to scroll through as it is to engage with.'
+      )">
+      <img
+        src="Cover Image Dough Jo.png"
+        alt="Dough Jo Social Media"
+        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.7;"
+      >
+      <div class="project-placeholder" style="font-size:4rem; opacity:0.15;">View</div>
       <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
       <div class="project-card-inner">
         <div class="project-meta">
-          <span class="project-tag">Brand Identity</span>
-          <span class="project-name">Project One</span>
-          <span class="project-year">2024</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card" style="background:#16213e;"
-      onclick="openOverlay('Project Two', 'Brand Identity · 2024', 'A brand refresh for an established business entering new markets. Focused on modernising the visual language while preserving brand equity and recognition built over years.')">
-      <div class="project-placeholder">02</div>
-      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
-      <div class="project-card-inner">
-        <div class="project-meta">
-          <span class="project-tag">Brand Refresh</span>
-          <span class="project-name">Project Two</span>
-          <span class="project-year">2023</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card" style="background:#0f3460;"
-      onclick="openOverlay('Project Three', 'Brand Identity · 2023', 'A luxury brand identity created for a boutique consultancy firm. The visual system draws on premium aesthetics — restrained colour, refined typography, and considered spatial relationships.')">
-      <div class="project-placeholder">03</div>
-      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
-      <div class="project-card-inner">
-        <div class="project-meta">
-          <span class="project-tag">Luxury Branding</span>
-          <span class="project-name">Project Three</span>
-          <span class="project-year">2023</span>
+          <span class="project-tag">Social Media · Lifestyle Brand</span>
+          <span class="project-name">Dough Jo</span>
+          <span class="project-year" style="font-family:'Space Mono',monospace;">2024</span>
         </div>
       </div>
     </div>
@@ -78,33 +62,182 @@
 
   <!-- OVERLAY -->
   <div id="project-overlay">
-    <div id="overlay-panel" data-lenis-prevent>
     <div id="overlay-backdrop"></div>
-    <div id="overlay-panel">
+    <div id="overlay-panel" data-lenis-prevent>
       <div id="overlay-header">
         <div>
-          <h2 id="overlay-title">Project One</h2>
-          <p id="overlay-subtitle">Brand Identity · 2024</p>
+          <h2 id="overlay-title">Dough Jo</h2>
+          <p id="overlay-subtitle">Social Media Design · Doughnut & Gym Brand · 2024</p>
         </div>
         <button id="overlay-close"><i class="ti ti-x"></i></button>
       </div>
       <div id="overlay-body">
-        <p class="overlay-desc" id="overlay-desc">Project description loads here.</p>
+
+        <!-- HERO TEXT -->
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px;">
+          <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.25em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Doughnuts · Fitness · Lifestyle</p>
+          <h2 style="font-family:'Become',sans-serif; font-size:3.5rem; font-weight:400; color:#ff91b3; line-height:1; margin:0 0 4px;">Dough Jo</h2>
+          <p style="font-family:'CxMono',monospace; font-size:0.65rem; letter-spacing:0.25em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Treat yourself · Push yourself</p>
+        </div>
+
+        <!-- OVERVIEW -->
         <div>
-          <p class="overlay-section-title">Work Samples</p>
-          <div class="overlay-image-grid">
-            <div class="overlay-image-slot">Insert Image</div>
-            <div class="overlay-image-slot">Insert Image</div>
-            <div class="overlay-image-slot">Insert Image</div>
-            <div class="overlay-image-slot">Insert Image</div>
+          <p class="overlay-section-title">The Brand</p>
+          <p class="overlay-desc">Dough Jo is a one-of-a-kind lifestyle brand that refuses to choose between indulgence and discipline. A doughnut shop and gym under one roof — the social media identity was designed to celebrate both sides of that duality. Bold visuals, playful energy, and a distinctive colour palette make every post unmistakably Dough Jo.</p>
+        </div>
+
+        <!-- CONCEPT GRID -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Concept</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">A feed that lives in the tension between sweet and sweat — indulgent photography balanced with energetic gym content, all tied together by a consistent visual language that makes the brand feel cohesive and alive.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Feed Strategy</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Posts alternate between product shots, lifestyle imagery, and community content — creating a rhythm that keeps followers engaged and the brand feeling dynamic rather than repetitive.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Tone</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Playful, confident, and a little cheeky — copy and visuals work together to build a brand personality that feels genuine, community-driven, and impossible to scroll past.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Platform</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Designed primarily for Instagram — optimised for square feed posts and vertical reels, with a consistent aesthetic that translates seamlessly across stories, highlights, and carousel formats.</p>
           </div>
         </div>
+
+        <!-- LOGO -->
+        <div>
+          <p class="overlay-section-title">Brand Logo</p>
+          <div class="doughjo-logo-wrap">
+            <img src="Dough_Jo_Logo (1).png" alt="Dough Jo Logo" class="doughjo-logo">
+          </div>
+        </div>
+
+        <!-- COLOUR PALETTE -->
+        <div>
+          <p class="overlay-section-title">Colour Palette</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:20px;">A palette that captures the Dough Jo duality — sweet pinks and warm caramels alongside deep dark chocolate tones and clean white. Every colour tells part of the brand story.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#ff91b3;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Sugar Pink</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#c67537;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Caramel</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#ffffff; border:0.5px solid rgba(255,255,255,0.2);"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Cream White</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#271009;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Dark Choc</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TYPOGRAPHY -->
+        <div>
+          <p class="overlay-section-title">Typography</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+            <div style="border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-size:2.5rem; color:#ff91b3; margin-bottom:4px; font-style:italic;">Aa</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.7); margin-bottom:4px;">Barriecito</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.3); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">Display · Headlines</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.65rem; color:rgba(255,255,255,0.35); line-height:1.8;">A playful, expressive display typeface that captures the fun and indulgent side of the Dough Jo brand — used for headlines and key brand moments.</p>
+            </div>
+            <div style="border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+              <p style="font-size:2.5rem; color:#c67537; margin-bottom:4px;">Aa</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.7); margin-bottom:4px;">Hangyaboly</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.3); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">Accent · Sub-headings</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.65rem; color:rgba(255,255,255,0.35); line-height:1.8;">A characterful accent typeface that adds personality and warmth — used for supporting copy, captions, and brand messaging that needs a human, handcrafted feel.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- REEL -->
+        <div>
+          <p class="overlay-section-title">Brand Reel</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">A brand reel created for Dough Jo's Instagram — designed to stop the scroll, introduce the brand world, and leave viewers wanting more.</p>
+          <div style="display:flex; justify-content:center;">
+            <video
+              src="#271009.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              style="width:100%; max-width:400px; aspect-ratio:1080/1920; border-radius:12px; display:block; border:0.5px solid rgba(255,255,255,0.08); object-fit:cover;">
+            </video>
+          </div>
+        </div>
+
+        <!-- INSTAGRAM FEED -->
+        <div>
+          <p class="overlay-section-title">Instagram Feed</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:20px;">A curated feed designed to feel cohesive, engaging, and unmistakably Dough Jo — each post contributes to a visual story that builds brand recognition and community with every scroll.</p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:3px;">
+
+            <!-- POST ONE -->
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div class="doughjo-post">
+                <img src="Dough_Jo_Image (2).png" alt="Dough Jo Post One">
+              </div>
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.35); line-height:1.6;">Fresh from the fryer — every doughnut is made to order, glazed with love and gone in seconds.</p>
+            </div>
+
+            <!-- POST TWO -->
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div class="doughjo-post">
+                <img src="Dough_Jo_Image.png" alt="Dough Jo Post Two">
+              </div>
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.35); line-height:1.6;">The brand that believes you can have your doughnut and eat it too — welcome to Dough Jo.</p>
+            </div>
+
+            <!-- POST THREE -->
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div class="doughjo-post">
+                <img src="Dough_Jo_Image (3).png" alt="Dough Jo Post Three">
+              </div>
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.35); line-height:1.6;">Flavours that hit different — because life is too short for boring doughnuts or boring workouts.</p>
+            </div>
+
+            <!-- POST FOUR -->
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div class="doughjo-post">
+                <img src="Dough_Jo_Image (2).png" alt="Dough Jo Post Four">
+              </div>
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.35); line-height:1.6;">Treat day is every day when you earn it. Drop a set, grab a glazed — that's the Dough Jo way.</p>
+            </div>
+
+            <!-- POST FIVE -->
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div class="doughjo-post">
+                <img src="Doughnut.png" alt="Dough Jo Post Five">
+              </div>
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.35); line-height:1.6;">The OG glazed — a classic that never gets old, just like the gains you're putting in at the gym.</p>
+            </div>
+
+            <!-- POST SIX -->
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div class="doughjo-post">
+                <img src="Dough Jo Person 1.jpg" alt="Dough Jo Post Six">
+              </div>
+              <p style="font-family:'CxMono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.35); line-height:1.6;">The community that lifts together, snacks together — real people, real results, real good doughnuts.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PROJECT DETAILS -->
         <div>
           <p class="overlay-section-title">Project Details</p>
           <div class="overlay-details">
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Client</span>
-              <span class="overlay-detail-value">Insert Client</span>
+              <span class="overlay-detail-value">Dough Jo</span>
             </div>
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Year</span>
@@ -112,22 +245,23 @@
             </div>
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Services</span>
-              <span class="overlay-detail-value">Brand Identity</span>
+              <span class="overlay-detail-value">Social Media Design</span>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
+  <!-- BACK PILL -->
+  <a href="javascript:history.back()" id="back-pill">
+    <i class="ti ti-arrow-left"></i>
+    <span>Back</span>
+  </a>
+
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
-
-    <!-- BACK PILL -->
-<a href="javascript:history.back()" id="back-pill">
-  <i class="ti ti-arrow-left"></i>
-  <span>Back</span>
-</a>
 
 </body>
 </html>
