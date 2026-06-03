@@ -1918,5 +1918,16 @@ body.explore-page {
 }
 
   #overlay-title {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+}
+@media (max-width: 768px) {
+  #overlay-title {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #overlay-title {
+    font-size: 1.4rem !important;
+  }
 }
