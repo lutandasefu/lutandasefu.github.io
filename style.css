@@ -2051,3 +2051,44 @@ body.explore-page {
     gap: 16px;
   }
 }
+
+/* Mission grid styles */
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+/* Style for individual items inside */
+.mission-item {
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  padding: 32px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Title styles */
+.section-title {
+  font-family: 'CxMono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+/* Content styles */
+.section-content {
+  font-family: 'CxMono', monospace;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
+}
