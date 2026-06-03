@@ -2111,3 +2111,10 @@ body.explore-page {
     line-height: normal; /* reset line height if needed */
   }
 }
+
+@media(max-width: 768px) {
+  #custom-navbar ul li {
+    display: flex;
+    align-items: center; /* vertically align all li items */
+  }
+}
