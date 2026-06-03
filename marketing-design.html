@@ -1,96 +1,207 @@
-/* ===== ZAPHUB FLYERS ===== */
-.zap-flyer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0;
-  border: 0.5px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing Design — Lutanda Sefu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.zap-flyer-image {
-  flex: 0 0 120px;
-  height: 120px;
-  overflow: hidden;
-  transition: flex 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="dot-grid"></canvas>
 
-.zap-flyer:hover .zap-flyer-image {
-  flex: 0 0 320px;
-}
+  <nav id="custom-navbar">
+    <ul>
+      <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
+      <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
+      <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
+    </ul>
+  </nav>
 
-.zap-flyer-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
+  <!-- CATEGORY HERO -->
+  <div id="category-hero">
+    <p class="category-tag">Epic Branding · Marketing Design</p>
+    <h1 class="category-title">
+      <span class="category-title-inner">Marketing<br>Design</span>
+    </h1>
+    <p class="category-desc">Creating bold, strategic marketing collateral — from print campaigns and digital ads to promotional material that cuts through the noise and drives results.</p>
+  </div>
 
-.zap-flyer:hover .zap-flyer-image img {
-  transform: scale(1.04);
-}
+  <!-- PROJECT GRID — single card full width -->
+  <div id="project-grid" style="grid-template-columns:1fr;">
 
-.zap-flyer-info {
-  flex: 1;
-  padding: 24px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.02);
-}
+    <div class="project-card" style="background:#111111; grid-column:1;"
+      onclick="openOverlay(
+        'Zaphub',
+        'Marketing Design · Real Estate Platform · 2024',
+        'A suite of marketing flyers designed for Zaphub — South Africa\'s innovative all-in-one real estate platform. Each piece was crafted to communicate clarity, trust, and modernity across digital and print channels.'
+      )">
+      <img
+        src="Zaphub Cover Image.png"
+        alt="Zaphub Marketing Design"
+        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.7;"
+      >
+      <div class="project-placeholder" style="font-size:4rem; opacity:0.15;">View</div>
+      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
+      <div class="project-card-inner">
+        <div class="project-meta">
+          <span class="project-tag">Marketing Design · Real Estate</span>
+          <span class="project-name">Zaphub</span>
+          <span class="project-year" style="font-family:'Space Mono',monospace;">2024</span>
+        </div>
+      </div>
+    </div>
 
-.zap-flyer-label {
-  font-family: 'CxMono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.4);
-  text-transform: uppercase;
-  margin: 0;
-}
+  </div>
 
-.zap-flyer-text {
-  font-family: 'CxMono', monospace;
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.8;
-  margin: 0;
-  opacity: 0;
-  transform: translateX(8px);
-  transition: opacity 0.4s ease 0.1s,
-              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-}
+  <!-- OVERLAY -->
+  <div id="project-overlay">
+    <div id="overlay-backdrop"></div>
+    <div id="overlay-panel" data-lenis-prevent>
+      <div id="overlay-header">
+        <div>
+          <h2 id="overlay-title">Zaphub</h2>
+          <p id="overlay-subtitle">Marketing Design · Real Estate Platform · 2024</p>
+        </div>
+        <button id="overlay-close"><i class="ti ti-x"></i></button>
+      </div>
+      <div id="overlay-body">
 
-.zap-flyer:hover .zap-flyer-text {
-  opacity: 1;
-  transform: translateX(0);
-}
+        <!-- HERO TEXT -->
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px;">
+          <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.25em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Real Estate · Platform · South Africa</p>
+          <h2 style="font-family:'Become',sans-serif; font-size:3.5rem; font-weight:400; color:#ffffff; line-height:1; margin:0 0 4px;">Zaphub</h2>
+          <p style="font-family:'CxMono',monospace; font-size:0.65rem; letter-spacing:0.25em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Smarter · Easier · More Rewarding</p>
+        </div>
 
-/* Mobile */
-@media (max-width: 768px) {
-  .zap-flyer {
-    flex-direction: column;
-  }
+        <!-- OVERVIEW -->
+        <div>
+          <p class="overlay-section-title">About Zaphub</p>
+          <p class="overlay-desc">At Zaphub, the mission is to make real estate as straightforward, empowering, and accessible as possible. As South Africa's innovative, all-in-one real estate platform, Zaphub caters to property buyers, sellers, and professionals who seek a seamless, transparent experience. The marketing collateral was designed to translate this mission into visually compelling communication — simplifying complex property transactions and making them feel smarter, easier, and more rewarding for everyone involved.</p>
+        </div>
 
-  .zap-flyer-image {
-    flex: none;
-    width: 100%;
-    height: 200px;
-  }
+        <!-- BRIEF -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Brief</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Design a suite of marketing flyers that communicate Zaphub's value proposition clearly and compellingly — speaking to buyers, sellers, and property professionals across digital and print channels.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Approach</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Each flyer was designed with a clear hierarchy — leading with a bold headline, supporting with concise copy, and closing with a strong call to action. Consistency across the suite reinforces brand recognition.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Audience</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Property buyers seeking their first home, sellers looking for maximum exposure, and real estate professionals wanting a smarter platform to manage and close transactions efficiently.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Outcome</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">A cohesive set of marketing assets that feel modern, trustworthy, and distinctly Zaphub — ready for deployment across social media, email campaigns, and physical print distribution.</p>
+          </div>
+        </div>
 
-  .zap-flyer:hover .zap-flyer-image {
-    flex: none;
-    height: 280px;
-  }
+        <!-- MARKETING FLYERS -->
+        <div>
+          <p class="overlay-section-title">Marketing Flyers</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:24px;">A suite of five marketing flyers developed for Zaphub — each targeting a specific message, audience, or campaign moment. Hover over each flyer to expand and explore the detail.</p>
 
-  .zap-flyer-info {
-    padding: 16px 20px;
-  }
+          <div style="display:flex; flex-direction:column; gap:2px;">
 
-  .zap-flyer-text {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+            <!-- FLYER ONE -->
+            <div class="zap-flyer">
+              <div class="zap-flyer-image">
+                <img src="ZapHub_Logo_2 (1).png" alt="Zaphub Flyer One">
+              </div>
+              <div class="zap-flyer-info">
+                <p class="zap-flyer-label">Platform Launch</p>
+                <p class="zap-flyer-text">Introducing Zaphub to the South African property market — a bold first impression designed to establish brand presence and communicate the platform's core promise of simplicity and transparency.</p>
+              </div>
+            </div>
+
+            <!-- FLYER TWO -->
+            <div class="zap-flyer">
+              <div class="zap-flyer-image">
+                <img src="ZapHub_Logo_2 (2).png" alt="Zaphub Flyer Two">
+              </div>
+              <div class="zap-flyer-info">
+                <p class="zap-flyer-label">For Buyers</p>
+                <p class="zap-flyer-text">Targeted at first-time and experienced property buyers — communicating how Zaphub makes the search, evaluation, and purchase process smarter and more rewarding than traditional methods.</p>
+              </div>
+            </div>
+
+            <!-- FLYER THREE -->
+            <div class="zap-flyer">
+              <div class="zap-flyer-image">
+                <img src="ZapHub_Logo_2 (3).png" alt="Zaphub Flyer Three">
+              </div>
+              <div class="zap-flyer-info">
+                <p class="zap-flyer-label">For Sellers</p>
+                <p class="zap-flyer-text">Designed for property sellers looking to maximise their listing exposure — highlighting Zaphub's reach, tools, and transparent process that puts sellers in control of their property journey.</p>
+              </div>
+            </div>
+
+            <!-- FLYER FOUR -->
+            <div class="zap-flyer">
+              <div class="zap-flyer-image">
+                <img src="ZapHub_Logo_2 (4).png" alt="Zaphub Flyer Four">
+              </div>
+              <div class="zap-flyer-info">
+                <p class="zap-flyer-label">For Professionals</p>
+                <p class="zap-flyer-text">Speaking directly to real estate agents and property professionals — positioning Zaphub as the essential platform for managing listings, connecting with clients, and closing deals more efficiently.</p>
+              </div>
+            </div>
+
+            <!-- FLYER FIVE -->
+            <div class="zap-flyer">
+              <div class="zap-flyer-image">
+                <img src="ZapHub_Logo_2 (5).png" alt="Zaphub Flyer Five">
+              </div>
+              <div class="zap-flyer-info">
+                <p class="zap-flyer-label">Campaign Closer</p>
+                <p class="zap-flyer-text">The campaign closing piece — reinforcing the Zaphub brand promise with a clear call to action, driving users to register, explore listings, and experience the platform for themselves.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PROJECT DETAILS -->
+        <div>
+          <p class="overlay-section-title">Project Details</p>
+          <div class="overlay-details">
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Client</span>
+              <span class="overlay-detail-value">Zaphub</span>
+            </div>
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Year</span>
+              <span class="overlay-detail-value">2024</span>
+            </div>
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Services</span>
+              <span class="overlay-detail-value">Marketing Design</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BACK PILL -->
+  <a href="javascript:history.back()" id="back-pill">
+    <i class="ti ti-arrow-left"></i>
+    <span>Back</span>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
