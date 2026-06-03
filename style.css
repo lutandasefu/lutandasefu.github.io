@@ -2092,3 +2092,10 @@ body.explore-page {
     grid-template-columns: 1fr;
   }
 }
+
+/* Override the color of the "View" text for the placeholder */
+.project-placeholder {
+  color: #fff !important; /* Bright white */
+  /* Optional: add a text-shadow for more contrast */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
