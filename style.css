@@ -2100,18 +2100,19 @@ body.explore-page {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }
 
-/* Target the center nav link on mobile */
 @media(max-width: 768px) {
   #custom-navbar ul li {
     display: flex;
-    align-items: center; /* vertically align all li items */
+    align-items: center; /* vertical align all li items */
   }
   #custom-navbar ul li a.nav-center {
     display: flex;
-    align-items: center; /* vertically center the text within the link */
-    justify-content: center; /* horizontally center if needed */
-    padding: 16px; /* adjust for spacing */
-    line-height: normal; /* reset line height */
-    height: auto; /* remove problematic height that may cut off content */
+    align-items: center; /* center text vertically within the link */
+    justify-content: center; /* optional, for horizontal centering */
+    padding: 16px; /* adjust spacing as needed */
+    line-height: 1; /* reset line-height for consistency */
+    font-size: 0.78rem; /* match other nav links, adjust if needed */
+    height: auto; /* ensure no fixed height that could clip the text */
+    margin: 0; /* reset margin if any */
   }
 }
