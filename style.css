@@ -2102,31 +2102,16 @@ body.explore-page {
 
 /* Target the center nav link on mobile */
 @media(max-width: 768px) {
-  #custom-navbar ul li a.nav-center {
-    display: flex;
-    align-items: center; /* vertically center */
-    justify-content: center;
-    height: 100%; /* ensure full height */
-    padding: 16px; /* or adjust as needed for alignment */
-    line-height: normal; /* reset line height if needed */
-  }
-}
-
-@media(max-width: 768px) {
   #custom-navbar ul li {
     display: flex;
     align-items: center; /* vertically align all li items */
   }
-}
-
-@media(max-width: 768px) {
-  /* Make sure the link is vertically centered and aligned with others */
-  a.nav-center {
+  #custom-navbar ul li a.nav-center {
     display: flex;
     align-items: center; /* vertically center the text within the link */
     justify-content: center; /* horizontally center if needed */
-    height: 100%; /* fill the parent li height */
-    padding: 16px; /* adjust padding for consistent spacing */
-    line-height: normal; /* reset line height if necessary */
+    padding: 16px; /* adjust for spacing */
+    line-height: normal; /* reset line height */
+    height: auto; /* remove problematic height that may cut off content */
   }
 }
