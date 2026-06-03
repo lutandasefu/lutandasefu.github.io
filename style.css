@@ -1916,20 +1916,17 @@ body.explore-page {
   .project-placeholder {
     font-size: 2rem !important;
   }
-}
 
-  #overlay-title {
-  font-size: 1.4rem;
-}
-@media (max-width: 768px) {
-  #overlay-title {
-    font-size: 1.8rem !important;
+  #overlay-header h2 {
+    font-size: 2rem !important;
+    line-height: 1.1 !important;
   }
 }
 
 @media (max-width: 480px) {
-  #overlay-title {
-    font-size: 1.4rem !important;
+  #overlay-header h2 {
+    font-size: 1.6rem !important;
+    line-height: 1.1 !important;
   }
 }
 
