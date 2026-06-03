@@ -1277,7 +1277,7 @@ body.explore-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.12;
+  opacity: 0.3;
   font-family: 'Become', sans-serif;
   font-size: 12rem;
   color: #ffffff;
