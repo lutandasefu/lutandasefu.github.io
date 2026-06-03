@@ -2099,3 +2099,15 @@ body.explore-page {
   /* Optional: add a text-shadow for more contrast */
   text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }
+
+/* Target the center nav link on mobile */
+@media(max-width: 768px) {
+  #custom-navbar ul li a.nav-center {
+    display: flex;
+    align-items: center; /* vertically center */
+    justify-content: center;
+    height: 100%; /* ensure full height */
+    padding: 16px; /* or adjust as needed for alignment */
+    line-height: normal; /* reset line height if needed */
+  }
+}
