@@ -2017,3 +2017,37 @@ body.explore-page {
     font-size: 2rem; /* Adjust this value as needed */
   }
 }
+
+/* Make grid responsive on small screens */
+@media (max-width: 768px) {
+  /* Target the parent container of the grid, e.g., if it has a class or ID */
+  /* For inline style, you might need to override the inline style with !important */
+  
+  /* Example: if the parent container has a class like 'mission-section' */
+  /* .mission-section {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+    }
+  */
+
+  /* If you cannot add a class, you can target the inline style with attribute selector: */
+  div[style*="grid-template-columns:1fr 1fr"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important; /* optional, smaller gap */
+  }
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+/* Responsive adjustment */
+@media(max-width: 768px) {
+  .mission-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
