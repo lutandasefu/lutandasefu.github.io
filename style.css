@@ -1908,13 +1908,14 @@ body.explore-page {
 }
 
 .boercorp-seal:hover {
-  transform@media (max-width: 768px) {
+  transform: scale(1.12);
+  filter: drop-shadow(0 8px 32px rgba(235, 231, 228, 0.15));
+}
+
+@media (max-width: 768px) {
   .project-placeholder {
     font-size: 2rem !important;
   }
-}
-    : scale(1.12);
-  filter: drop-shadow(0 8px 32px rgba(235, 231, 228, 0.15));
 }
 
   #overlay-title {
