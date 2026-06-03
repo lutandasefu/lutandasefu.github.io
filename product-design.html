@@ -16,60 +16,44 @@
   <div id="cursor-ring"></div>
   <canvas id="dot-grid"></canvas>
 
-<nav id="custom-navbar">
-  <ul>
-    <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
-    <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
-    <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
-  </ul>
-</nav>
+  <nav id="custom-navbar">
+    <ul>
+      <li><a href="designs.html" class="nav-left">UI/UX Design</a></li>
+      <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
+      <li><a href="designs.html" class="nav-right">Graphic Design</a></li>
+    </ul>
+  </nav>
 
-  <!-- HERO -->
+  <!-- CATEGORY HERO -->
   <div id="category-hero">
- <p class="category-tag">Epic Branding · Product Design</p>
-<h1 class="category-title"><span class="category-title-inner">Product<br>Design</span></h1>
-<p class="category-desc">Designing purposeful product experiences — packaging, physical goods, and digital products that communicate value and function beautifully in the real world.</p>
-<!-- card colors: #1c1c1e, #2c2c2e, #141414 -->
+    <p class="category-tag">Epic Branding · Product Design</p>
+    <h1 class="category-title">
+      <span class="category-title-inner">Product<br>Design</span>
+    </h1>
+    <p class="category-desc">Designing purposeful product experiences — packaging, physical goods, and digital products that communicate value and function beautifully in the real world.</p>
   </div>
 
-  <!-- PROJECT GRID -->
-  <div id="project-grid">
+  <!-- PROJECT GRID — single card full width -->
+  <div id="project-grid" style="grid-template-columns:1fr;">
 
-    <div class="project-card" style="background:#1a1a2e;"
-      onclick="openOverlay('Project One', 'Brand Identity · 2024', 'A complete brand identity system developed for a forward-thinking digital startup. The project encompassed logo design, colour system, typography selection, and a comprehensive brand guidelines document.')">
-      <div class="project-placeholder">01</div>
+    <div class="project-card" style="background:#0b2742; grid-column:1;"
+      onclick="openOverlay(
+        'Impact',
+        'Product Design · Washing Powder Brand · 2024',
+        'A bold product identity and packaging design for Impact — a washing powder brand built on the promise of powerful results. The visual system combines striking colour, confident typography, and purposeful packaging design to stand out on shelf and in the home.'
+      )">
+      <img
+        src="Washing Cover Image.png"
+        alt="Impact Washing Powder"
+        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.7;"
+      >
+      <div class="project-placeholder" style="font-size:4rem; opacity:0.15;">View</div>
       <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
       <div class="project-card-inner">
         <div class="project-meta">
-          <span class="project-tag">Brand Identity</span>
-          <span class="project-name">Project One</span>
-          <span class="project-year">2024</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card" style="background:#16213e;"
-      onclick="openOverlay('Project Two', 'Brand Identity · 2024', 'A brand refresh for an established business entering new markets. Focused on modernising the visual language while preserving brand equity and recognition built over years.')">
-      <div class="project-placeholder">02</div>
-      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
-      <div class="project-card-inner">
-        <div class="project-meta">
-          <span class="project-tag">Brand Refresh</span>
-          <span class="project-name">Project Two</span>
-          <span class="project-year">2023</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card" style="background:#0f3460;"
-      onclick="openOverlay('Project Three', 'Brand Identity · 2023', 'A luxury brand identity created for a boutique consultancy firm. The visual system draws on premium aesthetics — restrained colour, refined typography, and considered spatial relationships.')">
-      <div class="project-placeholder">03</div>
-      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
-      <div class="project-card-inner">
-        <div class="project-meta">
-          <span class="project-tag">Luxury Branding</span>
-          <span class="project-name">Project Three</span>
-          <span class="project-year">2023</span>
+          <span class="project-tag">Product Design · Packaging</span>
+          <span class="project-name">Impact</span>
+          <span class="project-year" style="font-family:'Space Mono',monospace;">2024</span>
         </div>
       </div>
     </div>
@@ -78,33 +62,151 @@
 
   <!-- OVERLAY -->
   <div id="project-overlay">
-    <div id="overlay-panel" data-lenis-prevent>
     <div id="overlay-backdrop"></div>
-    <div id="overlay-panel">
+    <div id="overlay-panel" data-lenis-prevent>
       <div id="overlay-header">
         <div>
-          <h2 id="overlay-title">Project One</h2>
-          <p id="overlay-subtitle">Brand Identity · 2024</p>
+          <h2 id="overlay-title">Impact</h2>
+          <p id="overlay-subtitle">Product Design · Washing Powder Brand · 2024</p>
         </div>
         <button id="overlay-close"><i class="ti ti-x"></i></button>
       </div>
       <div id="overlay-body">
-        <p class="overlay-desc" id="overlay-desc">Project description loads here.</p>
+
+        <!-- HERO TEXT -->
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px;">
+          <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.25em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Washing Powder · Packaging · Brand Identity</p>
+          <h2 style="font-family:'Become',sans-serif; font-size:3.5rem; font-weight:400; color:#ffffff; line-height:1; margin:0 0 4px;">Impact</h2>
+          <p style="font-family:'CxMono',monospace; font-size:0.65rem; letter-spacing:0.25em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Clean · Bold · Powerful</p>
+        </div>
+
+        <!-- OVERVIEW -->
         <div>
-          <p class="overlay-section-title">Work Samples</p>
-          <div class="overlay-image-grid">
-            <div class="overlay-image-slot">Insert Image</div>
-            <div class="overlay-image-slot">Insert Image</div>
-            <div class="overlay-image-slot">Insert Image</div>
-            <div class="overlay-image-slot">Insert Image</div>
+          <p class="overlay-section-title">Overview</p>
+          <p class="overlay-desc">Impact is a washing powder brand designed to command attention. The brief called for a product identity that felt powerful, trustworthy, and visually distinctive on a crowded retail shelf. The design system — from logo to packaging — was built around contrast, boldness, and a colour palette that communicates energy and efficacy without compromise.</p>
+        </div>
+
+        <!-- DESIGN CONCEPT -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Concept</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">The name Impact drives every design decision. Bold letterforms, high-contrast colour blocking, and dynamic layout create a visual language that communicates strength and reliability at a glance.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Typography</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">The Alpha typeface anchors the logotype — a bold, geometric sans-serif that conveys confidence and modernity. Its strong presence ensures legibility across all packaging sizes and formats.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Packaging</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Designed for real-world shelf impact — the front and back packaging layouts balance brand expression with functional information, ensuring clarity without sacrificing visual power.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Market</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Positioned for the everyday South African household — a product that feels premium and purposeful without being inaccessible. Designed to earn trust through consistency and confidence.</p>
           </div>
         </div>
+
+        <!-- LOGO VARIATIONS -->
+        <div>
+          <p class="overlay-section-title">Logo Variations</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">The Impact logo was developed across three colour expressions — each maintaining the same bold typographic foundation while adapting to different background contexts and applications.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px;">
+            <div style="aspect-ratio:1/1; overflow:hidden; border-radius:4px;">
+              <img src="IMPACT.png" alt="Impact Logo Primary" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="aspect-ratio:1/1; overflow:hidden; border-radius:4px;">
+              <img src="IMPACT (1).png" alt="Impact Logo Secondary" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="aspect-ratio:1/1; overflow:hidden; border-radius:4px;">
+              <img src="IMPACT (2).png" alt="Impact Logo Tertiary" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+          </div>
+        </div>
+
+        <!-- COLOUR PALETTE -->
+        <div>
+          <p class="overlay-section-title">Colour Palette</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:20px;">A rich, high-contrast palette built on deep navy and vivid purple — commanding authority while maintaining visual energy and brand distinction across all touchpoints.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#0b2742;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Deep Navy</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#ae58c6;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Vivid Purple</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#0062b7;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Bold Blue</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#3a0942;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Deep Plum</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#ffffff; border:0.5px solid rgba(255,255,255,0.2);"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Pure White</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TYPOGRAPHY -->
+        <div>
+          <p class="overlay-section-title">Typography</p>
+          <div style="border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-size:3rem; color:#ffffff; margin-bottom:4px; letter-spacing:0.05em; font-weight:700;">Aa</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.7); margin-bottom:4px;">Alpha</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; color:rgba(255,255,255,0.3); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;">Primary Logotype · Display</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8;">A bold, geometric display typeface chosen for its commanding presence and strong brand recognition. Alpha communicates confidence and modernity — perfectly aligned with the Impact brand proposition.</p>
+          </div>
+        </div>
+
+        <!-- PACKAGING DESIGN -->
+        <div>
+          <p class="overlay-section-title">Packaging Design</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">Front and back packaging layouts designed for print production — balancing bold visual branding with clear product information and regulatory requirements.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+            <img src="Washing Powder Product.png" alt="Impact Packaging Front" style="width:100%; object-fit:cover; border-radius:4px 0 0 4px;">
+            <img src="Washing Powder Product (1).png" alt="Impact Packaging Back" style="width:100%; object-fit:cover; border-radius:0 4px 4px 0;">
+          </div>
+        </div>
+
+        <!-- PRODUCT MOCKUPS -->
+        <div>
+          <p class="overlay-section-title">Product Mockups</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">Real-world product visualisation across multiple angles — demonstrating how the Impact brand identity translates from screen to physical packaging with confidence and consistency.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+            <div style="aspect-ratio:1/1; overflow:hidden; border-radius:4px 0 0 0;">
+              <img src="IMPACT (3).png" alt="Impact Mockup Angle One" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="aspect-ratio:1/1; overflow:hidden; border-radius:0 4px 0 0;">
+              <img src="IMPACT (4).png" alt="Impact Mockup Angle Two" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="aspect-ratio:1/1; overflow:hidden; border-radius:0 0 0 4px;">
+              <img src="IMPACT (6).png" alt="Impact Mockup Angle Three" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="aspect-ratio:1/1; overflow:hidden; border-radius:0 0 4px 0;">
+              <img src="IMPACT (7).png" alt="Impact Mockup Angle Four" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO MOCKUP -->
+        <div>
+          <p class="overlay-section-title">Hero Shot</p>
+          <div style="aspect-ratio:1/1; overflow:hidden; border-radius:4px;">
+            <img src="IMPACT (8).png" alt="Impact Hero Mockup" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+        </div>
+
+        <!-- PROJECT DETAILS -->
         <div>
           <p class="overlay-section-title">Project Details</p>
           <div class="overlay-details">
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Client</span>
-              <span class="overlay-detail-value">Insert Client</span>
+              <span class="overlay-detail-value">Impact</span>
             </div>
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Year</span>
@@ -112,22 +214,23 @@
             </div>
             <div class="overlay-detail-item">
               <span class="overlay-detail-label">Services</span>
-              <span class="overlay-detail-value">Brand Identity</span>
+              <span class="overlay-detail-value">Product Design</span>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
+  <!-- BACK PILL -->
+  <a href="javascript:history.back()" id="back-pill">
+    <i class="ti ti-arrow-left"></i>
+    <span>Back</span>
+  </a>
+
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
-
-    <!-- BACK PILL -->
-<a href="javascript:history.back()" id="back-pill">
-  <i class="ti ti-arrow-left"></i>
-  <span>Back</span>
-</a>
 
 </body>
 </html>
