@@ -1948,3 +1948,55 @@ body.explore-page {
     gap: 16px !important;
   }
 }
+
+/* ===== DOUGH JO ===== */
+.doughjo-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.doughjo-logo {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.4s ease;
+  cursor: pointer;
+}
+
+.doughjo-logo:hover {
+  transform: translateY(-8px) scale(1.04);
+  filter: drop-shadow(0 16px 40px rgba(255, 145, 179, 0.2));
+}
+
+.doughjo-post {
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+}
+
+.doughjo-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.doughjo-post:hover img {
+  transform: translateY(-6px) scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .doughjo-logo {
+    max-width: 220px;
+  }
+}
