@@ -2000,3 +2000,20 @@ body.explore-page {
     max-width: 220px;
   }
 }
+
+/* Base style for the heading */
+.responsive-heading {
+  font-family: 'Become', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
+  margin: 0 0 4px;
+}
+
+/* Smaller on mobile screens */
+@media (max-width: 768px) {
+  .responsive-heading {
+    font-size: 2rem; /* Adjust this value as needed */
+  }
+}
