@@ -604,19 +604,6 @@ body.cursor-heading #cursor-ring {
     height: 56px;
   }
 
-  #custom-navbar .nav-center {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;
-  }
-
-  #custom-navbar .nav-left,
-  #custom-navbar .nav-right {
-    font-size: 0.6rem;
-    letter-spacing: 0.03em;
-  }
-
   #hero-container {
     padding: 32px 24px;
     padding-top: 40px;
