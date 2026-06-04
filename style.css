@@ -132,9 +132,9 @@ body {
 
 #custom-navbar ul li:nth-child(2) a {
   color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.25em;
-  font-size: 0.85rem;
-  padding: 22px 56px;
+  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  padding: 22px 48px;
   border-left: 0.5px solid rgba(255, 255, 255, 0.1);
   border-right: none;
 }
@@ -174,9 +174,9 @@ body.home #custom-navbar ul li a {
 
 body.home #custom-navbar ul li:nth-child(2) a {
   color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.25em;
-  font-size: 0.85rem;
-  padding: 22px 56px;
+  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  padding: 22px 48px;
   border-left: 0.5px solid rgba(255, 255, 255, 0.1);
   border-right: none;
 }
@@ -196,8 +196,9 @@ body.home #custom-navbar .nav-center {
   }
 
   #custom-navbar ul li:nth-child(2) a {
-    padding: 16px 24px;
-    font-size: 0.65rem;
+    padding: 16px 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
   }
 
   body.home #custom-navbar {
@@ -206,10 +207,14 @@ body.home #custom-navbar .nav-center {
 
   body.home #custom-navbar ul li a {
     padding: 16px 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
   }
 
   body.home #custom-navbar ul li:nth-child(2) a {
-    padding: 16px 24px;
+    padding: 16px 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
   }
 }
 
@@ -221,10 +226,11 @@ body.home #custom-navbar .nav-center {
   }
 
   #custom-navbar ul li:nth-child(2) a {
-    padding: 14px 16px;
-    font-size: 0.6rem;
+    padding: 14px 12px;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
   }
-}
+} 
 
 /* ===== HOME PAGE NO SCROLL ===== */
 body.home {
