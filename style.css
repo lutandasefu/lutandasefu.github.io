@@ -102,10 +102,6 @@ body {
   height: 100%;
 }
 
-#custom-navbar ul li:nth-child(2) {
-  flex: 1;
-}
-
 #custom-navbar ul li a {
   display: flex;
   align-items: center;
@@ -131,12 +127,7 @@ body {
 }
 
 #custom-navbar ul li:nth-child(2) a {
-  color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.2em;
-  font-size: 0.78rem;
-  padding: 22px 48px;
   border-left: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-right: none;
 }
 
 /* ===== NAVBAR — HOMEPAGE PILL OVERRIDE ===== */
@@ -159,34 +150,6 @@ body.home #custom-navbar ul::after {
   border-radius: 100px;
 }
 
-body.home #custom-navbar ul li {
-  height: 100%;
-}
-
-body.home #custom-navbar ul li a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 22px 48px;
-  box-sizing: border-box;
-}
-
-body.home #custom-navbar ul li:nth-child(2) a {
-  color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.2em;
-  font-size: 0.78rem;
-  padding: 22px 48px;
-  border-left: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-right: none;
-}
-
-body.home #custom-navbar .nav-center {
-  position: relative;
-  left: auto;
-  transform: none;
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   #custom-navbar ul li a {
@@ -195,26 +158,8 @@ body.home #custom-navbar .nav-center {
     letter-spacing: 0.12em;
   }
 
-  #custom-navbar ul li:nth-child(2) a {
-    padding: 16px 20px;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-  }
-
   body.home #custom-navbar {
     top: 20px;
-  }
-
-  body.home #custom-navbar ul li a {
-    padding: 16px 20px;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-  }
-
-  body.home #custom-navbar ul li:nth-child(2) a {
-    padding: 16px 20px;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
   }
 }
 
@@ -224,13 +169,7 @@ body.home #custom-navbar .nav-center {
     font-size: 0.55rem;
     letter-spacing: 0.08em;
   }
-
-  #custom-navbar ul li:nth-child(2) a {
-    padding: 14px 12px;
-    font-size: 0.55rem;
-    letter-spacing: 0.08em;
-  }
-} 
+}
 
 /* ===== HOME PAGE NO SCROLL ===== */
 body.home {
