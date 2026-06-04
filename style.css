@@ -136,7 +136,7 @@ body {
   font-size: 0.85rem;
   padding: 22px 56px;
   border-left: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-right: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-right: none;
 }
 
 /* ===== NAVBAR — HOMEPAGE PILL OVERRIDE ===== */
@@ -178,7 +178,7 @@ body.home #custom-navbar ul li:nth-child(2) a {
   font-size: 0.85rem;
   padding: 22px 56px;
   border-left: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-right: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-right: none;
 }
 
 body.home #custom-navbar .nav-center {
