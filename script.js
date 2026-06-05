@@ -166,6 +166,11 @@ accCards.forEach(function(card) {
     el.style.transitionDelay = (i * 0.08) + 's';
     observer.observe(el);
   });
+
+  revealElement(contact, 700);
+var cvDownload = document.getElementById('cv-download');
+revealElement(cvDownload, 1000);
+  
 })();
 
 /* ===== PROJECT OVERLAY ===== */
