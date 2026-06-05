@@ -147,49 +147,25 @@ accCards.forEach(function(card) {
 
 /* ===== PROFILE PAGE ANIMATION ===== */
 (function() {
-  var profileHeading = document.getElementById('profile-heading');
-  if (!profileHeading) return;
-  var typingText = document.getElementById('profile-typing-text');
-  var profileCursor = document.getElementById('profile-cursor');
-  var image = document.getElementById('profile-image-wrap');
-  var typingWrap = document.getElementById('profile-typing-wrap');
-  var bio = document.getElementById('profile-bio');
-  var contact = document.getElementById('profile-contact');
-  var introText = "My name's Lutanda Sefu — lead graphic designer and founder of Epic Branding, a Johannesburg-based graphic design agency I've been running for over six years.";
-  var index = 0;
-  var typingSpeed = 40;
+  var animElements = document.querySelectorAll('.profile-animate');
+  if (!animElements.length) return;
 
-  function revealElement(el, delay) {
-    setTimeout(function() {
-      if (el) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
-    }, delay);
-  }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -20px 0px'
+  });
 
-  function typeProfile(callback) {
-    if (index < introText.length) {
-      typingText.textContent += introText.charAt(index);
-      index++;
-      setTimeout(function() { typeProfile(callback); }, typingSpeed);
-    } else {
-      if (profileCursor) profileCursor.style.animation = 'blink 1s infinite';
-      if (callback) setTimeout(callback, 400);
-    }
-  }
-
-  revealElement(profileHeading, 300);
-  revealElement(image, 800);
-  setTimeout(function() {
-    revealElement(typingWrap, 0);
-    setTimeout(function() {
-      typeProfile(function() {
-        revealElement(bio, 300);
-        revealElement(contact, 700);
-      });
-    }, 500);
-  }, 1400);
+  animElements.forEach(function(el, i) {
+    el.style.transitionDelay = (i * 0.08) + 's';
+    observer.observe(el);
+  });
 })();
 
 /* ===== PROJECT OVERLAY ===== */
