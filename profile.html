@@ -4,96 +4,298 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile — Lutanda Sefu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="style.css">
-  <style>
-  #profile-contact a span {
-    font-family: 'Space Mono', monospace !important;
-    unicode-range: U+0035;
-  }
-</style>
 </head>
 <body>
 
   <div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
-<canvas id="dot-grid"></canvas>
+  <div id="cursor-ring"></div>
+  <canvas id="dot-grid"></canvas>
 
-<nav id="custom-navbar">
-  <ul>
-    <li><a href="designs.html" class="nav-left">Graphic Design</a></li>
-    <li><a href="index.html" class="nav-center">Lutanda Sefu</a></li>
-  </ul>
-</nav>
+  <nav id="custom-navbar">
+    <ul>
+      <li><a href="designs.html">Graphic Design</a></li>
+      <li><a href="index.html">Lutanda Sefu</a></li>
+    </ul>
+  </nav>
 
-  <!-- PROFILE PAGE -->
   <div id="profile-container">
 
-    <!-- Heading -->
-    <h2 id="profile-heading" class="profile-animate">About Me</h2>
-
-    <!-- Image -->
-    <div id="profile-image-wrap" class="profile-animate">
-      <img src="Profile_Image.webp" alt="Lutanda Sefu" id="profile-image">
+    <!-- HERO -->
+    <div id="profile-hero" class="profile-animate">
+      <div id="profile-image-wrap">
+        <img src="Profile_Image.webp" alt="Lutanda Sefu" id="profile-image" loading="eager">
+      </div>
+      <div id="profile-hero-text">
+        <p id="profile-tag">Graphic Designer · UI/UX Designer · Front-End Developer</p>
+        <h1 id="profile-heading">Lutanda Sefu</h1>
+        <p id="profile-location"><i class="ti ti-map-pin"></i> Johannesburg, South Africa</p>
+        <p id="profile-tagline">Founder & Creative Director — Epic Branding</p>
+      </div>
     </div>
 
-    <!-- Typing intro -->
-    <div id="profile-typing-wrap" class="profile-animate">
-      <span id="profile-typing-text"></span><span id="profile-cursor">|</span>
+    <!-- DIVIDER -->
+    <div class="cv-divider profile-animate"></div>
+
+    <!-- PROFESSIONAL SUMMARY -->
+    <div class="cv-section profile-animate">
+      <p class="cv-section-label">Professional Summary</p>
+      <p class="cv-body">Creative Designer and Front-End Developer with over six years of experience building brands, digital experiences, websites, and marketing assets for businesses across multiple industries. Founder and Creative Director of Epic Branding — leading end-to-end branding, UI/UX design, website development, and digital marketing projects. Skilled in transforming business goals into visually compelling and user-focused solutions through strategic design thinking and modern development practices.</p>
     </div>
 
-    <!-- Bio paragraphs -->
-    <div id="profile-bio" class="profile-animate">
+    <!-- DIVIDER -->
+    <div class="cv-divider profile-animate"></div>
 
-      <p class="bio-para">
-        In that time I've built Epic Branding into a full-service creative studio, delivering brand identities, marketing material, and websites for businesses across South Africa. From logo systems and print collateral to digital campaigns and web design, I bring a strategic and aesthetic eye to every project.
-      </p>
+    <!-- SKILLS -->
+    <div class="cv-section profile-animate">
+      <p class="cv-section-label">Skills</p>
+      <div class="cv-skills-grid">
 
-      <p class="bio-para">
-        My journey started at The Open Window Institute, where I studied UI/UX Design. The following year I launched Epic Branding, turning my passion into a business. I'm currently expanding my creative thinking further through a Creative Writing degree at The University of South Africa.
-      </p>
+        <div class="cv-skill-group">
+          <p class="cv-skill-title">Design & Creative</p>
+          <div class="cv-tags">
+            <span class="cv-tag">Brand Identity</span>
+            <span class="cv-tag">Logo Design</span>
+            <span class="cv-tag">Marketing Collateral</span>
+            <span class="cv-tag">Social Media Design</span>
+            <span class="cv-tag">Packaging Design</span>
+            <span class="cv-tag">Print Design</span>
+            <span class="cv-tag">Art Direction</span>
+            <span class="cv-tag">Creative Strategy</span>
+          </div>
+        </div>
 
-      <p class="bio-para">
-        I'm based in Johannesburg, South Africa, and available for work.
-      </p>
+        <div class="cv-skill-group">
+          <p class="cv-skill-title">UI / UX Design</p>
+          <div class="cv-tags">
+            <span class="cv-tag">User Interface Design</span>
+            <span class="cv-tag">User Experience Design</span>
+            <span class="cv-tag">Wireframing</span>
+            <span class="cv-tag">Prototyping</span>
+            <span class="cv-tag">Design Systems</span>
+            <span class="cv-tag">Mobile & Web Design</span>
+            <span class="cv-tag">Information Architecture</span>
+          </div>
+        </div>
 
+        <div class="cv-skill-group">
+          <p class="cv-skill-title">Front-End Development</p>
+          <div class="cv-tags">
+            <span class="cv-tag">HTML</span>
+            <span class="cv-tag">CSS</span>
+            <span class="cv-tag">JavaScript</span>
+            <span class="cv-tag">jQuery</span>
+            <span class="cv-tag">Responsive Design</span>
+            <span class="cv-tag">GitHub</span>
+            <span class="cv-tag">WordPress</span>
+          </div>
+        </div>
+
+        <div class="cv-skill-group">
+          <p class="cv-skill-title">Software</p>
+          <div class="cv-tags">
+            <span class="cv-tag">Adobe Photoshop</span>
+            <span class="cv-tag">Adobe Illustrator</span>
+            <span class="cv-tag">Adobe InDesign</span>
+            <span class="cv-tag">Adobe XD</span>
+            <span class="cv-tag">Figma</span>
+            <span class="cv-tag">Google Workspace</span>
+            <span class="cv-tag">Microsoft Office</span>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <!-- Contact -->
+    <!-- DIVIDER -->
+    <div class="cv-divider profile-animate"></div>
 
+    <!-- WORK EXPERIENCE -->
+    <div class="cv-section profile-animate">
+      <p class="cv-section-label">Work Experience</p>
+      <div class="cv-timeline">
 
-    <div id="profile-contact" class="profile-animate" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; margin-top:16px; width:100%;">
-  <a href="tel:0604614995" style="display:flex; align-items:center; justify-content:center; gap:12px; text-decoration:none; color:rgba(255,255,255,0.6); font-family:'Space Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; width:100%;">
-    <i class="ti ti-phone" style="font-size:16px; opacity:0.6; font-family:'tabler-icons' !important;"></i>
-    <span id="phone-number" style="font-family:'Space Mono',monospace!important;font-size:0.75rem;">060 461 4995</span>
-    <style>
-  #phone-number {
-    font-family: 'Space Mono', monospace !important;
-  }
-  #profile-contact a span {
-    font-family: 'Space Mono', monospace !important;
-  }
-</style>
-  </a>
-  <a href="mailto:cleolutandalizosefu@gmail.com" style="display:flex; align-items:center; justify-content:center; gap:12px; text-decoration:none; color:rgba(255,255,255,0.6); font-family:'Space Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; width:100%;">
-    <i class="ti ti-mail" style="font-size:16px; opacity:0.6; font-family:'tabler-icons' !important;"></i>
-    <span style="font-family:'Space Mono',monospace;">cleolutandalizosefu@gmail.com</span>
-  </a>
-</div>
-    
+        <div class="cv-timeline-item">
+          <div class="cv-timeline-dot"></div>
+          <div class="cv-timeline-content">
+            <div class="cv-timeline-header">
+              <div>
+                <p class="cv-company">Epic Branding (Pty) Ltd</p>
+                <p class="cv-role">Founder & Senior Graphic Designer / Creative Director</p>
+              </div>
+              <p class="cv-date">2020 — Present</p>
+            </div>
+            <ul class="cv-list">
+              <li>Founded and managed a branding and design agency delivering visual identity, marketing, and digital design solutions.</li>
+              <li>Led brand strategy, logo design, packaging design, and marketing campaigns for businesses across multiple industries.</li>
+              <li>Designed responsive websites and digital experiences using Figma, WordPress, HTML, CSS, JavaScript, and GitHub.</li>
+              <li>Managed client relationships, project timelines, creative direction, and quality assurance across multiple projects.</li>
+              <li>Delivered end-to-end branding systems including visual identity guidelines, marketing assets, social media content, and website design.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-timeline-item">
+          <div class="cv-timeline-dot"></div>
+          <div class="cv-timeline-content">
+            <div class="cv-timeline-header">
+              <div>
+                <p class="cv-company">Freelance Ghostwriter</p>
+                <p class="cv-role">Content Writer</p>
+              </div>
+              <p class="cv-date">2024</p>
+            </div>
+            <ul class="cv-list">
+              <li>Produced structured digital content for international clients.</li>
+              <li>Managed multiple projects while meeting deadlines and quality standards.</li>
+              <li>Developed audience-focused content across various online platforms.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-timeline-item">
+          <div class="cv-timeline-dot"></div>
+          <div class="cv-timeline-content">
+            <div class="cv-timeline-header">
+              <div>
+                <p class="cv-company">Msys Technologies</p>
+                <p class="cv-role">Marketing & Sales Support</p>
+              </div>
+              <p class="cv-date">2021</p>
+            </div>
+            <ul class="cv-list">
+              <li>Assisted with digital marketing initiatives and campaign execution.</li>
+              <li>Produced visual content and promotional materials.</li>
+              <li>Supported brand consistency across marketing communications.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cv-timeline-item">
+          <div class="cv-timeline-dot"></div>
+          <div class="cv-timeline-content">
+            <div class="cv-timeline-header">
+              <div>
+                <p class="cv-company">Zeuz Construction & Building Maintenance</p>
+                <p class="cv-role">Project Coordinator & Administrative Support</p>
+              </div>
+              <p class="cv-date">2019 — 2021</p>
+            </div>
+            <ul class="cv-list">
+              <li>Managed project documentation and digital filing systems.</li>
+              <li>Developed professional presentations and project materials.</li>
+              <li>Facilitated communication between teams and stakeholders.</li>
+              <li>Supported operational planning and reporting processes.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="cv-divider profile-animate"></div>
+
+    <!-- EDUCATION -->
+    <div class="cv-section profile-animate">
+      <p class="cv-section-label">Education</p>
+      <div class="cv-timeline">
+
+        <div class="cv-timeline-item">
+          <div class="cv-timeline-dot"></div>
+          <div class="cv-timeline-content">
+            <div class="cv-timeline-header">
+              <div>
+                <p class="cv-company">University of South Africa — UNISA</p>
+                <p class="cv-role">BA in Creative Writing</p>
+              </div>
+              <p class="cv-date">In Progress</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-timeline-item">
+          <div class="cv-timeline-dot"></div>
+          <div class="cv-timeline-content">
+            <div class="cv-timeline-header">
+              <div>
+                <p class="cv-company">The Open Window Institute</p>
+                <p class="cv-role">BA in Interactive Design & Development</p>
+              </div>
+              <p class="cv-date">One Year</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-timeline-item">
+          <div class="cv-timeline-dot"></div>
+          <div class="cv-timeline-content">
+            <div class="cv-timeline-header">
+              <div>
+                <p class="cv-company">North Riding High School</p>
+                <p class="cv-role">National Senior Certificate</p>
+              </div>
+              <p class="cv-date"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="cv-divider profile-animate"></div>
+
+    <!-- COMMUNITY -->
+    <div class="cv-section profile-animate">
+      <p class="cv-section-label">Community Involvement</p>
+      <div class="cv-timeline">
+        <div class="cv-timeline-item">
+          <div class="cv-timeline-dot"></div>
+          <div class="cv-timeline-content">
+            <div class="cv-timeline-header">
+              <div>
+                <p class="cv-company">Rivers Foundation</p>
+                <p class="cv-role">Volunteer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="cv-divider profile-animate"></div>
+
+    <!-- CONTACT -->
+    <div class="cv-section profile-animate" id="profile-contact">
+      <p class="cv-section-label">Get In Touch</p>
+      <div id="cv-contact-grid">
+        <a href="tel:+27604614995" class="cv-contact-item" style="font-family:'Space Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; color:rgba(255,255,255,0.6); text-decoration:none; display:flex; align-items:center; gap:12px; transition:color 0.3s ease;">
+          <i class="ti ti-phone" style="font-size:16px; opacity:0.6; font-family:'tabler-icons' !important;"></i>
+          <span style="font-family:'Space Mono',monospace;">+27 60 461 4995</span>
+        </a>
+        <a href="mailto:cleolutandalizosefu@gmail.com" class="cv-contact-item" style="font-family:'Space Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; color:rgba(255,255,255,0.6); text-decoration:none; display:flex; align-items:center; gap:12px; transition:color 0.3s ease;">
+          <i class="ti ti-mail" style="font-size:16px; opacity:0.6; font-family:'tabler-icons' !important;"></i>
+          <span style="font-family:'Space Mono',monospace;">cleolutandalizosefu@gmail.com</span>
+        </a>
+      </div>
+    </div>
+
   </div>
+
+  <!-- BACK PILL -->
+  <a href="javascript:history.back()" id="back-pill">
+    <i class="ti ti-arrow-left"></i>
+    <span>Back</span>
+  </a>
 
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
-
-  <!-- BACK PILL -->
-<a href="javascript:history.back()" id="back-pill">
-  <i class="ti ti-arrow-left"></i>
-  <span>Back</span>
-</a>
 
 </body>
 </html>
