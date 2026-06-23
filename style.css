@@ -2437,3 +2437,140 @@ body.explore-page {
   position: relative;
   z-index: 1;
 }
+
+/* ===== SECOND OVERLAY — ONE DAY SOPOPA ===== */
+#project-overlay-2 {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+#project-overlay-2.active {
+  pointer-events: all;
+}
+
+#overlay-backdrop-2 {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+  cursor: pointer;
+}
+
+#project-overlay-2.active #overlay-backdrop-2 {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#overlay-panel-2 {
+  position: relative;
+  width: 100%;
+  max-height: 90vh;
+  background: #111111;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+  transform: translateY(100%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  z-index: 1;
+  box-shadow: 0 -40px 80px rgba(0, 0, 0, 0.6),
+              0 -2px 0 rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+#overlay-panel-2::-webkit-scrollbar {
+  width: 4px;
+}
+
+#overlay-panel-2::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#overlay-panel-2::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+#project-overlay-2.active #overlay-panel-2 {
+  transform: translateY(0);
+}
+
+#overlay-header-2 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 48px 64px 32px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+#overlay-close-2 {
+  width: 40px;
+  height: 40px;
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+#overlay-close-2:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+#overlay-title-2 {
+  font-family: 'Become', sans-serif;
+  font-size: 4rem;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
+  margin: 0;
+}
+
+#overlay-subtitle-2 {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+#overlay-body-2 {
+  padding: 48px 64px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+@media (max-width: 768px) {
+  #overlay-header-2 {
+    padding: 32px 24px 24px;
+  }
+
+  #overlay-title-2 {
+    font-size: 1.8rem;
+  }
+
+  #overlay-body-2 {
+    padding: 32px 24px 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  #overlay-title-2 {
+    font-size: 1.4rem !important;
+  }
+}
