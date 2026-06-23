@@ -17,11 +17,11 @@
   <canvas id="dot-grid"></canvas>
 
   <nav id="custom-navbar">
-  <ul>
-    <li><a href="designs.html" class="nav-left">Projects</a></li>
-    <li><a href="profile.html" class="nav-center">Lutanda Sefu</a></li>
-  </ul>
-</nav>
+    <ul>
+      <li><a href="designs.html">Graphic Design</a></li>
+      <li><a href="index.html">Lutanda Sefu</a></li>
+    </ul>
+  </nav>
 
   <!-- CATEGORY HERO -->
   <div id="category-hero">
@@ -32,11 +32,11 @@
     <p class="category-desc">Cohesive visual systems crafted for real businesses — from logo conception and colour systems through to brand guidelines and collateral that communicate with purpose.</p>
   </div>
 
-  <!-- PROJECT GRID — single card full width -->
-  <div id="project-grid" style="grid-template-columns:1fr;">
+  <!-- PROJECT GRID — two cards -->
+  <div id="project-grid">
 
     <!-- CARD 1 — Boercorp -->
-    <div class="project-card" style="background:#1a1a2e; grid-column:1;"
+    <div class="project-card" style="background:#1a1a2e;"
       onclick="openOverlay(
         'Boercorp',
         'Brand Identity · Agricultural Consortium · 2022',
@@ -47,13 +47,31 @@
         alt="Boercorp Brand Identity"
         style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.6;"
       >
-      <div class="project-placeholder" style="font-size:4rem;">View</div>
+      <div class="project-placeholder" style="font-size:4rem; opacity:0.15;">View</div>
       <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
       <div class="project-card-inner">
         <div class="project-meta">
           <span class="project-tag">Agricultural · Fresh Produce</span>
           <span class="project-name">Boercorp</span>
-          <span class="project-year">2022</span>
+          <span class="project-year" style="font-family:'Space Mono',monospace;">2022</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2 — One Day Sopopa -->
+    <div class="project-card" style="background:#033d8a;"
+      onclick="openOverlay(
+        'One Day Sopopa',
+        'Brand Identity · Mens Clothing Brand · 2024',
+        'A brand identity built for One Day Sopopa, a mens clothing brand founded by a young entrepreneur for young men in rural areas. The brand speaks to dreams, ambition, and the belief that one day, those dreams will be achieved — translated into a bold, confident visual identity rooted in youth culture.'
+      )">
+      <div class="project-placeholder" style="font-size:4rem; opacity:0.15;">View</div>
+      <div class="project-arrow"><i class="ti ti-arrow-up-right"></i></div>
+      <div class="project-card-inner">
+        <div class="project-meta">
+          <span class="project-tag">Mens Clothing · Streetwear</span>
+          <span class="project-name">One Day Sopopa</span>
+          <span class="project-year" style="font-family:'Space Mono',monospace;">2024</span>
         </div>
       </div>
     </div>
@@ -93,7 +111,7 @@
 
         <!-- LOGO EXPLORATION -->
         <div>
-          <p class="overlay-section-title">ONE · Logo Exploration</p>
+          <p class="overlay-section-title">01 · Logo Exploration</p>
           <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">Exploring a balance between heritage, authenticity and a modern, refined identity across three directions — Heritage Seal, Modern Balance, and Contemporary Mark.</p>
           <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px;">
             <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px; border-radius:4px;">
@@ -113,7 +131,7 @@
 
         <!-- LOGO VARIATIONS -->
         <div>
-          <p class="overlay-section-title">TWO · Logo Variations</p>
+          <p class="overlay-section-title">02 · Logo Variations</p>
           <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px;">
             <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px 16px; display:flex; flex-direction:column; align-items:center; gap:16px; border-radius:4px;">
               <img src="Logo variations _primary.png" alt="Primary Logo" style="width:100%; max-width:120px; object-fit:contain;">
@@ -133,7 +151,7 @@
         <!-- BRANDMARK -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;">
           <div>
-            <p class="overlay-section-title">THREE · Brandmark</p>
+            <p class="overlay-section-title">03 · Brandmark</p>
             <img src="The brandmark illustration .png" alt="Boercorp Brandmark" style="width:100%; object-fit:contain; max-height:200px;">
           </div>
           <div>
@@ -143,7 +161,7 @@
 
         <!-- COLOUR PALETTE -->
         <div>
-          <p class="overlay-section-title">FOUR · Colour Palette</p>
+          <p class="overlay-section-title">04 · Colour Palette</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
             <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
               <div style="width:64px; height:64px; border-radius:50%; background:#414858;"></div>
@@ -171,7 +189,7 @@
 
         <!-- TYPOGRAPHY -->
         <div>
-          <p class="overlay-section-title">FIVE · Typography</p>
+          <p class="overlay-section-title">05 · Typography</p>
           <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px;">
             <div style="border:0.5px solid rgba(255,255,255,0.08); padding:24px; border-radius:4px;">
               <p style="font-size:2rem; color:#ebe7e4; margin-bottom:8px; font-style:italic;">Aa</p>
@@ -193,7 +211,7 @@
 
         <!-- APPLICATIONS -->
         <div>
-          <p class="overlay-section-title">SIX · Applications</p>
+          <p class="overlay-section-title">06 · Applications</p>
           <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">The brand identity applied across packaging, dairy products and retail collateral — demonstrating versatility and real-world impact across physical touchpoints.</p>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
             <img src="The applications photos _1.png" alt="Boercorp Application 1" style="width:100%; aspect-ratio:4/3; object-fit:cover;">
@@ -205,31 +223,31 @@
 
         <!-- LOGO CONSTRUCTION -->
         <div>
-          <p class="overlay-section-title">SEVEN · Logo Construction</p>
+          <p class="overlay-section-title">07 · Logo Construction</p>
           <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:24px;">The Boercorp logo is built on a foundation of geometric precision and intentional proportion. Each element — the circular seal, brandmark illustration, script logotype, and consortium ring text — occupies a defined zone within the construction grid, ensuring consistent reproduction across all scales and applications.</p>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
             <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
-              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone ONE — Outer Ring</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone 1 — Outer Ring</p>
               <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The circular border and consortium text form the outer boundary. This ring provides structure and frames all inner elements.</p>
             </div>
             <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
-              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone TWO — Brandmark</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone 2 — Brandmark</p>
               <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The farm illustration occupies the upper centre, anchoring the visual identity in agricultural heritage and community.</p>
             </div>
             <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
-              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone THREE — Script Logotype</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone 3 — Script Logotype</p>
               <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The Boercorp script sits centrally below the brandmark, forming the focal point of the seal with expressive, flowing letterforms.</p>
             </div>
             <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
-              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone FOUR — Proportions</p>
-              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">Carefully balanced proportions create a harmonious and scalable identity that reads clearly for a billboard scale.</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Zone 4 — Proportions</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">Carefully balanced proportions create a harmonious and scalable identity that reads clearly from small to billboard scale.</p>
             </div>
           </div>
         </div>
 
         <!-- CLEAR SPACE -->
         <div>
-          <p class="overlay-section-title">EIGHT · Clear Space & Minimum Size</p>
+          <p class="overlay-section-title">08 · Clear Space & Minimum Size</p>
           <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:24px;">To preserve the integrity and legibility of the Boercorp logo, a defined clear space must always be maintained around the mark. No other graphic elements, text, or imagery should encroach within this protected zone.</p>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
             <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
@@ -238,7 +256,7 @@
             </div>
             <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
               <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.5); text-transform:uppercase;">Minimum Size</p>
-              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The seal logo should never be reproduced too small digitally. The horizontal lockup needs to be a decent size to ensure legibility.</p>
+              <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.3); line-height:1.8;">The seal logo should never be reproduced smaller than the equivalent of 24mm in print or 72px digitally to ensure legibility.</p>
             </div>
           </div>
         </div>
@@ -264,12 +282,147 @@
 
       </div>
     </div>
-       <!-- BACK PILL -->
-  <a href="javascript:history.back()" id="back-pill">
-    <i class="ti ti-arrow-left"></i>
-    <span>Back</span>
-  </a>
-    
+  </div>
+
+  <!-- OVERLAY 2 — ONE DAY SOPOPA -->
+  <div id="project-overlay-2">
+    <div id="overlay-backdrop-2"></div>
+    <div id="overlay-panel-2" data-lenis-prevent>
+      <div id="overlay-header-2">
+        <div>
+          <h2 id="overlay-title-2">One Day Sopopa</h2>
+          <p id="overlay-subtitle-2">Brand Identity · 2024</p>
+        </div>
+        <button id="overlay-close-2"><i class="ti ti-x"></i></button>
+      </div>
+      <div id="overlay-body-2">
+
+        <!-- HERO TEXT -->
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px;">
+          <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.25em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Mens Clothing · Youth Brand</p>
+          <h2 style="font-family:'Become',sans-serif; font-size:3.5rem; font-weight:400; color:#ffffff; line-height:1; margin:0 0 4px;">One Day Sopopa</h2>
+          <p style="font-family:'CxMono',monospace; font-size:0.65rem; letter-spacing:0.25em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Dream now · Achieve one day</p>
+        </div>
+
+       <!-- ICON -->
+<div style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); border-radius:8px; padding:48px;">
+  <img src="ODS_icon.png" alt="One Day Sopopa Icon" style="width:100%; max-width:220px; aspect-ratio:1/1; object-fit:contain;">
+</div>
+
+        <!-- OVERVIEW -->
+        <div>
+          <p class="overlay-section-title">Overview</p>
+          <p class="overlay-desc">One Day Sopopa is a mens clothing brand founded by a young entrepreneur, created for young men growing up in rural areas across South Africa. The brand carries a simple but powerful message — that dreams, no matter how distant they feel today, can be achieved one day. The visual identity speaks directly to ambition, resilience, and the quiet confidence of someone who knows their time is coming.</p>
+        </div>
+
+        <!-- CONCEPT GRID -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Story</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Born from the lived experience of growing up in a rural town with big dreams and limited resources — One Day Sopopa exists to remind young men that ambition has no postcode.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Audience</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Young men in rural and township communities who carry big dreams — the brand speaks their language and wears their story on every garment.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Tone</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">Bold, raw, and hopeful — a brand voice that feels like a friend reminding you to keep going, dressed in streetwear that wears the message with pride.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); padding:32px; border-radius:4px; display:flex; flex-direction:column; gap:12px;">
+            <p style="font-family:'CxMono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase;">The Vision</p>
+            <p style="font-family:'CxMono',monospace; font-size:0.75rem; color:rgba(255,255,255,0.5); line-height:1.9;">To grow from a local rural label into a recognised national streetwear brand — proving that the "one day" promise can become today's reality.</p>
+          </div>
+        </div>
+
+       <!-- TYPOGRAPHY -->
+<div>
+  <p class="overlay-section-title">Custom Typography</p>
+  <div style="background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); border-radius:4px; padding:32px; display:flex; flex-direction:column; gap:12px;">
+    <img src="ODS_Font.png" alt="One Day Sopopa Custom Font" style="width:100%; border-radius:4px; object-fit:contain;">
+    <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8;">A custom hand-crafted typeface designed specifically for One Day Sopopa — bold, rugged letterforms that mirror the resilience and grit of the brand's story.</p>
+  </div>
+</div>
+
+     <!-- LOGO TRANSITION -->
+<div>
+  <p class="overlay-section-title">Logo Evolution</p>
+  <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">The journey from initial concept to final mark — three transitional stages refining the logo into its final, confident form.</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:2px;">
+    <div style="aspect-ratio:1/1; background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); border-radius:4px; overflow:hidden;">
+      <img src="ODS_logo_1.png" alt="Logo Stage One" style="width:100%; height:100%; object-fit:contain;">
+    </div>
+    <div style="aspect-ratio:1/1; background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); border-radius:4px; overflow:hidden;">
+      <img src="ODS_logo_2.png" alt="Logo Stage Two" style="width:100%; height:100%; object-fit:contain;">
+    </div>
+    <div style="aspect-ratio:1/1; background:rgba(255,255,255,0.03); border:0.5px solid rgba(255,255,255,0.08); border-radius:4px; overflow:hidden;">
+      <img src="ODS_logo_3.png" alt="Logo Stage Three" style="width:100%; height:100%; object-fit:contain;">
+    </div>
+    <div style="aspect-ratio:1/1; background:rgba(3,61,138,0.1); border:0.5px solid rgba(3,61,138,0.4); border-radius:4px; overflow:hidden;">
+      <img src="ODS_main logo.png" alt="Final Logo" style="width:100%; height:100%; object-fit:contain;">
+    </div>
+  </div>
+</div>
+
+        <!-- COLOUR PALETTE -->
+        <div>
+          <p class="overlay-section-title">Colour Palette</p>
+          <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:20px;">A high-contrast palette of deep blue and fierce red against black and white — communicating ambition, confidence, and unapologetic self-belief.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#033d8a;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Deep Blue</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#ff3131;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Fierce Red</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#000000;"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">Black</p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <div style="width:64px; height:64px; border-radius:50%; background:#ffffff; border:0.5px solid rgba(255,255,255,0.2);"></div>
+              <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:rgba(255,255,255,0.4); text-align:center;">White</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT MOCKUPS -->
+<div>
+  <p class="overlay-section-title">Product Mockups</p>
+  <p style="font-family:'CxMono',monospace; font-size:0.7rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:16px;">Visualising the One Day Sopopa identity applied to physical garments — bringing the brand story to life on real apparel.</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+    <div style="aspect-ratio:1/1; overflow:hidden; border-radius:4px;">
+      <img src="Mock-up_1.png" alt="One Day Sopopa Mockup One" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div style="aspect-ratio:1/1; overflow:hidden; border-radius:4px;">
+      <img src="Mock-up_2.png" alt="One Day Sopopa Mockup Two" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+  </div>
+</div>
+
+        <!-- PROJECT DETAILS -->
+        <div>
+          <p class="overlay-section-title">Project Details</p>
+          <div class="overlay-details">
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Client</span>
+              <span class="overlay-detail-value">One Day Sopopa</span>
+            </div>
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Year</span>
+              <span class="overlay-detail-value">2024</span>
+            </div>
+            <div class="overlay-detail-item">
+              <span class="overlay-detail-label">Services</span>
+              <span class="overlay-detail-value">Brand Identity</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <!-- BACK PILL -->
@@ -280,6 +433,32 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    var oneDayCard = document.querySelectorAll('.project-card')[1];
+    if (oneDayCard) {
+      oneDayCard.onclick = function() {
+        document.getElementById('project-overlay-2').classList.add('active');
+        lenis.stop();
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        var panel2 = document.getElementById('overlay-panel-2');
+        if (panel2) panel2.scrollTop = 0;
+      };
+    }
+
+    var overlayBackdrop2 = document.getElementById('overlay-backdrop-2');
+    var overlayClose2 = document.getElementById('overlay-close-2');
+
+    function closeOverlay2() {
+      document.getElementById('project-overlay-2').classList.remove('active');
+      lenis.start();
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+
+    if (overlayBackdrop2) overlayBackdrop2.addEventListener('click', closeOverlay2);
+    if (overlayClose2) overlayClose2.addEventListener('click', closeOverlay2);
+  </script>
 
 </body>
 </html>
