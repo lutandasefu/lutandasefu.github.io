@@ -2574,3 +2574,23 @@ body.explore-page {
     font-size: 1.4rem !important;
   }
 }
+
+/* ===== ODS LOGO CARDS ===== */
+.ods-logo-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.ods-logo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+.ods-logo-card img {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ods-logo-card:hover img {
+  transform: scale(1.04);
+}
